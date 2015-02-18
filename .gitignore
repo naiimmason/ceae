@@ -2,6 +2,7 @@ econwillow/
 */willow/
 */log/
 *.numbers
+*/db/
 
 # --------------------
 # Standard files to ignore
