@@ -1,6 +1,7 @@
 econwillow/
 */willow/
 */log/
+*.numbers
 
 # --------------------
 # Standard files to ignore
