@@ -1,9 +1,9 @@
 econwillow/
-*/willow/
 */log/
 *.numbers
 *.xlsx
 */db/
+*.pyc
 
 # --------------------
 # Standard files to ignore
