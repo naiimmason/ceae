@@ -4,7 +4,7 @@ import mod.subject
 
 def session(me):
   # Edit page title
-  let("Water Prices", "title")
+  let("Second-Price Auction", "title")
 
   # Check to see if proctor or not
   if me == 0:

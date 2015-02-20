@@ -11,3 +11,7 @@ p, h3, label, button {
 .big-check {
   font-size: 200%;
 }
+
+img {
+  margin-top: 10px;
+}
