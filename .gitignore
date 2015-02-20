@@ -2,6 +2,7 @@ econwillow/
 */willow/
 */log/
 *.numbers
+*.xlsx
 */db/
 
 # --------------------
