@@ -1,0 +1,13 @@
+.center {
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+p, h3, label, button {
+  font-size: 150%;
+}
+
+.big-check {
+  font-size: 200%;
+}
