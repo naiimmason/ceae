@@ -9,12 +9,13 @@ def start(me):
   add("<p>Client " + str(me) + " has logged in</p>", "#debuggingData", clients=0)
 
   subj_id = consent.waitForConsent(me)
+  results = []
 
   # Allow the subject to proceed and clear the page
   add("<p>subject my proceed</p>")
   add("<p>" + str(subj_id) + " has started the experiment</p>", "#experimentData", clients=0)
   
-  mon_updateNum.update("numStarted")
+  mon_updateNum.update("numStarted", me)
 
   let("")
 
@@ -27,14 +28,22 @@ def start(me):
   waters = ["spring water", "re-use tap water", "re-use tap water that has gone through ZeroWater filter"]
 
   # TODO: Loop 3 times and make first two the practice part
-  # Run through the two parts of the experiment
-  ex_part1.start(me, subj_id, waters)
-  ex_part2.start(me, subj_id, waters)
+  # Run through the two parts of the experiment and store the results
+  results += ex_part1.start(me, subj_id, waters)
+  results += ex_part2.start(me, subj_id, waters)
 
-  mon_updateNum.update("numFinished")
+  # Make clientData dictionary and push on to Stack
+  clientData = { "client": me, "tag": "clientData", "results": results }
+  put(clientData)
+
+  mon_updateNum.update("numFinished", me)
+
+  # Log data
+  add("<p><b>" + subj_id + "</b> finished: " + ", ".join(clientData["results"]) + "</p>", "#experimentData", clients=0)
 
   add("<h1>Waiting for proctor</h1>")
-  
+
+  # Wait for the monitor to terminate the experiment
   finish = take({"finish": "true", "client": 0})
   put(finish)
 

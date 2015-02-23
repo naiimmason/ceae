@@ -1,15 +1,22 @@
 from willow.willow import *
 
 def start(me, subj_id, waters):
+  results = []
+  # Loop through all of the water choices
   i = 0
   while i < len(waters):
     add(open("pages/subject/exp_part1.html"))
     let(waters[i], "#waterID")
-    show("#validInput")
+
+    # Wait for the client to submit an offer
+    # TODO: Add input checks
     take({"tag": "click", "id": "submit", "client": me})
     offer = peek("#offer")
+    results.append(offer)
 
-    add("<p>" + str(subj_id) + " has offered $<b>" + str(offer) + "</b> to drink <b>" + waters[i] + "</b>.</p>", "#experimentData", clients=0)
+    # Log to monitor and clear screen
     let("")
     i += 1
+
+  return results
 
