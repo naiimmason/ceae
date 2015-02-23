@@ -41,7 +41,8 @@ def start(me):
   # Log data
   add("<p><b>" + subj_id + "</b> finished: " + ", ".join(clientData["results"]) + "</p>", "#experimentData", clients=0)
 
-  add("<h1>Waiting for proctor</h1>")
+  add(open("pages/subject/results.html"))
+  let("Waiting for everyone to finish...", "#results")
 
   # Wait for the monitor to terminate the experiment
   finish = take({"finish": "true", "client": 0})
