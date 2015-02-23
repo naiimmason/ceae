@@ -1,4 +1,5 @@
 from willow.willow import *
+import random as rand
 
 def start(me):
 
@@ -38,11 +39,13 @@ def start(me):
 
   majority = False
   winners = []
+  winner = -1
+  minimum = 10000000000000
+  nextHighest = minimum + 1
+
   # Analyze the data
   if choice >=0 and choice <=2:
     # Set minimum and next highest to absurd numbers
-    minimum = 10000000000000
-    nextHighest = minimum + 1
 
     # go through each offer check against minimum and next highest
     for client in options1_3_offers:
@@ -72,12 +75,34 @@ def start(me):
     add("<p> Minimum Amt: $" + str(minimum) + "</p>", "#debuggingData")
     add("<p> Payout: $" + str(nextHighest) + "</p>", "#debuggingData")
 
-  # If the proctor chose between 4 and 6  
-  elif choice >= 3 and choice <= 5:
+    # if more than 1 winner choose random
+    if len(winners) > 1:
+      winner = winners[rand.randint(0, len(winners) - 1)]
+    else:
+      winner = winners[0]
+
+    add("<p> Real Winner: " + winner + "</p>", "#debuggingData")
+  elif choice >= 3 and choice <= 5: # If the proctor chose between 4 and 6  
     # compare tally to how many clients finished and check if majority
     if options4_6_tally > numClientsFinished/2:
       majority = True
     add("<p>" + str(majority) + ", " + str(options4_6_tally) + " tally, " + str(numClientsFinished) + " clients </p>", "#debuggingData")
+
+
+  # Loop through each client and craft a result dictionary for them to fetch and
+  # display results
+  for client in clientData:
+    clientResult = {}
+
+    if choice >=0 and choice <=2:
+      clientResult = {"client": client["client"], "payout": "none", "winner": False, "tag": "clientResult", "type": "payout", "water": choice}
+      if client["client"] == int(winner):
+        clientResult["payout"] = nextHighest
+        clientResult["winner"] = True
+    elif choice >= 3 and choice <= 5:
+      clientResult = {"client": client["client"], "majority": majority, "for": options4_6_tally, "total": numClientsFinished, "tag": "clientResult", "type": "majority"}
+
+    put(clientResult)
 
   put({"finish": "true", "client": me, "choice": choice})
 

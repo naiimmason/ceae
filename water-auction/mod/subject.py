@@ -42,10 +42,20 @@ def start(me):
   add("<p><b>" + subj_id + "</b> finished: " + ", ".join(clientData["results"]) + "</p>", "#experimentData", clients=0)
 
   add(open("pages/subject/results.html"))
-  let("Waiting for everyone to finish...", "#results")
+  let("<p>Waiting for everyone to finish...</p>", "#results")
 
   # Wait for the monitor to terminate the experiment
   finish = take({"finish": "true", "client": 0})
   put(finish)
 
-  add("<h1>The experiment has finished</h1>")
+  clientResult = take({"client": me, "tag": "clientResult"})
+
+  resultStmt = ""
+  if clientResult["type"] == "majority":
+    resultStmt += "<p>The majority ruled <b>" + str(clientResult["majority"])
+  elif clientResult["type"] == "payout":
+    if clientResult["winner"] == True:
+      resultStmt += "<p>You <b>won</b> the bid for drinking <b>" + waters[clientResult["water"]] + "</b> for $<b>" + str(clientResult["payout"]) + "</b></p>" 
+    else:
+      resultStmt += "<p>You did <b>not</b> win the bid for drinking <b>" + waters[clientResult["water"]] + "</b>.</p>"
+  let(resultStmt, "#results")
