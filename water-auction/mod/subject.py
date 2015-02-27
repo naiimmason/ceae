@@ -25,7 +25,7 @@ def start(me):
   let("")
 
   # The waters to be used for this experiment
-  waters = ["spring water", "re-use tap water", "re-use tap water that has gone through ZeroWater filter"]
+  waters = ["spring water", "re-use tap water", "re-use tap water that has gone through a ZeroWater filter"]
 
   # TODO: Loop 3 times and make first two the practice part
   # Run through the two parts of the experiment and store the results
@@ -59,3 +59,4 @@ def start(me):
     else:
       resultStmt += "<p>You did <b>not</b> win the bid for drinking <b>" + waters[clientResult["water"]] + "</b>.</p>"
   let(resultStmt, "#results")
+  let("<img src=\"images/majority.png\" />", "#content")

@@ -1,3 +1,6 @@
+.container {
+  margin-top: 20px;
+}
 .center {
   display: block;
   margin: auto;
@@ -13,5 +16,5 @@ p, h3, label, button {
 }
 
 img {
-  margin-top: 10px;
+  width: 100%;
 }
