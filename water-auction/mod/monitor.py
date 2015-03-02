@@ -89,21 +89,21 @@ def start(me):
       majority = True
     add("<p>" + str(majority) + ", " + str(options4_6_tally) + " tally, " + str(numClientsFinished) + " clients </p>", "#debuggingData")
 
-    # create pie chart of tally    ax = plt.axes([0.1, 0.1, 0.8, 0.8])
-    labels = "Yes", "No"
-    yeses = numClientsFinished - options4_6_tally
-    noses = options4_6_tally
-    fracs = [yeses, noses]
-    print yeses
-    print noses
-    colors = ["yellowgreen", "lightcoral"]
-    explode = (0, 0.1, 0, 0)
-    plt.pie(fracs, labels=labels, colors=colors,
-      autopct="%1.1f", startangle=90)
-    plt.title("Percent in Favor")
-    plt.axis("equal")
-    plt.savefig("images/majority.png")
-    sleep(5)
+    # # create pie chart of tally    ax = plt.axes([0.1, 0.1, 0.8, 0.8])
+    # labels = "Yes", "No"
+    # yeses = numClientsFinished - options4_6_tally
+    # noses = options4_6_tally
+    # fracs = [yeses, noses]
+    # print yeses
+    # print noses
+    # colors = ["yellowgreen", "lightcoral"]
+    # explode = (0, 0.1, 0, 0)
+    # plt.pie(fracs, labels=labels, colors=colors,
+    #   autopct="%1.1f", startangle=90)
+    # plt.title("Percent in Favor")
+    # plt.axis("equal")
+    # plt.savefig("images/majority.png")
+    # sleep(5);
 
 
   # Loop through each client and craft a result dictionary for them to fetch and
@@ -117,7 +117,7 @@ def start(me):
         clientResult["payout"] = nextHighest
         clientResult["winner"] = True
     elif choice >= 3 and choice <= 5:
-      clientResult = {"client": client["client"], "majority": majority, "for": options4_6_tally, "total": numClientsFinished, "tag": "clientResult", "type": "majority"}
+      clientResult = {"client": client["client"], "majority": majority, "for": options4_6_tally, "total": numClientsFinished, "tag": "clientResult", "type": "majority", "water": choice%3}
 
     put(clientResult)
 

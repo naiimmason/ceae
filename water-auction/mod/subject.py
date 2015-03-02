@@ -30,6 +30,8 @@ def start(me):
   # TODO: Loop 3 times and make first two the practice part
   # Run through the two parts of the experiment and store the results
   results += ex_part1.start(me, subj_id, waters)
+  #continuePart = take({"tag": "continueToPart2", "client": 0})
+  #put(continuePart)
   results += ex_part2.start(me, subj_id, waters)
 
   # Make clientData dictionary and push on to Stack
@@ -52,11 +54,22 @@ def start(me):
 
   resultStmt = ""
   if clientResult["type"] == "majority":
-    resultStmt += "<p>The majority ruled <b>" + str(clientResult["majority"])
+    if clientResult["majority"]: 
+      resultStmt += "<p>The majority ruled <b>in favor of</b> the entire group drinking <b>" + waters[clientResult["water"]] + "</b>."
+    else:
+      resultStmt += "<p>The majority ruled <b>against</b> the entire group drinking <b>" +waters[clientResult["water"]] + "</b>."
+
+    # Hide data in the html
+    add("<span class=\"hidden\" id=\"yes\" value=" + str(clientResult["for"]) + "></span>")
+    add("<span class=\"hidden\" id=\"no\" value=" + str(clientResult["total"] - clientResult["for"])+ "></span>")
+
+    # Add canvas for chart drawing, this triggers the arrive event which calls the appropriate js
+    add("<canvas id=\"majorityChart\" width=\"400\" height=\"400\"></canvas>", "#chartDiv")
+
+
   elif clientResult["type"] == "payout":
     if clientResult["winner"] == True:
       resultStmt += "<p>You <b>won</b> the bid for drinking <b>" + waters[clientResult["water"]] + "</b> for $<b>" + str(clientResult["payout"]) + "</b></p>" 
     else:
       resultStmt += "<p>You did <b>not</b> win the bid for drinking <b>" + waters[clientResult["water"]] + "</b>.</p>"
   let(resultStmt, "#results")
-  let("<img src=\"images/majority.png\" />", "#content")
