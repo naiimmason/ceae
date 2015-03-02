@@ -4,16 +4,20 @@
 <div class="container">
   <h1>Control Panel<small class="pull-right">You are the proctor</small></h1>
   <hr>
-  <p><b>Number of Participents Started Experiment:</b> <span id="numStarted">0</span></p>
-  <p><b>Number of Participents Finished Experiment:</b> <span id="numFinished">0</span></p>
+  <p><b>Total:</b> <span id="totalSubjects">0</span></p>
+  <p><b>Number at Start:</b> <span id="numStart">0</span></p>
+  <p><b>Number at Stage 1:</b> <span id="numStage1">0</span></p>
+  <p><b>Number Finished Stage 1:</b> <span id="numFinishedStage1">0</span></p>
+  <p><b>Number at Stage 2:</b> <span id="numStage2">0</span></p>
+  <p><b>Number Finished Experiment:</b> <span id="numFinished">0</span></p>
   <form class="form-inline">
     <div class="form-group form-group-lg">
       <label for="resultInput" class="control-label" id="finishLabel">Experiment Choice: </label>
-      <input type="text" class="form-control input-lg" id="resultInput" placeholder="1-6">
+      <input type="text" class="form-control input-lg" id="resultInput" placeholder="1-6" autocomplete="off">
     </div>
-
     <button type="button" id="finish" class="btn btn-lg btn-danger">Finish</button>
   </form>
+  <button type="button" id="advance" class="btn btn-lg btn-primary" value="start">Start Experiment</button>
   <hr>
   <div class="col-md-6" id="experimentData">
     <h3>Experimental Log</h3>

@@ -1,17 +1,42 @@
 from willow.willow import *
 import random as rand
 import matplotlib.pyplot as plt
+import mod_calculatemedian
 
 def start(me):
 
   # Put inital dictionaries on to the stack
-  put({"tag": "numStarted", "num": 0, "clients": []})
+  put({"tag": "totalSubjects", "num": 0, "clients": []})
+  put({"tag": "numStart", "num": 0, "clients": []})
+  put({"tag": "numStage1", "num": 0, "clients": []})
+  put({"tag": "numFinishedStage1", "num": 0, "clients": []})
+  put({"tag": "numStage2", "num": 0, "clients": []})
   put({"tag": "numFinished", "num": 0, "clients": []})
 
   # Open up the display and then wait until the proctor wants to finish the 
   # experiment
   add(open("pages/monitor/monitor.html"))
-  take({"tag": "click", "id": "finish", "client": me})
+  action = {"id": "not started"}
+
+  position = 0
+  while action["id"] != "finish":
+    action = take({"tag": "click", "id": "finish", "client": me}, 
+                  {"tag": "click", "id": "advance", "client": me})
+
+    if action["id"] == "advance":
+      position += 1
+      poke("value", str(position), "#advance")
+      advance = {"advance": True, "client": me, "stage": position}
+
+      # If moving on to stage 2 perform calculations by grabbing client data 
+      # moving on
+      if position == 2:
+        median_values = mod_calculatemedian.calculate(me)
+        advance["median"] = median_values
+      
+      # Show advance packet
+      put(advance)
+      let("Advance to Stage " + str(position + 1), "#advance")
 
   # Check out the choice and then depending on the number (btwn 1 and 6) decide 
   # on how to handle client data and gather all data from clients that they have posted in
@@ -20,7 +45,7 @@ def start(me):
   numClientsFinished = int(clientsFinished["num"])
   clientData = []
   for client in clientsFinished["clients"]:
-    clientData.append(take({"client": client, "tag": "clientData"}))
+    clientData.append(take({"client": client, "tag": "clientData2"}))
 
   # define variable
   options4_6_tally = 0
@@ -88,23 +113,6 @@ def start(me):
     if options4_6_tally > numClientsFinished/2:
       majority = True
     add("<p>" + str(majority) + ", " + str(options4_6_tally) + " tally, " + str(numClientsFinished) + " clients </p>", "#debuggingData")
-
-    # # create pie chart of tally    ax = plt.axes([0.1, 0.1, 0.8, 0.8])
-    # labels = "Yes", "No"
-    # yeses = numClientsFinished - options4_6_tally
-    # noses = options4_6_tally
-    # fracs = [yeses, noses]
-    # print yeses
-    # print noses
-    # colors = ["yellowgreen", "lightcoral"]
-    # explode = (0, 0.1, 0, 0)
-    # plt.pie(fracs, labels=labels, colors=colors,
-    #   autopct="%1.1f", startangle=90)
-    # plt.title("Percent in Favor")
-    # plt.axis("equal")
-    # plt.savefig("images/majority.png")
-    # sleep(5);
-
 
   # Loop through each client and craft a result dictionary for them to fetch and
   # display results

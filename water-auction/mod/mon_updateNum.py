@@ -7,3 +7,10 @@ def update(tag, me):
   answer["clients"].append(me)
   let(answer["num"], "#" + answer["tag"], clients=0)
   put(answer)
+
+def decrement(tag, me):
+  answer = take({"tag": tag})
+  answer["num"] -= 1
+  #answer["clients"].pop(me)
+  let(answer["num"], "#" + answer["tag"], clients=0)
+  put(answer)

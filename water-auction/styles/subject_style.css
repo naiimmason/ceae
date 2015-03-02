@@ -1,5 +1,5 @@
 .container {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .center {
   display: block;
@@ -8,7 +8,7 @@
 }
 
 p, h3, label, button {
-  font-size: 150%;
+  font-size: 200%;
 }
 
 .big-check {
@@ -17,4 +17,11 @@ p, h3, label, button {
 
 img {
   width: 100%;
+}
+input[type=checkbox] {
+ /* Double-sized Checkboxes */
+ -ms-transform: scale(2); /* IE */
+ -moz-transform: scale(2); /* FF */
+ -webkit-transform: scale(2); /* Safari and Chrome */
+ -o-transform: scale(2); /* Opera */
 }

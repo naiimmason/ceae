@@ -2,9 +2,8 @@ from willow.willow import *
 import random as rand
 
 # Go through each 
-def start(me, subj_id, waters):
+def start(me, subj_id, waters, temp_waters, median_values):
   results = ["null", "null", "null"]
-  temp_waters = rand.sample(waters, len(waters))
 
   # Loop through all of the water types
   i = 0

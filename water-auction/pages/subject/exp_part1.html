@@ -2,23 +2,23 @@
 <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css" />
 
 <div class="container">
-  <div class="col-md-2">
+  <div class="col-md-1">
   </div>
-  <div class="col-md-8">
+  <div class="col-md-10">
     <p>What is the lowest amount of money in USD that we have to pay you to drink 3 oz. of <b><u><span id="waterID"></span></u></b>?</p>
-    <p><em>Bids must be betwen $0 and $5000.<em></p>
-    <p><em>The winning bid must be less than or equal to the amount in the sealed envelope in the front of the room.<em></p>
+    <p><em>Bids must be betwen $0 and $5000.</em></p>
+    <p><em>The winning bid must be less than or equal to the amount in the sealed envelope in the front of the room.</em></p>
     <label>Amount (USD):</label>
     <form class="form-inline" onsubmit="return false;">
       <div class="form-group">
         <div class="input-group">
           <div class="input-group-addon">$</div>
-          <input type="float" class="form-control input-lg" id="offer">
+          <input type="float" class="form-control input-lg" id="offer" autocomplete="off">
         </div>
       </div>
       <button type="button" class="btn btn-lg btn-primary" id="submit">Submit</button>
     </form>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-1">
   </div>
 </div>
