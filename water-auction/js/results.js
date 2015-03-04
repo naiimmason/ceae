@@ -1,16 +1,38 @@
 $(function() {
   console.log("Loaded results.js");
 
-  $(document).arrive("#barChart1", function() {
-    var labels = [];
-    var data = [
+  var barchartGen = function(num){
+    var labels = ["$0-$5", "$5-$10", "$10-$15", "$15-$20", "$20-$25", "$25-$30", "$30-$5000"];
+    var dataset = [parseInt($("#0").attr("value")), parseInt($("#1").attr("value")), parseInt($("#2").attr("value")), parseInt($("#3").attr("value")), parseInt($("#4").attr("value")), parseInt($("#5").attr("value")), parseInt($("#6").attr("value"))];
+    console.log(dataset);
+    var data = 
     {
+      labels: labels,
+      datasets: [
+        {
+          label: "Bar Chart",
+          fillColor: "#00539f",
+          strokeColor: "rgba(220,220,220,0.8)",
+          highlightFill: "rgba(220,220,220,0.75)",
+          highlightStroke: "rgba(220,220,220,1)",
+          data: dataset
+        }
+      ]
+    };
+    console.log(data)
 
-    }
-    ];
-
-    var ctx = $("#barChart1").get(0).getContext("2d");
+    var ctx = $("#barChart" + num).get(0).getContext("2d");
     var barChart = new Chart(ctx).Bar(data);
+  }
+
+  $(document).arrive("#barChart1", function() {
+    barchartGen(1);
+  });
+  $(document).arrive("#barChart2", function() {
+    barchartGen(2);
+  });
+  $(document).arrive("#barChart3", function() {
+    barchartGen(3);
   });
   $(document).arrive("#majorityChart", function() {
     console.log("RESULTS");
@@ -44,13 +66,13 @@ $(function() {
         percentageInnerCutout : 0, // This is 0 for Pie charts
 
         //Number - Amount of animation steps
-        animationSteps : 100,
+        animationSteps : 1,
 
         //String - Animation easing effect
         animationEasing : "easeOutBounce",
 
         //Boolean - Whether we animate the rotation of the Doughnut
-        animateRotate : true,
+        animateRotate : false,
 
         //Boolean - Whether we animate scaling the Doughnut from the centre
         animateScale : false,

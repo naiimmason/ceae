@@ -2,7 +2,8 @@ from willow.willow import *
 import random as rand
 
 # Go through each 
-def start(me, subj_id, waters, temp_waters, median_values):
+def start(me, subj_id, waters, temp_waters, median_values, all_water):
+  print all_water
   results = ["null", "null", "null"]
 
   # Loop through all of the water types
@@ -18,7 +19,15 @@ def start(me, subj_id, waters, temp_waters, median_values):
     while j < len(waters):
       if temp_waters[i] == waters[j]:
         let(median_values[j], "#price")
+        graph_values = all_water[j];
+        k = 0
+        for value in graph_values:
+          add("<span id=\"" + str(k) + "\" value=\"" + str(value) + "\" class=\"hidden\"></span>")
+          k+=1
       j += 1
+
+    add("<canvas id=\"barChart" + str(i + 1) + "\" width=\"600\" height=\"400\"></canvas>", "#chartDiv")
+
     answer = take({"tag": "click", "id": "Yes", "client": me},
                   {"tag": "click", "id": "No", "client": me})
 

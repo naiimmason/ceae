@@ -3,7 +3,12 @@ import random as rand
 import matplotlib.pyplot as plt
 import mod_calculatemedian
 
-def start(me):
+def start(me, waters, output_path):
+  # Initialize the output file
+  output_file = open(output_path, "w")
+  output_file.write("subject info,,Part A,,,Part B,,,\n")
+  output_file.write("subject number, subject id, " + waters[0] +", " + waters[1] + ", " + waters[2]+ ", " + waters[0] +", " + waters[1] + ", " + waters[2] +  "\n")
+  output_file.close()
 
   # Put inital dictionaries on to the stack
   put({"tag": "totalSubjects", "num": 0, "clients": []})

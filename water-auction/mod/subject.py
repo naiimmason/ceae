@@ -5,7 +5,7 @@ import ex_part1
 import ex_part2
 import mon_updateNum
 
-def start(me, waters, rand_waters):
+def start(me, waters, rand_waters, output_path):
   # Open up the welcome page
   add(open("pages/subject/welcome.html"))
   add("<p>Client " + str(me) + " has logged in</p>", "#debuggingData", clients=0)
@@ -57,6 +57,7 @@ def start(me, waters, rand_waters):
   add(open("pages/subject/btwnparts.html"))
   advance = take({"advance": True, "client": 0, "stage": 2})
   median_values = advance["median"] # Grab median values from advance packet
+  all_water = advance["all_water"]
   put(advance)
   let("")
 
@@ -65,11 +66,16 @@ def start(me, waters, rand_waters):
   mon_updateNum.update("numStage2", me)
 
   # Perform the second part of the experiment
-  results += ex_part2.start(me, subj_id, waters, rand_waters, median_values)
+  results += ex_part2.start(me, subj_id, waters, rand_waters, median_values, all_water)
 
   # Make clientData dictionary and push on to Stack
   clientData2 = { "client": me, "tag": "clientData2", "results": results }
   put(clientData2)
+
+  # Output the answer and data to the relavent database file
+  output_file = open(output_path, "a")
+  output_file.write(str(me) + ", " + str(subj_id) + ", " + str(results[0]) + ", " + str(results[1]) + ", " + str(results[2]) + ", " + str(results[3]) + ", " + str(results[4]) + ", " + str(results[5]) +  "\n")
+  output_file.close()
 
   # Update numbers of where people are
   mon_updateNum.decrement("numStage2", me)
