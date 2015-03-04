@@ -7,8 +7,8 @@
   text-align: center;
 }
 
-p, h3, label, button {
-  font-size: 200%;
+.big-text {
+  font-size: 190%;
 }
 
 .smaller {
@@ -25,4 +25,18 @@ input[type=checkbox] {
  -moz-transform: scale(2); /* FF */
  -webkit-transform: scale(2); /* Safari and Chrome */
  -o-transform: scale(2); /* Opera */
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin-left: 10px;
+  vertical-align: bottom;
+  position: relative;
+  top: -15px;
+  *overflow: hidden;
+}
+
+#chartLegend {
+  float: right;
+  border: 1px solid black;
+  padding: 5px;
 }

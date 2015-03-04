@@ -25,8 +25,8 @@ def start(me, subj_id, waters, temp_waters, median_values, all_water):
           add("<span id=\"" + str(k) + "\" value=\"" + str(value) + "\" class=\"hidden\"></span>")
           k+=1
       j += 1
-
-    add("<canvas id=\"barChart" + str(i + 1) + "\" width=\"600\" height=\"400\"></canvas>", "#chartDiv")
+    
+    add("<canvas id=\"barChart" + str(i + 1) + "\" width=\"600\" height=\"250\"></canvas>", "#chartDiv")
 
     answer = take({"tag": "click", "id": "Yes", "client": me},
                   {"tag": "click", "id": "No", "client": me})

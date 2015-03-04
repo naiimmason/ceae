@@ -25,7 +25,7 @@ def start(me, waters, rand_waters, output_path):
   let("")
 
   # Show first instruction page and wait for them to continue
-  add(open("pages/subject/instructions.html"))
+  add(open("pages/subject/prac_instructions.html"))
   take({"tag": "click", "id": "continue", "client": me})
   let("")
 
@@ -96,6 +96,7 @@ def start(me, waters, rand_waters, output_path):
 
   resultStmt = ""
   if clientResult["type"] == "majority":
+    add("<div id=\"chartLegend\" class=\"\"></div>", "#chartDiv")
     if clientResult["majority"]: 
       resultStmt += "<p>The majority ruled <b>in favor of</b> the entire group drinking <b>" + waters[clientResult["water"]] + "</b> at a price of <b>$" + str(median_values[clientResult["water"]]) + "</b>."
     else:
