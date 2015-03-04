@@ -11,13 +11,14 @@ p, h3, label, button {
   font-size: 200%;
 }
 
-.big-check {
-  font-size: 200%;
+.smaller {
+  font-size: 120%;
 }
 
 img {
   width: 100%;
 }
+
 input[type=checkbox] {
  /* Double-sized Checkboxes */
  -ms-transform: scale(2); /* IE */

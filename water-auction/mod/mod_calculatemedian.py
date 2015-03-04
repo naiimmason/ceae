@@ -26,5 +26,6 @@ def calculate(me):
   median_values.append(np.median(water1_values))
   median_values.append(np.median(water2_values))
   median_values.append(np.median(water3_values))
+  all_water = [water1_values, water2_values, water3_values]
 
-  return median_values
+  return median_values, all_water

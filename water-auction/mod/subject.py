@@ -5,11 +5,7 @@ import ex_part1
 import ex_part2
 import mon_updateNum
 
-waters = ["spring water", "re-use tap water", "re-use tap water that has gone through a ZeroWater filter"]
-temp_waters = rand.sample(waters, len(waters))
-
-
-def start(me):
+def start(me, waters, rand_waters):
   # Open up the welcome page
   add(open("pages/subject/welcome.html"))
   add("<p>Client " + str(me) + " has logged in</p>", "#debuggingData", clients=0)
@@ -69,7 +65,7 @@ def start(me):
   mon_updateNum.update("numStage2", me)
 
   # Perform the second part of the experiment
-  results += ex_part2.start(me, subj_id, waters, temp_waters, median_values)
+  results += ex_part2.start(me, subj_id, waters, rand_waters, median_values)
 
   # Make clientData dictionary and push on to Stack
   clientData2 = { "client": me, "tag": "clientData2", "results": results }
@@ -95,9 +91,9 @@ def start(me):
   resultStmt = ""
   if clientResult["type"] == "majority":
     if clientResult["majority"]: 
-      resultStmt += "<p>The majority ruled <b>in favor of</b> the entire group drinking <b>" + waters[clientResult["water"]] + "</b>."
+      resultStmt += "<p>The majority ruled <b>in favor of</b> the entire group drinking <b>" + waters[clientResult["water"]] + "</b> at a price of <b>$" + str(median_values[clientResult["water"]]) + "</b>."
     else:
-      resultStmt += "<p>The majority ruled <b>against</b> the entire group drinking <b>" +waters[clientResult["water"]] + "</b>."
+      resultStmt += "<p>The majority ruled <b>against</b> the entire group drinking <b>" +waters[clientResult["water"]] + "</b> at a price of <b>$" + str(median_values[clientResult["water"]]) + "</b>."
 
     # Hide data in the html
     add("<span class=\"hidden\" id=\"yes\" value=" + str(clientResult["for"]) + "></span>")

@@ -1,5 +1,17 @@
 $(function() {
   console.log("Loaded results.js");
+
+  $(document).arrive("#barChart1", function() {
+    var labels = [];
+    var data = [
+    {
+
+    }
+    ];
+
+    var ctx = $("#barChart1").get(0).getContext("2d");
+    var barChart = new Chart(ctx).Bar(data);
+  });
   $(document).arrive("#majorityChart", function() {
     console.log("RESULTS");
     if($("#majorityChart").get(0)) {
@@ -49,7 +61,9 @@ $(function() {
       }
 
       var ctx = $("#majorityChart").get(0).getContext("2d");
-      var majChart = new Chart(ctx).Pie(data, options)
+      var majChart = new Chart(ctx).Pie(data, options);
+
+      legend(document.getElementById("chartLegend"), data);
     }
   });
 });

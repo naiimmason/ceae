@@ -13,7 +13,12 @@ def start(me, subj_id, waters, temp_waters, median_values):
 
     # Pick a random price and then wait for an answer from the client
     price = rand.randint(1, 10)
-    let(price, "#price")
+    # Add results to list and log to monitor
+    j = 0
+    while j < len(waters):
+      if temp_waters[i] == waters[j]:
+        let(median_values[j], "#price")
+      j += 1
     answer = take({"tag": "click", "id": "Yes", "client": me},
                   {"tag": "click", "id": "No", "client": me})
 

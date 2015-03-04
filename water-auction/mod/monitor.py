@@ -31,8 +31,9 @@ def start(me):
       # If moving on to stage 2 perform calculations by grabbing client data 
       # moving on
       if position == 2:
-        median_values = mod_calculatemedian.calculate(me)
+        median_values, all_water = mod_calculatemedian.calculate(me)
         advance["median"] = median_values
+        advance["all_water"] = all_water
       
       # Show advance packet
       put(advance)
