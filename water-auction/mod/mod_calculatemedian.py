@@ -1,6 +1,7 @@
 from willow.willow import *
 import numpy as np
 buckets = [5, 10, 15, 20, 25, 30, 5000]
+
 def calculate(me):
   clientsFinished = take({"tag": "numFinishedStage1"})
   put(clientsFinished)

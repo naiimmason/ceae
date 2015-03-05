@@ -34,6 +34,7 @@ $(function() {
   $(document).arrive("#barChart3", function() {
     barchartGen(3);
   });
+  
   $(document).arrive("#majorityChart", function() {
     console.log("RESULTS");
     if($("#majorityChart").get(0)) {
