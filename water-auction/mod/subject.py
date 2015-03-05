@@ -4,11 +4,15 @@ import consent
 import ex_part1
 import ex_part2
 import mon_updateNum
+import practice
+
+def updateStage(subj_id, stage):
+  let(str(stage),"#" + str(subj_id) + "STAGE", clients=0)
 
 def start(me, waters, rand_waters, output_path):
   # Open up the welcome page
   add(open("pages/subject/welcome.html"))
-  add("<p>Client " + str(me) + " has logged in</p>", "#debuggingData", clients=0)
+  #add("<p>Client " + str(me) + " has logged in</p>", "#debuggingData", clients=0)
 
   # For the person to consent and fill in their name
   subj_id = consent.waitForConsent(me)
@@ -18,7 +22,19 @@ def start(me, waters, rand_waters, output_path):
 
   # Allow the subject to proceed and clear the page
   add("<p>subject my proceed</p>")
+  subj_water = "<td>" + str(subj_id) + "</td>"
   add("<p>" + str(subj_id) + " has started the experiment</p>", "#experimentData", clients=0)
+  add("<tr id=\"" + str(subj_id) + "\"><td>" + str(subj_id) + "</td>"
+    "<td id=\"" + str(subj_id) + "STAGE\">Instructions</td>" # stage
+    "<td id=\"" + str(subj_id) + "water1A\"></td>" # water 1 A
+    "<td id=\"" + str(subj_id) + "water2A\">""</td>" # water 2 A
+    "<td id=\"" + str(subj_id) + "water3A\">""</td>" # water 3 A
+    "<td>""</td>" # 
+    "<td id=\"" + str(subj_id) + "water1B\">""</td>" # water 1 B
+    "<td id=\"" + str(subj_id) + "water2B\">""</td>" # water 2 B
+    "<td id=\"" + str(subj_id) + "water3B\">""</td>" # water 3 B
+
+    "</tr>", "#tableBody",clients=0)
   
   # Update the total number of subjects
   mon_updateNum.update("totalSubjects", me)
@@ -34,21 +50,28 @@ def start(me, waters, rand_waters, output_path):
 
   # Open waiting landing page and wait for advance packet before moving on and
   # updating the numbers
+  updateStage(subj_id, "Waiting for practice")
   add(open("pages/subject/landing.html"))
   advance = take({"advance": True, "client": 0, "stage": 1})
   put(advance)
+
+  #
+  #practice.startPractice()
+
   mon_updateNum.update("numStage1", me)
   mon_updateNum.decrement("numStart", me)
   let("")
 
   # TODO: Loop 3 times and make first two the practice part
   # Run through the two parts of the experiment and store the results
+  updateStage(subj_id, "Stage 1")
   results += ex_part1.start(me, subj_id, waters)
 
   # Update numbers of where people are
   mon_updateNum.decrement("numStage1", me)
   mon_updateNum.update("numFinishedStage1", me)
 
+  updateStage(subj_id, "Finished Stage 1")
   # Put current data on stack for analysis before moving on
   clientData1 = { "client": me, "tag": "clientData1", "results": results }
   put(clientData1)
@@ -65,6 +88,7 @@ def start(me, waters, rand_waters, output_path):
   mon_updateNum.decrement("numFinishedStage1", me)
   mon_updateNum.update("numStage2", me)
 
+  updateStage(subj_id, "Stage 2")
   # Perform the second part of the experiment
   results += ex_part2.start(me, subj_id, waters, rand_waters, median_values, all_water)
 
@@ -82,8 +106,9 @@ def start(me, waters, rand_waters, output_path):
   mon_updateNum.update("numFinished", me)
 
   # Log data
-  add("<p><b>" + subj_id + "</b> finished: " + ", ".join(clientData2["results"]) + "</p>", "#experimentData", clients=0)
+  #add("<p><b>" + subj_id + "</b> finished: " + ", ".join(clientData2["results"]) + "</p>", "#experimentData", clients=0)
 
+  updateStage(subj_id, "Finished experiment")
   # Open results page and wait for finish packet
   add(open("pages/subject/results.html"))
   let("<p>Waiting for everyone to finish...</p>", "#results")

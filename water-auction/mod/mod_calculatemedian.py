@@ -33,7 +33,7 @@ def calculate(me):
   tallies_water3 = [0, 0, 0, 0, 0, 0, 0]
   for value in water1_values:
     i = 0
-    while i < len(buckets):
+    while i <= len(buckets):
       if value < buckets[i]:
         tallies_water1[i] += 1
         i = len(buckets) + 1
@@ -41,7 +41,7 @@ def calculate(me):
 
   for value in water2_values:
     i = 0
-    while i < len(buckets):
+    while i <= len(buckets):
       if value < buckets[i]:
         tallies_water2[i] += 1
         i = len(buckets) + 1
@@ -50,7 +50,7 @@ def calculate(me):
   for value in water3_values:
     i = 0
     while i < len(buckets):
-      if value < buckets[i]:
+      if value <= buckets[i]:
         tallies_water3[i] += 1
         i = len(buckets) + 1
       i += 1

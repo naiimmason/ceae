@@ -29,7 +29,8 @@ def start(me, subj_id, waters):
     j = 0
     while j < len(waters):
       if temp_waters[i] == waters[j]:
-        results[j] = offer  
+        results[j] = offer 
+        add("$" + str(offer), "#" + str(subj_id) + "water" + str(j + 1) + "A",clients=0) 
       j += 1
 
     # Log to monitor and clear screen
