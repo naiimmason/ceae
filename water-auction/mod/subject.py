@@ -106,7 +106,7 @@ def start(me, waters, rand_waters, output_path):
   mon_updateNum.update("numFinished", me)
 
   # Log data
-  #add("<p><b>" + subj_id + "</b> finished: " + ", ".join(clientData2["results"]) + "</p>", "#experimentData", clients=0)
+  add("<p><b>" + subj_id + "</b> finished: " + ", ".join(clientData2["results"]) + "</p>", "#experimentData", clients=0)
 
   updateStage(subj_id, "Finished experiment")
   # Open results page and wait for finish packet

@@ -103,9 +103,9 @@ def start(me, waters, output_path):
 
     majority = False
     winners = map(str, winners)
-    add("<p> Winner: " + ", ".join(winners) + "</p>", "#debuggingData")
-    add("<p> Minimum Amt: $" + str(minimum) + "</p>", "#debuggingData")
-    add("<p> Payout: $" + str(nextHighest) + "</p>", "#debuggingData")
+    add("<p> Winner: " + ", ".join(winners) + "</p>", "#experimentData")
+    add("<p> Minimum Amt: $" + str(minimum) + "</p>", "#experimentData")
+    add("<p> Payout: $" + str(nextHighest) + "</p>", "#experimentData")
 
     # if more than 1 winner choose random
     if len(winners) > 1:
@@ -113,12 +113,12 @@ def start(me, waters, output_path):
     else:
       winner = winners[0]
 
-    add("<p> Real Winner: " + winner + "</p>", "#debuggingData")
+    add("<p> Real Winner: " + winner + "</p>", "#experimentData")
   elif choice >= 3 and choice <= 5: # If the proctor chose between 4 and 6  
     # compare tally to how many clients finished and check if majority
     if options4_6_tally > numClientsFinished/2:
       majority = True
-    add("<p>" + str(majority) + ", " + str(options4_6_tally) + " tally, " + str(numClientsFinished) + " clients </p>", "#debuggingData")
+    add("<p>" + str(majority) + ", " + str(options4_6_tally) + " tally, " + str(numClientsFinished) + " clients </p>", "#experimentData")
 
   # Loop through each client and craft a result dictionary for them to fetch and
   # display results
