@@ -51,3 +51,24 @@ def addUserRow(subj_id):
     "<td id=\"" + str(subj_id) + "water2B\">""</td>" # water 2 B
     "<td id=\"" + str(subj_id) + "water3B\">""</td>" # water 3 B
     "</tr>", "#tableBody",clients=findAdmin())
+
+# Grab the users info from the tupple space
+def grabInfo(subj_id):
+  info = take({"tag": "userInfo", "user": subj_id})
+  put(info)
+  return info
+
+# Get the position of the subject
+def getPosition(subj_id):
+  return grabInfo(subj_id)["position"]
+
+# Set the position of the user relative to the experiment and readd to tupple 
+# space
+def setPosition(subj_id, position):
+  info = take({"tag": "userInfo", "user": subj_id})
+  info["position"] = position
+  put(info)
+
+# Update the stage field on the admin table
+def updateStage(subj_id, stage):
+  let(str(stage),"#" + str(subj_id) + "STAGE", clients=findAdmin())

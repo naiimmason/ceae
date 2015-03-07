@@ -15,7 +15,8 @@ def start(me, waters):
   position = 0
   while action["id"] != "finish":
     action = take({"tag": "click", "id": "finish", "client": me}, 
-                  {"tag": "click", "id": "advance", "client": me})
+                  {"tag": "click", "id": "advance", "client": me},
+                  {"tag": "click", "id": "communication", "client": me})
 
     if action["id"] == "advance":
       position += 1
@@ -24,7 +25,7 @@ def start(me, waters):
 
       # If moving on to stage 2 perform calculations by grabbing client data 
       # moving on
-      if position == 2:
+      if position == 3:
         median_values, all_water = mod_calculatemedian.calculate(me)
         advance["median"] = median_values
         advance["all_water"] = all_water
@@ -32,11 +33,16 @@ def start(me, waters):
       # Show advance packet
       put(advance)
       let("Advance to Stage " + str(position + 1), "#advance")
+    elif action["id"] == "communication":
+      comm = take({"tag": "communication"})
+      comm["communication"] = not comm["communication"]
+      put(comm)
 
   # Check out the choice and then depending on the number (btwn 1 and 6) decide 
   # on how to handle client data and gather all data from clients that they have posted in
   choice = int(peek("#resultInput")) - 1 # assume 1-6 thus -1 for array values
   clientsFinished = take({"tag": "numFinished"})
+  put(clientsFinished)
   numClientsFinished = int(clientsFinished["num"])
   clientData = []
   for client in clientsFinished["clients"]:
@@ -53,7 +59,7 @@ def start(me, waters):
 
     # depending on our choice add to the desired data set
     if choice >= 0 and choice <=2:
-      options1_3_offers.append({"offer": float(client_choice), "client": client["client"]})
+      options1_3_offers.append({"offer": float(client_choice), "user": client["user"]})
     elif choice >= 3 and choice <= 5:
       if client_choice == "Yes":
         options4_6_tally += 1
@@ -71,7 +77,7 @@ def start(me, waters):
     # go through each offer check against minimum and next highest
     for client in options1_3_offers:
       offer = client["offer"]
-      client_id = client["client"]
+      client_id = client["user"]
 
       # if new lowest set nexthighest to minimum and minimum to the new offer 
       # and make sure to rest the nextHighest to the previous minimum
@@ -83,7 +89,7 @@ def start(me, waters):
 
       # add more than one winner
       elif offer == minimum:
-        winners.append(client["client"])
+        winners.append(client["user"])
         nextHighest = minimum
 
       # if the offer is less than the next highest set the next highest
@@ -115,12 +121,12 @@ def start(me, waters):
     clientResult = {}
 
     if choice >=0 and choice <=2:
-      clientResult = {"client": client["client"], "payout": "none", "winner": False, "tag": "clientResult", "type": "payout", "water": choice}
-      if client["client"] == int(winner):
+      clientResult = {"client": client["client"], "payout": "none", "winner": False, "tag": "clientResult", "type": "payout", "water": choice, "user": client["user"]}
+      if client["user"] == winner:
         clientResult["payout"] = nextHighest
         clientResult["winner"] = True
     elif choice >= 3 and choice <= 5:
-      clientResult = {"client": client["client"], "majority": majority, "for": options4_6_tally, "total": numClientsFinished, "tag": "clientResult", "type": "majority", "water": choice%3}
+      clientResult = {"client": client["client"], "majority": majority, "for": options4_6_tally, "total": numClientsFinished, "tag": "clientResult", "type": "majority", "water": choice%3, "user": client["user"]}
 
     put(clientResult)
 

@@ -38,7 +38,7 @@ def checkUserID(subj_id):
   put(totalUsers)
   for user in totalUsers["users"]:
     if user == subj_id:
-      add("<button class=\"btn btn-lg btn-danger\" id=\"warningBtn\">The partici"
+      add("<button class=\"btn btn-lg btn-danger\" id=\"warningBtn\">That partici"
         + "pant ID is taken!</button><br><br>", "#warning")
       return False
   return True

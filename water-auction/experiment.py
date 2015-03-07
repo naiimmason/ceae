@@ -3,6 +3,7 @@ import mod.monitor
 import mod.subject
 import mod.consent
 import mod.utilities
+import mod.reconnect
 import random as rand
 import datetime
 
@@ -31,6 +32,7 @@ def session(me):
     put({"tag": "numFinishedStage1", "num": 0, "clients": []})
     put({"tag": "numStage2", "num": 0, "clients": []})
     put({"tag": "numFinished", "num": 0, "clients": []})
+    put({"tag": "communication", "communication": False})
 
   # Edit page title
   let("Second-Price Auction", "title")
@@ -38,7 +40,7 @@ def session(me):
   # Show login page and ask for consent and check to see if they are the admin 
   # or not
   add(open("pages/welcome.html"));
-  subj_id = mod.consent.waitForConsent(me)
+  subj_id = str(mod.consent.waitForConsent(me))
 
   # Check to see if proctor or not
   if subj_id == "econadmin012":
@@ -49,7 +51,10 @@ def session(me):
 
   # Reconnect code goes here
   elif subj_id == "reconnect123456789":
-    print "add reconnect code"
+    let("")
+    add(open("pages/subject/reconnect.html"))
+    subj_id = str(mod.reconnect.wait(me))
+    mod.subject.start(me, subj_id, waters, rand_waters, output_path)
 
   # New unique person is added and starts the experiment
   else:
@@ -57,7 +62,7 @@ def session(me):
     mod.utilities.addUser(subj_id, me)
     mod.utilities.addUserRow(subj_id)
     temp_waters = rand.sample(waters, len(waters))
-    put({"tag": "userInfo", "user": subj_id, "results": [], 
+    put({"tag": "userInfo", "user": subj_id, "results": [-1, -1, -1, -1, -1, -1], 
       "pers_rand_waters": temp_waters, "position": "start"})
     mod.subject.start(me, subj_id, waters, rand_waters, output_path)
 
