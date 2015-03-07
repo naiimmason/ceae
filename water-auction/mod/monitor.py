@@ -3,20 +3,9 @@ import random as rand
 import matplotlib.pyplot as plt
 import mod_calculatemedian
 
-def start(me, waters, output_path):
-  # Initialize the output file
-  output_file = open(output_path, "w")
-  output_file.write("subject info,,Part A,,,Part B,,,\n")
-  output_file.write("subject number, subject id, " + waters[0] +", " + waters[1] + ", " + waters[2]+ ", " + waters[0] +", " + waters[1] + ", " + waters[2] +  "\n")
-  output_file.close()
-
-  # Put inital dictionaries on to the stack
-  put({"tag": "totalSubjects", "num": 0, "clients": []})
-  put({"tag": "numStart", "num": 0, "clients": []})
-  put({"tag": "numStage1", "num": 0, "clients": []})
-  put({"tag": "numFinishedStage1", "num": 0, "clients": []})
-  put({"tag": "numStage2", "num": 0, "clients": []})
-  put({"tag": "numFinished", "num": 0, "clients": []})
+# Main logic thread for the admin
+def start(me, waters):
+  let("")
 
   # Open up the display and then wait until the proctor wants to finish the 
   # experiment

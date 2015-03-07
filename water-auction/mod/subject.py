@@ -3,73 +3,87 @@ import random as rand
 import consent
 import ex_part1
 import ex_part2
-import mon_updateNum
+import utilities
 import practice
 
+# Grab the users info from the tupple space
+def grabInfo(subj_id):
+  info = take({"tag": "userInfo", "user": subj_id})
+  put(info)
+  return info
+
+# Get the position of the subject
+def getPosition(subj_id):
+  return grabInfo(subj_id)["position"]
+
+# Set the position of the user relative to the experiment and readd to tupple 
+# space
+def setPosition(subj_id, position):
+  info = take({"tag": "userInfo", "user": subj_id})
+  info["position"] = position
+  put(info)
+
+# Update the stage field on the admin table
 def updateStage(subj_id, stage):
-  let(str(stage),"#" + str(subj_id) + "STAGE", clients=0)
+  let(str(stage),"#" + str(subj_id) + "STAGE", clients=utilities.findAdmin())
 
-def start(me, waters, rand_waters, output_path):
-  # Open up the welcome page
-  add(open("pages/subject/welcome.html"))
-  #add("<p>Client " + str(me) + " has logged in</p>", "#debuggingData", clients=0)
-
-  # For the person to consent and fill in their name
-  subj_id = consent.waitForConsent(me)
+# The main logic that runs the subject's portion of the experiment
+def start(me, subj_id, waters, rand_waters, output_path):
+  let("")
+  temp_waters = grabInfo(subj_id)["pers_rand_waters"]
   results = [] # This is where all data collected will be stored
 
-  # The waters to be used for this experiment, these are IN ORDER
+  # "start" Instruction page
+  if(getPosition(subj_id) == "start"):
+    # Show first instruction page and wait for them to continue
+    add(open("pages/subject/prac_instructions.html"))
+    take({"tag": "click", "id": "continue", "client": me})
+    let("")
 
-  # Allow the subject to proceed and clear the page
-  add("<p>subject my proceed</p>")
-  subj_water = "<td>" + str(subj_id) + "</td>"
-  add("<p>" + str(subj_id) + " has started the experiment</p>", "#experimentData", clients=0)
-  add("<tr id=\"" + str(subj_id) + "\"><td>" + str(subj_id) + "</td>"
-    "<td id=\"" + str(subj_id) + "STAGE\">Instructions</td>" # stage
-    "<td id=\"" + str(subj_id) + "water1A\"></td>" # water 1 A
-    "<td id=\"" + str(subj_id) + "water2A\">""</td>" # water 2 A
-    "<td id=\"" + str(subj_id) + "water3A\">""</td>" # water 3 A
-    "<td>""</td>" # 
-    "<td id=\"" + str(subj_id) + "water1B\">""</td>" # water 1 B
-    "<td id=\"" + str(subj_id) + "water2B\">""</td>" # water 2 B
-    "<td id=\"" + str(subj_id) + "water3B\">""</td>" # water 3 B
+    # Update number of people who are waiting to start
+    utilities.increment("numStart", me)
+    setPosition(subj_id, "waitingPractice")
 
-    "</tr>", "#tableBody",clients=0)
-  
-  # Update the total number of subjects
-  mon_updateNum.update("totalSubjects", me)
+  # "waitingPractice" Waiting for practice page
+  if(getPosition(subj_id) == "waitingPractice"):
+    # Open waiting landing page and wait for advance packet before moving on and
+    # updating the numbers
+    updateStage(subj_id, "Waiting for practice")
+    add(open("pages/subject/landing.html"))
+    advance = take({"advance": True, "client": utilities.findAdmin(), "stage": 1})
+    put(advance)
+    setPosition(subj_id, "practiceInput")
+
+  # "practiceInput" Practice page
+  if(getPosition(subj_id) == "practiceInput"):
+    practice.start(subj_id)
+    
+  # "waitingPracticeResults" Waiting for practice results page
+  # "practiceResults" The practice round's results
+  # "partBInstructions" Part B instructions page
+  # "waitingPartB" Part B waiting to start page
+  # "partBWater1" Part B water 1 page
+  # "partBWater2" Part B water 2 page
+  # "partBWater3" Part B water 3 page
+  # "waitingPartC" Waiting for part C page
+  # "partCWater1" Part c water 1 page
+  # "partCWater2" Part c water 2 page
+  # "partCWater3" Part c water 3 page
+  # "results" Results page
+  # "endSurvey" Survey page
+
+  utilities.increment("numStage1", me)
+  utilities.decrement("numStart", me)
+  updateStage(subj_id, "Stage 1")
   let("")
-
-  # Show first instruction page and wait for them to continue
-  add(open("pages/subject/prac_instructions.html"))
-  take({"tag": "click", "id": "continue", "client": me})
-  let("")
-
-  # Update number of people who are waiting to start
-  mon_updateNum.update("numStart", me)
-
-  # Open waiting landing page and wait for advance packet before moving on and
-  # updating the numbers
-  updateStage(subj_id, "Waiting for practice")
-  add(open("pages/subject/landing.html"))
-  advance = take({"advance": True, "client": 0, "stage": 1})
-  put(advance)
-
-  #
-  #practice.startPractice()
-
-  mon_updateNum.update("numStage1", me)
-  mon_updateNum.decrement("numStart", me)
-  let("")
-
+  setPosition(subj_id, 3)
   # TODO: Loop 3 times and make first two the practice part
   # Run through the two parts of the experiment and store the results
-  updateStage(subj_id, "Stage 1")
-  results += ex_part1.start(me, subj_id, waters)
+  results += ex_part1.start(me, subj_id, waters, temp_waters)
 
   # Update numbers of where people are
-  mon_updateNum.decrement("numStage1", me)
-  mon_updateNum.update("numFinishedStage1", me)
+  utilities.decrement("numStage1", me)
+  utilities.increment("numFinishedStage1", me)
 
   updateStage(subj_id, "Finished Stage 1")
   # Put current data on stack for analysis before moving on
@@ -78,15 +92,15 @@ def start(me, waters, rand_waters, output_path):
 
   # Open a waiting page and wait for advance packet
   add(open("pages/subject/btwnparts.html"))
-  advance = take({"advance": True, "client": 0, "stage": 2})
+  advance = take({"advance": True, "client": utilities.findAdmin(), "stage": 2})
   median_values = advance["median"] # Grab median values from advance packet
   all_water = advance["all_water"]
   put(advance)
   let("")
 
   # Update the numbers of where people are
-  mon_updateNum.decrement("numFinishedStage1", me)
-  mon_updateNum.update("numStage2", me)
+  utilities.decrement("numFinishedStage1", me)
+  utilities.increment("numStage2", me)
 
   updateStage(subj_id, "Stage 2")
   # Perform the second part of the experiment
@@ -102,8 +116,8 @@ def start(me, waters, rand_waters, output_path):
   output_file.close()
 
   # Update numbers of where people are
-  mon_updateNum.decrement("numStage2", me)
-  mon_updateNum.update("numFinished", me)
+  utilities.decrement("numStage2", me)
+  utilities.increment("numFinished", me)
 
   # Log data
   add("<p><b>" + subj_id + "</b> finished: " + ", ".join(clientData2["results"]) + "</p>", "#experimentData", clients=0)
@@ -114,7 +128,7 @@ def start(me, waters, rand_waters, output_path):
   let("<p>Waiting for everyone to finish...</p>", "#results")
 
   # Wait for the monitor to terminate the experiment
-  finish = take({"finish": "true", "client": 0})
+  finish = take({"finish": "true", "client": utilities.findAdmin()})
   put(finish)
 
   clientResult = take({"client": me, "tag": "clientResult"})

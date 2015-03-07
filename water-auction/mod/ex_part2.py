@@ -1,5 +1,6 @@
 from willow.willow import *
 import random as rand
+import utilities
 
 # Go through each 
 def start(me, subj_id, waters, temp_waters, median_values, all_water):
@@ -36,7 +37,7 @@ def start(me, subj_id, waters, temp_waters, median_values, all_water):
     while j < len(waters):
       if temp_waters[i] == waters[j]:
         results[j] = answer["id"]
-        add(str(answer["id"]), "#" + str(subj_id) + "water" + str(j + 1) + "B",clients=0) 
+        add(str(answer["id"]), "#" + str(subj_id) + "water" + str(j + 1) + "B",clients=utilities.findAdmin()) 
       j += 1
     let("")
     i += 1
