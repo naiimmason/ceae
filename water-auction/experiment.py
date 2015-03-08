@@ -25,6 +25,11 @@ def session(me):
     # Two most important dictionaries used to check IDs
     put({"tag": "totalSubjects", "num": 0, "clients": [], "users": []})
     put({"tag": "activeUsers", "num": 0, "users": []})
+    put({"tag": "practice1Finished", "num": 0, "users": []})
+    put({"tag": "practice2Finished", "num": 0, "users": []})
+    put({"tag": "maxPayout", "amount": 4999})
+    put({"tag": "communication", "communication": False})
+    put({"tag": "currentStage", "stage": "waitingPractice1"})
 
     # Quality of life dictionaries that update admin info
     put({"tag": "numStart", "num": 0, "clients": []})
@@ -32,9 +37,6 @@ def session(me):
     put({"tag": "numFinishedStage1", "num": 0, "clients": []})
     put({"tag": "numStage2", "num": 0, "clients": []})
     put({"tag": "numFinished", "num": 0, "clients": []})
-    put({"tag": "communication", "communication": False})
-    put({"tag": "maxPayout", "amount": 4999})
-    put({"tag": "currentStage", "stage": "waitingPractice1"})
 
   # Edit page title
   let("Second-Price Auction", "title")
@@ -66,7 +68,7 @@ def session(me):
     mod.utilities.addUser(subj_id, me)
     temp_waters = rand.sample(waters, len(waters))
     put({"tag": "userInfo", "user": subj_id, "results": [-1, -1, -1, -1, -1, -1], 
-      "pers_rand_waters": temp_waters, "position": "Start"})
+      "pers_rand_waters": temp_waters, "position": "Start", "practice_results": [-1, -1]})
     mod.utilities.addUserRow(subj_id)
     mod.subject.start(me, subj_id, waters, rand_waters, output_path)
 

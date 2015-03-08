@@ -81,7 +81,7 @@ def start(me, subj_id, waters, rand_waters, output_path):
     utilities.increment("numFinishedStage1", me)
     subj.waitingPartC.start(subj_id, me)
 
-  advance = take({"advance": True, "stage": 3})
+  advance = take({"advance": True, "stage": "waitingPartC"})
   put(advance)
   median_values = advance["median"] # Grab median values from advance packet
   all_water = advance["all_water"]

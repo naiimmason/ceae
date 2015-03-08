@@ -40,7 +40,7 @@ def addUser(subj_id, me):
 def addUserRow(subj_id):
   # Add the table element to the correct place and add ids based on the subject
   # id
-  add("<p>" + str(subj_id) + " has started the experiment</p>", "#experimentData", clients=findAdmin())
+  #add("<p>" + str(subj_id) + " has started the experiment</p>", "#experimentData", clients=findAdmin())
   add("<tr id=\"" + str(subj_id) + "\"><td>" + str(subj_id) + "</td>"
     "<td id=\"" + str(subj_id) + "STAGE\">Instructions</td>" # stage
     "<td id=\"" + str(subj_id) + "water1A\"></td>" # water 1 A

@@ -11,7 +11,8 @@ btntexts = {
   "waitingPracResults2": "Finish Practice 2",
   "waitingPartB": "Start Part B",
   "waitingPartC": "Start Part C",
-  "waitingResults": "Finish Experiment"
+  "waitingResults": "Finish Experiment",
+  "finished": "NO MORE STAGES!"
 }
 
 positions = [
@@ -21,7 +22,8 @@ positions = [
   "waitingPracResults2",
   "waitingPartB",
   "waitingPartC",
-  "waitingResults"
+  "waitingResults",
+  "finished"
 ]
 
 # Main logic thread for the admin
@@ -57,27 +59,106 @@ def start(me, waters):
       position = i
     i += 1
 
-
-  while action["id"] != "finish":
-    action = take({"tag": "click", "id": "finish", "client": me}, 
-                  {"tag": "click", "id": "advance", "client": me},
-                  {"tag": "click", "id": "communication", "client": me})
+  finish = False
+  while not finish:
+    action = take({"tag": "click", "id": "advance", "client": me},
+                  {"tag": "click", "id": "communication", "client": me},
+                  {"tag": "click", "id": "updateMaxPayout", "client": me})
 
     if action["id"] == "advance":
       position += 1
       poke("value", str(position), "#advance")
       stage = take({"tag": "currentStage"})
       stage["stage"] = positions[position]
+      if positions[position] == "finished":
+        finish = True
+
+      if positions[position] == "waitingResults":
+        pop("btn-primary", "#advance")
+        push("btn-danger", "#advance")
+
       put(stage)
-      advance = {"advance": True, "client": me, "stage": position}
+      advance = {"advance": True, "client": me, "stage": positions[position-1]}
+
+      if positions[position-1] == "waitingPracResults1"  or positions[position-1] == "waitingPracResults2":
+        number = 1 
+        if positions[position-1] == "waitingPracResults2":
+          number = 2
+
+        max_payout = take({"tag": "maxPayout"})
+        maxPayout = max_payout["amount"]
+        put(max_payout) 
+
+        prac1Data = []
+        finishers1 = take({"tag": "practice" + str(number) + "Finished"})
+        put(finishers1)
+
+        for user in finishers1["users"]:
+          prac1UserData = take({"tag": "userInfo", "user": user})
+          put(prac1UserData)
+          prac1Data.append({"user": user, "offer": prac1UserData["practice_results"][number-1]})
+
+        winners = []
+        winner = -1
+        minimum = 1000000000
+        nextHighest = minimum + 1
+
+        # go through each offer check against minimum and next highest
+        for user in prac1Data:
+          offer = float(user["offer"])
+          user_id = user["user"]
+
+          # if new lowest set nexthighest to minimum and minimum to the new offer 
+          # and make sure to rest the nextHighest to the previous minimum
+          if offer < minimum:
+            winners[:] = []
+            nextHighest = minimum
+            minimum = offer
+            winners.append(user_id)
+
+          # add more than one winner
+          elif offer == minimum:
+            winners.append(user["user"])
+            nextHighest = minimum
+
+          # if the offer is less than the next highest set the next highest
+          elif offer < nextHighest:
+            nextHighest = offer
+
+        if nextHighest > maxPayout:
+          nextHighest = minimum
+
+        winners = map(str, winners)
+        add("<h4>Practice " + str(number), "#experimentData")
+        add("<p> Winner: " + ", ".join(winners) + "</p>", "#experimentData")
+        add("<p> Minimum Amt: $" + str(minimum) + "</p>", "#experimentData")
+        add("<p> Payout: $" + str(nextHighest) + "</p>", "#experimentData")
+        add("<hr>", "#experimentData")
+
+        # if more than 1 winner choose random
+        if len(winners) > 1:
+          winner = winners[rand.randint(0, len(winners) - 1)]
+        else:
+          if len(winners) > 0:
+            winner = winners[0]
+
+        add("<p> Real Winner: " + str(winner) + "</p>", "#experimentData")
+
+        for user in prac1Data:
+          clientPracResult = { "user": user["user"], "won": "did not win", "tag": "practice_results" + str(number-1) }
+          if winner == user["user"]:
+            clientPracResult["won"] = "won"
+            clientPracResult["offer"] = nextHighest
+
+          put(clientPracResult)
 
       # If moving on to stage 2 perform calculations by grabbing client data 
       # moving on
-      if position == 3:
+      if positions[position-1] == "waitingPartC":
         median_values, all_water = mod_calculatemedian.calculate(me)
         advance["median"] = median_values
         advance["all_water"] = all_water
-      
+
       # Show advance packet
       put(advance)
       let(btntexts[positions[position]], "#advance")
@@ -86,6 +167,14 @@ def start(me, waters):
       comm = take({"tag": "communication"})
       comm["communication"] = not comm["communication"]
       put(comm)
+
+    elif action["id"] == "updateMaxPayout":
+      maxPayout = float(peek("#maxInput"))
+        # Update max payout text
+      max_payout = take({"tag": "maxPayout"})
+      max_payout["amount"] = maxPayout
+      put(max_payout)
+      let(str(max_payout["amount"]), "#maxPayout")
 
   # Check out the choice and then depending on the number (btwn 1 and 6) decide 
   # on how to handle client data and gather all data from clients that they have posted in
@@ -113,11 +202,15 @@ def start(me, waters):
       if client_choice == "Yes":
         options4_6_tally += 1
 
+  max_payout = take({"tag": "maxPayout"})
+  maxPayout = max_payout["amount"]
+  put(max_payout) 
+
   majority = False
   winners = []
   winner = -1
-  minimum = 10000000000000
-  nextHighest = minimum + 1
+  minimum = maxPayout
+  nextHighest = maxPayout
 
   # Analyze the data
   if choice >=0 and choice <=2:
@@ -145,8 +238,13 @@ def start(me, waters):
       elif offer < nextHighest:
         nextHighest = offer
 
+    if nextHighest > maxPayout:
+      nextHighest = minimum
+
     majority = False
     winners = map(str, winners)
+    add("<hr>", "#experimentData")
+    add("<h4>Experiment Finished</h4>", "#experimentData")
     add("<p> Winner: " + ", ".join(winners) + "</p>", "#experimentData")
     add("<p> Minimum Amt: $" + str(minimum) + "</p>", "#experimentData")
     add("<p> Payout: $" + str(nextHighest) + "</p>", "#experimentData")
@@ -155,7 +253,8 @@ def start(me, waters):
     if len(winners) > 1:
       winner = winners[rand.randint(0, len(winners) - 1)]
     else:
-      winner = winners[0]
+      if len(winners) > 0:
+        winner = winners[0]
 
     add("<p> Real Winner: " + winner + "</p>", "#experimentData")
   elif choice >= 3 and choice <= 5: # If the proctor chose between 4 and 6  
