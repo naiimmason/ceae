@@ -5,11 +5,14 @@
   <h1>Control Panel<small class="pull-right">You are the proctor</small></h1>
   <hr>
   <p><b>Total:</b> <span id="totalSubjects">0</span></p>
-  <p><b>Number at Start:</b> <span id="numStart">0</span></p>
-  <p><b>Number at Stage 1:</b> <span id="numStage1">0</span></p>
-  <p><b>Number Finished Stage 1:</b> <span id="numFinishedStage1">0</span></p>
-  <p><b>Number at Stage 2:</b> <span id="numStage2">0</span></p>
+  <div class="hidden">
+    <p><b>Number at Start:</b> <span id="numStart">0</span></p>
+    <p><b>Number at Stage 1:</b> <span id="numStage1">0</span></p>
+    <p><b>Number Finished Stage 1:</b> <span id="numFinishedStage1">0</span></p>
+    <p><b>Number at Stage 2:</b> <span id="numStage2">0</span></p>
+  </div>
   <p><b>Number Finished Experiment:</b> <span id="numFinished">0</span></p>
+  <hr>
   <form class="form-inline">
     <div class="form-group form-group-lg">
       <label for="resultInput" class="control-label" id="finishLabel">Experiment Choice: </label>
@@ -17,8 +20,21 @@
     </div>
     <button type="button" id="finish" class="btn btn-lg btn-danger">Finish</button>
   </form>
-  <button type="button" id="advance" class="btn btn-lg btn-primary" value="start">Start Experiment</button>
-  <input type="checkbox" class="clickable" id="communication">
+  <hr>
+  <span id="advanceBtnSpan"><button type="button" id="advance" class="btn btn-lg btn-primary" value="start">Start Experiment</button></span>
+  <hr>
+  <form class="form-inline">
+    <label for="communication" class="control-label"> Communication allowed?</label>
+    <input type="checkbox" class="clickable" id="communication">
+  </form>
+  <hr>
+  <form>
+    <div class="form-group form-group-lg">
+      <label for="maxInput" class="control-label" id="maxInputValue">Max Payout: $<span id="maxPayout"></span></label>
+      <input type="text" class="form-control input-lg" id="maxInput" placeholder="$4999" autocomplete="off">
+    </div>
+    <button type="button" id ="updateMaxPayout" class="btn btn-lg btn-primary">Update Payout</button>
+  </form>  
   <hr>
   <table class="table table-bordered">
     <thead>
@@ -49,7 +65,7 @@
     <tbody>
   </table>
   <hr>
-  <div class="col-md-6 center" id="experimentData">
-    <h3>Experimental Log</h3>
+  <div id="experimentData">
+    <h3>Experimental Log:</h3>
   </div>
 </div>

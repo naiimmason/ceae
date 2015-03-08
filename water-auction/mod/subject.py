@@ -14,19 +14,40 @@ def start(me, subj_id, waters, rand_waters, output_path):
   results = utilities.grabInfo(subj_id)["results"] # This is where all data collected will be stored
 
   # "start" Instruction page
-  if(utilities.getPosition(subj_id) == "start"):
+  if(utilities.getPosition(subj_id) == "Start"):
     subj.start.start(subj_id, me)
 
-  # "waitingPractice" Waiting for practice page
-  if(utilities.getPosition(subj_id) == "waitingPractice"):
+  # "waitingPractice1" Waiting for practice page
+  if(utilities.getPosition(subj_id) == "waitingPractice1"):
     subj.waitingPractice.start(subj_id, me)
 
-  # "practiceInput" Practice page
-  if(utilities.getPosition(subj_id) == "practiceInput"):
-    subj.practice.start(subj_id)
+  # "practiceInput1" Practice page
+  if(utilities.getPosition(subj_id) == "practiceInput1"):
+    subj.practice.input1(subj_id, me)
 
-  # "waitingPracticeResults" Waiting for practice results page
-  # "practiceResults" The practice round's results
+  # "waitingPracticeResults1" Waiting for practice results page
+  if(utilities.getPosition(subj_id) == "waitingPracticeResults1"):
+    subj.practice.waitingResults1(subj_id, me)
+
+  # "practiceResults1" The practice round's results
+  if(utilities.getPosition(subj_id) == "practiceResults1"):
+    subj.practice.results1(subj_id, me)
+
+  # "waitingPractice2" Waiting for practice page
+  if(utilities.getPosition(subj_id) == "waitingPractice2"):
+    subj.practice.waitingPractice2(subj_id, me)
+
+  # "practiceInput2" Practice page
+  if(utilities.getPosition(subj_id) == "practiceInput2"):
+    subj.practice.input2(subj_id, me)
+
+  # "waitingPracticeResults2" Waiting for the practice results of the second round
+  if(utilities.getPosition(subj_id) == "waitingPracticeResults2"):
+    subj.practice.waitingResults2(subj_id, me)
+
+  # "practiceResults2" 
+  if(utilities.getPosition(subj_id) == "practiceResults2"):
+    subj.practice.results2(subj_id, me)
   
   # "partBInstructions" Part B instructions page
   if(utilities.getPosition(subj_id) == "partBInstructions"):
@@ -60,7 +81,7 @@ def start(me, subj_id, waters, rand_waters, output_path):
     utilities.increment("numFinishedStage1", me)
     subj.waitingPartC.start(subj_id, me)
 
-  advance = take({"advance": True, "client": utilities.findAdmin(), "stage": 3})
+  advance = take({"advance": True, "stage": 3})
   put(advance)
   median_values = advance["median"] # Grab median values from advance packet
   all_water = advance["all_water"]

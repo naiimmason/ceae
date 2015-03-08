@@ -33,6 +33,8 @@ def session(me):
     put({"tag": "numStage2", "num": 0, "clients": []})
     put({"tag": "numFinished", "num": 0, "clients": []})
     put({"tag": "communication", "communication": False})
+    put({"tag": "maxPayout", "amount": 4999})
+    put({"tag": "currentStage", "stage": "waitingPractice1"})
 
   # Edit page title
   let("Second-Price Auction", "title")
@@ -40,10 +42,12 @@ def session(me):
   # Show login page and ask for consent and check to see if they are the admin 
   # or not
   add(open("pages/welcome.html"));
-  subj_id = str(mod.consent.waitForConsent(me))
+  subj_id = ""
+  if me != 0:
+    subj_id = str(mod.consent.waitForConsent(me))
 
   # Check to see if proctor or not
-  if subj_id == "econadmin012":
+  if subj_id == "econadmin012" or me == 0:
     # Remove the last adminUser and add the new one
     grab({"tag": "adminUser"})
     put({"tag": "adminUser", "clientNum": me})
@@ -60,10 +64,10 @@ def session(me):
   else:
     # Update the total number of subjects and add a unique dictionary for that user 
     mod.utilities.addUser(subj_id, me)
-    mod.utilities.addUserRow(subj_id)
     temp_waters = rand.sample(waters, len(waters))
     put({"tag": "userInfo", "user": subj_id, "results": [-1, -1, -1, -1, -1, -1], 
-      "pers_rand_waters": temp_waters, "position": "start"})
+      "pers_rand_waters": temp_waters, "position": "Start"})
+    mod.utilities.addUserRow(subj_id)
     mod.subject.start(me, subj_id, waters, rand_waters, output_path)
 
 run(session)

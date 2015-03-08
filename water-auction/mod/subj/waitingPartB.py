@@ -8,6 +8,6 @@ def start(subj_id):
   add(open("pages/subject/waitingPartB.html"))
 
   # Wait for the advance token and update position
-  advance = take({"advance": True, "client": mod.utilities.findAdmin(), "stage": 2})
+  advance = take({"advance": True, "stage": 2})
   put(advance)
   mod.utilities.setPosition(subj_id, "partBWater1")

@@ -52,6 +52,20 @@ def addUserRow(subj_id):
     "<td id=\"" + str(subj_id) + "water3B\">""</td>" # water 3 B
     "</tr>", "#tableBody",clients=findAdmin())
 
+  let(grabInfo(subj_id)["position"], "#" + str(subj_id) + "STAGE")
+  
+  i = -1
+  for result in grabInfo(subj_id)["results"]:
+    i += 1
+    if result == -1:
+      continue
+    else:
+      part = "A"
+      number = str(i%3 + 1)
+      if i > 2:
+        part = "B"
+      let(str(result),"#" + str(subj_id) + "water" + number + part, clients=findAdmin())
+
 # Grab the users info from the tupple space
 def grabInfo(subj_id):
   info = take({"tag": "userInfo", "user": subj_id})

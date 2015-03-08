@@ -60,6 +60,10 @@ def start(me, subj_id, waters, temp_waters, median_values, all_water, water_pos,
     # Log data
     add("<p><b>" + subj_id + "</b> finished: " + ", ".join(clientData2["results"]) + "</p>", "#experimentData", clients=utilities.findAdmin())
 
+    # Update numbers of where people are
+    utilities.decrement("numStage2", me)
+    utilities.increment("numFinished", me)
+
 
     # Output the answer and data to the relavent database file
     output_file = open(output_path, "a")

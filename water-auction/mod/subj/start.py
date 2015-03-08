@@ -11,4 +11,4 @@ def start(subj_id, me):
 
   # Update number of people who are waiting to start
   mod.utilities.increment("numStart", me)
-  mod.utilities.setPosition(subj_id, "waitingPractice")
+  mod.utilities.setPosition(subj_id, "waitingPractice1")

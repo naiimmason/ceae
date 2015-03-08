@@ -3,10 +3,6 @@ import mod.utilities
 def start(subj_id, me, output_path, waters, median_values):
   let("")
   results = mod.utilities.grabInfo(subj_id)["results"]
-
-  # Update numbers of where people are
-  mod.utilities.decrement("numStage2", me)
-  mod.utilities.increment("numFinished", me)
   
   mod.utilities.updateStage(subj_id, "Finished experiment")
   # Open results page and wait for finish packet

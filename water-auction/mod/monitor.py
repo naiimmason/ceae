@@ -2,6 +2,27 @@ from willow.willow import *
 import random as rand
 import matplotlib.pyplot as plt
 import mod_calculatemedian
+import utilities
+
+btntexts = {
+  "waitingPractice1": "Start Practice 1",
+  "waitingPracResults1": "Finish Practice 1",
+  "waitingPractice2": "Start Practice 2",
+  "waitingPracResults2": "Finish Practice 2",
+  "waitingPartB": "Start Part B",
+  "waitingPartC": "Start Part C",
+  "waitingResults": "Finish Experiment"
+}
+
+positions = [
+  "waitingPractice1",
+  "waitingPracResults1",
+  "waitingPractice2",
+  "waitingPracResults2",
+  "waitingPartB",
+  "waitingPartC",
+  "waitingResults"
+]
 
 # Main logic thread for the admin
 def start(me, waters):
@@ -12,7 +33,31 @@ def start(me, waters):
   add(open("pages/monitor/monitor.html"))
   action = {"id": "not started"}
 
+  # Update the table if not made yet
+  totalUsers = take({"tag": "totalSubjects"})
+  put(totalUsers)
+  for user in totalUsers["users"]:
+    utilities.addUserRow(user)
+
+  # Update the button text
+  stage = take({"tag": "currentStage"})
+  put(stage)
+  let(btntexts[stage["stage"]], "#advance")
+  poke("value", stage["stage"], "#advance")
+
+  # Update max payout text
+  max_payout = take({"tag": "maxPayout"})
+  put(max_payout)
+  let(str(max_payout["amount"]), "#maxPayout")
+
   position = 0
+  i = 0
+  while i < len(positions):
+    if stage["stage"] == positions[i]:
+      position = i
+    i += 1
+
+
   while action["id"] != "finish":
     action = take({"tag": "click", "id": "finish", "client": me}, 
                   {"tag": "click", "id": "advance", "client": me},
@@ -21,6 +66,9 @@ def start(me, waters):
     if action["id"] == "advance":
       position += 1
       poke("value", str(position), "#advance")
+      stage = take({"tag": "currentStage"})
+      stage["stage"] = positions[position]
+      put(stage)
       advance = {"advance": True, "client": me, "stage": position}
 
       # If moving on to stage 2 perform calculations by grabbing client data 
@@ -32,7 +80,8 @@ def start(me, waters):
       
       # Show advance packet
       put(advance)
-      let("Advance to Stage " + str(position + 1), "#advance")
+      let(btntexts[positions[position]], "#advance")
+      
     elif action["id"] == "communication":
       comm = take({"tag": "communication"})
       comm["communication"] = not comm["communication"]
@@ -46,7 +95,7 @@ def start(me, waters):
   numClientsFinished = int(clientsFinished["num"])
   clientData = []
   for client in clientsFinished["clients"]:
-    clientData.append(take({"client": client, "tag": "clientData2"}))
+    clientData.append(take({"tag": "clientData2"}))
 
   # define variable
   options4_6_tally = 0
