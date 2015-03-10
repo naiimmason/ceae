@@ -64,7 +64,8 @@ $(document).ready(function(){
        */
       var text_fields = elt.find("input:text,textarea");
       text_fields.keypress(function(e) {
-        e.stopPropagation();
+       if (e.which != 13){e.stopPropagation();}
+
       });
 
       /*

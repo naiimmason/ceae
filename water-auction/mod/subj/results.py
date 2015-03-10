@@ -38,3 +38,8 @@ def start(subj_id, me, output_path, waters, median_values):
     else:
       resultStmt += "<p>You did <b>not</b> win the bid for drinking <b>" + waters[clientResult["water"]] + "</b>.</p>"
   let(resultStmt, "#results")
+
+  add("<hr>", "#buttonYo")
+  add("<button class=\"btn btn-primary btn-lg\" id=\"continue\">Continue to Final Survey</button>", "#buttonYo")
+  take({"tag": "click", "client": me, "id": "continue"})
+  mod.utilities.setPosition(subj_id, "survey")

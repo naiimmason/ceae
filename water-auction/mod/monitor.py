@@ -100,8 +100,8 @@ def start(me, waters):
 
         winners = []
         winner = -1
-        minimum = 1000000000
-        nextHighest = minimum + 1
+        minimum = maxPayout+1
+        nextHighest = maxPayout+1
 
         # go through each offer check against minimum and next highest
         for user in prac1Data:
@@ -129,11 +129,11 @@ def start(me, waters):
           nextHighest = minimum
 
         winners = map(str, winners)
-        add("<h4>Practice " + str(number), "#experimentData")
+        add("<h4>Practice " + str(number) + "</h4>", "#experimentData")
         add("<p> Winner: " + ", ".join(winners) + "</p>", "#experimentData")
         add("<p> Minimum Amt: $" + str(minimum) + "</p>", "#experimentData")
         add("<p> Payout: $" + str(nextHighest) + "</p>", "#experimentData")
-        add("<hr>", "#experimentData")
+        add("<p> Max Payout: " + str(maxPayout) + "</p>", "#experimentData")
 
         # if more than 1 winner choose random
         if len(winners) > 1:
@@ -143,6 +143,7 @@ def start(me, waters):
             winner = winners[0]
 
         add("<p> Real Winner: " + str(winner) + "</p>", "#experimentData")
+        add("<hr>", "#experimentData")
 
         for user in prac1Data:
           clientPracResult = { "user": user["user"], "won": "did not win", "tag": "practice_results" + str(number-1) }
@@ -209,8 +210,8 @@ def start(me, waters):
   majority = False
   winners = []
   winner = -1
-  minimum = maxPayout
-  nextHighest = maxPayout
+  minimum = maxPayout + 1
+  nextHighest = maxPayout + 1
 
   # Analyze the data
   if choice >=0 and choice <=2:
@@ -248,6 +249,7 @@ def start(me, waters):
     add("<p> Winner: " + ", ".join(winners) + "</p>", "#experimentData")
     add("<p> Minimum Amt: $" + str(minimum) + "</p>", "#experimentData")
     add("<p> Payout: $" + str(nextHighest) + "</p>", "#experimentData")
+    add("<p> Max Payout: " + str(maxPayout) + "</p>", "#experimentData")
 
     # if more than 1 winner choose random
     if len(winners) > 1:

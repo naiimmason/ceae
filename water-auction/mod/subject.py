@@ -107,4 +107,4 @@ def start(me, subj_id, waters, rand_waters, output_path):
 
   # "endSurvey" Survey page
   if(utilities.getPosition(subj_id) == "survey"):
-    subj.survey.start()
+    subj.survey.start(subj_id, me)

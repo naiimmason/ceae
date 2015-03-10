@@ -1,0 +1,430 @@
+<link rel="stylesheet" type="text/css" href="../../styles/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../../styles/subject_style.css" />
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+<div class="container">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10 big-text">
+    <h1>End of Experiment Survey:</h1>
+    <hr>
+    <ol>
+      <li class="special">
+        How thirsty are you right now? <b><output for="thirsty" id="thirstyValue">5</output></b>
+        <form class="form-inline" role="form">
+          <div class="input-group">
+            <span class="input-group-addon">Not Thirsty (1)</span>
+            <input id="thirsty" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 0)">
+            <span class="input-group-addon">Very Thirsty (9)</span>
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        In a typical week, approximately how many glasses (12 oz.) of tap water do you consume?
+        <input type="number" id="amtWaterDrink" class="form-control input-lg">
+      </li>
+
+      <li class="special">
+        How often does your household drink the following types of water?
+      </li>
+
+      <li class="special">
+        Are you concerned about the quality of your drinking water?
+        <form class="form-inline">
+          <div class="radio-btn-frm">
+            <label>Yes</label>
+            <input type="radio" name="truth" value="Yes">
+            <label>No</label>
+            <input type="radio" name="truth" value="No">
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        How risky do you consider drinking tap water? <b><output for="riskytap" id="riskyTapValue">5</output></b>
+        <form class="form-inline" role="form">
+          <div class="input-group">
+            <span class="input-group-addon">Not Risky (1)</span>
+            <input id="riskytap" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 1)">
+            <span class="input-group-addon">Very Risky (9)</span>
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        How risky do you consider filtered tap water? <b><output for="riskyfiltap" id="riskyFilTapValue">5</output></b>
+        <form class="form-inline" role="form">
+          <div class="input-group">
+            <span class="input-group-addon">Not Risky (1)</span>
+            <input id="riskyfiltap" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 2)">
+            <span class="input-group-addon">Very Risky (9)</span>
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        How risky do you consider bottled water? <b><output for="riskybottle" id="riskyBottleValue">5</output></b>
+        <form class="form-inline" role="form">
+          <div class="input-group">
+            <span class="input-group-addon">Not Risky (1)</span>
+            <input id="riskybottle" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 3)">
+            <span class="input-group-addon">Very Risky (9)</span>
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        How often do you go camping? <b><output for="camping" id="campingValue">5</output></b>
+        <form class="form-inline" role="form">
+          <div class="input-group">
+            <span class="input-group-addon">Never (1)</span>
+            <input id="camping" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 4)">
+            <span class="input-group-addon">Very Often (9)</span>
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        Before today, have you ever felt like drinking water may be a risk to your health?
+        <form class="form-inline">
+          <div class="radio-btn-frm">
+            <label>Yes</label>
+            <input type="radio" name="truth" value="Yes">
+            <label>No</label>
+            <input type="radio" name="truth" value="No">
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        Did the fact that Penta water comes from a plastic bottle affect your offer?
+        <form class="form-inline">
+          <div class="radio-btn-frm">
+            <label>Yes</label>
+            <input type="radio" name="truth" value="Yes">
+            <label>No</label>
+            <input type="radio" name="truth" value="No">
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        Did the fact that Penta water comes from a plastic bottle bother you?
+        <form class="form-inline">
+          <div class="radio-btn-frm">
+            <label>Yes</label>
+            <input type="radio" name="truth" value="Yes">
+            <label>No</label>
+            <input type="radio" name="truth" value="No">
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        What is your country of origin?
+        <form class="form-inline">
+          <div class="radio-btn-frm">
+            <label>US</label>
+            <input type="radio" name="origin" value="US">
+            <label>Other</label>
+            <input type="radio" name="origin" value="Other">
+            <input type="text" class="form-control input-lg">
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        What is your gender?
+        <form class="form-inline">
+          <div class="radio-btn-frm">
+            <label>Male</label>
+            <input type="radio" name="truth" value="Male">
+            <label>Female</label>
+            <input type="radio" name="truth" value="Female">
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        <form class="form-inline">
+          What is your age?
+          <input type="number" class="form-control input-lg">
+        </form>
+      </li> 
+
+      <li class="special">
+        Including yourself, how many people live in your household?
+        <input type="number" class="form-control input-lg">
+      </li>
+
+      <li class="special">
+        What is your relationship status?
+        <form class="form-horizontal">
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Single">
+            </div>
+            <label>Single</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Married">
+            </div>
+            <label>Married</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Divorced">
+            </div>
+            <label>Divorced</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Widowed">
+            </div>
+            <label>Widowed</label>
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        Employment status: Are you currently...   
+        <form class="form-horizontal">
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Employed for wages">
+            </div>
+            <label>Employed for wages</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Self-employed">
+            </div>
+            <label>Self-employed</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="unemployed">
+            </div>
+            <label>Unemployed</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Widowed">
+            </div>
+            <label>Widowed</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Student">
+            </div>
+            <label>Student</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Retired">
+            </div>
+            <label>Retired</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="other">
+            </div>
+            <div class="form-inline">
+              <label>Other, please specify</label>
+              <input type="text" class="form-control input-lg">
+            </div>
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        What is your race?  
+        <form class="form-horizontal">
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="White">
+            </div>
+            <label>White</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Black or African American">
+            </div>
+            <label>Black or African American</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="American Indian and Alaska Native">
+            </div>
+            <label>American Indian and Alaska Native</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Asian">
+            </div>
+            <label>Asian</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Native Hawaiian and Other Pacific Islander">
+            </div>
+            <label>Native Hawaiian and Other Pacific Islander</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Some other race">
+            </div>
+            <label>Some other race</label>
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        What is your highest level of education obtained?
+        <form class="form-horizontal">
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Some High School">
+            </div>
+            <label>Some High School</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="High School Degree">
+            </div>
+            <label>High School Degree</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Some College">
+            </div>
+            <label>Some College</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="College Degree">
+            </div>
+            <label>College Degree</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="Graduate Degree">
+            </div>
+            <label>Graduate Degree</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="other">
+            </div>
+            <div class="form-inline">
+              <label>Other (please list)</label>
+              <input type="text" class="form-control input-lg">
+            </div>
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        What is your annual household income?
+        <form class="form-horizontal">
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="$0-$10,000">
+            </div>
+            <label>$0-$10,000</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="$10,001-$20,000">
+            </div>
+            <label>$10,001-$20,000</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="$20,001-$30,000">
+            </div>
+            <label>$20,001-$30,000</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="$30,001-$40,000">
+            </div>
+            <label>$30,001-$40,000</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="$40,001-$60,000">
+            </div>
+            <label>$40,001-$60,000</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="$60,001-$80,000">
+            </div>
+            <label>$60,001-$80,000</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="$80,001-$100,000">
+            </div>
+            <label>$80,001-$100,000</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="$100,001-$150,000">
+            </div>
+            <label>$100,001-$150,000</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="$150,001-$250,000">
+            </div>
+            <label>$150,001-$250,000</label>
+          </div>
+          <div class="form-group special">
+            <div class="col-sm-1">
+              <input type="radio" name="status" value="More than $250,000">
+            </div>
+            <label>More than $250,000</label>
+          </div>
+        </form>
+      </li>
+
+      <li class="special">
+        <form class="form-inline">
+          What is your zipcode?
+          <input type="text" class="form-control input-lg">
+        </form>
+      </li>
+
+      <li class="special">
+        <form class="form-inline">
+          What zipcode (or town) did you grow up in?
+          <input type="text" class="form-control input-lg">
+        </form>
+      </li>
+
+      <li class="special">
+        <p>Is there anything else you would like to tell us?</p>
+        <textarea class="form-control" rows="5"></textarea>
+      </li>
+    </ol>
+    <hr>
+    <button type="button" class="btn btn-primary btn-lg pull-right" id="continue">Submit and Finish</button>
+  </div>
+  <div class="col-md-1">
+  </div>
+
+  <script>
+    tags = ["#thirstyValue",
+            "#riskyTapValue",
+            "#riskyFilTapValue",
+            "#riskyBottleValue",
+            "#campingValue"]
+    function outputUpdate(vol, i) {
+      document.querySelector(tags[i]).value = vol;
+    }
+  </script>
+</div>
