@@ -85,8 +85,6 @@ $(function() {
 
       var ctx = $("#majorityChart").get(0).getContext("2d");
       var majChart = new Chart(ctx).Pie(data, options);
-
-      legend(document.getElementById("chartLegend"), data);
     }
   });
 });

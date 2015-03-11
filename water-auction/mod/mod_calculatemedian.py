@@ -24,13 +24,34 @@ def calculate(me):
   print water2_values
   print water3_values
 
-  median_values.append(np.median(water1_values))
-  median_values.append(np.median(water2_values))
-  median_values.append(np.median(water3_values))
+  water1_median = np.median(water1_values)
+  water2_median = np.median(water2_values)
+  water3_median = np.median(water3_values)
+
+  for value in water1_values:
+    if value == water1_median:
+      water1_median = min(water1_values)
+      break;
+
+  for value in water2_values:
+    if value == water2_median:
+      water2_median = min(water2_values)
+      break;
+
+  for value in water3_values:
+    if value == water3_median:
+      water3_median = min(water3_values)
+      break;
+
+
+  median_values.append(water1_median)
+  median_values.append(water2_median)
+  median_values.append(water3_median)
 
   tallies_water1 = [0, 0, 0, 0, 0, 0, 0]
   tallies_water2 = [0, 0, 0, 0, 0, 0, 0]
   tallies_water3 = [0, 0, 0, 0, 0, 0, 0]
+  
   for value in water1_values:
     i = 0
     while i <= len(buckets):
@@ -49,12 +70,12 @@ def calculate(me):
 
   for value in water3_values:
     i = 0
-    while i < len(buckets):
+    while i <= len(buckets):
       if value <= buckets[i]:
         tallies_water3[i] += 1
         i = len(buckets) + 1
       i += 1
 
   all_water = [tallies_water1, tallies_water2, tallies_water3]
-
+  print median_values
   return median_values, all_water

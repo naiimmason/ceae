@@ -43,6 +43,12 @@ img {
   margin-right: 10px;
 }
 
+#chartLegend {
+  position: relative;
+  /*top: -220px;*/
+  left: -220px;
+}
+
 .radio-btn-frm input[type=text] {
   margin-left: 10px;
 }

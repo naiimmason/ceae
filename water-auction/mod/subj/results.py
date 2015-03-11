@@ -18,7 +18,7 @@ def start(subj_id, me, output_path, waters, median_values):
 
   resultStmt = ""
   if clientResult["type"] == "majority":
-    add("<div id=\"chartLegend\" class=\"\"></div>", "#chartDiv")
+    add("<div id=\"chartLegend\" class=\"\"><p>Yes: " + str(clientResult["for"]) + "</p><p>No: " + str(clientResult["total"] - clientResult["for"]) +"</p></div>", "#chartDiv")
     if clientResult["majority"]: 
       resultStmt += "<p>The majority ruled <b>in favor of</b> the entire group drinking <b>" + waters[clientResult["water"]] + "</b> at a price of <b>$" + str(median_values[clientResult["water"]]) + "</b>."
     else:

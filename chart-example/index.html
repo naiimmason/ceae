@@ -1,14 +1,34 @@
 <!doctype html>
 <html>
   <head>
+  <style>
+  .center {
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+
+  #legend {
+    position: relative;
+    left:220px;
+    top:-200px;
+  }
+  </style>
   </head>
   <body>
     <script type="text/javascript" src="Chart.js"></script>
     <script type="text/javascript" src="jquery-2.1.3.js"></script>
     <link rel="stylesheet" type="text/css" href="./bootstrap.min.css">
     <script type="text/javascript" src="test.js"></script>
+    <script type="text/javascript" src="legend.js"></script>
 
-    <canvas id="myChart" width="900" height="400"></canvas>
+    <div id="chartDiv" class="center">
+      <canvas id="myChart" width="400" height="400"></canvas>
+      <div id="legend">
+        <p>Yes</p>
+        <p>No</p>
+      </div>
+    </div>
     <span id="yes" class="hidden" value="20"></span>
     <span id="no" class="hidden" value="40"></span>
   </body>
