@@ -63,11 +63,12 @@ def start(me, subj_id, waters, temp_waters, median_values, all_water, water_pos,
     # Update numbers of where people are
     utilities.decrement("numStage2", me)
     utilities.increment("numFinished", me)
+    prac_results = utilities.grabInfo(subj_id)["practice_results"]
 
 
     # Output the answer and data to the relavent database file
     output_file = open(output_path, "a")
-    output_file.write(str(me) + ", " + str(subj_id) + ", " + str(results[0]) + ", " + str(results[1]) + ", " + str(results[2]) + ", " + str(results[3]) + ", " + str(results[4]) + ", " + str(results[5]) +  "\n")
+    output_file.write(str(me) + ", " + str(subj_id) + ", " + str(prac_results[0]) + ", "  + str(prac_results[1]) + ", " + str(results[0]) + ", " + str(results[1]) + ", " + str(results[2]) + ", " + str(results[3]) + ", " + str(results[4]) + ", " + str(results[5]) +  "\n")
     output_file.close()
 
   return results

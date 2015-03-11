@@ -128,6 +128,10 @@ def start(me, waters):
         if nextHighest > maxPayout:
           nextHighest = minimum
 
+        if minimum > maxPayout:
+          winners = []
+          winner = -1
+
         winners = map(str, winners)
         add("<h4>Practice " + str(number) + "</h4>", "#experimentData")
         add("<p> Winner: " + ", ".join(winners) + "</p>", "#experimentData")
@@ -241,6 +245,10 @@ def start(me, waters):
 
     if nextHighest > maxPayout:
       nextHighest = minimum
+
+    if minimum > maxPayout:
+      winners = []
+      winner = -1
 
     majority = False
     winners = map(str, winners)

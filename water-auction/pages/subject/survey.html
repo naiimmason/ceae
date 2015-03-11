@@ -2,6 +2,43 @@
 <link rel="stylesheet" type="text/css" href="../../styles/subject_style.css" />
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 
+
+<script>
+  var tags = ["#thirstyValue",
+          "#riskyTapValue",
+          "#riskyFilTapValue",
+          "#riskyBottleValue",
+          "#campingValue",
+          "#tap-water-oftenValue",
+          "#fil-tap-water-oftenValue",
+          "#bot-water-oftenValue"]
+
+  function outputUpdate(vol, i) {
+    document.querySelector(tags[i]).value = vol;
+  }
+
+  var grab_values = ["qualityConcern",
+                 "riskyDrinkWater",
+                 "plasticConcernOffer",
+                 "plasticConcernBother",
+                 "origin",
+                 "gender",
+                 "relstatus",
+                 "empstatus",
+                 "race",
+                 "edustatus",
+                 "income"]
+
+  var grabValues = function clicktest() {
+    values = []
+    for(var i = 0; i < grab_values.length; i++) {
+      values.push($("input[name=" + grab_values[i] + "]:checked").val());
+      $("#" + grab_values[i]).append(values[i]);
+    }
+    console.log(values)
+  }
+</script>
+
 <div class="container">
   <div class="col-md-1">
   </div>
@@ -27,6 +64,30 @@
 
       <li class="special">
         How often does your household drink the following types of water?
+        <form class="form-inline" role="form">
+          <p>Tap Water: <b><output for="tap-water-often" id="tap-water-oftenValue">50</output>%</b></p>
+          <div class="input-group">
+            <span class="input-group-addon">Never (0%)</span>
+            <input id="tap-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 5)">
+            <span class="input-group-addon">Very Often (100%)</span>
+          </div>
+        </form>
+        <form class="form-inline" role="form">
+          <p>Filtered Tap Water: <b><output for="tap-water-often" id="fil-tap-water-oftenValue">50</output>%</b></p>
+          <div class="input-group">
+            <span class="input-group-addon">Never (0%)</span>
+            <input id="fil-tap-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 6)">
+            <span class="input-group-addon">Very Often (100%)</span>
+          </div>
+        </form>
+        <form class="form-inline" role="form">
+          <p>Bottled Water: <b><output for="tap-water-often" id="bot-water-oftenValue">50</output>%</b></p>
+          <div class="input-group">
+            <span class="input-group-addon">Never (0%)</span>
+            <input id="bot-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 7)">
+            <span class="input-group-addon">Very Often (100%)</span>
+          </div>
+        </form>
       </li>
 
       <li class="special">
@@ -34,9 +95,9 @@
         <form class="form-inline">
           <div class="radio-btn-frm">
             <label>Yes</label>
-            <input type="radio" name="truth" value="Yes">
+            <input type="radio" name="qualityConcern" value="Yes">
             <label>No</label>
-            <input type="radio" name="truth" value="No">
+            <input type="radio" name="qualityConcern" value="No">
           </div>
         </form>
       </li>
@@ -90,9 +151,9 @@
         <form class="form-inline">
           <div class="radio-btn-frm">
             <label>Yes</label>
-            <input type="radio" name="truth" value="Yes">
+            <input type="radio" name="riskyDrinkWater" value="Yes">
             <label>No</label>
-            <input type="radio" name="truth" value="No">
+            <input type="radio" name="riskyDrinkWater" value="No">
           </div>
         </form>
       </li>
@@ -102,9 +163,9 @@
         <form class="form-inline">
           <div class="radio-btn-frm">
             <label>Yes</label>
-            <input type="radio" name="truth" value="Yes">
+            <input type="radio" name="plasticConcernOffer" value="Yes">
             <label>No</label>
-            <input type="radio" name="truth" value="No">
+            <input type="radio" name="plasticConcernOffer" value="No">
           </div>
         </form>
       </li>
@@ -114,9 +175,9 @@
         <form class="form-inline">
           <div class="radio-btn-frm">
             <label>Yes</label>
-            <input type="radio" name="truth" value="Yes">
+            <input type="radio" name="plasticConcernBother" value="Yes">
             <label>No</label>
-            <input type="radio" name="truth" value="No">
+            <input type="radio" name="plasticConcernBother" value="No">
           </div>
         </form>
       </li>
@@ -129,7 +190,7 @@
             <input type="radio" name="origin" value="US">
             <label>Other</label>
             <input type="radio" name="origin" value="Other">
-            <input type="text" class="form-control input-lg">
+            <input type="text" id="originother" class="form-control input-lg">
           </div>
         </form>
       </li>
@@ -139,9 +200,9 @@
         <form class="form-inline">
           <div class="radio-btn-frm">
             <label>Male</label>
-            <input type="radio" name="truth" value="Male">
+            <input type="radio" name="gender" value="Male">
             <label>Female</label>
-            <input type="radio" name="truth" value="Female">
+            <input type="radio" name="gender" value="Female">
           </div>
         </form>
       </li>
@@ -149,13 +210,13 @@
       <li class="special">
         <form class="form-inline">
           What is your age?
-          <input type="number" class="form-control input-lg">
+          <input type="number" id="ageValue" class="form-control input-lg">
         </form>
       </li> 
 
       <li class="special">
         Including yourself, how many people live in your household?
-        <input type="number" class="form-control input-lg">
+        <input type="number" id="householdValue" class="form-control input-lg">
       </li>
 
       <li class="special">
@@ -163,25 +224,25 @@
         <form class="form-horizontal">
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Single">
+              <input type="radio" name="relstatus" value="Single">
             </div>
             <label>Single</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Married">
+              <input type="radio" name="relstatus" value="Married">
             </div>
             <label>Married</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Divorced">
+              <input type="radio" name="relstatus" value="Divorced">
             </div>
             <label>Divorced</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Widowed">
+              <input type="radio" name="relstatus" value="Widowed">
             </div>
             <label>Widowed</label>
           </div>
@@ -193,47 +254,47 @@
         <form class="form-horizontal">
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Employed for wages">
+              <input type="radio" name="empstatus" value="Employed for wages">
             </div>
             <label>Employed for wages</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Self-employed">
+              <input type="radio" name="empstatus" value="Self-employed">
             </div>
             <label>Self-employed</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="unemployed">
+              <input type="radio" name="empstatus" value="unemployed">
             </div>
             <label>Unemployed</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Widowed">
+              <input type="radio" name="empstatus" value="Widowed">
             </div>
             <label>Widowed</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Student">
+              <input type="radio" name="empstatus" value="Student">
             </div>
             <label>Student</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Retired">
+              <input type="radio" name="empstatus" value="Retired">
             </div>
             <label>Retired</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="other">
+              <input type="radio" name="empstatus" value="Other">
             </div>
             <div class="form-inline">
               <label>Other, please specify</label>
-              <input type="text" class="form-control input-lg">
+              <input type="text" id="empstatusOther" class="form-control input-lg">
             </div>
           </div>
         </form>
@@ -244,37 +305,37 @@
         <form class="form-horizontal">
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="White">
+              <input type="radio" name="race" value="White">
             </div>
             <label>White</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Black or African American">
+              <input type="radio" name="race" value="Black or African American">
             </div>
             <label>Black or African American</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="American Indian and Alaska Native">
+              <input type="radio" name="race" value="American Indian and Alaska Native">
             </div>
             <label>American Indian and Alaska Native</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Asian">
+              <input type="radio" name="race" value="Asian">
             </div>
             <label>Asian</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Native Hawaiian and Other Pacific Islander">
+              <input type="radio" name="race" value="Native Hawaiian and Other Pacific Islander">
             </div>
             <label>Native Hawaiian and Other Pacific Islander</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Some other race">
+              <input type="radio" name="race" value="Some other race">
             </div>
             <label>Some other race</label>
           </div>
@@ -286,41 +347,41 @@
         <form class="form-horizontal">
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Some High School">
+              <input type="radio" name="edustatus" value="Some High School">
             </div>
             <label>Some High School</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="High School Degree">
+              <input type="radio" name="edustatus" value="High School Degree">
             </div>
             <label>High School Degree</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Some College">
+              <input type="radio" name="edustatus" value="Some College">
             </div>
             <label>Some College</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="College Degree">
+              <input type="radio" name="edustatus" value="College Degree">
             </div>
             <label>College Degree</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="Graduate Degree">
+              <input type="radio" name="edustatus" value="Graduate Degree">
             </div>
             <label>Graduate Degree</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="other">
+              <input type="radio" name="edustatus" value="other">
             </div>
             <div class="form-inline">
               <label>Other (please list)</label>
-              <input type="text" class="form-control input-lg">
+              <input type="text" id="edustatusOther" class="form-control input-lg">
             </div>
           </div>
         </form>
@@ -331,61 +392,61 @@
         <form class="form-horizontal">
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="$0-$10,000">
+              <input type="radio" name="income" value="$0-$10,000">
             </div>
             <label>$0-$10,000</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="$10,001-$20,000">
+              <input type="radio" name="income" value="$10,001-$20,000">
             </div>
             <label>$10,001-$20,000</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="$20,001-$30,000">
+              <input type="radio" name="income" value="$20,001-$30,000">
             </div>
             <label>$20,001-$30,000</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="$30,001-$40,000">
+              <input type="radio" name="income" value="$30,001-$40,000">
             </div>
             <label>$30,001-$40,000</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="$40,001-$60,000">
+              <input type="radio" name="income" value="$40,001-$60,000">
             </div>
             <label>$40,001-$60,000</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="$60,001-$80,000">
+              <input type="radio" name="income" value="$60,001-$80,000">
             </div>
             <label>$60,001-$80,000</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="$80,001-$100,000">
+              <input type="radio" name="income" value="$80,001-$100,000">
             </div>
             <label>$80,001-$100,000</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="$100,001-$150,000">
+              <input type="radio" name="income" value="$100,001-$150,000">
             </div>
             <label>$100,001-$150,000</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="$150,001-$250,000">
+              <input type="radio" name="income" value="$150,001-$250,000">
             </div>
             <label>$150,001-$250,000</label>
           </div>
           <div class="form-group special">
             <div class="col-sm-1">
-              <input type="radio" name="status" value="More than $250,000">
+              <input type="radio" name="income" value="More than $250,000">
             </div>
             <label>More than $250,000</label>
           </div>
@@ -395,36 +456,36 @@
       <li class="special">
         <form class="form-inline">
           What is your zipcode?
-          <input type="text" class="form-control input-lg">
+          <input type="text" id="currentZip" class="form-control input-lg">
         </form>
       </li>
 
       <li class="special">
         <form class="form-inline">
           What zipcode (or town) did you grow up in?
-          <input type="text" class="form-control input-lg">
+          <input type="text" id="pastZip" class="form-control input-lg">
         </form>
       </li>
 
       <li class="special">
         <p>Is there anything else you would like to tell us?</p>
-        <textarea class="form-control" rows="5"></textarea>
+        <textarea id="commentBox" class="form-control" rows="5"></textarea>
       </li>
     </ol>
     <hr>
-    <button type="button" class="btn btn-primary btn-lg pull-right" id="continue">Submit and Finish</button>
+    <button onclick="grabValues()" type="button" class="btn btn-primary btn-lg pull-right" id="continue">Submit and Finish</button>
   </div>
   <div class="col-md-1">
   </div>
-
-  <script>
-    tags = ["#thirstyValue",
-            "#riskyTapValue",
-            "#riskyFilTapValue",
-            "#riskyBottleValue",
-            "#campingValue"]
-    function outputUpdate(vol, i) {
-      document.querySelector(tags[i]).value = vol;
-    }
-  </script>
+  <textarea class="hidden" id="qualityConcern"></textarea>
+  <textarea class="hidden" id="riskyDrinkWater"></textarea>
+  <textarea class="hidden" id="plasticConcernOffer"></textarea>
+  <textarea class="hidden" id="plasticConcernBother"></textarea>
+  <textarea class="hidden" id="origin"></textarea>
+  <textarea class="hidden" id="gender"></textarea>
+  <textarea class="hidden" id="relstatus"></textarea>
+  <textarea class="hidden" id="empstatus"></textarea>
+  <textarea class="hidden" id="race"></textarea>
+  <textarea class="hidden" id="edustatus"></textarea>
+  <textarea class="hidden" id="income"></textarea>
 </div>

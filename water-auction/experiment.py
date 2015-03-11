@@ -8,16 +8,23 @@ import random as rand
 import datetime
 
 # Define static variables that are to be used throughout the program
-datetime.datetime.now().isoformat()
+time = datetime.datetime.now().isoformat()
 waters = ["Penta Ultra Purified water", "re-use tap water", "re-use tap water that has gone through a ZeroWater filter"]
 rand_waters = rand.sample(waters, len(waters))
-output_path = "db/data" + datetime.datetime.now().isoformat() + ".csv"
+output_path = "db/data" + time + ".csv"
+survey_path = "db/survey" + time + ".csv"
 
 # Initialize the output file
 output_file = open(output_path, "w")
-output_file.write("subject info,,Part A,,,Part B,,,\n")
-output_file.write("subject number, subject id, " + waters[0] +", " + waters[1] + ", " + waters[2]+ ", " + waters[0] +", " + waters[1] + ", " + waters[2] +  "\n")
+output_file.write("subject info,,Practice,,Part A,,,Part B,,,\n")
+output_file.write("subject number, subject id, Candy, Picture, " + waters[0] +", " + waters[1] + ", " + waters[2]+ ", " + waters[0] +", " + waters[1] + ", " + waters[2] +  "\n")
 output_file.close()
+
+# Initialize the survey data
+survey_file = open(survey_path, "w")
+survey_file.write(",Question Numbers\n")
+survey_file.write("subject info, 1, 2, 3a, 3b, 3c, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12 Other, 13, 14, 15, 16, 17, 17 Other, 18, 19, 19 Other, 20, 21, 22, 23, Other Comments\n")
+survey_file.close()
 
 def session(me):
   if me == 0:
@@ -60,7 +67,7 @@ def session(me):
     let("")
     add(open("pages/subject/reconnect.html"))
     subj_id = str(mod.reconnect.wait(me))
-    mod.subject.start(me, subj_id, waters, rand_waters, output_path)
+    mod.subject.start(me, subj_id, waters, rand_waters, output_path, survey_path)
 
   # New unique person is added and starts the experiment
   else:
@@ -70,6 +77,6 @@ def session(me):
     put({"tag": "userInfo", "user": subj_id, "results": [-1, -1, -1, -1, -1, -1], 
       "pers_rand_waters": temp_waters, "position": "Start", "practice_results": [-1, -1]})
     mod.utilities.addUserRow(subj_id)
-    mod.subject.start(me, subj_id, waters, rand_waters, output_path)
+    mod.subject.start(me, subj_id, waters, rand_waters, output_path, survey_path)
 
 run(session)

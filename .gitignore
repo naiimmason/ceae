@@ -4,6 +4,7 @@ econwillow/
 *.xlsx
 */db/
 *.pyc
+survey-example/
 
 # --------------------
 # Standard files to ignore

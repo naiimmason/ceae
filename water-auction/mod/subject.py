@@ -8,7 +8,7 @@ import practice
 import subj
 
 # The main logic that runs the subject's portion of the experiment
-def start(me, subj_id, waters, rand_waters, output_path):
+def start(me, subj_id, waters, rand_waters, output_path, survey_path):
   let("")
   temp_waters = utilities.grabInfo(subj_id)["pers_rand_waters"]
   results = utilities.grabInfo(subj_id)["results"] # This is where all data collected will be stored
@@ -107,4 +107,7 @@ def start(me, subj_id, waters, rand_waters, output_path):
 
   # "endSurvey" Survey page
   if(utilities.getPosition(subj_id) == "survey"):
-    subj.survey.start(subj_id, me)
+    subj.survey.start(subj_id, me, survey_path)
+
+  if(utilities.getPosition(subj_id) == "last page"):
+    subj.survey.end(subj_id, me)
