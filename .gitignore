@@ -5,6 +5,7 @@ econwillow/
 */db/
 *.pyc
 survey-example/
+*.zip
 
 # --------------------
 # Standard files to ignore

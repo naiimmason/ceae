@@ -1,6 +1,5 @@
 from willow.willow import *
 import random as rand
-import matplotlib.pyplot as plt
 import mod_calculatemedian
 import utilities
 
@@ -29,6 +28,7 @@ positions = [
 # Main logic thread for the admin
 def start(me, waters):
   let("")
+  median_values_final = []
 
   # Open up the display and then wait until the proctor wants to finish the 
   # experiment
@@ -161,6 +161,7 @@ def start(me, waters):
       # moving on
       if positions[position-1] == "waitingPartC":
         median_values, all_water = mod_calculatemedian.calculate(me)
+        median_values_final = median_values
         advance["median"] = median_values
         advance["all_water"] = all_water
 
@@ -271,7 +272,7 @@ def start(me, waters):
     # compare tally to how many clients finished and check if majority
     if options4_6_tally > numClientsFinished/2:
       majority = True
-    add("<p>" + str(majority) + ", " + str(options4_6_tally) + " tally, " + str(numClientsFinished) + " clients </p>", "#experimentData")
+    add("<p>" + str(majority) + ", " + str(options4_6_tally) + " tally, " + str(numClientsFinished) + " clients, payout of " + str(median_values[choice%3]) + " </p>", "#experimentData")
 
   # Loop through each client and craft a result dictionary for them to fetch and
   # display results

@@ -28,20 +28,20 @@ def calculate(me):
   water2_median = np.median(water2_values)
   water3_median = np.median(water3_values)
 
-  for value in water1_values:
-    if value == water1_median:
-      water1_median = min(water1_values)
-      break;
+  # for value in water1_values:
+  #   if value == water1_median:
+  #     water1_median = min(water1_values)
+  #     break;
 
-  for value in water2_values:
-    if value == water2_median:
-      water2_median = min(water2_values)
-      break;
+  # for value in water2_values:
+  #   if value == water2_median:
+  #     water2_median = min(water2_values)
+  #     break;
 
-  for value in water3_values:
-    if value == water3_median:
-      water3_median = min(water3_values)
-      break;
+  # for value in water3_values:
+  #   if value == water3_median:
+  #     water3_median = min(water3_values)
+  #     break;
 
 
   median_values.append(water1_median)
