@@ -29,7 +29,7 @@ def start(me, subj_id, waters, temp_waters, median_values, all_water, water_pos,
         k+=1
     j += 1
   
-  add("<canvas id=\"barChart" + str(i + 1) + "\" width=\"600\" height=\"250\"></canvas>", "#chartDiv")
+  add("<canvas class=\"chartFormat\" id=\"barChart" + str(i + 1) + "\" width=\"600\" height=\"300\"></canvas>", "#chartDiv")
 
   answer = take({"tag": "click", "id": "Yes", "client": me},
                 {"tag": "click", "id": "No", "client": me})

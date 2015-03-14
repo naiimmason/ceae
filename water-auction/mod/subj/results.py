@@ -20,9 +20,9 @@ def start(subj_id, me, output_path, waters, median_values):
   if clientResult["type"] == "majority":
     add("<div id=\"chartLegend\" class=\"\"><p>Yes: " + str(clientResult["for"]) + "</p><p>No: " + str(clientResult["total"] - clientResult["for"]) +"</p></div>", "#chartDiv")
     if clientResult["majority"]: 
-      resultStmt += "<p>The majority ruled <b>in favor of</b> the entire group drinking <b>" + waters[clientResult["water"]] + "</b> at a price of <b>$" + str(median_values[clientResult["water"]]) + "</b>."
+      resultStmt += "<p>The majority ruled in favor of the entire group drinking " + waters[clientResult["water"]] + " at a price of $" + str(median_values[clientResult["water"]]) + "."
     else:
-      resultStmt += "<p>The majority ruled <b>against</b> the entire group drinking <b>" +waters[clientResult["water"]] + "</b> at a price of <b>$" + str(median_values[clientResult["water"]]) + "</b>."
+      resultStmt += "<p>The majority ruled against the entire group drinking " +waters[clientResult["water"]] + " at a price of $" + str(median_values[clientResult["water"]]) + "."
 
     # Hide data in the html
     add("<span class=\"hidden\" id=\"yes\" value=" + str(clientResult["for"]) + "></span>")
@@ -34,9 +34,9 @@ def start(subj_id, me, output_path, waters, median_values):
 
   elif clientResult["type"] == "payout":
     if clientResult["winner"] == True:
-      resultStmt += "<p>You <b>won</b> the bid for drinking <b>" + waters[clientResult["water"]] + "</b> for $<b>" + str(clientResult["payout"]) + "</b></p>" 
+      resultStmt += "<p>You won the bid for drinking " + waters[clientResult["water"]] + " for $" + str(clientResult["payout"]) + "</p>" 
     else:
-      resultStmt += "<p>You did <b>not</b> win the bid for drinking <b>" + waters[clientResult["water"]] + "</b>.</p>"
+      resultStmt += "<p>You did not win the bid for drinking " + waters[clientResult["water"]] + ".</p>"
   let(resultStmt, "#results")
 
   add("<hr>", "#buttonYo")

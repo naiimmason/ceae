@@ -1,3 +1,7 @@
+function DrawTheChart(ChartData,ChartOptions,ChartId,ChartType){
+eval('var myLine = new Chart($(ChartId).get(0).getContext("2d")).'+ChartType+'(ChartData,ChartOptions);$(ChartId).get(0).getContext("2d").stroke();')
+}
+
 $(function() {
   console.log("Loaded results.js");
 
@@ -20,7 +24,6 @@ $(function() {
       ]
     };
     console.log(data)
-
     var ctx = $("#barChart" + num).get(0).getContext("2d");
     var barChart = new Chart(ctx).Bar(data);
   }

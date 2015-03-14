@@ -60,9 +60,9 @@ def results(subj_id, me, practice_id):
   clientResult = take({"tag": "practice_results" + str(practice_id), "user": subj_id})
   put(clientResult)
 
-  let("You <b>" + clientResult["won"] + "</b> the bid to <b>" + str(practice_items[practice_id]) + "</b><span id=\"won\"></span>.", "#results")
+  let("You " + clientResult["won"] + " the bid to " + str(practice_items[practice_id]) + "<span id=\"won\"></span>.", "#results")
   if clientResult["won"] == "won":
-    let(" for a price of $<b>" + str(clientResult["offer"]) +"</b>", "#won")
+    let(" for a price of $" + str(clientResult["offer"]) +"", "#won")
   take({"tag": "click", "client": me, "id": "continue"})
 
 def waitingPractice2(subj_id, me):
