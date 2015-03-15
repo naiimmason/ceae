@@ -9,7 +9,9 @@ btntexts = {
   "waitingPractice2": "Start Practice 2",
   "waitingPracResults2": "Finish Practice 2",
   "waitingPartB": "Start Part B",
-  "waitingPartC": "Start Part C",
+  "waitingPartC1": "Start Part C 1",
+  "waitingPartC2": "Start Part C 2",
+  "waitingPartC3": "Start Part C 3",
   "waitingResults": "Finish Experiment",
   "finished": "NO MORE STAGES!"
 }
@@ -20,10 +22,14 @@ positions = [
   "waitingPractice2",
   "waitingPracResults2",
   "waitingPartB",
-  "waitingPartC",
+  "waitingPartC1",
+  "waitingPartC2",
+  "waitingPartC3",
   "waitingResults",
   "finished"
 ]
+
+chat_time = 30
 
 # Main logic thread for the admin
 def start(me, waters):
@@ -53,6 +59,7 @@ def start(me, waters):
   let(str(max_payout["amount"]), "#maxPayout")
 
   position = 0
+  num = 0
   i = 0
   while i < len(positions):
     if stage["stage"] == positions[i]:
@@ -72,10 +79,6 @@ def start(me, waters):
       stage["stage"] = positions[position]
       if positions[position] == "finished":
         finish = True
-
-      if positions[position] == "waitingResults":
-        pop("btn-primary", "#advance")
-        push("btn-danger", "#advance")
 
       put(stage)
       advance = {"advance": True, "client": me, "stage": positions[position-1]}
@@ -161,19 +164,38 @@ def start(me, waters):
 
       # If moving on to stage 2 perform calculations by grabbing client data 
       # moving on
-      if positions[position-1] == "waitingPartC":
+      if positions[position-1] == "waitingPartC1":
         median_values, all_water = mod_calculatemedian.calculate(me)
         median_values_final = median_values
         advance["median"] = median_values
         advance["all_water"] = all_water
+
         comm = take({"tag": "communication"})
         put(comm)
-        if comm["communication"]:
+        if not comm["communication"]:
+          position += 2
+
+      if positions[position] == "waitingResults":
+        pop("btn-primary", "#advance")
+        push("btn-danger", "#advance")
 
 
       # Show advance packet
       put(advance)
       let(btntexts[positions[position]], "#advance")
+
+      if(positions[position-1] == "waitingPartC1" or positions[position-1] == "waitingPartC2" or  positions[position-1] == "waitingPartC3"):
+        comm = take({"tag": "communication"})
+        put(comm)
+        if comm["communication"]:
+          for i in range(chat_time):
+            sleep(1)
+            minutes = int((chat_time - i)/60)
+            seconds = int(chat_time-i)%60
+            put({"tag": "chatTime" + str(num), "minutes": minutes, "seconds" : seconds, "totSeconds": (chat_time - i)})
+          put({"tag": "doneChat" + str(num)})
+          num += 1
+
       
     elif action["id"] == "communication":
       comm = take({"tag": "communication"})
@@ -197,6 +219,10 @@ def start(me, waters):
   clientData = []
   for client in clientsFinished["clients"]:
     clientData.append(take({"tag": "clientData2"}))
+
+  advance = take({"advance": True, "stage": "waitingPartC1"})
+  put(advance)
+  median_values_final = advance["median"]
 
   # define variable
   options4_6_tally = 0
@@ -278,7 +304,7 @@ def start(me, waters):
     # compare tally to how many clients finished and check if majority
     if options4_6_tally > numClientsFinished/2:
       majority = True
-    add("<p>" + str(majority) + ", " + str(options4_6_tally) + " tally, " + str(numClientsFinished) + " clients, payout of " + str(median_values[choice%3]) + " </p>", "#experimentData")
+    add("<p>" + str(majority) + ", " + str(options4_6_tally) + " tally, " + str(numClientsFinished) + " clients, payout of " + str(median_values_final[choice%3]) + " </p>", "#experimentData")
 
   # Loop through each client and craft a result dictionary for them to fetch and
   # display results

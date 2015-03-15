@@ -13,6 +13,6 @@ def start(subj_id, me):
   put(clientData1)
 
   # Wait for the advance token and update position
-  advance = take({"advance": True, "stage": "waitingPartC"})
+  advance = take({"advance": True, "stage": "waitingPartC1"})
   put(advance)
   mod.utilities.setPosition(subj_id, "partCWater1")

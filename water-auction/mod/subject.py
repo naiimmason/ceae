@@ -81,7 +81,7 @@ def start(me, subj_id, waters, rand_waters, output_path, survey_path):
     utilities.increment("numFinishedStage1", me)
     subj.waitingPartC.start(subj_id, me)
 
-  advance = take({"advance": True, "stage": "waitingPartC"})
+  advance = take({"advance": True, "stage": "waitingPartC1"})
   put(advance)
   median_values = advance["median"] # Grab median values from advance packet
   all_water = advance["all_water"]
@@ -93,9 +93,15 @@ def start(me, subj_id, waters, rand_waters, output_path, survey_path):
     utilities.increment("numStage2", me)
     results = ex_part2.start(me, subj_id, waters, rand_waters, median_values, all_water, 0, output_path)
 
+  if(utilities.getPosition(subj_id) == "partCWater2Wait"):
+    ex_part2.wait(me, subj_id, 2)
+
   # "partCWater2" Part c water 2 page
   if(utilities.getPosition(subj_id) == "partCWater2"):
     results = ex_part2.start(me, subj_id, waters, rand_waters, median_values, all_water, 1, output_path)
+
+  if(utilities.getPosition(subj_id) == "partCWater3Wait"):
+    ex_part2.wait(me, subj_id, 3)
 
   # "partCWater3" Part c water 3 page
   if(utilities.getPosition(subj_id) == "partCWater3"):

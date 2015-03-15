@@ -1,6 +1,8 @@
 from willow.willow import *
 import random as rand
 import utilities
+
+chat_time = 30
                                     #chatbox should run in the background to send and receive messages
 def chatbox(me, subj_id, num):
   members = me + 1
@@ -8,6 +10,7 @@ def chatbox(me, subj_id, num):
   for i in range(me):
       put({"tag":"entered","client":subj_id,"viewer":i})
   done = False
+  seconds_left = chat_time
   while not done:
                               #wait for a send or enter chat event
                               #TODO respond to press 'enter' events
@@ -15,7 +18,8 @@ def chatbox(me, subj_id, num):
                  {"tag" : "chat", "receiver":me},
                  {"tag":"entered", "viewer":me},
                  {"tag":"key", "value":"\r", "client":me},
-                 {"tag": "doneChat" + str(num)})
+                 {"tag": "doneChat" + str(num)},
+                 {"tag": "chatTime" + str(num), "totSeconds": seconds_left})
                               #send the message to all in client list when anyone clicked on id "chatbutton"
       if msg["tag"] == "chat":
                               #add current message
@@ -31,7 +35,7 @@ def chatbox(me, subj_id, num):
       elif msg["tag"] == "click":
                               #message cannot be empty
           if peek("#chatbar") != "":
-              label = "Subject " + str(subj_id)
+              label = "Subject " + str(subj_id) + ":"
                               #construct message
               txt = "%s %s %s<br>" % ( time.strftime("%H:%M:%S"),
                      label,
@@ -50,8 +54,17 @@ def chatbox(me, subj_id, num):
               for i in range(members):
                   put({"tag" : "chat","sender":me,"msg":txt, "receiver": i})
               poke("value","","#chatbar")
-      elif msg["tag"] == "doneChat":
+      elif msg["tag"] == "doneChat" + str(num):
         done = True
+        put(msg)
+      elif msg["tag"] == "chatTime" + str(num):
+        seconds_left -= 1
+        minutes = msg["minutes"]
+        seconds = msg["seconds"]
+        if seconds < 10:
+          seconds = "0" + str(seconds)
+        let(str(minutes) + ":" + str(seconds), "#timeLeft")
+        put(msg)
 
 # Go through each 
 def start(me, subj_id, waters, temp_waters, median_values, all_water, water_pos, output_path):
@@ -80,11 +93,18 @@ def start(me, subj_id, waters, temp_waters, median_values, all_water, water_pos,
         k+=1
     j += 1
   
-  add("<canvas class=\"chartFormat\" id=\"barChart" + str(i + 1) + "\" width=\"600\" height=\"250\"></canvas>", "#chartDiv")
+  add("<canvas class=\"chartFormat\" id=\"barChart" + str(i + 1) + "\" width=\"600\" height=\"250\"></canvas>", "#chartDiv4 ")
 
-  add(open("chat.html"), "#chatBox")
-  add(str(subj_id),"#nameDisplay")
-  chatbox(me, subj_id, water_pos)
+
+  comm = take({"tag": "communication"})
+  put(comm)
+
+  if(comm["communication"]):
+    add(open("chat.html"), "#chatBox")
+    add(str(subj_id),"#nameDisplay")
+    chatbox(me, subj_id, water_pos)
+  let("<p>Chatting has ceased!</p>", "#timer")
+
   add("<button type=\"button\" class=\"btn btn-lg\" id=\"Yes\">Yes</button>", "#buttonYes")
   add("<button type=\"button\" class=\"btn btn-lg\" id=\"No\">No</button>", "#buttonNo")
 
@@ -104,9 +124,21 @@ def start(me, subj_id, waters, temp_waters, median_values, all_water, water_pos,
   put(info)
 
   if(i == 0):
-    utilities.setPosition(subj_id, "partCWater2")
+    comm = take({"tag": "communication"})
+    put(comm)
+
+    if(comm["communication"]):
+      utilities.setPosition(subj_id, "partCWater2Wait")
+    else:
+      utilities.setPosition(subj_id, "partCWater2")
   elif(i == 1):
-    utilities.setPosition(subj_id, "partCWater3")
+    comm = take({"tag": "communication"})
+    put(comm)
+
+    if(comm["communication"]):
+      utilities.setPosition(subj_id, "partCWater3Wait")
+    else:
+      utilities.setPosition(subj_id, "partCWater3")
   elif(i == 2):
     utilities.setPosition(subj_id, "results")
     results = utilities.grabInfo(subj_id)["results"]
@@ -129,3 +161,11 @@ def start(me, subj_id, waters, temp_waters, median_values, all_water, water_pos,
     output_file.close()
 
   return results
+
+def wait(me, subj_id, water):
+  let("")
+  utilities.updateStage(subj_id, "Waiting for Part C Water " + str(water))
+  add(open("pages/subject/waiting_partc.html"))
+  advance = take({"advance": True, "stage": "waitingPartC" + str(water)})
+  put(advance)
+  utilities.setPosition(subj_id, "partCWater" + str(water))
