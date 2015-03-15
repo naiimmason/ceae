@@ -43,6 +43,7 @@ def input(subj_id, me, practice_id):
   finished = take({"tag": "practice" + str(practice_id + 1) + "Finished"})
   finished["users"].append(subj_id)
   finished["num"] += 1
+  add("$" + str(offer), "#" + str(subj_id) + "practice" + str(practice_id + 1),clients=mod.utilities.findAdmin()) 
   put(finished)
 
 def waitingResults(subj_id, me, practice_id):
@@ -62,7 +63,11 @@ def results(subj_id, me, practice_id):
 
   let("You " + clientResult["won"] + " the bid to " + str(practice_items[practice_id]) + "<span id=\"won\"></span>.", "#results")
   if clientResult["won"] == "won":
-    let(" for a price of $" + str(clientResult["offer"]) +"", "#won")
+    let(" for a price of $" + str("{0:.2f}".format(clientResult["offer"])) +"", "#won")
+    userdata = take({"tag": "userInfo", "user": subj_id})
+    userdata["payout"] += clientResult["offer"]
+    put(userdata)
+  let("$" + str(mod.utilities.grabInfo(subj_id)["payout"]), "#" + str(subj_id) + "payout", clients=mod.utilities.findAdmin())
   take({"tag": "click", "client": me, "id": "continue"})
 
 def waitingPractice2(subj_id, me):

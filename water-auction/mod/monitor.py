@@ -90,6 +90,7 @@ def start(me, waters):
         put(max_payout) 
 
         prac1Data = []
+        orderedResults = []
         finishers1 = take({"tag": "practice" + str(number) + "Finished"})
         put(finishers1)
 
@@ -97,11 +98,12 @@ def start(me, waters):
           prac1UserData = take({"tag": "userInfo", "user": user})
           put(prac1UserData)
           prac1Data.append({"user": user, "offer": prac1UserData["practice_results"][number-1]})
+          orderedResults.append(prac1UserData["practice_results"][number-1])
 
         winners = []
         winner = -1
-        minimum = maxPayout+1
-        nextHighest = maxPayout+1
+        minimum = maxPayout
+        nextHighest = maxPayout
 
         # go through each offer check against minimum and next highest
         for user in prac1Data:
@@ -125,13 +127,12 @@ def start(me, waters):
           elif offer < nextHighest:
             nextHighest = offer
 
-        if nextHighest > maxPayout:
-          nextHighest = minimum
-
         if minimum > maxPayout:
           winners = []
           winner = -1
 
+        orderedResults.sort()
+        orderedResults = map(str, orderedResults)
         winners = map(str, winners)
         add("<h4>Practice " + str(number) + "</h4>", "#experimentData")
         add("<p> Winner: " + ", ".join(winners) + "</p>", "#experimentData")
@@ -147,6 +148,7 @@ def start(me, waters):
             winner = winners[0]
 
         add("<p> Real Winner: " + str(winner) + "</p>", "#experimentData")
+        add("<p>All bids: " + ", ".join(orderedResults) + "</p>", "#experimentData")
         add("<hr>", "#experimentData")
 
         for user in prac1Data:
@@ -164,6 +166,10 @@ def start(me, waters):
         median_values_final = median_values
         advance["median"] = median_values
         advance["all_water"] = all_water
+        comm = take({"tag": "communication"})
+        put(comm)
+        if comm["communication"]:
+
 
       # Show advance packet
       put(advance)

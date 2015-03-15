@@ -1,22 +1,24 @@
 <link rel="stylesheet" type="text/css" href="styles/subject_style.css" />
 <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css" />
 
-<div class="container big-text">
+<div class="container">
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <div id="chartDiv" class="center">
+    <div id="chartDiv" class="center big-text">
       <p class="vertical-text">Number of Votes</p>
     </div>
-    <p class="center">Spread of Bids From All Participants From Part B</p>
+    <p class="center big-text">Spread of Bids From All Participants From Part B</p>
     <hr>
-    <p>Do you vote in favor of the group drinking 3 oz. of <span id="waterID"></span> at a price of $<span id="price"></span>?</p>
+    <p class="big-text">Do you vote in favor of the group drinking 3 oz. of <span id="waterID"></span> at a price of $<span id="price"></span>?</p>
+    
+    <div id="chatBox" class="little-big">  
+    </div>
+
     <div class="center">
-      <div class="col-md-6">
-        <button type="button" class="btn btn-lg" id="Yes">Yes</button>
+      <div class="col-md-6" id="buttonYes">
       </div>
-      <div class="col-md-6">
-        <button type="button" class="btn btn-lg" id="No">No</button>
+      <div class="col-md-6" id="buttonNo">
       </div>
     </div>
   </div>

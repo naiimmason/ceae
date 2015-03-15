@@ -20,9 +20,10 @@ def start(subj_id, me, output_path, waters, median_values):
   if clientResult["type"] == "majority":
     add("<div id=\"chartLegend\" class=\"\"><p>Yes: " + str(clientResult["for"]) + "</p><p>No: " + str(clientResult["total"] - clientResult["for"]) +"</p></div>", "#chartDiv")
     if clientResult["majority"]: 
-      resultStmt += "<p>The majority ruled in favor of the entire group drinking " + waters[clientResult["water"]] + " at a price of $" + str(median_values[clientResult["water"]]) + "."
+      resultStmt += "<p>The majority ruled in favor of the entire group drinking " + waters[clientResult["water"]] + " at a price of $" + str("{0:.2f}".format(median_values[clientResult["water"]])) + "."
+
     else:
-      resultStmt += "<p>The majority ruled against the entire group drinking " +waters[clientResult["water"]] + " at a price of $" + str(median_values[clientResult["water"]]) + "."
+      resultStmt += "<p>The majority ruled against the entire group drinking " +waters[clientResult["water"]] + " at a price of $" + str("{0:.2f}".format(median_values[clientResult["water"]])) + "."
 
     # Hide data in the html
     add("<span class=\"hidden\" id=\"yes\" value=" + str(clientResult["for"]) + "></span>")
@@ -31,13 +32,29 @@ def start(subj_id, me, output_path, waters, median_values):
     # Add canvas for chart drawing, this triggers the arrive event which calls the appropriate js
     add("<canvas id=\"majorityChart\" width=\"400\" height=\"400\"></canvas>", "#chartDiv")
 
+    # Check to see if there is a maxpayout
+    payoutDict = take({"tag": "maxPayout"})
+    payout = payoutDict["amount"]
+    put(payoutDict)
+    if payout < median_values[clientResult["water"]]:
+      add("<p>However, the maximum payout was $" + str("{0:.2f}".format(payout)) + " and you will not be paid.</p>", "#maxpayoutDiv")
+    else:
+      userData = take({"tag": "userInfo", "user": subj_id})
+      userData["payout"] += median_values[clientResult["water"]]
+      put(userData)
+
 
   elif clientResult["type"] == "payout":
     if clientResult["winner"] == True:
-      resultStmt += "<p>You won the bid for drinking " + waters[clientResult["water"]] + " for $" + str(clientResult["payout"]) + "</p>" 
+      resultStmt += "<p>You won the bid for drinking " + waters[clientResult["water"]] + " for $" + str("{0:.2f}".format(clientResult["payout"])) + "</p>"
+
+      userData = take({"tag": "userInfo", "user": subj_id})
+      userData["payout"] += clientResult["payout"]
+      put(userData)
     else:
       resultStmt += "<p>You did not win the bid for drinking " + waters[clientResult["water"]] + ".</p>"
   let(resultStmt, "#results")
+  let("$" + str(mod.utilities.grabInfo(subj_id)["payout"]), "#" + str(subj_id) + "payout", clients=mod.utilities.findAdmin())
 
   add("<hr>", "#buttonYo")
   add("<button class=\"btn btn-primary btn-lg\" id=\"continue\">Continue to Final Survey</button>", "#buttonYo")

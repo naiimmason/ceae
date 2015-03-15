@@ -54,5 +54,8 @@ def end(subj_id, me):
   let("")
   mod.utilities.updateStage(subj_id, "END")
   add(open("pages/subject/final.html"))
+  payout = mod.utilities.grabInfo(subj_id)["payout"]
+  let("$" + str("{0:.2f}".format(payout)), "#" + str(subj_id) + "payout", clients=mod.utilities.findAdmin()) 
+  let(str("{0:.2f}".format(payout)), "#payout")
 
 

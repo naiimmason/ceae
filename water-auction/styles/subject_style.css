@@ -3,6 +3,10 @@
   margin-bottom: 40px;
 }
 
+.little-big {
+  font-size: 130%;
+}
+
 .center {
   display: block;
   margin: auto;
@@ -16,6 +20,10 @@
   top:50px;
   right: 40px;
   float: left;
+}
+
+#chartDiv {
+  margin-top: -80px;
 }
 
 .chartFormat {

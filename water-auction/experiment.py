@@ -75,7 +75,7 @@ def session(me):
     mod.utilities.addUser(subj_id, me)
     temp_waters = rand.sample(waters, len(waters))
     put({"tag": "userInfo", "user": subj_id, "results": [-1, -1, -1, -1, -1, -1], 
-      "pers_rand_waters": temp_waters, "position": "Start", "practice_results": [-1, -1]})
+      "pers_rand_waters": temp_waters, "position": "Start", "practice_results": [-1, -1], "payout": 25})
     mod.utilities.addUserRow(subj_id)
     mod.subject.start(me, subj_id, waters, rand_waters, output_path, survey_path)
 

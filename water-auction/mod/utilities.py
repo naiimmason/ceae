@@ -43,6 +43,9 @@ def addUserRow(subj_id):
   #add("<p>" + str(subj_id) + " has started the experiment</p>", "#experimentData", clients=findAdmin())
   add("<tr id=\"" + str(subj_id) + "\"><td>" + str(subj_id) + "</td>"
     "<td id=\"" + str(subj_id) + "STAGE\">Instructions</td>" # stage
+    "<td id=\"" + str(subj_id) + "payout\"></td>"
+    "<td id=\"" + str(subj_id) + "practice1\"></td>"
+    "<td id=\"" + str(subj_id) + "practice2\"></td>"
     "<td id=\"" + str(subj_id) + "water1A\"></td>" # water 1 A
     "<td id=\"" + str(subj_id) + "water2A\">""</td>" # water 2 A
     "<td id=\"" + str(subj_id) + "water3A\">""</td>" # water 3 A
@@ -65,6 +68,16 @@ def addUserRow(subj_id):
       if i > 2:
         part = "B"
       let(str(result),"#" + str(subj_id) + "water" + number + part, clients=findAdmin())
+
+  i = 1
+  for result in grabInfo(subj_id)["practice_results"]:
+    if result == -1:
+      i += 1
+      continue
+    else:
+      let(str(result), "#" + str(subj_id) + "practice" + str(i), clients=findAdmin())
+
+  let("$" + str(grabInfo(subj_id)["payout"]), "#" + str(subj_id) + "payout", clients=findAdmin())
 
 # Grab the users info from the tupple space
 def grabInfo(subj_id):
