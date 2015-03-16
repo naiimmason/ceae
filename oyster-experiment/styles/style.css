@@ -1,0 +1,148 @@
+/* Hard CSS reset in order to give a more uniform appearance across multiple
+devices with unknown default formatting options */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* End of the CSS reset */
+
+/* A simple page wrapper that sets default values for an entire page wrapped in 
+this class */
+.page-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  font-family: Verdana;
+}
+
+/* Simply make any images take up 100% of the width of their parent element */
+img {
+  width: 100%;
+}
+
+/* Make the label and input font sizes match */
+label {
+  font-size: 40px;
+}
+
+/* Create a sleek modern blue button that matches the color of the UD logo */ 
+button {
+  color: #ffffff;
+  font-size: 40px;
+  border-radius: 10px;
+  display: block;
+  float: right;
+  background: #00539f;
+  outline: 0;
+  border:none;
+  padding:10px;
+}
+
+button:hover {
+  background: #2268A8;
+  cursor: pointer;
+}
+
+/* Create some spacing between elements */ 
+.id, .consent, .continue {
+  margin-top: 20px;
+}
+
+.consent {
+  margin-bottom: 20px;
+}
+
+#id-input {
+  width: 60%;
+}
+
+/* Create a warning that grabs the attention of people */
+.warning {
+  text-align: center;
+  font-size: 40px;
+  background: red;
+  color: #fff;
+  width:80%;
+  margin: auto;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.warning p {
+  padding: 10px;
+}
+
+/* Create a radius to round the corners for a sleeker look and add a drop shadow
+to make it even more "modern" looking. Make sure to get rid of any hilighting
+outline and redefine what happens when you focus it.*/
+input[type=text] {
+  font-size: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px #666;
+  padding: 7px;
+  outline: 0;
+}
+
+input[type=text]:focus {
+  border-color: #00539f;
+}
+
+/* Double-sized Checkboxes */
+input[type=checkbox] {
+  transform: scale(2);
+  position: relative;
+  top: -8px;
+}
+
+/* Create a gradient line break and make it thinner for a sleekr, more modern 
+look */
+hr {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+}
