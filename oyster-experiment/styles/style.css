@@ -47,15 +47,6 @@ table {
 
 /* End of the CSS reset */
 
-/* A simple page wrapper that sets default values for an entire page wrapped in 
-this class */
-.page-wrapper {
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
-  font-family: Verdana;
-}
-
 /* Simply make any images take up 100% of the width of their parent element */
 img {
   width: 100%;
@@ -84,7 +75,17 @@ button:hover {
   cursor: pointer;
 }
 
-/* Create some spacing between elements */ 
+/* A simple page wrapper that sets default values for an entire page wrapped in 
+this class */
+.page-wrapper {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  font-family: Verdana;
+}
+
+/* Create some spacing between elements on the first page */ 
 .id, .consent, .continue {
   margin-top: 20px;
 }
@@ -136,6 +137,12 @@ input[type=checkbox] {
   top: -8px;
 }
 
+input[type=radio] {
+  transform: scale(2);
+  position: relative;
+  top: -9px;
+}
+
 /* Create a gradient line break and make it thinner for a sleekr, more modern 
 look */
 hr {
@@ -145,4 +152,23 @@ hr {
   background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
   background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
   background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+}
+
+/* Set fonts to that default 40px and add some spacing */
+.number-selection {
+  font-size: 40px;
+}
+
+.oyster-selection {
+  font-size: 30px;
+}
+
+.oyster-selection input {
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.thank-you {
+  font-size: 40px;
+  text-align: center;
 }

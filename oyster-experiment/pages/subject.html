@@ -1,6 +1,39 @@
 <link rel="stylesheet" type="text/css" href="styles/style.css">
 
+<script>
+  var grabValues = function() {
+    val = $("input[name=number-oysters]:checked").val();
+    $("#num-oysters").append(val)
+    console.log(val)
+  }
+</script>
+
 <div class="page-wrapper">
-  <section>
+  <section class="number-selection">
+    <p>How many oysters would you like to play for?</p>
+    <form>
+      <input type="radio" name="number-oysters" value="3"> 3
+      <input type="radio" name="number-oysters" value="6"> 6
+      <input type="radio" name="number-oysters" value="9"> 9
+      <input type="radio" name="number-oysters" value="12"> 12
+    </form>
+    <div class="button">
+      <button type="button" id="continue" onclick="grabValues()">Continue</button>
+    </div>
   </section>
+
+  <section class="oyster-selection hidden">
+    <div class="oyster-list">
+    </div>
+    <hr>
+    <div class="button">
+      <button type="button" id="continue">Submit</button>
+    </div>
+  </section>
+
+  <section class="thank-you hidden">
+    <p>Thank you for participating!</p>
+  </section>
+
+  <textarea class="hidden" id="num-oysters"></textarea>
 </div>
