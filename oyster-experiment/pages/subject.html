@@ -9,7 +9,44 @@
 </script>
 
 <div class="page-wrapper">
-  <section class="number-selection">
+  <section class="warning"></section>
+
+  <section class="instructions">
+    <h3>Instructions:</h3>
+
+    <p><em>Please read these instructions carefully and do not communicate with any one during the experiment. Ask a facilitator if you have a question and remember that your participation is voluntary.</em></p>
+
+    <ul>
+      <li><strong>We will give you $10 that you may keep and/or use to purchase oysters.</strong> You may think of this money as a bank account from which you can withdrawal money.</li>
+      <li>Depending on the choices you select during the experiment, you may receive oysters and cash; cash only; oysters only; or oysters and you owe money at the end of the experiment.</li>
+    </ul>
+
+    <br>
+
+    <h3>Rules:</h3>
+
+    <ol>
+      <li>Decide how many oysters you want to play for (3, 6, 9 or 12)</li>
+      <li>Decide if you want to buy the oyster options at the random price by selecting “Yes” or “No”</li>
+      <li>Roll a die to determine which oyster option will be implemented</li>
+      <li>Fill out a short survey</li>
+    </ol>
+
+    <br>
+
+    <ul><li>You may consume the oysters (a) raw on the half shell, (b) raw in a shot glass, fried as a 'po-boy’ sandwich, or take them home in a bag.</li></ul>
+
+    <p><strong>Example 1:</strong> If you selected 'Yes’ for an oyster bundle that cost $7 and this decision was implemented, you will receive the oysters and $3 cash ($10 - $7 = $3).</p>
+
+    <p><strong>Example 2:</strong> If you selected 'No’ for an oyster bundle and this decision was implemented, you will receive $10 and will not receive any oysters.</p>
+
+    <p><strong>Example 1:</strong> If you selected 'Yes’ for an oyster bundle that cost $15 and this decision was implemented, you will receive the oysters and owe $5 cash ($10 - $15 = -$5).</p>
+    <div class="button">
+      <button type="button" id="continue">Continue</button>
+    </div>
+  </section>
+
+  <section class="number-selection hidden">
     <p>How many oysters would you like to play for?</p>
     <form>
       <input type="radio" name="number-oysters" value="3"> 3
@@ -20,12 +57,16 @@
       <br>
       <input type="radio" name="number-oysters" value="12"> 12
     </form>
+    <p class="note">Note: If you play for more than 3 oysters, there is a chance that you
+    spend more money than you have in your account. In this case you have to
+    cover the remaining costs.</p>
     <div class="button">
       <button type="button" id="continue" onclick="grabValues()">Continue</button>
     </div>
   </section>
 
   <section class="oyster-selection hidden">
+    <p>You are playing for <strong id="number-of-oysters"></strong> oysters.</p>
     <img src="images/noaa-graphic.png">
     <br>
     <div class="oyster-list">

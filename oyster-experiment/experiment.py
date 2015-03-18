@@ -21,6 +21,7 @@
 # Import Willow and needed libraries
 from willow.willow import * 
 import datetime
+import random as rand
 import subject
 
 # Figure out where to store experiment data and write initial files based on

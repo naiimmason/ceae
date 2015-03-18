@@ -13,10 +13,17 @@ std_dev = 0.50
 # This is the main method for subjects and will be the first thing that is 
 # called
 def start(me, subj_id):
-  # The inital page load lets them choose the amount of oysters they want, wait
-  # for them to choose and continue
   let("")
   add(open("pages/subject.html"))
+
+  # The initial load shows them only the instructions, wait for them to go to 
+  # the bottom and click continue and then reveal the next thing.
+  take({"tag": "click", "client": me, "id": "continue"})
+  push("hidden", ".instructions")
+  pop("hidden", ".number-selection")
+
+  # :ets them choose the amount of oysters they want, wait for them to choose
+  # and continue
   take({"tag": "click", "client": me, "id": "continue"})
   num_oysters = int(peek("#num-oysters"))
   
@@ -33,6 +40,7 @@ def start(me, subj_id):
         "<input type=\"radio\" name=\"oyster" + str(i) + "\" value=\"No\"> No" +
         "</form>", ".oyster-list")
 
+  let(str(num_oysters), "#number-of-oysters")
   push("hidden", ".number-selection")
   pop("hidden", ".oyster-selection")
 

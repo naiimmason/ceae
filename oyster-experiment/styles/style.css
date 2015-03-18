@@ -47,6 +47,16 @@ table {
 
 /* End of the CSS reset */
 
+/* A simple page wrapper that sets default values for an entire page wrapped in 
+this class */
+.page-wrapper {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  font-family: Verdana;
+}
+
 /* Simply make any images take up 100% of the width of their parent element */
 img {
   width: 100%;
@@ -75,14 +85,29 @@ button:hover {
   cursor: pointer;
 }
 
-/* A simple page wrapper that sets default values for an entire page wrapped in 
-this class */
-.page-wrapper {
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
-  font-family: Verdana;
+/* Some default list styles and and bold styles */
+ul {
+  list-style: disc;
+  padding-left: 40px;
+}
+ol {
+  list-style: decimal;
+  padding-left: 60px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+a:link {
+  color: #00539f;
+}
+a:visited {
+  color: #00539f;
+}
+
+a:hover {
+  color: #2268A8;
 }
 
 /* Create some spacing between elements on the first page */ 
@@ -91,7 +116,18 @@ this class */
 }
 
 .consent {
+  margin-top: 40px;
   margin-bottom: 20px;
+}
+
+.consent label {
+  line-height: 130%;
+}
+
+.consent p {
+  text-align: center;
+  line-height: 120%;
+  font-size: 20px;
 }
 
 #id-input {
@@ -119,9 +155,9 @@ to make it even more "modern" looking. Make sure to get rid of any hilighting
 outline and redefine what happens when you focus it.*/
 input[type=text] {
   font-size: 40px;
-  border: 1px solid #ccc;
+  border: 3px solid #ccc;
   border-radius: 5px;
-  box-shadow: 2px 2px 3px #666;
+/*  box-shadow: 2px 2px 3px #666;*/
   padding: 7px;
   outline: 0;
 }
@@ -168,7 +204,37 @@ hr {
   margin-left: 15px;
 }
 
+.oyster-selection p {
+  margin-bottom: 20px;
+}
+
 .thank-you {
   font-size: 40px;
   text-align: center;
+}
+
+.note {
+  margin-top: 20px;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.button {
+  margin-top: 20px;
+}
+
+.instructions {
+  font-size: 30px;
+  line-height: 120%;
+}
+
+.instructions p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.instructions h3 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
