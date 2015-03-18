@@ -66,29 +66,35 @@
   </section>
 
   <section class="oyster-selection hidden">
-    <p>You are playing for <strong id="number-of-oysters"></strong> oysters.</p>
+    <p class="selection-intro">You are playing for <strong id="number-of-oysters"></strong> oysters.</p>
     <div class="oyster-list">
-      <div id="treatment-0">
-        <img src="images/noaa-graphic.png">
-      </div>
-      <br>
-      <div id="treatment-1">
-        <img src="images/noaa-graphic.png">
-      </div>
-      <br>
-      <div id="treatment-2">
-        <img src="images/noaa-graphic.png">
-      </div>
-      <br>
-      <div id="treatment-3">
-        <img src="images/noaa-graphic.png">
-      </div>
-      <br>
+      <div id="treatment-0"></div>
+      <br><hr><br>
+      <div id="treatment-1"></div>
+      <br><hr><br>
+      <div id="treatment-2"></div>
+      <br><hr><br>
+      <div id="treatment-3"></div>
+      <br><hr><br>
+      <div id="treatment-4"></div>
+      <br><hr><br>
+      <div id="treatment-5"></div>
+      <br><hr><br>
+      <div id="treatment-6"></div>
+      <br><hr><br>
+      <div id="treatment-7"></div>
+      <br><hr><br>
     </div>
-    <hr>
     <div class="button">
       <button type="button" id="continue">Submit</button>
     </div>
+  </section>
+
+  <section class="treatment-selection hidden">
+    <p>You will now roll a die to determine which treatment of oysters you will
+    be offered...</p>
+    <input type="text" id="treatment-choice" autocomplete="off">
+    <button type="button" id="submit">Submit</button>
   </section>
 
   <section class="thank-you hidden">

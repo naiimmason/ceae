@@ -51,6 +51,7 @@ table {
 this class */
 .page-wrapper {
   margin-top: 20px;
+  margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
   width: 70%;
@@ -113,6 +114,42 @@ a:hover {
 p {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-radius: 10px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius:5px
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius:5px
+}
+
+table th:first-child {
+  border-top-left-radius: 5px;
+}
+
+table th:last-child {
+  border-top-right-radius: 5px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+th {
+  font-weight: bold;
 }
 
 .note {
@@ -227,6 +264,12 @@ hr {
 
 .oyster-selection {
   font-size: 30px;
+  text-align: center;
+}
+
+.oyster-seleciton .selection-intro {
+  font-size: 20px;
+  margin-bottom: 60px;
 }
 
 .oyster-selection input {
@@ -239,9 +282,40 @@ hr {
   margin-bottom: 20px;
 }
 
+.oyster-selection .half {
+  display: inline-block;
+  width: 20%;
+  margin:auto;
+  margin-top:20px;
+}
+
+.oyster-selection hr {
+  color:black;
+  background-image: none;
+  background-color: black;
+  height: 6px;
+  width: 100% !important
+}
+
+.treatment-selection p {
+  text-align: center;
+  line-height: 110%;
+  font-size: 40px;
+}
+
+.treatment-selection input[type=text] {
+  display:block;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.treatment-selection button {
+  float:none;
+  margin:auto;
+}
+
 .thank-you {
   font-size: 40px;
   text-align: center;
 }
-
-
