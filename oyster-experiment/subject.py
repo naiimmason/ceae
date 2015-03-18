@@ -27,8 +27,8 @@ def start(me, subj_id):
   take({"tag": "click", "client": me, "id": "continue"})
   num_oysters = int(peek("#num-oysters"))
   
-  # For the amount of oysters that they chose generate a random price and add 
-  # a relavent option for the user
+  # Generate a 8 random prices (2 for each treatment) and add a relavent option 
+  # for the user
   for i in range(8):
     price = gen_price()
     total_price = price * num_oysters
@@ -38,7 +38,7 @@ def start(me, subj_id):
         " for a total of $" + str("{0:.2f}".format(total_price)) +
         "<input type=\"radio\" name=\"oyster" + str(i) + "\" value=\"Yes\"> Yes" +
         "<input type=\"radio\" name=\"oyster" + str(i) + "\" value=\"No\"> No" +
-        "</form>", ".oyster-list")
+        "</form>", "#treatment-" + str(i%4))
 
   let(str(num_oysters), "#number-of-oysters")
   push("hidden", ".number-selection")
