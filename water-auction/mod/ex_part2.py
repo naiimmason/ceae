@@ -3,12 +3,24 @@ import random as rand
 import utilities
 
 chat_time = 30
-                                    #chatbox should run in the background to send and receive messages
+                              #chatbox should run in the background to send and receive messages
 def chatbox(me, subj_id, num):
-  members = me + 1
+  members = take({"tag": "chatBox" + str(num)})
+  inchat = False
+  for user in members["users"]:
+    if user == subj_id:
+      inchat = True;
+      break;
+  if not inchat:
+    members["num"] += 1
+    members["users"].append(subj_id)
+  members["real_users"].append(me)
+  put(members)
+  users = members["real_users"]
+  members = members["num"]
                                   #you've entered the chat
-  for i in range(me):
-      put({"tag":"entered","client":subj_id,"viewer":i})
+  for user in users:
+      put({"tag":"entered","client":str(subj_id),"viewer":user})
   done = False
   seconds_left = chat_time
   while not done:
@@ -23,13 +35,13 @@ def chatbox(me, subj_id, num):
                               #send the message to all in client list when anyone clicked on id "chatbutton"
       if msg["tag"] == "chat":
                               #add current message
-              add(msg["msg"],"#chatbox")
+          add(msg["msg"],"#chatbox")
                               #someone entered the chat
       elif msg["tag"] == "entered":
-          members = msg["client"] + 1
+          members += 1
           print("total members: %s" % (members))
                               #send a message to tell everyone that a new person entered
-          txt = "Subject %s entered the chat.<br>" % (str(subj_id))
+          txt = "Subject %s entered the chat.<br>" % (str(msg["client"]))
           add(txt,"#chatbox")
                               #clicked the send button
       elif msg["tag"] == "click":
@@ -37,27 +49,52 @@ def chatbox(me, subj_id, num):
           if peek("#chatbar") != "":
               label = "Subject " + str(subj_id) + ":"
                               #construct message
-              txt = "%s %s %s<br>" % ( time.strftime("%H:%M:%S"),
+              txt = "%s <b>%s</b> %s<br>" % ( time.strftime("%H:%M:%S"),
                      label,
-                     peek("#chatbar",me) )
-              for i in range(members):
-                  put({"tag" : "chat","sender":me,"msg":txt, "receiver": i})
+                     peek("#chatbar",me).encode('utf-8').strip() )
+              try:
+                txt.decode('ascii')
+              except UnicodeDecodeError:
+                  print "it was not a ascii-encoded unicode string"
+              else:
+                users = take({"tag": "chatBox" + str(num)})
+                put(users)
+                users = users["real_users"]
+                for user in users:
+                    put({"tag" : "chat","sender":str(subj_id),"msg":txt, "receiver":user})
+                add(txt, "#chatbox", clients=utilities.findAdmin())
               poke("value","","#chatbar")
       elif msg["tag"] == "key":
                                               #message cannot be empty
           if peek("#chatbar") != "":
               label = "Subject " + str(subj_id) + ":"
                               #construct message
-              txt = "%s %s %s<br>" % ( time.strftime("%H:%M:%S"),
+              txt = "%s <b>%s</b> %s<br>" % ( time.strftime("%H:%M:%S"),
                      label,
-                     peek("#chatbar",me) )
-              for i in range(members):
-                  put({"tag" : "chat","sender":me,"msg":txt, "receiver": i})
-              poke("value","","#chatbar")
+                     peek("#chatbar",me).encode('utf-8').strip() )
+
+              try:
+                txt.decode('ascii')
+              except UnicodeDecodeError:
+                print "it was not a ascii-encoded unicode string"
+              except UnicodeEncodeError:
+                print "STILL NOT ASCII"
+              else:
+                print "It may have been an ascii-encoded unicode string"
+                users = take({"tag": "chatBox" + str(num)})
+                put(users)
+                users = users["real_users"]
+                for user in users:
+                  put({"tag" : "chat","sender":str(subj_id),"msg":txt, "receiver":user})
+                add(txt, "#chatbox", clients=utilities.findAdmin())
+                poke("value","","#chatbar")
       elif msg["tag"] == "doneChat" + str(num):
         done = True
         put(msg)
       elif msg["tag"] == "chatTime" + str(num):
+        # print users
+        # print "SUBJECT: " + str(subj_id)
+        # print "ME: " + str(me)
         seconds_left -= 1
         minutes = msg["minutes"]
         seconds = msg["seconds"]

@@ -11,7 +11,7 @@ def start(subj_id, me):
   communication = take({"tag": "communication"})
   put(communication)
   if communication["communication"]:
-    add("You will be given 5 minutes time for communication within your group before each task. The experimenter will announce the beginning and end of the 5 minutes communication time. Once the 5 minutes are over, no further communication is permitted.","#comm")
+    add("You will be given 5 minutes time for communication within your group before each task. This communication will be done via a chat box on your computer. This chat box allows you to send messages to everyone in the room. Please use your keyboard to type your messages and then click submit for everyone to see your message. All communication must be done through the chat box, please remain quiet. The chat box will time out after 5 minutes. Once the 5 minutes are over, no further communication is permitted.   ","#comm")
     
   take({"tag": "click", "id": "continue", "client": me})
   let("")

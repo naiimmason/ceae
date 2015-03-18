@@ -16,10 +16,9 @@ def start(subj_id, me, survey_path):
                "#riskyTapValue",
                "#riskyFilTapValue",
                "#riskyBottleValue",
-               "#campingValue", 
                "#riskyDrinkWater",
-               "#plasticConcernOffer",
                "#plasticConcernBother",
+               "#plasticConcernOffer",
                "#origin",
                "#originother",
                "#gender",
@@ -36,6 +35,9 @@ def start(subj_id, me, survey_path):
                "#pastZip",
                "#commentBox"
                ]
+
+               # "#campingValue", 
+                #              "#newBother",
   values = []
   for value in peek_values:
     values.append(str(peek(value)))

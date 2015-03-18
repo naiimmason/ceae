@@ -32,7 +32,7 @@ positions = [
 chat_time = 30
 
 # Main logic thread for the admin
-def start(me, waters):
+def start(me, waters, rand_waters):
   let("")
   median_values_final = []
 
@@ -169,6 +169,8 @@ def start(me, waters):
         median_values_final = median_values
         advance["median"] = median_values
         advance["all_water"] = all_water
+        temp_thing = map(str, median_values_final)
+        add("<p>PART C VALUES: (Penta, Re-use, Filter) " + ", ".join(temp_thing) + "</p>", "#experimentData")
 
         comm = take({"tag": "communication"})
         put(comm)
@@ -185,14 +187,20 @@ def start(me, waters):
       let(btntexts[positions[position]], "#advance")
 
       if(positions[position-1] == "waitingPartC1" or positions[position-1] == "waitingPartC2" or  positions[position-1] == "waitingPartC3"):
+        add("<hr><b>STARTING NEW CHAT FOR " + str(rand_waters[num]) + "</b><hr>", "#chatbox", clients=utilities.findAdmin())
         comm = take({"tag": "communication"})
         put(comm)
         if comm["communication"]:
+          # sleep(chat_time)          
           for i in range(chat_time):
             sleep(1)
             minutes = int((chat_time - i)/60)
             seconds = int(chat_time-i)%60
             put({"tag": "chatTime" + str(num), "minutes": minutes, "seconds" : seconds, "totSeconds": (chat_time - i)})
+            if seconds < 10:
+              seconds = "0" + str(seconds)
+            let(str(minutes) + ":" + str(seconds), "#timeLeft")
+
           put({"tag": "doneChat" + str(num)})
           num += 1
 

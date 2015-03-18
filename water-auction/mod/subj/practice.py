@@ -2,7 +2,7 @@ from willow.willow import *
 import mod.utilities
 
 practice_items = [
-  "eat a piece of candy",
+  "eat a piece of chocolate",
   "draw a picture"
 ]
 
@@ -50,7 +50,7 @@ def waitingResults(subj_id, me, practice_id):
   let("")
   mod.utilities.updateStage(subj_id, "Finished practice " + str(practice_id + 1))
   add(open("pages/subject/practice_waiting.html"))
-  let(str(practice_id + 1), "#practiceItem")
+  let("", "#practiceItem")
   advance = take({"advance": True, "stage": "waitingPracResults" + str(practice_id + 1)})
   put(advance)
 

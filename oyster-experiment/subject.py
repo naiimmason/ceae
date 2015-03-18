@@ -22,7 +22,7 @@ def start(me, subj_id):
   
   # For the amount of oysters that they chose generate a random price and add 
   # a relavent option for the user
-  for i in range(num_oysters):
+  for i in range(8):
     price = gen_price()
     total_price = price * num_oysters
     add("<form>" + 

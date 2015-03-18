@@ -37,10 +37,12 @@ def start(subj_id, me, output_path, waters, median_values):
     payout = payoutDict["amount"]
     put(payoutDict)
     if payout < median_values[clientResult["water"]]:
-      add("<p>However, the maximum payout was $" + str("{0:.2f}".format(payout)) + " and you will not be paid.</p>", "#maxpayoutDiv")
+      add("<p>However, the maximum payout was $" + str("{0:.2f}".format(payout)) + " (sealed envelope amount) and you will not be paid.</p>", "#maxpayoutDiv")
     else:
       userData = take({"tag": "userInfo", "user": subj_id})
-      userData["payout"] += median_values[clientResult["water"]]
+      if not userData["paid"]:
+        userData["payout"] += median_values[clientResult["water"]]
+        userData["paid"] = True
       put(userData)
 
 
@@ -49,7 +51,9 @@ def start(subj_id, me, output_path, waters, median_values):
       resultStmt += "<p>You won the bid for drinking " + waters[clientResult["water"]] + " for $" + str("{0:.2f}".format(clientResult["payout"])) + "</p>"
 
       userData = take({"tag": "userInfo", "user": subj_id})
-      userData["payout"] += clientResult["payout"]
+      if not userData["paid"]:
+        userData["payout"] += clientResult["payout"]
+        userData["paid"] = True
       put(userData)
     else:
       resultStmt += "<p>You did not win the bid for drinking " + waters[clientResult["water"]] + ".</p>"

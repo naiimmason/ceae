@@ -37,6 +37,9 @@ def session(me):
     put({"tag": "maxPayout", "amount": 4999})
     put({"tag": "communication", "communication": False})
     put({"tag": "currentStage", "stage": "waitingPractice1"})
+    put({"tag": "chatBox0", "num": 0, "users": [], "real_users": []})
+    put({"tag": "chatBox1", "num": 0, "users": [], "real_users": []})
+    put({"tag": "chatBox2", "num": 0, "users": [], "real_users": []})
 
     # Quality of life dictionaries that update admin info
     put({"tag": "numStart", "num": 0, "clients": []})
@@ -60,7 +63,7 @@ def session(me):
     # Remove the last adminUser and add the new one
     grab({"tag": "adminUser"})
     put({"tag": "adminUser", "clientNum": me})
-    mod.monitor.start(me, waters)
+    mod.monitor.start(me, waters, rand_waters)
 
   # Reconnect code goes here
   elif subj_id == "reconnect123456789":
@@ -75,7 +78,7 @@ def session(me):
     mod.utilities.addUser(subj_id, me)
     temp_waters = rand.sample(waters, len(waters))
     put({"tag": "userInfo", "user": subj_id, "results": [-1, -1, -1, -1, -1, -1], 
-      "pers_rand_waters": temp_waters, "position": "Start", "practice_results": [-1, -1], "payout": 25})
+      "pers_rand_waters": temp_waters, "position": "Start", "practice_results": [-1, -1], "payout": 25, "paid": False})
     mod.utilities.addUserRow(subj_id)
     mod.subject.start(me, subj_id, waters, rand_waters, output_path, survey_path)
 

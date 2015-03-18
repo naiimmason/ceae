@@ -8,10 +8,13 @@
           "#riskyTapValue",
           "#riskyFilTapValue",
           "#riskyBottleValue",
-          "#campingValue",
           "#tap-water-oftenValue",
           "#fil-tap-water-oftenValue",
-          "#bot-water-oftenValue"]
+          "#bot-water-oftenValue",
+          ]
+
+          //  "#campingValue",
+           //         "#newBotherValue"
 
   function outputUpdate(vol, i) {
     document.querySelector(tags[i]).value = vol;
@@ -28,6 +31,8 @@
                  "race",
                  "edustatus",
                  "income"]
+
+
 
   var grabValues = function clicktest() {
     values = []
@@ -68,7 +73,7 @@
           <p>Tap Water: <b><output for="tap-water-often" id="tap-water-oftenValue">50</output>%</b></p>
           <div class="input-group">
             <span class="input-group-addon">Never (0%)</span>
-            <input id="tap-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 5)">
+            <input id="tap-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 4)">
             <span class="input-group-addon">Very Often (100%)</span>
           </div>
         </form>
@@ -76,7 +81,7 @@
           <p>Filtered Tap Water: <b><output for="tap-water-often" id="fil-tap-water-oftenValue">50</output>%</b></p>
           <div class="input-group">
             <span class="input-group-addon">Never (0%)</span>
-            <input id="fil-tap-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 6)">
+            <input id="fil-tap-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 5)">
             <span class="input-group-addon">Very Often (100%)</span>
           </div>
         </form>
@@ -84,7 +89,7 @@
           <p>Bottled Water: <b><output for="tap-water-often" id="bot-water-oftenValue">50</output>%</b></p>
           <div class="input-group">
             <span class="input-group-addon">Never (0%)</span>
-            <input id="bot-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 7)">
+            <input id="bot-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 6)">
             <span class="input-group-addon">Very Often (100%)</span>
           </div>
         </form>
@@ -134,7 +139,7 @@
           </div>
         </form>
       </li>
-
+<!-- 
       <li class="special">
         How often do you go camping? <b><output for="camping" id="campingValue">5</output></b>
         <form class="form-inline" role="form">
@@ -144,34 +149,10 @@
             <span class="input-group-addon">Very Often (9)</span>
           </div>
         </form>
-      </li>
+      </li> -->
 
       <li class="special">
-        Before today, have you ever felt like drinking water may be a risk to your health?
-        <form class="form-inline">
-          <div class="radio-btn-frm">
-            <label>Yes</label>
-            <input type="radio" name="riskyDrinkWater" value="Yes">
-            <label>No</label>
-            <input type="radio" name="riskyDrinkWater" value="No">
-          </div>
-        </form>
-      </li>
-
-      <li class="special">
-        Did the fact that Penta water comes from a plastic bottle affect your offer?
-        <form class="form-inline">
-          <div class="radio-btn-frm">
-            <label>Yes</label>
-            <input type="radio" name="plasticConcernOffer" value="Yes">
-            <label>No</label>
-            <input type="radio" name="plasticConcernOffer" value="No">
-          </div>
-        </form>
-      </li>
-
-      <li class="special">
-        Did the fact that Penta water comes from a plastic bottle bother you?
+        Previously, have you ever felt like drinking water may be a risk to your health outside the United States?
         <form class="form-inline">
           <div class="radio-btn-frm">
             <label>Yes</label>
@@ -181,6 +162,29 @@
           </div>
         </form>
       </li>
+
+      <li class="special">
+        Previously, have you ever felt like drinking water may be a risk to your health inside the United States?
+        <form class="form-inline">
+          <div class="radio-btn-frm">
+            <label>Yes</label>
+            <input type="radio" name="plasticConcernOffer" value="Yes">
+            <label>No</label>
+            <input type="radio" name="plasticConcernOffer" value="No">
+          </div>
+        </form>
+      </li>
+<!-- 
+      <li class="special">
+        How much did it bother you that Penta Ultra Purified Water came from a plastic bottle? <b><output for="newBother" id="newBotherValue">5</output></b>
+        <form class="form-inline" role="form">
+          <div class="input-group">
+            <span class="input-group-addon">Not At All (1)</span>
+            <input id="riskybottle" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 7)">
+            <span class="input-group-addon">Very Much (9)</span>
+          </div>
+        </form>
+      </li> -->
 
       <li class="special">
         What is your country of origin?
