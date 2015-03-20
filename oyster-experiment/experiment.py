@@ -23,6 +23,7 @@ from willow.willow import *
 import datetime
 import random as rand
 import subject
+import reconnect
 
 # Figure out where to store experiment data and write initial files based on
 # time of the experiment in order to provide always unique file names.
@@ -49,7 +50,7 @@ survey_file.close()
 def session(me):
   # Run things that only need to occur upon the first person joining willow
   if me == 0:
-    put({"tag": "users", "users": []})
+    put({"tag": "totalUsers", "users": []})
 
   let("Oyster Experiment", "title")
 
@@ -60,8 +61,9 @@ def session(me):
   if subj_id == "econadmin012":
     print "Hi! I'm an admin!"
   else:
+    reconnect.addUser(subj_id)
     subject.start(me, subj_id)
-    users = take({"tag": "users"})
+    users = take({"tag": "totalUsers"})
     users["users"].append(subj_id)
     put(users)
 
@@ -81,12 +83,16 @@ def waitForConsent(me):
     # Wait for the person to take an action and then update the boolean values
     # accordingly
     action = take({"tag": "click", "id": "consent-button", "client": me},
-                  {"tag": "click", "id": "continue", "client": me})
+                  {"tag": "click", "id": "continue", "client": me},
+                  {"tag": "click", "id": "reconnect", "client": me})
 
     subj_id = peek("#id-input")
     valid_name = isValid(subj_id)
 
-    if action["id"] == "consent-button":
+    if action["id"] == "reconnect":
+      reconnect(me);
+
+    elif action["id"] == "consent-button":
       consent = not consent
 
     elif action["id"] == "continue":
@@ -102,7 +108,7 @@ def waitForConsent(me):
         sleep(.25)
         let("<p>You must consent before continuing.</p>", ".warning")
 
-  return subj_id
+  return str(subj_id)
 
 
 # Take a name and see if it has been taken by somebody yet. Check to see if the
@@ -112,12 +118,19 @@ def isValid(name):
   if name == "":
     return False
 
-  users = take({"tag": "users"})
+  if reconnect.userExist(name):
+    return False
+
+  users = take({"tag": "totalUsers"})
   put(users)
   users = users["users"]
   for user in users:
     if name == user:
       return False
   return True
+
+def reconnect(me):
+  let("")
+  add(open("pages/reconnect.html"))
 
 run(session)

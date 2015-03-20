@@ -96,19 +96,37 @@ ol {
   padding-left: 60px;
 }
 
+li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 strong {
   font-weight: bold;
 }
 
-a:link {
-  color: #00539f;
+em {
+  font-style: italic;
 }
+
+u {
+  text-decoration: underline;
+}
+
+a:link, a {
+  color: #00539f;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 a:visited {
   color: #00539f;
+  text-decoration: underline;
 }
 
 a:hover {
   color: #2268A8;
+  text-decoration: underline;
 }
 
 p {
@@ -245,6 +263,9 @@ hr {
   padding: 10px;
 }
 
+.reconnect {
+  float: none;
+}
 
 /* Set font sizes and add some spacing */
 .instructions {
@@ -252,7 +273,7 @@ hr {
   line-height: 120%;
 }
 
-.instructions h3 {
+h3 {
   font-size: 40px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -264,12 +285,16 @@ hr {
 
 .oyster-selection {
   font-size: 30px;
+}
+
+.oyster-selection h3 {
   text-align: center;
 }
 
-.oyster-seleciton .selection-intro {
-  font-size: 20px;
-  margin-bottom: 60px;
+.selection-intro {
+  font-size: 30px;
+  margin-bottom: 80px;
+  line-height: 120%;
 }
 
 .oyster-selection input {
@@ -297,20 +322,28 @@ hr {
   width: 100% !important
 }
 
-.treatment-selection p {
+.treatment-instructions {
+  margin-bottom: 80px;
+}
+
+.oyster-list {
+  text-align: center;
+}
+
+.option-selection p {
   text-align: center;
   line-height: 110%;
   font-size: 40px;
 }
 
-.treatment-selection input[type=text] {
+.option-selection input[type=text] {
   display:block;
   margin: auto;
   text-align: center;
   margin-bottom: 20px;
 }
 
-.treatment-selection button {
+.option-selection button {
   float:none;
   margin:auto;
 }

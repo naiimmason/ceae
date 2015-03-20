@@ -1,17 +1,56 @@
 <link rel="stylesheet" type="text/css" href="styles/style.css">
 
 <script>
-  var grabValues = function() {
-    val = $("input[name=number-oysters]:checked").val();
-    $("#num-oysters").append(val)
-    console.log(val)
+  // Store id / output pairs in an array
+  ids = [
+    ["number-oysters", "#num-oysters"],
+    ["oyster0", "#treatment-0-sel"],
+    ["oyster1", "#treatment-1-sel"],
+    ["oyster2", "#treatment-2-sel"],
+    ["oyster3", "#treatment-3-sel"],
+    ["oyster4", "#treatment-4-sel"],
+    ["oyster5", "#treatment-5-sel"],
+    ["oyster6", "#treatment-6-sel"],
+    ["oyster7", "#treatment-7-sel"]
+  ]
+
+  // Grab values from radio buttons
+  var grabValues = function(id) {
+    // If they are selecting the number of oysters to play for
+    if(id === 0) {
+      val = $("input[name=" + ids[id][0] + "]:checked").val();
+      $(ids[id][1]).html(val)
+      console.log(val)
+    } 
+
+    // If they are playing for experiment 1
+    else if (id === 8) {
+      vals = []
+      for(var i = 1; i < 9; i++) {
+        val = $("input[name=" + ids[i][0] + "]:checked").val()
+        vals.push(val); 
+        $(ids[i][1]).html(val)
+      }
+      console.log(vals);
+    }
+
+    else if (id === 6) {
+      vals = []
+      for(var i = 1; i < 7; i++) {
+        val = $("input[name=" + ids[i][0] + "]:checked").val()
+        vals.push(val); 
+        $(ids[i][1]).html(val)
+      }
+      console.log(vals);
+    }
   }
 </script>
 
 <div class="page-wrapper">
   <section class="warning"></section>
 
-  <section class="instructions">
+  <!-- Show the instructions for the experiment -->
+  <section class="instructions hidden">
     <h3>Instructions:</h3>
 
     <p><em>Please read these instructions carefully and do not communicate with any one during the experiment. Ask a facilitator if you have a question and remember that your participation is voluntary.</em></p>
@@ -34,18 +73,19 @@
 
     <br>
 
-    <ul><li>You may consume the oysters (a) raw on the half shell, (b) raw in a shot glass, fried as a 'po-boy’ sandwich, or take them home in a bag.</li></ul>
+    <ul><li>You may consume the oysters (a) raw on the half shell, (b) raw in a shot glass, fried as a 'po-boy' sandwich, or take them home in a bag.</li></ul>
 
-    <p><strong>Example 1:</strong> If you selected 'Yes’ for an oyster bundle that cost $7 and this decision was implemented, you will receive the oysters and $3 cash ($10 - $7 = $3).</p>
+    <p><strong>Example 1:</strong> If you selected 'Yes' for an oyster bundle that cost $7 and this decision was implemented, you will receive the oysters and $3 cash ($10 - $7 = $3).</p>
 
-    <p><strong>Example 2:</strong> If you selected 'No’ for an oyster bundle and this decision was implemented, you will receive $10 and will not receive any oysters.</p>
+    <p><strong>Example 2:</strong> If you selected 'No' for an oyster bundle and this decision was implemented, you will receive $10 and will not receive any oysters.</p>
 
-    <p><strong>Example 1:</strong> If you selected 'Yes’ for an oyster bundle that cost $15 and this decision was implemented, you will receive the oysters and owe $5 cash ($10 - $15 = -$5).</p>
+    <p><strong>Example 1:</strong> If you selected 'Yes' for an oyster bundle that cost $15 and this decision was implemented, you will receive the oysters and owe $5 cash ($10 - $15 = -$5).</p>
     <div class="button">
       <button type="button" id="continue">Continue</button>
     </div>
   </section>
 
+  <!-- Selection screen asking how many oysters they want -->
   <section class="number-selection hidden">
     <p>How many oysters would you like to play for?</p>
     <form>
@@ -61,12 +101,21 @@
     spend more money than you have in your account. In this case you have to
     cover the remaining costs.</p>
     <div class="button">
-      <button type="button" id="continue" onclick="grabValues()">Continue</button>
+      <button type="button" id="continue" onclick="grabValues(0)">Continue</button>
     </div>
   </section>
 
+  <!-- Oyster selection screen, which ones are they going to buy -->
   <section class="oyster-selection hidden">
-    <p class="selection-intro">You are playing for <strong id="number-of-oysters"></strong> oysters.</p>
+    <div class="selection-intro">
+      <p class="treatment-instructions"></p>
+      <h3><u><strong>Your Decisions</strong></u></h3>
+      <p>The following options are based on the latest available information from the United States National Oceanic and Atmospheric Administration (NOAA). Please make your choices.</p>
+      <p>You selected to make choices for <strong id="number-of-oysters"></strong> oysters. Please make your choices by selecting ‘YES' or ‘NO' for the following options. Remember these are the actual prices you will pay.</p>
+    </div>
+    <br>
+    <hr>
+    <br>
     <div class="oyster-list">
       <div id="treatment-0"></div>
       <br><hr><br>
@@ -80,26 +129,40 @@
       <br><hr><br>
       <div id="treatment-5"></div>
       <br><hr><br>
-      <div id="treatment-6"></div>
-      <br><hr><br>
-      <div id="treatment-7"></div>
-      <br><hr><br>
+      <div id="extra-treatments">
+        <div id="treatment-6"></div>
+        <br><hr><br>
+        <div id="treatment-7"></div>
+        <br><hr><br>
+      </div>
     </div>
+    <div class="warning"></div>
     <div class="button">
-      <button type="button" id="continue">Submit</button>
+      <button type="button" id="continue" onclick="grabValues(8)">Submit</button>
     </div>
   </section>
 
-  <section class="treatment-selection hidden">
+  <!-- Option selection screen -->
+  <section class="option-selection hidden">
     <p>You will now roll a die to determine which treatment of oysters you will
     be offered...</p>
     <input type="text" id="treatment-choice" autocomplete="off">
     <button type="button" id="submit">Submit</button>
   </section>
 
+  <!-- Final screen, shows final results -->
   <section class="thank-you hidden">
     <p>Thank you for participating!</p>
   </section>
 
-  <textarea class="hidden" id="num-oysters"></textarea>
+  <!-- Cleverly hide the subject's choices in hidden text areas -->
+  <textarea class="hidden" id="num-oysters">-1</textarea>
+  <textarea class="hidden" id="treatment-0-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-1-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-2-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-3-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-4-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-5-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-6-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-7-sel">-1</textarea>
 </div>
