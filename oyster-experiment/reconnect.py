@@ -12,9 +12,10 @@ def addUser(subj_id):
        "user": subj_id, 
        "position": "start", 
        "experiment": None,
+       "treatment": None,
        "num-oysters": -1,
-       "rand_order": [],
-       "rand_prices": []});
+       "rand_order": None,
+       "rand_prices": None});
 
 # Check to see if a user already exists or not
 def userExist(subj_id):
@@ -46,4 +47,6 @@ def grabValue(subj_id, valueTag):
   userInfo = grab({"tag": "userInfo",
                    "user": subj_id})
   put(userInfo)
+  if userInfo[valueTag] == None:
+    return None
   return userInfo[valueTag]

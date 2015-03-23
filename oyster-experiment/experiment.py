@@ -28,20 +28,22 @@ import reconnect
 # Figure out where to store experiment data and write initial files based on
 # time of the experiment in order to provide always unique file names.
 time = datetime.datetime.now().isoformat()
-data_filepath = "db/oyster-" + time + "-DATA.csv"
-survey_filepath = "db/oyster-" + time + "-SURVEY.csv" 
+data_filepath1 = "db/NUTRIENTS-oyster-" + time + "-DATA.csv"
+survey_filepath1 = "db/NUTRIENTS-oyster-" + time + "-SURVEY.csv" 
+data_filepath2 = "db/WORDING-oyster-" + time + "-DATA.csv"
+survey_filepath2 = "db/WORDING-oyster-" + time + "-SURVEY.csv" 
 
 # Store the header rows in the data and survey files in order to initialize them
-data_file = open(data_filepath, "w")
-data_file.write("Date," + time + "\n")
-data_file.write("subject, number of oysters, option 1, option 2, option 3, " +
-  "option 4, option 5, option 6, Yes To, No To\n")
-data_file.close()
+# data_file = open(data_filepath, "w")
+# data_file.write("Date," + time + "\n")
+# data_file.write("subject, number of oysters, option 1, option 2, option 3, " +
+#   "option 4, option 5, option 6, Yes To, No To\n")
+# data_file.close()
 
-survey_file = open(survey_filepath, "w")
-survey_file.write("Date," + time + "\n")
-survey_file.write("subject\n")
-survey_file.close()
+# survey_file = open(survey_filepath, "w")
+# survey_file.write("Date," + time + "\n")
+# survey_file.write("subject\n")
+# survey_file.close()
 
 # This is the default function that is run upon a connection to the Willow
 # server. It is named session by convention and the parameter me is an integer
@@ -90,7 +92,7 @@ def waitForConsent(me):
     valid_name = isValid(subj_id)
 
     if action["id"] == "reconnect":
-      reconnect(me);
+      reconnectPage(me);
 
     elif action["id"] == "consent-button":
       consent = not consent
@@ -129,8 +131,20 @@ def isValid(name):
       return False
   return True
 
-def reconnect(me):
+# Check to see if that user exists and if they do start them, if not tell them
+def reconnectPage(me):
+  go = True
   let("")
   add(open("pages/reconnect.html"))
+  while go:
+    take({"tag": "click", "client": me, "id": "reconnect"})
+    subj_id = peek("#id-input")
+    if reconnect.userExist(subj_id):
+      go = False
+      subject.start(me, subj_id)
+    else:
+      let("", ".warning")
+      sleep(.25)
+      let("<p>That id has not been used yet.</p>", ".warning")
 
 run(session)

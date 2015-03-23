@@ -14,6 +14,17 @@ mean = 1.50 # used for calculating the random prices
 std_dev = 0.50
 bank = 10.0
 nutrients = ["unknown", "low", "moderate", "high"]
+worded_questions = [
+  "Nauti Pilgrim oysters. These are aquacultured oysters.",
+  "Oysters from Plymouth Rock, MA. These are aquacultured oysters.",
+  "Little Bitches oysters from Chesapeake Bay in VA.",
+  "Little Bitches oysters. These are aquacultured oysters.",
+  "Oysters from Chesapeake Bay in VA. These are aquacultured oysters.",
+  "Oysters from Long Island, NY. These are wild-caught oysters.",
+  "Blue Point oysters from Long Island, NY.",
+  "Blue Point oysters. These are wild-caught oysters.",
+  "Nauti Pilgrim oystrs from Plymouth Rock, MA."]
+
 
 # This is the main method for subjects and will be the first thing that is 
 # called
@@ -52,30 +63,146 @@ def start(me, subj_id):
   let("", ".warning")
   let(str(num_oysters), "#number-of-oysters")
 
-  # Determine which experiment that the subject with choose and then store their
-  # experiment choice in case that they disconnect
-  experiment_choice = reconnect.grabValue(subj_id, "experiment")
-  if experiment_choice == None:
-    if rand.random() < 2:
-      experiment_choice = "maik"
-    else:
-      experiment_choice = "yosef"
-    reconnect.updateValue(subj_id, "experiment", experiment_choice)
+  if reconnect.getPosition(subj_id) == "experiment":
+    # Determine which experiment that the subject with choose and then store their
+    # experiment choice in case that they disconnect
+    experiment_choice = reconnect.grabValue(subj_id, "experiment")
+    if experiment_choice == None:
+      if rand.random() < .5:
+        experiment_choice = "maik"
+      else:
+        experiment_choice = "yosef"
+      reconnect.updateValue(subj_id, "experiment", experiment_choice)
 
-  # Route them to the correct experiment
+    # Route them to the correct experiment
+    if experiment_choice == "maik":
+      experiment1(me, subj_id, num_oysters)
+    elif experiment_choice == "yosef":
+      experiment2(me, subj_id, num_oysters)
+
+    reconnect.updatePosition(subj_id, "survey")
+
+  experiment_choice = reconnect.grabValue(subj_id, "experiment")
+  num_options = 6
   if experiment_choice == "maik":
-    experiment1(me, subj_id, num_oysters)
-  elif experiment_choice == "yosef":
-    experiment2(me, subj_id, num_oysters)
+    num_options = 8
+
+  # Show them the survey and then make sure that they have answered everything
+  # that they want to by adding a warning upon the first click
+  if reconnect.getPosition(subj_id) == "survey":
+    push("hidden", ".oyster-selection")
+    pop("hidden", ".survey")
+
+    take({"tag": "click", "id": "submitSurvey", "client": me})
+    let("<p>Please make sure you have answered all questions possible. You will NOT be able to go back.</p>", ".warning")
+    take({"tag": "click", "id": "submitSurvey", "client": me})
+    let("", ".warning")
+
+    reconnect.updatePosition(subj_id, "consumption-selection")
+
+  if reconnect.getPosition(subj_id) == "consumption-selection":
+    push("hidden", ".survey")
+    pop("hidden", ".consumption-selection")
+
+    # Ask them which way they would like their oysters served and make sure they
+    # provide an answer
+    cook_option = "-1"
+    while cook_option == "-1":
+      take({"tag": "click", "client": me, "id": "continue"})
+      cook_option = str(peek("#cooked-option"))
+
+      # If they do not choose a consumption option, warn them
+      if cook_option == "-1":
+        let("", ".warning")
+        sleep(.25)
+        let("<p>You must select a way to receive your oysters.</p>", ".warning")
+
+    let("", ".warning")
+    reconnect.updatePosition(subj_id, "dice-roll")
+
+  if reconnect.getPosition(subj_id) == "dice-roll":
+    push("hidden", ".consumption-selection")
+    pop("hidden", ".dice-roll")
+
+    take({"tag": "click", "client": me, "id": "dice-button"})
+    poke("value", "stop", "#dice-button", )
+    
+    let("Stop", "#dice-button")
+
+    stop = False
+    while not stop:
+      sleep(.02)
+      dice_number(num_options)
+      action = grab({"tag": "click", "client": me, "id": "dice-button"})
+      if action != None:
+        stop = True
+
+    poke("value", "continue", "#dice-button")
+    let("Continue", "#dice-button")
+
+    take({"tag": "click", "client": me, "id": "dice-button"})
+    avalue = int(peek("#final-option"))
+    reconnect.updateValue(subj_id, "final-selection", avalue)
+    reconnect.updatePosition(subj_id, "end")
+
+  if reconnect.getPosition(subj_id) == "end":
+    push("hidden", ".dice-roll")
+    pop("hidden", ".thank-you")
+
+    option_choice = reconnect.grabValue(subj_id, "final-selection")
+
+    let(option_choice, "#option-choice")
+
+    option_prices = reconnect.grabValue(subj_id, "rand_prices")
+    options = reconnect.grabValue(subj_id, "rand_order")
+
+    price = option_prices[option_choice - 1]
+    total_price = price * num_oysters
+    you_pay = total_price - bank
+    pay_get_label = "You Pay"
+    if you_pay < 0:
+      you_pay = -1 * you_pay
+      pay_get_label = "You Get"
+
+    # Depending on the experiment generate the first line that defines the type
+    # of oyster the subject is being offered
+    first_line = ""
+    if experiment_choice == "maik":
+      first_line = "<p>Oysters are from a location with <strong><u><em>" + options[option_choice-1]  + " levels</em> of nutrients</u></strong></p>"
+    elif experiment_choice == "yosef":
+      first_line = "<p>" + options[option_choice-1] + "</p>"
+
+    # Add the elements to the html and show the html
+    add( first_line +
+      "<table><thead>" +
+      "<th>Price per Oyster</th>" +
+      "<th>Total Cost</th>" +
+      "<th>"+ pay_get_label +"</th>" +
+      "</thead><tbody id=\"final-selection-body\"></tbody></table" 
+      , "#final-selection")
+
+    add("<tr>" + 
+        "<td>$" + str("{0:.2f}".format(price)) + "</td>" +
+        "<td>$" + str("{0:.2f}".format(total_price)) + " (" + str(num_oysters) +" X $" + str("{0:.2f}".format(price)) + ")</td>" + 
+        "<td>$" + str("{0:.2f}".format(you_pay)) + "</td>" +
+        "</tr>", "#final-selection-body")
+
+
+
 
 # This is the function that runs if they are doing Maik's experiment, Maik also
 # has two treatments with different wording's A and B
 def experiment1(me, subj_id, num_oysters):
+  num_options = 8
   # Randomly select a treatment for the subject, this only changes the wording
   # of the selection process
-  treatment = "A"
-  if rand.random() < .5:
-    treatment = "B"
+  treatment = reconnect.grabValue(subj_id, "treatment")
+  if treatment == None:
+    if rand.random() < .5:
+      treatment = "B"
+    else:
+      treatment = "A"
+    reconnect.updateValue(subj_id, "treatment", treatment)
 
   if treatment == "A":
     let(open("pages/treatmentA.html"),".treatment-instructions")
@@ -84,15 +211,42 @@ def experiment1(me, subj_id, num_oysters):
 
   # Double up on the nutrients list and randomly order them in order to make sure
   # that there is no wording or phrasing bias for the experiment
-  rand_nutrients = nutrients + nutrients
-  rand_nutrients = rand.sample(rand_nutrients, len(rand_nutrients))
+  rand_nutrients = reconnect.grabValue(subj_id, "rand_order")
+  if rand_nutrients == None:
+    rand_nutrients = nutrients + nutrients
+    rand_nutrients = rand.sample(rand_nutrients, len(rand_nutrients))
+    reconnect.updateValue(subj_id, "rand_order", rand_nutrients)
+
+  pop("hidden", "#noaa-instructions")
+  addExperimentHTML(me, subj_id, num_oysters, rand_nutrients, "maik")
+
+# This is Yosi's experiment, they choose 6 random wordings from things
+def experiment2(me, subj_id, num_oysters):
+  num_options = 6
+
+  push("hidden", "#extra-treatments")
+  rand_questions = reconnect.grabValue(subj_id, "rand_order")
+  if rand_questions == None:
+    rand_questions = rand.sample(worded_questions, num_options)
+    reconnect.updateValue(subj_id, "rand_order", rand_questions)
+
+  addExperimentHTML(me, subj_id, num_oysters, rand_questions, "yosef")
+  return "hello"
+
+def addExperimentHTML(me, subj_id, num_oysters, options, experiment_choice):
+  # Generate a number of random prices depending on how many options they are 
+  # given, 8 for Maik, 6 for Yosef
+  option_prices = reconnect.grabValue(subj_id, "rand_prices")
+  if option_prices == None:
+    option_prices = gen_rand_prices(len(options))
+    reconnect.updateValue(subj_id, "rand_prices", option_prices)
 
   # Generate 8 random prices (2 for each nutrient level) and add a relavent option 
   # for the user
-  for i in range(8):
+  for i in range(len(options)):
     # Generate the random price and calculate totals and how much the user would
     # have to subsidize
-    price = gen_price()
+    price = option_prices[i]
     total_price = price * num_oysters
     you_pay = total_price - bank
     pay_get_label = "You Pay"
@@ -100,8 +254,16 @@ def experiment1(me, subj_id, num_oysters):
       you_pay = -1 * you_pay
       pay_get_label = "You Get"
 
-    # Add the elements to the html
-    add("<p>Oysters are from a location with <strong><u><em>" + rand_nutrients[i]  + " levels</em> of nutrients</u></strong></p>" +
+    # Depending on the experiment generate the first line that defines the type
+    # of oyster the subject is being offered
+    first_line = ""
+    if experiment_choice == "maik":
+      first_line = "<p>Oysters are from a location with <strong><u><em>" + options[i]  + " levels</em> of nutrients</u></strong></p>"
+    elif experiment_choice == "yosef":
+      first_line = "<p>" + options[i] + "</p>"
+
+    # Add the elements to the html and show the html
+    add( first_line +
       "<table><thead>" +
       "<th>Price per Oyster</th>" +
       "<th>Total Cost</th>" +
@@ -126,7 +288,11 @@ def experiment1(me, subj_id, num_oysters):
 
   # Wait for them to select a chocie for all of them and continue to the 
   # selection screen
-  selections = ["-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1"]
+  selections = ["-1", "-1", "-1", "-1", "-1", "-1"]
+  if experiment_choice == "maik":
+    selections.append("-1")
+    selections.append("-1")
+
   selected = False
 
   while not selected:
@@ -146,21 +312,6 @@ def experiment1(me, subj_id, num_oysters):
         break;
 
   let("", ".warning")
-  push("hidden", ".oyster-selection")
-  pop("hidden", ".option-selection")
-
-  take({"tag": "click", "client": me, "id": "submit"})
-  push("hidden", ".option-selection")
-  pop("hidden", ".thank-you")
-  return "hello"
-
-# This is Yosi's experiment, they choose 6 random wordings from things
-def experiment2(me, subj_id, num_oysters):
-  return "hello"
-
-# This function is called after each of the experiment options are finished
-def finishExperiment(me, subj_id):
-  return "hello"
 
 # Generate a random oyster price based on a mean of 1.50 and a standard deviation
 # of 0.50. Using an inverse normal distribution to determine the price.
@@ -169,3 +320,16 @@ def gen_price():
   if price < 0:
     price = 0
   return price
+
+# Generate x number of random prices and return it as an array
+def gen_rand_prices(num):
+  nums = []
+  for i in range(num):
+    nums.append(gen_price())
+  return nums
+
+def dice_number(num):
+  newnum = rand.randint(1, num)
+  let(str(newnum), "#dice-number")
+  let(str(newnum), "#final-option")
+  poke("value", str(newnum), "#dice-number")

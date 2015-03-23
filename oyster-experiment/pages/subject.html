@@ -46,6 +46,12 @@
   }
 </script>
 
+<script>
+  var grabCook = function() {
+    val = $("input[name=cooked-type]:checked").val();
+    $("#cooked-option").html(val)
+  }
+</script>
 <div class="page-wrapper">
   <section class="warning"></section>
 
@@ -110,7 +116,7 @@
     <div class="selection-intro">
       <p class="treatment-instructions"></p>
       <h3><u><strong>Your Decisions</strong></u></h3>
-      <p>The following options are based on the latest available information from the United States National Oceanic and Atmospheric Administration (NOAA). Please make your choices.</p>
+      <p class="hidden" id="noaa-instructions">The following options are based on the latest available information from the United States National Oceanic and Atmospheric Administration (NOAA). Please make your choices.</p>
       <p>You selected to make choices for <strong id="number-of-oysters"></strong> oysters. Please make your choices by selecting ‘YES' or ‘NO' for the following options. Remember these are the actual prices you will pay.</p>
     </div>
     <br>
@@ -142,17 +148,167 @@
     </div>
   </section>
 
+  <!-- Survey of questions -->
+  <section class="survey hidden">
+    <ol>
+      <li>What is your age?
+        <input type="text" id="age">
+      </li>
+      <li>Are you male or female?
+        <div class="radio-item">
+          <input type="radio" name="gender" id="male" value="male">
+          <label>Male</label>
+        </div>
+        <div class="radio-itme">
+          <input type="radio" name="gender" id="female" value="female">
+          <label>Female</label>
+        </div>
+      </li>
+
+      <li>How often do you consume oysters?
+        <div class="radio-item">
+          <input type="radio" name="amtoysters" value="0">
+          <label>0 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="amtoysters" value="1-2">
+          <label>1-2 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="amtoysters" value="3-5">
+          <label>3-5 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="amtoysters" value="6-9">
+          <label>6-9 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="amtoysters" value=">9">
+          <label>>9 times per year</label>
+        </div>
+      </li>
+
+      <li>Are you the primary shopper in your household?
+        <div class="radio-item">
+          <input type="radio" name="primshop" value="yes">
+          <label>Yes</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="primshop" value="no">
+          <label>No</label>
+        </div>
+      </li>
+
+      <li>What is your profession?
+        <div class="radio-item">
+          <input type="radio" name="profession" value="government">
+          <label>Government</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Academia">
+          <label>Academia</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Business">
+          <label>Business</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Agriculture">
+          <label>Agriculture</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Other">
+          <label>Other (please specify) </label>
+          <input type="text" name="otherprofession">
+        </div>
+      </li>
+
+      <li>Are you:
+        <div class="radio-item">
+          <input type="radio" name="pplitical" value="liberal">
+          <label>Politically liberal</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="pplitical" value="moderate">
+          <label>Politically moderate</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="pplitical" value="conservative">
+          <label>Politically conservative</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="pplitical" value="other">
+          <label>Other (please specify)</label>
+          <input type="text" name="otherpolitical">
+        </div>
+      </li>
+
+      <li>Which category best describes your <u>household</u> income (before taxes) in 2014?
+        <div class="radio-item">
+          <input type="radio" name="income" value="les">
+          <label>Politically liberal</label>
+        </div>
+      </li>
+      <li>What is the highest degree or level of school that you have comopleted? <em>(Select one</em></li>
+      <li>How often do you go to the beach each year, on average?</li>
+      <li>Are you a first time oyster consumer?</li>
+      <li>In a typical month, approximately how often do you eat seafood?</li>
+      <li>In a typical month, approximately how often do you eat at restaurants?</li>
+      <li>When you eat at a restaurant, what is the percentage of seafood versus other food?</li>
+      <li>How often do you eat seafood at home versus a restaurant?</li>
+      <li>Are you the primary seafood shopper in your household?</li>
+      <li>How often do you catch your own seafood?</li>
+      <li>How important is location in your oyster choice?</li>
+      <li>For oysters from the Delaware Bay, I would...</li>
+      <li>For oysters from the Delaware Inland Bays, I would...</li>
+      <li>How do you usually prefer the preparation of your oysters?</li>
+      <li>How important are the following oyster characteristics to you?</li>
+    </ol>
+    <div class="warning">
+    </div>
+    <div class="button">
+      <button type="button" id="submitSurvey">Finish and Submit</button>
+    </div>
+  </section>
+
+  <!-- Let them choose which way they want to consume their oysters -->
+  <section class="consumption-selection hidden">
+    <p>How would you like your oysters cooked?</p>
+    <div class="radio-item">
+      <input type="radio" name="cooked-type" value="Raw on the half shell">
+      <label>Raw on the half shell</label>
+    </div>
+    <div class="radio-item">
+      <input type="radio" name="cooked-type" value="In a shot glass with condiments">
+      <label>In a shot glass with condiments</label>
+    </div>
+    <div class="radio-item">
+      <input type="radio" name="cooked-type" value="Fried on a roll">
+      <label>Fried on a roll</label>
+    </div>
+    <div class="radio-item">
+      <input type="radio" name="cooked-type" value="In a bag with ice">
+      <label>In a bag with ice</label>
+    </div>
+    <div class="button">
+      <button type="button" id="continue" onclick="grabCook()">Continue</button>
+    </div>
+  </section>
+
   <!-- Option selection screen -->
-  <section class="option-selection hidden">
+  <section class="dice-roll hidden">
     <p>You will now roll a die to determine which treatment of oysters you will
     be offered...</p>
-    <input type="text" id="treatment-choice" autocomplete="off">
-    <button type="button" id="submit">Submit</button>
+    <h2 id="dice-number" value="1">1</h2>
+    <button type="button" id="dice-button" value="start">Roll the Dice</button>
   </section>
+
 
   <!-- Final screen, shows final results -->
   <section class="thank-you hidden">
-    <p>Thank you for participating!</p>
+    <p>Thank you for participating! Please return this tablet.</p>
+    <p>Option <span id="option-choice"></span> was randomly selected, the option information is below.</p>
+    <div id="final-selection"></div>
   </section>
 
   <!-- Cleverly hide the subject's choices in hidden text areas -->
@@ -165,4 +321,6 @@
   <textarea class="hidden" id="treatment-5-sel">-1</textarea>
   <textarea class="hidden" id="treatment-6-sel">-1</textarea>
   <textarea class="hidden" id="treatment-7-sel">-1</textarea>
+  <textarea class="hidden" id="cooked-option">-1</textarea>
+  <textarea class="hidden" id="final-option"></textarea>
 </div>
