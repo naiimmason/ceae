@@ -91,6 +91,9 @@ def waitForConsent(me):
     subj_id = peek("#id-input")
     valid_name = isValid(subj_id)
 
+    # There are three possible choices, reconnecting, consent, or continue, if 
+    # they continue they must have pressed consent before and if the reconnect 
+    # they go through a whole new logic scenario.
     if action["id"] == "reconnect":
       reconnectPage(me);
 

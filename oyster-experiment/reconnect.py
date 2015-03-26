@@ -15,7 +15,8 @@ def addUser(subj_id):
        "treatment": None,
        "num-oysters": -1,
        "rand_order": None,
-       "rand_prices": None});
+       "rand_prices": None,
+       "selections": None});
 
 # Check to see if a user already exists or not
 def userExist(subj_id):

@@ -15,15 +15,15 @@ std_dev = 0.50
 bank = 10.0
 nutrients = ["unknown", "low", "moderate", "high"]
 worded_questions = [
-  "Nauti Pilgrim oysters. These are aquacultured oysters.",
+  "<em>Nauti Pilgrim</em> oysters. These are aquacultured oysters.",
   "Oysters from Plymouth Rock, MA. These are aquacultured oysters.",
-  "Little Bitches oysters from Chesapeake Bay in VA.",
-  "Little Bitches oysters. These are aquacultured oysters.",
+  "<em>Little Bitches</em> oysters from Chesapeake Bay in VA.",
+  "<em>Little Bitches</em> oysters. These are aquacultured oysters.",
   "Oysters from Chesapeake Bay in VA. These are aquacultured oysters.",
   "Oysters from Long Island, NY. These are wild-caught oysters.",
-  "Blue Point oysters from Long Island, NY.",
-  "Blue Point oysters. These are wild-caught oysters.",
-  "Nauti Pilgrim oystrs from Plymouth Rock, MA."]
+  "<em>Blue Point</em> oysters from Long Island, NY.",
+  "<em>Blue Point</em> oysters. These are wild-caught oysters.",
+  "<em>Nauti Pilgrim</em> oystrs from Plymouth Rock, MA."]
 
 
 # This is the main method for subjects and will be the first thing that is 
@@ -120,6 +120,7 @@ def start(me, subj_id):
     let("", ".warning")
     reconnect.updatePosition(subj_id, "dice-roll")
 
+  # A random dice roll phase where subjects randomly choose a selection option
   if reconnect.getPosition(subj_id) == "dice-roll":
     push("hidden", ".consumption-selection")
     pop("hidden", ".dice-roll")
@@ -145,12 +146,14 @@ def start(me, subj_id):
     reconnect.updateValue(subj_id, "final-selection", avalue)
     reconnect.updatePosition(subj_id, "end")
 
+  # The ending where they are shown which option was chosen and if they decided
+  # to get that option
   if reconnect.getPosition(subj_id) == "end":
     push("hidden", ".dice-roll")
     pop("hidden", ".thank-you")
 
     option_choice = reconnect.grabValue(subj_id, "final-selection")
-
+    yes_or_no = reconnect.grabValue(subj_id, "selections")[option_choice-1]
     let(option_choice, "#option-choice")
 
     option_prices = reconnect.grabValue(subj_id, "rand_prices")
@@ -162,7 +165,7 @@ def start(me, subj_id):
     pay_get_label = "You Pay"
     if you_pay < 0:
       you_pay = -1 * you_pay
-      pay_get_label = "You Get"
+      pay_get_label = "You Receive"
 
     # Depending on the experiment generate the first line that defines the type
     # of oyster the subject is being offered
@@ -187,7 +190,7 @@ def start(me, subj_id):
         "<td>$" + str("{0:.2f}".format(you_pay)) + "</td>" +
         "</tr>", "#final-selection-body")
 
-
+    let(yes_or_no, "#yesno")
 
 
 # This is the function that runs if they are doing Maik's experiment, Maik also
@@ -252,7 +255,7 @@ def addExperimentHTML(me, subj_id, num_oysters, options, experiment_choice):
     pay_get_label = "You Pay"
     if you_pay < 0:
       you_pay = -1 * you_pay
-      pay_get_label = "You Get"
+      pay_get_label = "You Receive"
 
     # Depending on the experiment generate the first line that defines the type
     # of oyster the subject is being offered
@@ -277,10 +280,10 @@ def addExperimentHTML(me, subj_id, num_oysters, options, experiment_choice):
         "<td>$" + str("{0:.2f}".format(you_pay)) + "</td>" +
         "</tr>", "#treatment-" + str(i) + "-table")
 
-    add("<p>Would you buy these oysters at $" + str("{0:.2f}".format(price)) 
+    add("<p>Do you want to buy these oysters at $" + str("{0:.2f}".format(price)) 
         + " per oyster?" +
-        "<div class=\"half\"><input type=\"radio\" name=\"oyster" + str(i) + "\" value=\"Yes\"> Yes</div>" +
-        "<div class=\"half\"><input type=\"radio\" name=\"oyster" + str(i) + "\" value=\"No\"> No</div>" +
+        "<div class=\"half\"><input type=\"radio\" name=\"oyster" + str(i) + "\" value=\"Yes\"> <label class=\"yesnolabel\">YES</label></div>" +
+        "<div class=\"half\"><input type=\"radio\" name=\"oyster" + str(i) + "\" value=\"No\"> <label class=\"yesnolabel\">NO</label></div>" +
         "", "#treatment-" + str(i))
 
   push("hidden", ".number-selection")
@@ -311,6 +314,7 @@ def addExperimentHTML(me, subj_id, num_oysters, options, experiment_choice):
         let("<p>You must select a choice for <strong>all</strong> options.</p>", ".warning")
         break;
 
+  reconnect.updateValue(subj_id, "selections", selections)
   let("", ".warning")
 
 # Generate a random oyster price based on a mean of 1.50 and a standard deviation

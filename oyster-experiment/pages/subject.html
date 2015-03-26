@@ -59,11 +59,11 @@
   <section class="instructions hidden">
     <h3>Instructions:</h3>
 
-    <p><em>Please read these instructions carefully and do not communicate with any one during the experiment. Ask a facilitator if you have a question and remember that your participation is voluntary.</em></p>
+    <p><em>Please read these instructions carefully and do not communicate with any one while you are making your decisions.</em></p>
 
     <ul>
-      <li><strong>We will give you $10 that you may keep and/or use to purchase oysters.</strong> You may think of this money as a bank account from which you can withdrawal money.</li>
-      <li>Depending on the choices you select during the experiment, you may receive oysters and cash; cash only; oysters only; or oysters and you owe money at the end of the experiment.</li>
+      <li><strong>We will give you $10 that you may keep and/or use to purchase oysters.</strong> You may think of this money as a bank account from which you can withdraw money.</li>
+      <li>Depending on the choices q you make, you may receive a combination of cash and oysters. There is the possibility of you owing us money if the cost of your oysters is greater than $10.</li>
     </ul>
 
     <br>
@@ -72,20 +72,18 @@
 
     <ol>
       <li>Decide how many oysters you want to play for (3, 6, 9 or 12)</li>
-      <li>Decide if you want to buy the oyster options at the random price by selecting “Yes” or “No”</li>
-      <li>Roll a die to determine which oyster option will be implemented</li>
+      <li>Decide if you want to buy the oyster options at the listed price by selecting “Yes” or “No”</li>
+      <li>Roll a die to determine which oyster option will be implemented (only one will be implemented)</li>
       <li>Fill out a short survey</li>
     </ol>
 
     <br>
 
-    <ul><li>You may consume the oysters (a) raw on the half shell, (b) raw in a shot glass, fried as a 'po-boy' sandwich, or take them home in a bag.</li></ul>
-
     <p><strong>Example 1:</strong> If you selected 'Yes' for an oyster bundle that cost $7 and this decision was implemented, you will receive the oysters and $3 cash ($10 - $7 = $3).</p>
 
     <p><strong>Example 2:</strong> If you selected 'No' for an oyster bundle and this decision was implemented, you will receive $10 and will not receive any oysters.</p>
 
-    <p><strong>Example 1:</strong> If you selected 'Yes' for an oyster bundle that cost $15 and this decision was implemented, you will receive the oysters and owe $5 cash ($10 - $15 = -$5).</p>
+    <p><strong>Example 3:</strong> If you selected 'Yes' for an oyster bundle that cost $15 and this decision was implemented, you will receive the oysters and owe $5 cash ($10 - $15 = -$5).</p>
     <div class="button">
       <button type="button" id="continue">Continue</button>
     </div>
@@ -93,7 +91,7 @@
 
   <!-- Selection screen asking how many oysters they want -->
   <section class="number-selection hidden">
-    <p>How many oysters would you like to play for?</p>
+    <p>How many oysters would you like to buy?</p>
     <form>
       <input type="radio" name="number-oysters" value="3"> 3
       <br>
@@ -245,23 +243,196 @@
 
       <li>Which category best describes your <u>household</u> income (before taxes) in 2014?
         <div class="radio-item">
-          <input type="radio" name="income" value="les">
-          <label>Politically liberal</label>
+          <input type="radio" name="income" value="Less than $10000">
+          <label>Less than $10,000</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$10000-$14999">
+          <label>$10,000-$14,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$15000-$24999">
+          <label>$15,000-$24,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$25000-$34999">
+          <label>$25,000-$34,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$35000-$49999">
+          <label>$35,000-$49,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$50000-$74999">
+          <label>$50,000-$74,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$75000-$99999">
+          <label>$75,000-$99,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$100000-$149999">
+          <label>$100,000-$149,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$150000-$199999">
+          <label>$150,000-$199,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$200000-$249999">
+          <label>$200,000-$249,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$250000 and above">
+          <label>$250,000 and above</label>
         </div>
       </li>
-      <li>What is the highest degree or level of school that you have comopleted? <em>(Select one</em></li>
-      <li>How often do you go to the beach each year, on average?</li>
-      <li>Are you a first time oyster consumer?</li>
-      <li>In a typical month, approximately how often do you eat seafood?</li>
-      <li>In a typical month, approximately how often do you eat at restaurants?</li>
+
+      <li>What is the highest degree or level of school that you have comopleted? <em>(Select one)</em>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Grade school">
+          <label>Grade school</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Some high school">
+          <label>Some high school</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="High school graduate">
+          <label>High school graduate</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Some college credit">
+          <label>Some college credit</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Associate degree">
+          <label>Associate degree</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Bachelor's degree">
+          <label>Bachelor's degree</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Graduate degree/Professional">
+          <label>Graduate degree/Professional</label>
+        </div>
+      </li>
+
+      <li>How often do you go to the beach each year, on average?
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="0 times per year">
+          <label>0 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="1-2 times per year">
+          <label>1-2 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="3-5 times per year">
+          <label>3-5 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="6-9 times per year">
+          <label>6-9 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value=">9 times per year">
+          <label>>9 times per year</label>
+        </div>
+      </li>
+
+      <li>Are you a first time oyster consumer?
+        <div class="radio-item">
+          <input type="radio" name="firsttime" value="Yes">
+          <label>Yes</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="firsttime" value="No">
+          <label>No</label>
+        </div>
+      </li>
+
+      <li>In a typical month, approximately how often do you eat seafood?
+        <input type="text" id="ofteneatseafood">
+      </li>
+
+      <li>In a typical month, approximately how often do you eat at restaurants?
+        <input type="text" id="ofteneatrestaurant">
+      </li>
+
       <li>When you eat at a restaurant, what is the percentage of seafood versus other food?</li>
+
       <li>How often do you eat seafood at home versus a restaurant?</li>
-      <li>Are you the primary seafood shopper in your household?</li>
+      <li>Are you the primary seafood shopper in your household?
+        <div class="radio-item">
+          <input type="radio" name="shopper" value="Yes">
+          <label>Yes</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="shopper" value="No">
+          <label>No</label>
+        </div>
+      </li>
+
       <li>How often do you catch your own seafood?</li>
+
       <li>How important is location in your oyster choice?</li>
-      <li>For oysters from the Delaware Bay, I would...</li>
-      <li>For oysters from the Delaware Inland Bays, I would...</li>
-      <li>How do you usually prefer the preparation of your oysters?</li>
+
+      <li>For oysters from the Delaware Bay, I would...
+        <div class="radio-item">
+          <input type="radio" name="delawarebay" value="pay more than other locations">
+          <label>pay more than other locations.</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="delawarebay" value="pay less than other locations">
+          <label>pay less than other locations.</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="delawarebay" value="pay the same as other locations">
+          <label>pay the same as other locations.</label>
+        </div>
+      </li>
+
+      <li>For oysters from the Delaware Inland Bays, I would...
+        <div class="radio-item">
+          <input type="radio" name="delawareinlandbay" value="pay more than other locations">
+          <label>pay more than other locations.</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="delawareinlandbay" value="pay less than other locations">
+          <label>pay less than other locations.</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="delawareinlandbay" value="pay the same as other locations">
+          <label>pay the same as other locations.</label>
+        </div>
+      </li>
+
+      <li>How do you usually prefer the preparation of your oysters?
+        <div class="radio-item">
+          <input type="radio" name="oysterprep" value="Raw on the half shell">
+          <label>Raw on the half shell</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="oysterprep" value="Raw in a shooter">
+          <label>Raw in a shooter</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="oysterprep" value="Fried">
+          <label>Fried</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="oysterprep" value="Grilled">
+          <label>Grilled</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="oysterprep" value="Other">
+          <label>Other</label>
+          <input type="text" id="oysterprepother">
+        </div>
+      </li>
+
       <li>How important are the following oyster characteristics to you?</li>
     </ol>
     <div class="warning">
@@ -307,8 +478,9 @@
   <!-- Final screen, shows final results -->
   <section class="thank-you hidden">
     <p>Thank you for participating! Please return this tablet.</p>
-    <p>Option <span id="option-choice"></span> was randomly selected, the option information is below.</p>
+    <p>Option <span id="option-choice"></span> was randomly selected, the option information is below:</p>
     <div id="final-selection"></div>
+    <p>You chose <strong><span id="yesno"></span></strong> to buying these oysters.</p>
   </section>
 
   <!-- Cleverly hide the subject's choices in hidden text areas -->
