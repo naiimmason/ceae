@@ -43,6 +43,8 @@
       }
       console.log(vals);
     }
+
+    window.scrollTo(0, 0);
   }
 </script>
 
@@ -117,7 +119,17 @@
     if (vol < 0) {
       vol *= -1;
     }
-    document.querySelector(output_update_tags[i]).value = vol;
+    if (i === 0) {
+      document.querySelector("#percentSeafoodResValue1").value = 100 - vol;
+      document.querySelector("#percentSeafoodResValue2").value = vol;
+    }
+    else if (i === 1) {
+      document.querySelector("#homevresValue1").value = 100 - vol;
+      document.querySelector("#homevresValue2").value = vol;
+    }
+    else {
+      document.querySelector(output_update_tags[i]).value = vol;
+    }
   }
 </script>
 
@@ -131,28 +143,29 @@
     <p><em>Please read these instructions carefully and do not communicate with any one while you are making your decisions.</em></p>
 
     <ul>
-      <li><strong>We will give you $10 that you may keep and/or use to purchase oysters.</strong> You may think of this money as a bank account from which you can withdraw money.</li>
-      <li>Depending on the choices q you make, you may receive a combination of cash and oysters. There is the possibility of you owing us money if the cost of your oysters is greater than $10.</li>
+      <li><strong>We will give you $10 that you may keep or use to purchase oysters.</strong> You may think of this money as a bank account from which you can withdraw money.</li>
+      <li>Depending on the choices you make, you may receive a combination of cash and oysters. There is the possibility of you owing us money if the cost of your oysters is greater than $10.</li>
+      <li>Your decisions are just like the ones you make in a store, you either buy at the listed price or you don't.</li>
     </ul>
 
     <br>
 
-    <h3>Rules:</h3>
+    <h3>Guidelines:</h3>
 
     <ol>
-      <li>Decide how many oysters you want to play for (3, 6, 9 or 12)</li>
-      <li>Decide if you want to buy the oyster options at the listed price by selecting “Yes” or “No”</li>
-      <li>Roll a die to determine which oyster option will be implemented (only one will be implemented)</li>
+      <li>Decide how many oysters you want to buy (3, 6, 9 or 12)</li>
+      <li>Decide if you want to buy the oyster options at the listed price by selecting 'Yes' or 'No'</li>
       <li>Fill out a short survey</li>
+      <li>Roll a digital die to determine which oyster option will be implemented (only one will be implemented)</li>
     </ol>
 
     <br>
 
-    <p><strong>Example 1:</strong> If you selected 'Yes' for an oyster bundle that cost $7 and this decision was implemented, you will receive the oysters and $3 cash ($10 - $7 = $3).</p>
+    <p><strong>Example 1:</strong> If you selected 'Yes' for an oyster option that cost $7 and this option is implemented, you will receive the oysters and $3 cash ($10 - $7 = $3).</p>
 
-    <p><strong>Example 2:</strong> If you selected 'No' for an oyster bundle and this decision was implemented, you will receive $10 and will not receive any oysters.</p>
+    <p><strong>Example 2:</strong> If you selected 'No' for an oyster option and this option is implemented, you will receive $10 and will not receive any oysters.</p>
 
-    <p><strong>Example 3:</strong> If you selected 'Yes' for an oyster bundle that cost $15 and this decision was implemented, you will receive the oysters and owe $5 cash ($10 - $15 = -$5).</p>
+    <p><strong>Example 3:</strong> If you selected 'Yes' for an oyster option that cost $15 and this option is implemented, you will receive the oysters and owe $5 ($10 - $15 = -$5).</p>
     <div class="button">
       <button type="button" id="continue">Continue</button>
     </div>
@@ -170,9 +183,6 @@
       <br>
       <input type="radio" name="number-oysters" value="12"> 12
     </form>
-    <p class="note">Note: If you play for more than 3 oysters, there is a chance that you
-    spend more money than you have in your account. In this case you have to
-    cover the remaining costs.</p>
     <div class="button">
       <button type="button" id="continue" onclick="grabValues(0)">Continue</button>
     </div>
@@ -182,8 +192,8 @@
   <section class="oyster-selection hidden">
     <div class="selection-intro">
       <p class="treatment-instructions"></p>
-      <h3><u><strong>Your Decisions</strong></u></h3>
-      <p class="hidden" id="noaa-instructions">The following options are based on the latest available information from the United States National Oceanic and Atmospheric Administration (NOAA). Please make your choices.</p>
+      <h3><u><strong>Please make your decisions below</strong></u></h3>
+      <p class="hidden" id="noaa-instructions">The following information is based on the latest available report from the United States National Oceanic and Atmospheric Administration (NOAA) on nutrients in the nation's coastal waters. </p>
       <p>You selected to make choices for <strong id="number-of-oysters"></strong> oysters. Please make your choices by selecting ‘YES' or ‘NO' for the following options. Remember these are the actual prices you will pay.</p>
     </div>
     <br>
@@ -218,17 +228,14 @@
   <!-- Survey of questions -->
   <section class="survey hidden">
     <ol>
-      <li>What is your age?
-        <input type="text" id="age">
-      </li>
-      <li>Are you male or female?
+      <li>Are you a first time oyster consumer?
         <div class="radio-item">
-          <input type="radio" name="gender" id="male" value="male">
-          <label>Male</label>
+          <input type="radio" name="firsttime" value="Yes">
+          <label>Yes</label>
         </div>
-        <div class="radio-itme">
-          <input type="radio" name="gender" id="female" value="female">
-          <label>Female</label>
+        <div class="radio-item">
+          <input type="radio" name="firsttime" value="No">
+          <label>No</label>
         </div>
       </li>
 
@@ -266,162 +273,6 @@
         </div>
       </li>
 
-      <li>What is your profession?
-        <div class="radio-item">
-          <input type="radio" name="profession" value="government">
-          <label>Government</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="profession" value="Academia">
-          <label>Academia</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="profession" value="Business">
-          <label>Business</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="profession" value="Agriculture">
-          <label>Agriculture</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="profession" value="Other">
-          <label>Other (please specify) </label>
-          <input type="text" name="otherprofession">
-        </div>
-      </li>
-
-      <li>Are you:
-        <div class="radio-item">
-          <input type="radio" name="political" value="liberal">
-          <label>Politically liberal</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="political" value="moderate">
-          <label>Politically moderate</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="political" value="conservative">
-          <label>Politically conservative</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="political" value="other">
-          <label>Other (please specify)</label>
-          <input type="text" name="otherpolitical">
-        </div>
-      </li>
-
-      <li>Which category best describes your <u>household</u> income (before taxes) in 2014?
-        <div class="radio-item">
-          <input type="radio" name="income" value="Less than $10000">
-          <label>Less than $10,000</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="income" value="$10000-$14999">
-          <label>$10,000-$14,999</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="income" value="$15000-$24999">
-          <label>$15,000-$24,999</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="income" value="$25000-$34999">
-          <label>$25,000-$34,999</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="income" value="$35000-$49999">
-          <label>$35,000-$49,999</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="income" value="$50000-$74999">
-          <label>$50,000-$74,999</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="income" value="$75000-$99999">
-          <label>$75,000-$99,999</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="income" value="$100000-$149999">
-          <label>$100,000-$149,999</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="income" value="$150000-$199999">
-          <label>$150,000-$199,999</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="income" value="$200000-$249999">
-          <label>$200,000-$249,999</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="income" value="$250000 and above">
-          <label>$250,000 and above</label>
-        </div>
-      </li>
-
-      <li>What is the highest degree or level of school that you have comopleted? <em>(Select one)</em>
-        <div class="radio-item">
-          <input type="radio" name="education" value="Grade school">
-          <label>Grade school</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="education" value="Some high school">
-          <label>Some high school</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="education" value="High school graduate">
-          <label>High school graduate</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="education" value="Some college credit">
-          <label>Some college credit</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="education" value="Associate degree">
-          <label>Associate degree</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="education" value="Bachelor's degree">
-          <label>Bachelor's degree</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="education" value="Graduate degree/Professional">
-          <label>Graduate degree/Professional</label>
-        </div>
-      </li>
-
-      <li>How often do you go to the beach each year, on average?
-        <div class="radio-item">
-          <input type="radio" name="beachtime" value="0 times per year">
-          <label>0 times per year</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="beachtime" value="1-2 times per year">
-          <label>1-2 times per year</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="beachtime" value="3-5 times per year">
-          <label>3-5 times per year</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="beachtime" value="6-9 times per year">
-          <label>6-9 times per year</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="beachtime" value=">9 times per year">
-          <label>>9 times per year</label>
-        </div>
-      </li>
-
-      <li>Are you a first time oyster consumer?
-        <div class="radio-item">
-          <input type="radio" name="firsttime" value="Yes">
-          <label>Yes</label>
-        </div>
-        <div class="radio-item">
-          <input type="radio" name="firsttime" value="No">
-          <label>No</label>
-        </div>
-      </li>
-
       <li>In a typical month, approximately how often do you eat seafood?
         <input type="text" id="ofteneatseafood">
       </li>
@@ -431,20 +282,18 @@
       </li>
 
       <li>When you eat at a restaurant, what is the percentage of seafood versus other food?
-      <strong><output for="percentSeafoodRes" id="percentSeafoodResValue">0</output>%</strong>
         <div class="slider">
-          <span>Other (100%)</span>
-          <input id="percentSeafoodRes" type="range" value="0" min="-100" max="100" step="1" data-show-value="true" oninput="outputUpdate(value, 0)">
-          <span>Seafood (100%)</span>
+          <span>Other (<output for="percentSeafoodRes" id="percentSeafoodResValue1">50</output>%)</span>
+          <input id="percentSeafoodRes" type="range" value="50" min="0" max="100" step="1" data-show-value="true" oninput="outputUpdate(value, 0)">
+          <span>Seafood (<output output for="percentSeafoodRes" id="percentSeafoodResValue2">50</output>%)</span>
         </div>
       </li>
 
-      <li>How often do you eat seafood at home versus a restaurant?
-        <strong><output for="homevres" id="homevresValue">0</output>%</strong>
+      <li>How often do you eat seafood at home versus at a restaurant?
         <div class="slider">
-          <span>Home (100%)</span>
-          <input id="homevres" type="range" value="0" min="-100" max="100" step="1" data-show-value="true" oninput="outputUpdate(value, 1)">
-          <span>Restaurant (100%)</span>
+          <span>Home (<output for="homevres" id="homevresValue1">50</output>%)</span>
+          <input id="homevres" type="range" value="50" min="-0" max="100" step="1" data-show-value="true" oninput="outputUpdate(value, 1)">
+          <span>Restaurant (<output for="homevres" id="homevresValue2">50</output>%)</span>
         </div>
       </li>
 
@@ -596,7 +445,166 @@
         </div>
       </li>
 
-      <li>How many of the following beers have you consumed?
+      <li>On average, how often do you go to the beach each year?
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="0 times per year">
+          <label>0 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="1-2 times per year">
+          <label>1-2 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="3-5 times per year">
+          <label>3-5 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="6-9 times per year">
+          <label>6-9 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value=">9 times per year">
+          <label>>9 times per year</label>
+        </div>
+      </li>
+
+      <li>What is your age?
+        <input type="text" id="age">
+      </li>
+      <li>Are you male or female?
+        <div class="radio-item">
+          <input type="radio" name="gender" id="male" value="male">
+          <label>Male</label>
+        </div>
+        <div class="radio-itme">
+          <input type="radio" name="gender" id="female" value="female">
+          <label>Female</label>
+        </div>
+      </li>
+
+      <li>What is your profession?
+        <div class="radio-item">
+          <input type="radio" name="profession" value="government">
+          <label>Government</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Academia">
+          <label>Academia</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Business">
+          <label>Business</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Agriculture">
+          <label>Agriculture</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Other">
+          <label>Other (please specify) </label>
+          <input type="text" name="otherprofession">
+        </div>
+      </li>
+
+      <li>Are you:
+        <div class="radio-item">
+          <input type="radio" name="political" value="liberal">
+          <label>Politically liberal</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="political" value="moderate">
+          <label>Politically moderate</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="political" value="conservative">
+          <label>Politically conservative</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="political" value="other">
+          <label>Other (please specify)</label>
+          <input type="text" name="otherpolitical">
+        </div>
+      </li>
+
+      <li>Which category best describes your <u>household</u> income (before taxes) in 2014?
+        <div class="radio-item">
+          <input type="radio" name="income" value="Less than $10000">
+          <label>Less than $10,000</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$10000-$14999">
+          <label>$10,000-$14,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$15000-$24999">
+          <label>$15,000-$24,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$25000-$34999">
+          <label>$25,000-$34,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$35000-$49999">
+          <label>$35,000-$49,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$50000-$74999">
+          <label>$50,000-$74,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$75000-$99999">
+          <label>$75,000-$99,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$100000-$149999">
+          <label>$100,000-$149,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$150000-$199999">
+          <label>$150,000-$199,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$200000-$249999">
+          <label>$200,000-$249,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$250000 and above">
+          <label>$250,000 and above</label>
+        </div>
+      </li>
+
+      <li>What is the highest level of education that you have completed?
+        <div class="radio-item">
+          <input type="radio" name="education" value="Grade school">
+          <label>Grade school</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Some high school">
+          <label>Some high school</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="High school graduate">
+          <label>High school graduate</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Some college credit">
+          <label>Some college credit</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Associate degree">
+          <label>Associate degree</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Bachelor's degree">
+          <label>Bachelor's degree</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Graduate degree/Professional">
+          <label>Graduate degree/Professional</label>
+        </div>
+      </li>
+
+      <li>How many of the following beers have you consumed tonight?
         <div class="row-buttons">
           <strong>Responders: </strong><br>
           <input type="radio" name="responders" value="0"><label>0</label>
@@ -790,16 +798,12 @@
       <label>Raw on the half shell</label>
     </div>
     <div class="radio-item">
-      <input type="radio" name="cooked-type" value="In a shot glass with condiments">
-      <label>In a shot glass with condiments</label>
-    </div>
-    <div class="radio-item">
-      <input type="radio" name="cooked-type" value="Fried on a roll">
-      <label>Fried on a roll</label>
+      <input type="radio" name="cooked-type" value="Fried">
+      <label>Fried</label>
     </div>
     <div class="radio-item">
       <input type="radio" name="cooked-type" value="In a bag with ice">
-      <label>In a bag with ice</label>
+      <label>In a bag with ice (to take home)</label>
     </div>
     <div class="button">
       <button type="button" id="continue" onclick="grabCook()">Continue</button>
@@ -820,7 +824,7 @@
     <p>Thank you for participating! Please return this tablet.</p>
     <p>Option <span id="option-choice"></span> was randomly selected, the option information is below:</p>
     <div id="final-selection"></div>
-    <p>You chose <strong><span id="yesno"></span></strong> to buying these oysters.</p>
+    <p id="yesno"></p>
   </section>
 
   <!-- Cleverly hide the subject's choices in hidden text areas -->

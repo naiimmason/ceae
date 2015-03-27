@@ -51,6 +51,12 @@ table {
   line-height: 110%;
 }
 
+.close-button {
+  font-size: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
 /* A simple page wrapper that sets default values for an entire page wrapped in 
 this class */
 .page-wrapper {
@@ -170,8 +176,8 @@ th, td {
   padding: 10px;
 }
 
-th {
-  font-weight: bold;
+th {/*
+  font-weight: bold;*/
 }
 
 .note {
@@ -316,9 +322,16 @@ h3 {
   margin-bottom: 20px;
 }
 
+.oyster-selection h2 {
+  text-align: left;
+  font-size: 25px;
+  position: relative;
+  top: -20px;
+}
+
 .oyster-selection .half {
   display: inline-block;
-  width: 20%;
+  width: 30%;
   margin:auto;
   margin-top:20px;
 }

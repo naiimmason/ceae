@@ -68,7 +68,7 @@ def start(me, subj_id, datafilepath1, datafilepath2, surveyfilepath1, surveyfile
     # experiment choice in case that they disconnect
     experiment_choice = reconnect.grabValue(subj_id, "experiment")
     if experiment_choice == None:
-      if rand.random() < .5:
+      if rand.random() < .75:
         experiment_choice = "maik"
       else:
         experiment_choice = "yosef"
@@ -91,7 +91,6 @@ def start(me, subj_id, datafilepath1, datafilepath2, surveyfilepath1, surveyfile
   # that they want to by adding a warning upon the first click
   if reconnect.getPosition(subj_id) == "survey":
     push("hidden", ".oyster-selection")
-    sleep(.2)
     pop("hidden", ".survey")
 
     take({"tag": "click", "id": "submitSurvey", "client": me})
@@ -262,7 +261,6 @@ def start(me, subj_id, datafilepath1, datafilepath2, surveyfilepath1, surveyfile
     pop("hidden", ".thank-you")
 
     option_choice = reconnect.grabValue(subj_id, "final-selection")
-    yes_or_no = reconnect.grabValue(subj_id, "selections")[option_choice-1]
     let(option_choice, "#option-choice")
 
     option_prices = reconnect.grabValue(subj_id, "rand_prices")
@@ -282,7 +280,7 @@ def start(me, subj_id, datafilepath1, datafilepath2, surveyfilepath1, surveyfile
     if experiment_choice == "maik":
       first_line = "<p>Oysters are from a location with <strong><u><em>" + options[option_choice-1]  + " levels</em> of nutrients</u></strong></p>"
     elif experiment_choice == "yosef":
-      first_line = "<p>" + options[option_choice-1] + "</p>"
+      first_line = "<p><strong>" + options[option_choice-1] + "</strong></p>"
 
     # Add the elements to the html and show the html
     add( first_line +
@@ -299,7 +297,14 @@ def start(me, subj_id, datafilepath1, datafilepath2, surveyfilepath1, surveyfile
         "<td>$" + str("{0:.2f}".format(you_pay)) + "</td>" +
         "</tr>", "#final-selection-body")
 
-    let(yes_or_no, "#yesno")
+    yes_or_no = reconnect.grabValue(subj_id, "selections")[option_choice-1]
+    cook_option = reconnect.grabValue(subj_id, "cooked-option")
+    if yes_or_no == "No":
+      let("You chose <strong>no</strong> to buying these oysters and you will be paid $10.", "#yesno")
+    else:
+      let("You chose <strong>yes</strong> to buying these oysters. They will be served \"" +
+        cook_option + "\".", "#yesno")
+
 
 
 # This is the function that runs if they are doing Maik's experiment, Maik also
@@ -310,10 +315,13 @@ def experiment1(me, subj_id, num_oysters):
   # of the selection process
   treatment = reconnect.grabValue(subj_id, "treatment")
   if treatment == None:
-    if rand.random() < .5:
+    num = rand.random()
+    if num < .33:
       treatment = "B"
-    else:
+    elif num < .66:
       treatment = "A"
+    else:
+      treatment = "C"
     reconnect.updateValue(subj_id, "treatment", treatment)
 
   if treatment == "A":
@@ -330,6 +338,8 @@ def experiment1(me, subj_id, num_oysters):
     reconnect.updateValue(subj_id, "rand_order", rand_nutrients)
 
   pop("hidden", "#noaa-instructions")
+  if treatment == "C":
+    push("hidden", "#noaa-instructions")
   addExperimentHTML(me, subj_id, num_oysters, rand_nutrients, "maik")
 
 # This is Yosi's experiment, they choose 6 random wordings from things
@@ -370,12 +380,13 @@ def addExperimentHTML(me, subj_id, num_oysters, options, experiment_choice):
     # of oyster the subject is being offered
     first_line = ""
     if experiment_choice == "maik":
-      first_line = "<p>Oysters are from a location with <strong><u><em>" + options[i]  + " levels</em> of nutrients</u></strong></p>"
+      first_line = "<p>Oysters from a location with <strong><u><em>" + options[i]  + " levels</em> of nutrients</u></strong></p>"
     elif experiment_choice == "yosef":
-      first_line = "<p>" + options[i] + "</p>"
+      first_line = "<p><strong>" + options[i] + "</strong></p>"
 
     # Add the elements to the html and show the html
-    add( first_line +
+    add( "<h2>Option " + str(i+1) + ":</h2>" +
+      first_line +
       "<table><thead>" +
       "<th>Price per Oyster</th>" +
       "<th>Total Cost</th>" +
@@ -389,7 +400,7 @@ def addExperimentHTML(me, subj_id, num_oysters, options, experiment_choice):
         "<td>$" + str("{0:.2f}".format(you_pay)) + "</td>" +
         "</tr>", "#treatment-" + str(i) + "-table")
 
-    add("<p>Do you want to buy these oysters at $" + str("{0:.2f}".format(price)) 
+    add("<p>Do you want to buy these " + str(num_oysters) + " oysters at $" + str("{0:.2f}".format(price)) 
         + " per oyster?" +
         "<div class=\"half\"><input type=\"radio\" name=\"oyster" + str(i) + "\" value=\"Yes\"> <label class=\"yesnolabel\">YES</label></div>" +
         "<div class=\"half\"><input type=\"radio\" name=\"oyster" + str(i) + "\" value=\"No\"> <label class=\"yesnolabel\">NO</label></div>" +
