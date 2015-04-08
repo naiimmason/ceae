@@ -28,9 +28,16 @@ import reconnect
 # Figure out where to store experiment data and write initial files based on
 # time of the experiment in order to provide always unique file names.
 time = datetime.datetime.now().isoformat()
-data_filepath1 = "db/NUTRIENTS-oyster-" + time + "-DATA.csv"
-survey_filepath1 = "db/NUTRIENTS-oyster-" + time + "-SURVEY.csv" 
+data_filepath1 = "db/" + time + "-DATA.csv"
+survey_filepath1 = "db/" + time + "-SURVEY.csv" 
 
+data_file = open(data_filepath1, "w")
+data_file.write("DATA FILE, Date," + time + "\n")
+data_file.close()
+
+survey_file = open(survey_filepath1, "w")
+survey_file.write("SURVEY FILE, Date," + time + "\n")
+survey_file.close()
 
 # This is the default function that is run upon a connection to the Willow
 # server. It is named session by convention and the parameter me is an integer
@@ -41,7 +48,7 @@ def session(me):
   if me == 0:
     put({"tag": "totalUsers", "users": []})
 
-  let("Oyster Experiment", "title")
+  let("Arsenic/Chromium", "title")
 
   add(open("pages/login.html"))
   subj_id = waitForConsent(me)
@@ -136,5 +143,6 @@ def reconnectPage(me):
       let("", ".warning")
       sleep(.25)
       let("<p>That id has not been used yet.</p>", ".warning")
+  let("")
 
 run(session)
