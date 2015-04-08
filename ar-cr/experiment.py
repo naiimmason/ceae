@@ -143,6 +143,5 @@ def reconnectPage(me):
       let("", ".warning")
       sleep(.25)
       let("<p>That id has not been used yet.</p>", ".warning")
-  let("")
-
+      
 run(session)

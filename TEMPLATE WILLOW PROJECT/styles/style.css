@@ -48,7 +48,11 @@ table {
 /* End of the CSS reset */
 
 .consent-page {
-  line-height: 110%;
+  line-height: 120%;
+}
+
+.consent-page h3 {
+  font-size: 30px; 
 }
 
 /* A simple page wrapper that sets default values for an entire page wrapped in 
