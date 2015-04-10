@@ -1,4 +1,5 @@
 econwillow/
+node_modules/
 */log/
 *.numbers
 *.xlsx
