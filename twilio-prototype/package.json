@@ -2,6 +2,12 @@
   "name": "text-prototype",
   "version": "0.0.1",
   "dependencies": {
+    "body-parser": "^1.12.2",
+    "cookie-parser": "^1.3.4",
+    "express": "^4.12.3",
+    "method-override": "^2.3.2",
+    "mongoose": "^4.0.1",
+    "morgan": "^1.5.2",
     "twilio": "^1.11.1"
   }
 }

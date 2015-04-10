@@ -1,28 +1,40 @@
-var twilio = require("twilio");
+var twilio         = require("twilio");
+    express        = require("express");
+    app            = express();
+    http           = require("http");
+    util           = require("util");
+    morgan         = require("morgan");
+    bodyParser     = require("body-parser");
+    cookieParser   = require("cookie-parser");
+    methodOverride = require("method-override");
+    mongoose       = require("mongoose");
 
-var auth = require("auth");
+var auth = require("./config/auth");
 
-var client = new twilio.RestClient(auth.sid, auth.token);
 
-client.sms.messages.create({
-    to:'+13025406713',
-    from: auth.number,
-    body:'ahoy hoy! Testing Twilio and node.js'
-}, function(error, message) {
-    // The HTTP request to Twilio will run asynchronously. This callback
-    // function will be called when a response is received from Twilio
-    // The "error" variable will contain error information, if any.
-    // If the request was successful, this value will be "falsy"
-    if (!error) {
-        // The second argument to the callback will contain the information
-        // sent back by Twilio for the request. In this case, it is the
-        // information about the text messsage you just sent:
-        console.log('Success! The SID for this SMS message is:');
-        console.log(message.sid);
- 
-        console.log('Message sent on:');
-        console.log(message.dateCreated);
-    } else {
-        console.log('Oops! There was an error.');
-    }
+// configure Express and express middlewear
+app.use(express.static(__dirname + '/client'));
+//app.set('views', __dirname + '/client/html');
+app.use(morgan("combined"));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(methodOverride());
+
+
+// ROUTES
+var api = require("./routes/api");
+app.use("/api", api);
+
+// The last middle wear to use is the 404 middlewear. If they didn't get
+// anywhere show them the 404
+app.use(function(req, res){
+    res.sendStatus(404);
+});
+
+var server = http.createServer(app);
+
+// Start the server (taken from Andy which is taken from Cloud9)
+server.listen(process.env.PORT || 3100, process.env.IP || "0.0.0.0", function() {
+  var address = server.address();
+  console.log("Server is now started on ", address.address + ":" + address.port);
 });
