@@ -1,5 +1,6 @@
 econwillow/
 node_modules/
+auth.js
 */log/
 *.numbers
 *.xlsx
