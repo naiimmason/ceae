@@ -2,7 +2,6 @@
   "name": "text-prototype",
   "version": "0.0.1",
   "dependencies": {
-    "express": "^4.12.3",
-    "mailin": "^1.0.0"
+    "twilio": "^1.11.1"
   }
 }
