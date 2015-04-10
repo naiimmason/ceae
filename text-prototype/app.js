@@ -2,7 +2,10 @@ var mailin = require("mailin");
 
 mailin.start({
   port: 25,
-  disableWebhook: true // Disable the webhook posting.
+  disableWebhook: true, // Disable the webhook posting.
+  smtpOptions: {
+    SMTP: "mail.jkeeler.me"
+  }
 });
 
 /* Access simplesmtp server instance. */
