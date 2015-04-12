@@ -45,13 +45,8 @@ survey_file.close()
 # that increments by 1 for each new connection and is defined by Willow. Show
 # the new person the login page and depending on their name do something.
 def session(me):
-    add(open("pages/login.html"))
-    subj_id = waitForConsent(me)
-    let("")
 
-    if subj_id == "econadmin012":
-        users = {}
-        print "Hi! I'm an admin!"
+    if me ==0:
         while True:
             msg = take({"tag":"entered"},{"tag":"getClient"})
 
@@ -67,6 +62,9 @@ def session(me):
                     put({"tag":"giveClient", "client": users[msg["id"]]})
 
     else:
+        add(open("pages/login.html"))
+        subj_id = waitForConsent(me)
+        let("")
         #add id to the list of valid ids
         put({"tag":"entered","id":subj_id,"client":me})
 
