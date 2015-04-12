@@ -1,5 +1,7 @@
 econwillow/
 node_modules/
+config/
+.sass-cache
 auth.js
 */log/
 *.numbers
@@ -8,6 +10,7 @@ auth.js
 *.pyc
 survey-example/
 *.zip
+*.css.map
 
 # --------------------
 # Standard files to ignore
