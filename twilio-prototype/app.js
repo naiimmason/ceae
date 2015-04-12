@@ -1,3 +1,7 @@
+// =============================================================================
+// MODULES
+// =============================================================================
+
 var twilio         = require("twilio");
     express        = require("express");
     app            = express();
@@ -9,21 +13,32 @@ var twilio         = require("twilio");
     methodOverride = require("method-override");
     mongoose       = require("mongoose");
 
+// =============================================================================
+// CONFIGURATION
+// =============================================================================
 var auth = require("./config/auth");
-
 
 // configure Express and express middlewear
 app.use(express.static(__dirname + '/client'));
-//app.set('views', __dirname + '/client/html');
+app.set('views', __dirname + '/client/html');
 app.use(morgan("combined"));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(methodOverride());
 
+// =============================================================================
+// DATABASE
+// =============================================================================
+var dbConfig = require("./config/db");
+mongoose.connect(dbConfig.url);
 
+// =============================================================================
 // ROUTES
+// =============================================================================
 var api = require("./routes/api");
+var routes = require("./routes/routes");
 app.use("/api", api);
+app.use("/", routes);
 
 // The last middle wear to use is the 404 middlewear. If they didn't get
 // anywhere show them the 404
@@ -31,6 +46,9 @@ app.use(function(req, res){
     res.sendStatus(404);
 });
 
+// =============================================================================
+// START SERVER
+// =============================================================================
 var server = http.createServer(app);
 
 // Start the server (taken from Andy which is taken from Cloud9)

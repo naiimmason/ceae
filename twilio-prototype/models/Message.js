@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var messageSchema = new Schema({
   sender: String,
   body: String,
-  date: Date,
+  date: { type: Date, default: Date.now },
   sid: String,
 });
 
