@@ -47,6 +47,7 @@ survey_file.close()
 def session(me):
 
     if me ==0:
+        users = {}
         while True:
             msg = take({"tag":"entered"},{"tag":"getClient"})
 
