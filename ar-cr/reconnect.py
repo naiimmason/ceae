@@ -10,12 +10,11 @@ from willow.willow import *
 def addUser(subj_id):
   put({"tag": "userInfo", 
        "user": subj_id, 
-       "position": "start", 
-       "experiment": None,
-       "treatment": None,
-       "num-oysters": -1,
-       "rand_order": None,
-       "rand_prices": None,
+       "position": "start",
+       "chem_treatment": None,
+       "price_treatment": None,
+       "conc_treatment": None,
+       "phys_treatment": None,
        "selections": None});
 
 # Check to see if a user already exists or not

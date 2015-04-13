@@ -43,7 +43,7 @@ app.use("/", routes);
 // The last middle wear to use is the 404 middlewear. If they didn't get
 // anywhere show them the 404
 app.use(function(req, res){
-    res.sendStatus(404);
+  res.sendStatus(404);
 });
 
 // =============================================================================

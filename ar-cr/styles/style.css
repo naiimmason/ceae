@@ -233,6 +233,10 @@ hr {
   background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
 
+.center {
+  display: block;
+  margin: auto;
+}
 
 /* FIRST PAGE
    Create some spacing between elements on the first page */ 
@@ -265,6 +269,23 @@ hr {
   width: 60%;
 }
 
+.experiment p {
+  font-size: 30px;
+}
+
+.experiment hr {
+  color:black;
+  background-image: none;
+  background-color: black;
+  height: 6px;
+  width: 100% !important
+}
+.experiment input[type=radio] {
+  top: -5px;
+  width: 32px;
+  height: 32px;
+}
+
 /* SECOND PAGE
    Create a warning that grabs the attention of people */
 .warning {
@@ -287,7 +308,7 @@ hr {
 }
 
 /* Set font sizes and add some spacing */
-.instructions {
+.instructions, .instructions2 {
   font-size: 30px;
   line-height: 120%;
 }
@@ -298,11 +319,15 @@ h3 {
   margin-bottom: 20px;
 }
 
+.yesnolabel {
+  position: relative;
+  top: -8px;
+}
+
 .half {
-  display: inline-block;
   width: 20%;
+  display: inline-block;
   margin:auto;
-  margin-top:20px;
 }
 
 .survey, .survey input[type=text], .survey label {
