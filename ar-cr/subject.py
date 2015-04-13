@@ -103,6 +103,9 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
 
     take({"tag": "click", "id": "submit", "client": me})
 
+    # Grab all of their choices from the html that is hidden
+    # Make sure that the grab values function actually puts values in the
+    # correct spot in the html
     choices = []
     for i in range(num_questions):
       choices.append(peek("#question" + str(i) + "-sel"))
@@ -117,6 +120,7 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
     take({"tag": "click", "client": me, "id": "dice-button"})
     poke("value", "stop", "#dice-button", )
     
+    # Keep rolling the dice until the subject is satisfied
     let("Stop", "#dice-button")
     choice = -1
     stop = False
@@ -137,6 +141,8 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
     push("hidden", ".dice-roll")
 
   if reconnect.getPosition(subj_id) == "payout":
+    # Grab all nneeded information about the subject to make sure that it is all
+    # available and in case of a disconnect issue
     pop("hidden", ".payout")
     choice = reconnect.grabValue(subj_id, "final_selection") - 1
     selections = reconnect.grabValue(subj_id, "selections")
@@ -145,6 +151,7 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
     price_treatment = reconnect.grabValue(subj_id, "price_treatment")
     phys_treatment = reconnect.grabValue(subj_id, "phys_treatment")
 
+    # What was their choice?
     yesorno = selections[choice]
     gained = 0
 
@@ -153,6 +160,7 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
 
     money = gained + bank
 
+    # Add HTML to their their output screen
     add("<p>Are you willing to " + phys_treatment[choice] +" contianing " 
       + chem_treatment[choice] + " at a concentration of " + 
       conc_treatment[choice] + " ppb for $" + str("{0:.2f}".format(price_treatment[choice])) 
@@ -174,6 +182,7 @@ def gen_price():
     price = 0
   return price
 
+# Generate a random integer based on a num and update the dice in the html
 def dice_number(num):
   newnum = rand.randint(1, num)
   let(str(newnum), "#dice-number")
