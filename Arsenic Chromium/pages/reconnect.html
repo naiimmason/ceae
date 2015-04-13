@@ -1,0 +1,23 @@
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+
+<div class="page-wrapper reconnect">
+  <section class="warning"></section>
+  <header>
+    <img src="images/ExpAppliedEcon.png" alt="udel logo">
+  </header>
+  <hr>
+  <section>
+    <div class="id">
+      <label for="id-input">Participant ID:</label>
+      <input id="id-input" type="text" autocomplete="off" placeholder="My ID">
+    </div>
+    <div class="continue">
+      <button type="button" id="reconnect">Validate</button>
+    </div>
+      <a href="" id="reconnectHref">Click Here To Reconnect To Subject</a>
+  </section>
+</div>
+<input type="hidden" id="reconnectUrl">
+<script>
+    document.getElementById("reconnectUrl").value = document.URL;
+</script>
