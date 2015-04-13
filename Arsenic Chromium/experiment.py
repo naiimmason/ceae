@@ -65,12 +65,12 @@ def session(me):
     else:
         add(open("pages/login.html"))
         subj_id = waitForConsent(me)
-        let("")
         #add id to the list of valid ids
         put({"tag":"entered","id":subj_id,"client":me})
 
         #start subject specific code
-        subject.start(me, subj_id, data_filepath1, survey_filepath1)
+        subject.start(me,subj_id,data_filepath1,survey_filepath1)
+
 
 # This function waits for a person on the login page to consent and provide a 
 # valid participant id in order to continue.
@@ -137,8 +137,7 @@ def isValid(name,me):
 def reconnectPage(me):
     go = True
     let("")
-    add(open("pages/reconnect.html"))
-    hide("#reconnectHref")
+    let(open("pages/reconnect.html"))
     while go:
         tak = take({"tag": "click", "client": me, "id": "reconnect"})
         subj_id = peek("#id-input")
@@ -146,7 +145,7 @@ def reconnectPage(me):
             go = False
             url = peek("#reconnectUrl")
             poke("href",url+str(getClient(subj_id)),"#reconnectHref")
-            show("#reconnectHref")
+            let("Click Here To Reconnect","#reconnectHref")
             let("", ".warning")
 
         else:

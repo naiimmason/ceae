@@ -27,7 +27,7 @@ import reconnect
 
 # Figure out where to store experiment data and write initial files based on
 # time of the experiment in order to provide always unique file names.
-time = datetime.datetime.now().isoformat()
+time = datetime.datetime.now().isoformat().replace(":","-")
 data_filepath1 = "db/" + time + "-DATA.csv"
 survey_filepath1 = "db/" + time + "-SURVEY.csv" 
 
@@ -47,8 +47,6 @@ def session(me):
   # Run things that only need to occur upon the first person joining willow
   if me == 0:
     put({"tag": "totalUsers", "users": []})
-
-  let("Arsenic/Chromium", "title")
 
   add(open("pages/login.html"))
   subj_id = waitForConsent(me)
