@@ -15,7 +15,8 @@ def addUser(subj_id):
        "price_treatment": None,
        "conc_treatment": None,
        "phys_treatment": None,
-       "selections": None});
+       "selections": None,
+       "final_selection": -1});
 
 # Check to see if a user already exists or not
 def userExist(subj_id):

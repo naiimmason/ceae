@@ -7,6 +7,7 @@ import random as rand
 mean = 8
 std_dev = 1.50
 num_questions = 6
+bank = 15.0
 
 ar_treatments = [
   "10",
@@ -87,7 +88,8 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
 
     # Create the questions and add to the HTML
     for i in range(num_questions):
-      add("<p>Are you willing to " + phys_treatment[i] +" contianing " 
+      add("<p>Choice " + str(i+1) + ":</p>" +
+          "<p>Are you willing to " + phys_treatment[i] +" contianing " 
           + chem_treatment[i] + " at a concentration of " + 
           conc_treatment[i] + " ppb for $" + str("{0:.2f}".format(price_treatment[i])) 
           + "?</p>" +
@@ -99,7 +101,70 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
       add("<hr>", ".experimentqs")
 
 
-    take({"id": "click", "tag": "submit", "client": me})
+    take({"tag": "click", "id": "submit", "client": me})
+
+    choices = []
+    for i in range(num_questions):
+      choices.append(peek("#question" + str(i) + "-sel"))
+
+    reconnect.updateValue(subj_id, "selections", choices)
+    reconnect.updatePosition(subj_id, "dice_roll")
+    push("hidden", ".experiment")
+
+  if reconnect.getPosition(subj_id) == "dice_roll":
+    pop("hidden", ".dice-roll")
+
+    take({"tag": "click", "client": me, "id": "dice-button"})
+    poke("value", "stop", "#dice-button", )
+    
+    let("Stop", "#dice-button")
+    choice = -1
+    stop = False
+    while not stop:
+      sleep(.02)
+      choice = dice_number(num_questions)
+      action = grab({"tag": "click", "client": me, "id": "dice-button"})
+      if action != None:
+        stop = True
+
+    poke("value", "continue", "#dice-button")
+    let("Continue", "#dice-button")
+
+    take({"tag": "click", "client": me, "id": "dice-button"})
+
+    reconnect.updateValue(subj_id, "final_selection", choice)
+    reconnect.updatePosition(subj_id, "payout")
+    push("hidden", ".dice-roll")
+
+  if reconnect.getPosition(subj_id) == "payout":
+    pop("hidden", ".payout")
+    choice = reconnect.grabValue(subj_id, "final_selection") - 1
+    selections = reconnect.grabValue(subj_id, "selections")
+    chem_treatment = reconnect.grabValue(subj_id, "chem_treatment")
+    conc_treatment = reconnect.grabValue(subj_id, "conc_treatment")
+    price_treatment = reconnect.grabValue(subj_id, "price_treatment")
+    phys_treatment = reconnect.grabValue(subj_id, "phys_treatment")
+
+    yesorno = selections[choice]
+    gained = 0
+
+    if yesorno == "Yes":
+      gained = price_treatment[choice]
+
+    money = gained + bank
+
+    add("<p>Are you willing to " + phys_treatment[choice] +" contianing " 
+      + chem_treatment[choice] + " at a concentration of " + 
+      conc_treatment[choice] + " ppb for $" + str("{0:.2f}".format(price_treatment[choice])) 
+      + "?</p>",
+      "#selected-option")
+
+    let(choice, "#final_choice")
+    let(yesorno, "#subj_final_choice")
+    let(str("{0:.2f}".format(gained)), "#gained")
+    let(str("{0:.2f}".format(money)), "#money")
+
+
 
 # Generate a random oyster price based on a mean of 1.50 and a standard deviation
 # of 0.50. Using an inverse normal distribution to determine the price.
@@ -108,3 +173,9 @@ def gen_price():
   if price < 0:
     price = 0
   return price
+
+def dice_number(num):
+  newnum = rand.randint(1, num)
+  let(str(newnum), "#dice-number")
+  poke("value", str(newnum), "#dice-number")
+  return newnum

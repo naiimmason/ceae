@@ -45,6 +45,10 @@ table {
   border-spacing: 0;
 }
 
+h1 {
+  font-size: 60px;
+}
+
 /* End of the CSS reset */
 
 .consent-page {
@@ -236,6 +240,7 @@ hr {
 .center {
   display: block;
   margin: auto;
+  float: center;
 }
 
 /* FIRST PAGE
@@ -284,6 +289,14 @@ hr {
   top: -5px;
   width: 32px;
   height: 32px;
+}
+
+.dice-roll {
+  font-size: 30px;
+}
+
+.payout {
+  font-size: 30px;
 }
 
 /* SECOND PAGE

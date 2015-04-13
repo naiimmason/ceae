@@ -1,5 +1,17 @@
 <link rel="stylesheet" type="text/css" href="styles/style.css">
 
+<script>
+  // Grab values from radio buttons
+  var grabValues = function() {
+    for(var i = 0; i < 6; i++) {
+      val = $("input[name=question" + i +"]:checked").val();
+      $("#question" + i + "-sel").html(val);
+      console.log(val);
+    }
+  }
+</script>
+
+
 <div class="page-wrapper">
   <section class="warning hidden"></section>
 
@@ -90,12 +102,32 @@
   <section class="experiment hidden">
     <div class="experimentqs">
     </div>
-    <button type="button" id="submit">Submit</button>
+    <button type="button" id="submit" onclick="grabValues()">Submit</button>
   </section>
 
   <section class="survey hidden"></section>
 
-  <section class="payout hidden"></section>
+  <section class="dice-roll hidden">
+    <p>You will now roll a die to determine which treatment will be chosen.</p>
+    <br>
+    <h1 id="dice-number" class="center">0</h1>
+    <button type="button" id="dice-button" value="start" class="center">Start Roll</button>
+  </section>
+
+  <section class="payout hidden">
+    <p>Option <span id="final_choice"></span> was chosen!</p>
+    <p>You selected <strong><span id="subj_final_choice"></span></strong> to this option.</p>
+    <p>You will be payed $<span id="money"></span> ($15 + $<span id="gained"></span>) for participating.</p>
+    <p>The option information is below for review:</p>
+    <p id="selected-option"></p>
+  </section>
 
   <section class="warning hidden"></section>
+
+  <textarea class="hidden" id="question0-sel"></textarea>
+  <textarea class="hidden" id="question1-sel"></textarea>
+  <textarea class="hidden" id="question2-sel"></textarea>
+  <textarea class="hidden" id="question3-sel"></textarea>
+  <textarea class="hidden" id="question4-sel"></textarea>
+  <textarea class="hidden" id="question5-sel"></textarea>
 </div>
