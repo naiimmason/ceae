@@ -115,9 +115,19 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
     # Grab all of their choices from the html that is hidden
     # Make sure that the grab values function actually puts values in the
     # correct spot in the html
+    cont = True
     choices = []
-    for i in range(num_questions):
-      choices.append(peek("#question" + str(i) + "-sel"))
+    while cont:
+        cont = False
+        for i in range(num_questions):
+            choices.append(peek("#question" + str(i) + "-sel"))
+            if peek("#question" + str(i) + "-sel") == "":
+                cont = cont or True
+        if cont:
+            let("", ".warning")
+            sleep(.25)
+            let("<p>Please answer all questions</p>", ".warning")
+    let("", ".warning")
 
     reconnect.updateValue(subj_id, "selections", choices)
     reconnect.updatePosition(subj_id, "dice_roll")
