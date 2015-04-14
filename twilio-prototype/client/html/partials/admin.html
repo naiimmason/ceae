@@ -1,9 +1,28 @@
-<p>Welcome {{ user.displayName }}!</p>
+<div class="head-banner"></div>
 
-<button>Start Reporting Period</button>
+<div class="page-wrapper">
+  <p>Welcome <strong>{{ user.displayName }}</strong>!</p>
 
-<section>
-  <ul>
-    <li ng-repeat="user in users"><a href="/#/u/{{ user._id }}">{{ user.number }}</a></li>
-  </ul>
-</section>
+  <button>Start Reporting Period</button>
+
+  <hr>
+
+  <section class="user-list">
+    <button type="button">Show Users</button>
+    <ul>
+      <li ng-repeat="user in users"><a href="/#/u/{{ user._id }}">{{ user.number }}</a></li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <section class="add-user">
+    <button type="button">Add Cell Number</button>
+  </section>
+
+  <hr>
+
+  <section class="send-message">
+    <button type="button">Broadcast Message</button>
+  </section>
+</div>

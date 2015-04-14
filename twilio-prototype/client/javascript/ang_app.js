@@ -29,7 +29,12 @@ app.controller("HomeController", ["$scope", "$location", "$http",
 
 app.controller("UserController", ["$scope", "$routeParams", "$location", "$http",
   function($scope, $routeParams, $location, $http) {
-    isAdmin($http, $location);
+    $http.get("/api/u/me").success(function(data) {
+      $scope.user = data
+      if(!$scope.user.admin) {
+        $location.path("/#/");
+      }
+    })
 
     $scope.messages = [];
     $scope.user = {};
@@ -47,8 +52,12 @@ app.controller("AdminController", ["$scope", "$http", "$location",
   function($scope, $http, $location) {
     $scope.user = {};
 
-    $scope.user = isAdmin($http, $location);
-    console.log($scope.user);
+    $http.get("/api/u/me").success(function(data) {
+      $scope.user = data
+      if(!$scope.user.admin) {
+        $location.path("/#/");
+      }
+    })
 
     $scope.users = [];
 
@@ -57,22 +66,6 @@ app.controller("AdminController", ["$scope", "$http", "$location",
     });
   }
 ]);
-
-// Check to see if you are an admin or not
-function isAdmin($http, $location) {
-  user = {};
-
-  $http.get("/api/u/me").success(function(data) {
-    user = data;
-    console.log(user);
-    if(!user.admin) {
-      $location.path("/#/");
-    }
-  });
-
-  console.log(user);
-  return user;
-}
 
 // Simple logging to make sure everything loaded correctly
 console.log("Angular has been loaded!");
