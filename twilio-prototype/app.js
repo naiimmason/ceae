@@ -12,11 +12,38 @@ var twilio         = require("twilio");
     cookieParser   = require("cookie-parser");
     methodOverride = require("method-override");
     mongoose       = require("mongoose");
+    passport       = require("passport");
+    FBStrategy     = require('passport-facebook').Strategy;
+    session        = require("express-session");
 
 // =============================================================================
 // CONFIGURATION
 // =============================================================================
-var auth = require("./config/auth");
+var FBAuth = require("./config/auth").FBAuth;
+
+// Allow passport to serialize and deserialize users
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+passport.use(new FBStrategy({
+    clientID: FBAuth.clientID,
+    clientSecret: FBAuth.clientSecret,
+    callbackURL: FBAuth.callbackURL
+  },
+  function(accessToken, refreshToken, profile, done) {
+    console.log(profile);
+    // User.findOrCreate(..., function(err, user) {
+    //   if (err) { return done(err); }
+    //   done(null, user);
+    // });
+    done(null, profile);
+  }
+));
 
 // configure Express and express middlewear
 app.use(express.static(__dirname + '/client'));
@@ -25,6 +52,16 @@ app.use(morgan("combined"));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(methodOverride());
+app.use(session({ 
+  secret: FBAuth.sessionSecret,
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Initialize Passport!  Also use passport.session() middleware, to support
+// persistent login sessions
+app.use(passport.initialize());
+app.use(passport.session());
 
 // =============================================================================
 // DATABASE
@@ -37,8 +74,10 @@ mongoose.connect(dbConfig.url);
 // =============================================================================
 var api = require("./routes/api");
 var routes = require("./routes/routes");
+var auth = require("./routes/auth");
 app.use("/api", api);
 app.use("/", routes);
+app.use("/auth", auth);
 
 // The last middle wear to use is the 404 middlewear. If they didn't get
 // anywhere show them the 404

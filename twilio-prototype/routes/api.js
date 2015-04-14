@@ -1,6 +1,6 @@
 var router = require("express").Router();
 var twilio = require("twilio");
-var auth = require("../config/auth");
+var auth = require("../config/auth").twilioAuth;
 var twilioclient = new twilio.RestClient(auth.sid, auth.token);
 var Message = require("../models/Message");
 var User = require("../models/User");
@@ -149,5 +149,16 @@ router.delete("/u/:id", function(req, res, next) {
     res.json(user);
   });
 });
+
+// Check to see if a user is logged in, if not, redirect them
+function loggedIn(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect('/#/login');
+  }
+}
+
+// Method for checking access level
 
 module.exports = router;

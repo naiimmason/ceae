@@ -1,7 +1,9 @@
 <header>
-  <h1>Hello world!</h1>
+  <h3>CBEAR Water Meter Reporting</h3>
 </header>
 
 <section>
-  <p ng-repeat="user in users"><a href="/#/u/{{user._id}}">{{ user.number }}</a> --- {{ user._id }}</p>
+  <ul>
+    <li ng-repeat="user in users"><a href="/#/u/{{ user._id }}">{{ user.number }}</a></li>
+  </ul>
 </section>

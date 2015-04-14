@@ -1,7 +1,7 @@
 var path = require("path"); 
 var router = require("express").Router();
 
-app.get("/", function(req, res) {
+router.get("/", function(req, res) {
   res.sendFile(path.resolve("./client/html/index.html"));
 });
 
