@@ -37,6 +37,7 @@ passport.use(new FBStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
+    // Method for adding to our database if they do not exist
     // User.findOrCreate(..., function(err, user) {
     //   if (err) { return done(err); }
     //   done(null, user);
