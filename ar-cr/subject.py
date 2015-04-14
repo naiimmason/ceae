@@ -41,13 +41,22 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
   if reconnect.getPosition(subj_id) == "start":
     pop("hidden", ".instructions")
     take({"tag": "click", "id": "continue", "client": me})
+    reconnect.updatePosition(subj_id,"instructions2")
     push("hidden", ".instructions")
-    reconnect.updatePosition(subj_id, "instructions2")
+
 
   if reconnect.getPosition(subj_id) == "instructions2":
-    pop("hidden", ".instructions2")
-    take({"tag": "click", "id": "continue", "client": me})
-    push("hidden", ".instructions2")
+    #half the people can see the the instrucitons:
+    toggle = grab({"tag":"toggle"})
+    if toggle ==None:
+        toggle_val = 1;
+    else:
+        toggle_val = toggle["value"] + 1
+    put({"tag":"toggle","value":toggle_val})
+    if toggle_val % 2:
+        pop("hidden", ".instructions2")
+        take({"tag": "click", "id": "continue", "client": me})
+        push("hidden", ".instructions2")
 
     # Determine random order for treatments
     phys_treatment = [];
@@ -161,7 +170,7 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
     money = gained + bank
 
     # Add HTML to their their output screen
-    add("<p>Are you willing to " + phys_treatment[choice] +" contianing " 
+    add("<p>Are you willing to " + phys_treatment[choice] +" containing "
       + chem_treatment[choice] + " at a concentration of " + 
       conc_treatment[choice] + " ppb for $" + str("{0:.2f}".format(price_treatment[choice])) 
       + "?</p>",
