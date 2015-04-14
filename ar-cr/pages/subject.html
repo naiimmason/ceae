@@ -105,7 +105,86 @@
     <button type="button" id="submit" onclick="grabValues()">Submit</button>
   </section>
 
-  <section class="survey hidden"></section>
+  <section class="survey hidden">
+      <ol>
+          <li class="special">
+            How thirsty are you right now? <b><output for="thirsty" id="thirstyValue">5</output></b>
+            <form class="form-inline" role="form">
+              <div class="input-group">
+                <span class="input-group-addon">Not Thirsty (1)</span>
+                <input id="thirsty" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 0)">
+                <span class="input-group-addon">Very Thirsty (9)</span>
+              </div>
+            </form>
+          </li>
+          <li class="special">
+            In a typical week, approximately how many glasses (12 oz.) of tap water do you consume?
+            <input type="number" id="amtWaterDrink" class="form-control input-lg">
+          </li>
+          <li class="special">
+            How often does your household drink the following types of water?
+            <form class="form-inline" role="form">
+              <p>Tap Water: <b><output for="tap-water-often" id="tap-water-oftenValue">50</output>%</b></p>
+              <div class="input-group">
+                <span class="input-group-addon">Never (0%)</span>
+                <input id="tap-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 4)">
+                <span class="input-group-addon">Very Often (100%)</span>
+              </div>
+            </form>
+            <form class="form-inline" role="form">
+              <p>Filtered Tap Water: <b><output for="tap-water-often" id="fil-tap-water-oftenValue">50</output>%</b></p>
+              <div class="input-group">
+                <span class="input-group-addon">Never (0%)</span>
+                <input id="fil-tap-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 5)">
+                <span class="input-group-addon">Very Often (100%)</span>
+              </div>
+            </form>
+            <form class="form-inline" role="form">
+              <p>Bottled Water: <b><output for="tap-water-often" id="bot-water-oftenValue">50</output>%</b></p>
+              <div class="input-group">
+                <span class="input-group-addon">Never (0%)</span>
+                <input id="bot-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 6)">
+                <span class="input-group-addon">Very Often (100%)</span>
+              </div>
+            </form>
+          </li>
+          <li class="special">
+            Are you concerned about the quality of your drinking water?
+            <form class="form-inline">
+              <div class="radio-btn-frm">
+                <label>Yes</label>
+                <input type="radio" name="qualityConcern" value="Yes">
+                <label>No</label>
+                <input type="radio" name="qualityConcern" value="No">
+              </div>
+            </form>
+          </li>
+          <li class="special">
+            Are you concerned about exposng yourself to water in your community through touch?
+            <form class="form-inline">
+              <div class="radio-btn-frm">
+                <label>Yes</label>
+                <input type="radio" name="touchExpose" value="Yes">
+                <label>No</label>
+                <input type="radio" name="touchExpose" value="No">
+              </div>
+            </form>
+          </li>
+          <li class="special">
+            Are you concerned about exposing yourself to water in your community through touch?
+            <form class="form-inline">
+              <div class="radio-btn-frm">
+                <label>Yes</label>
+                <input type="radio" name="inhaleExpose" value="Yes">
+                <label>No</label>
+                <input type="radio" name="inhaleExpose" value="No">
+              </div>
+            </form>
+          </li>
+      </ol>
+
+
+  </section>
 
   <section class="dice-roll hidden">
     <p>You will now roll a die to determine which treatment will be chosen.</p>
