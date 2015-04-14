@@ -116,9 +116,9 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
     # Make sure that the grab values function actually puts values in the
     # correct spot in the html
     cont = True
-    choices = []
     while cont:
         cont = False
+        choices = []
         for i in range(num_questions):
             choices.append(peek("#question" + str(i) + "-sel"))
             if peek("#question" + str(i) + "-sel") == "":
