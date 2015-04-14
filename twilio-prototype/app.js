@@ -30,6 +30,7 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+// Use the facebook strategy for authentication purposes
 passport.use(new FBStrategy({
     clientID: FBAuth.clientID,
     clientSecret: FBAuth.clientSecret,
@@ -37,11 +38,6 @@ passport.use(new FBStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
-    // Method for adding to our database if they do not exist
-    // User.findOrCreate(..., function(err, user) {
-    //   if (err) { return done(err); }
-    //   done(null, user);
-    // });
     done(null, profile);
   }
 ));

@@ -4,12 +4,16 @@ var auth = require("../config/auth").twilioAuth;
 var twilioclient = new twilio.RestClient(auth.sid, auth.token);
 var Message = require("../models/Message");
 var User = require("../models/User");
+var admins = require("../config/admins");
 
 // =============================================================================
 // GET
 // =============================================================================
+
+// ______________________________messages_____________________________
+
 // Retrieve all messages from the database
-router.get("/m", function(req, res, next) {
+router.get("/m", loggedIn, isAdmin, function(req, res, next) {
   Message.find(function(err, messages) {
     if (err) next(err);
     res.json(messages);
@@ -17,28 +21,30 @@ router.get("/m", function(req, res, next) {
 });
 
 // Retreieve the message by the specified id
-router.get("/m/:id", function(req, res, next) {
+router.get("/m/id/:id", loggedIn, isAdmin, function(req, res, next) {
   Message.findById(req.params.id, function(err, message) {
     if (err) next(err);
     res.json(message);
   });
 });
 
-router.get("/u", function(req, res, next) {
+// ______________________________users______________________________
+
+router.get("/u", loggedIn, isAdmin, function(req, res, next) {
   User.find(function(err, users) {
     if (err) next(err);
     res.json(users);
   });
 });
 
-router.get("/u/:id", function(req, res, next) {
+router.get("/u/id/:id", loggedIn, isAdmin, function(req, res, next) {
   User.findById(req.params.id, function(err, user) {
     if (err) next(err);
     res.json(user);
   });
 });
 
-router.get("/u/:id/m", function(req, res, next) {
+router.get("/u/id/:id/m", loggedIn, isAdmin, function(req, res, next) {
   User.findById(req.params.id, function(err, user) {
     if(err) next(err);
 
@@ -49,9 +55,18 @@ router.get("/u/:id/m", function(req, res, next) {
   });
 });
 
+// Check to see if the user is an admin or not
+router.get("/u/me", loggedIn, isAdmin, function(req, res, next) {
+  req.user.admin = true;
+  res.json(req.user);
+});
+
 // =============================================================================
 // POST
 // =============================================================================
+
+// _____________________________messags______________________________
+
 // Receive a post a request from 
 router.post("/m/receive", function(req, res, next) {
   //console.log(req.body);
@@ -122,6 +137,8 @@ router.post("/m", function(req, res, next) {
   });
 });
 
+// ______________________________users______________________________
+
 router.post("/u", function(req, res, next) {
   auser = {
     number: req.body.number
@@ -136,14 +153,17 @@ router.post("/u", function(req, res, next) {
 // =============================================================================
 // DELETE
 // =============================================================================
-router.delete("/m/:id", function(req, res, next) {
+
+// ______________________________messages______________________________
+router.delete("/m/:id", loggedIn, isAdmin, function(req, res, next) {
   Message.findByIdAndRemove(req.params.id, req.body, function(err, message) {
     if(err) next(err);
     res.json(message);
   });
 });
 
-router.delete("/u/:id", function(req, res, next) {
+// ______________________________users______________________________
+router.delete("/u/:id", loggedIn, isAdmin, function(req, res, next) {
   User.findByIdAndRemove(req.params.id, req.body, function(err, user) {
     if(err) next(err);
     res.json(user);
@@ -155,10 +175,28 @@ function loggedIn(req, res, next) {
   if (req.user) {
     next();
   } else {
-    res.redirect('/#/login');
+    console.log("not logged in");
+    res.redirect("/");
+  }
+}
+
+// Check to see if they are on the admin list or not
+function isAdmin(req, res, next) {
+  var admin = false;
+
+  for(var i = 0; i < admins.length; i++) {
+    if (req.user.id === admins[i]) {
+      admin = true;
+    }
+  }
+  
+  if (admin) {
+    next();
+  }
+  else {
+    res.redirect("/");
   }
 }
 
 // Method for checking access level
-
 module.exports = router;

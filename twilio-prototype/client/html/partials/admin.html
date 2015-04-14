@@ -1,0 +1,9 @@
+<p>Welcome {{ user.displayName }}!</p>
+
+<button>Start Reporting Period</button>
+
+<section>
+  <ul>
+    <li ng-repeat="user in users"><a href="/#/u/{{ user._id }}">{{ user.number }}</a></li>
+  </ul>
+</section>

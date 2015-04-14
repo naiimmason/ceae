@@ -1,9 +1,32 @@
-<header>
-  <h3>CBEAR Water Meter Reporting</h3>
+<header role="banner">
+  <img src="images/web-header.png" alt="CBEAR logo">
+  <h2>CBEAR Water Meter Reporting</h1>
 </header>
 
-<section>
-  <ul>
-    <li ng-repeat="user in users"><a href="/#/u/{{ user._id }}">{{ user.number }}</a></li>
-  </ul>
+<section class="main-content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  <form>
+    <h4>Water Meter Input</h4>
+    <label for="farmerid">ID:</label>
+    <input type="number" id="farmerid">
+    <label for="meterinput">Water Meter Value:</label>
+    <input type="number" id="meterinput">
+    <button type="submit">Submit</button>
+  </form>
 </section>
+
+<aside class="sidebar">
+  <h4>Links</h4>
+  <ul>
+    <li>Link 1</li>
+    <li>Link 2</li>
+    <li>Link 3</li>
+  </ul>
+</aside>
+
