@@ -1,19 +1,15 @@
-var app = angular.module("twilio-prototype", ["ngRoute"]);
+var app = angular.module("twilio-admin", ["ngRoute"]);
 
 // Configure routes for this application
 app.config(["$routeProvider", "$locationProvider", 
   function($routeProvider, $locationProvider) {
     $routeProvider.when("/", {
-      templateUrl: "/html/partials/home.html",
-      controller: "HomeController"
+      templateUrl: "/html/partials/admin_home.html",
+      controller: "AdminController"
     })
     .when("/u/:id", {
       templateUrl: "/html/partials/user.html",
       controller: "UserController"
-    })
-    .when("/admin", {
-      templateUrl: "/html/partials/admin.html",
-      controller: "AdminController"
     })
     .otherwise({
       redirectTo: "/"

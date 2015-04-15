@@ -8,6 +8,7 @@ mean = 8
 std_dev = 1.50
 num_questions = 6
 bank = 15.0
+num_survey_qs = 50
 
 ar_treatments = [
   "10",
@@ -44,20 +45,6 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
     reconnect.updatePosition(subj_id,"instructions2")
     push("hidden", ".instructions")
 
-
-  if reconnect.getPosition(subj_id) == "instructions2":
-    #half the people can see the the instrucitons:
-    toggle = grab({"tag":"toggle"})
-    if toggle ==None:
-        toggle_val = 1;
-    else:
-        toggle_val = toggle["value"] + 1
-    put({"tag":"toggle","value":toggle_val})
-    if toggle_val % 2:
-        pop("hidden", ".instructions2")
-        take({"tag": "click", "id": "continue", "client": me})
-        push("hidden", ".instructions2")
-
     # Determine random order for treatments
     phys_treatment = [];
     chem_treatment = [];
@@ -69,11 +56,11 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
     # price and physical treatment
     for i in range(num_questions):
       if rand.random() < .5:
-        chem_treatment.append("Arsenic")
+        chem_treatment.append("Arsenic-V")
         conc_treatment.append(rand.choice(ar_treatments))
       else:
         conc_treatment.append(rand.choice(cr_treatments))
-        chem_treatment.append("Chromium-3")
+        chem_treatment.append("Chromium-III")
       phys_treatment.append(rand.choice(phys_treatments))
       price_treatment.append(gen_price())
 
@@ -83,6 +70,11 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
     reconnect.updateValue(subj_id, "chem_treatment", chem_treatment)
     reconnect.updateValue(subj_id, "conc_treatment", conc_treatment)
     reconnect.updateValue(subj_id, "price_treatment", price_treatment)
+
+    info_type = "A"
+    if rand.random() < .5:
+      info_type = "B"
+    reconnect.updateValue(subj_id, "info_type", info_type)
     reconnect.updatePosition(subj_id, "experiment")
 
   # The meat of the experiment is done here
@@ -94,11 +86,18 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
     conc_treatment = reconnect.grabValue(subj_id, "conc_treatment")
     price_treatment = reconnect.grabValue(subj_id, "price_treatment")
     phys_treatment = reconnect.grabValue(subj_id, "phys_treatment")
+    info_type = reconnect.grabValue(subj_id, "info_type")
+
+    additional_info = ""
+    if info_type == "B":
+      additional_info = "<p>The United States Environmental Protection Agency (EPA) standard for...</p>" \
+        + "<p>...Arsenic is 10 parts per billion (ppb)</p>" \
+        + "<p>...Chromium is 100 parts per billion (ppb)</p><br>"
 
     # Create the questions and add to the HTML
     for i in range(num_questions):
-      add("<p>Choice " + str(i+1) + ":</p>" +
-          "<p>Are you willing to " + phys_treatment[i] +" contianing " 
+      add(additional_info + "<p>Choice " + str(i+1) + ":</p>" +
+          "<p>Are you willing to " + phys_treatment[i] +" containing " 
           + chem_treatment[i] + " at a concentration of " + 
           conc_treatment[i] + " ppb for $" + str("{0:.2f}".format(price_treatment[i])) 
           + "?</p>" +
@@ -109,29 +108,45 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
           ".experimentqs")
       add("<hr>", ".experimentqs")
 
-
-    take({"tag": "click", "id": "submit", "client": me})
-
     # Grab all of their choices from the html that is hidden
     # Make sure that the grab values function actually puts values in the
     # correct spot in the html
     cont = True
     while cont:
-        cont = False
-        choices = []
-        for i in range(num_questions):
-            choices.append(peek("#question" + str(i) + "-sel"))
-            if peek("#question" + str(i) + "-sel") == "":
-                cont = cont or True
-        if cont:
-            let("", ".warning")
-            sleep(.25)
-            let("<p>Please answer all questions</p>", ".warning")
+      take({"tag": "click", "id": "submit", "client": me})
+      cont = False
+      choices = []
+      for i in range(num_questions):
+        choices.append(peek("#question" + str(i) + "-sel"))
+        if peek("#question" + str(i) + "-sel") == "":
+          cont = cont or True
+      if cont:
+        let("", ".warning")
+        sleep(.25)
+        add("<p>Please answer all questions</p>", ".warning")
     let("", ".warning")
 
     reconnect.updateValue(subj_id, "selections", choices)
-    reconnect.updatePosition(subj_id, "dice_roll")
+    reconnect.updatePosition(subj_id, "survey")
     push("hidden", ".experiment")
+
+  if reconnect.getPosition(subj_id) == "survey":
+    pop("hidden", ".survey")
+    add(open("pages/survey.html"), "#surveyqs")
+
+    take({"tag": "click", "id": "submit", "client": me})
+    let("<p>Please make sure you have answered as many questions as possible. You " +
+        "will NOT be able to go back.</p>", ".warning")
+    take({"tag": "click", "id": "submit", "client": me})
+    let("", ".warning")
+
+    answers = []
+    for i in range(num_survey_qs):
+      answers.append(peek("#surveyq" + str(i) + "-sel"))
+    print answers
+
+    reconnect.updatePosition(subj_id, "dice_roll")
+    push("hidden", ".survey")
 
   if reconnect.getPosition(subj_id) == "dice_roll":
     pop("hidden", ".dice-roll")
@@ -186,7 +201,7 @@ def start(me, subj_id, data_filepath1, survey_filepath1):
       + "?</p>",
       "#selected-option")
 
-    let(choice, "#final_choice")
+    let(choice + 1, "#final_choice")
     let(yesorno, "#subj_final_choice")
     let(str("{0:.2f}".format(gained)), "#gained")
     let(str("{0:.2f}".format(money)), "#money")

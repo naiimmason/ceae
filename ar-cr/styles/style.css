@@ -274,7 +274,7 @@ hr {
   width: 60%;
 }
 
-.experiment p {
+.experiment {
   font-size: 30px;
 }
 
@@ -360,7 +360,7 @@ h3 {
 }
 
 .survey li {
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .radio-item {

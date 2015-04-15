@@ -1,12 +1,38 @@
 <link rel="stylesheet" type="text/css" href="styles/style.css">
 
 <script>
+
   // Grab values from radio buttons
   var grabValues = function() {
     for(var i = 0; i < 6; i++) {
       val = $("input[name=question" + i +"]:checked").val();
       $("#question" + i + "-sel").html(val);
       console.log(val);
+    }
+  }
+
+  yesno_tags =  ['q5', 'q6', 'q7', 'q17', 'q18', 'q19', 'q36']
+  multiple_tags =  ['q34', 'q35', 'q41', 'q42', 'q43', 'q44', 'q45', 'q46', 'q47']
+
+  var grabRadioValues = function() {
+    for(var i = 0; i < yesno_tags.length; i++) {
+      val = $("input[name=" + yesno_tags[i] + "]:checked").val();
+      $("survey" + yesno_tags[i] + "-sel").html(val);
+    }
+
+    for(var i = 0; i < multiple_tags.length; i++) {
+      val = $("input[name=" + multiple_tags[i] + "]:checked").val();
+      $("survey" + multiple_tags[i] + "-sel").html(val);
+    }
+  }
+  output_update_tags =  ['#surveyq0-sel', '#surveyq2-sel', '#surveyq3-sel', '#surveyq4-sel', '#surveyq8-sel', '#surveyq9-sel', '#surveyq10-sel', '#surveyq11-sel', '#surveyq12-sel', '#surveyq13-sel', '#surveyq14-sel', '#surveyq15-sel', '#surveyq16-sel', '#surveyq20-sel', '#surveyq21-sel', '#surveyq22-sel', '#surveyq23-sel', '#surveyq24-sel', '#surveyq25-sel', '#surveyq26-sel', '#surveyq27-sel', '#surveyq28-sel', '#surveyq29-sel', '#surveyq30-sel', '#surveyq31-sel', '#surveyq32-sel', '#surveyq33-sel']
+
+  function outputUpdate(vol, i) {
+    if (vol < 0) {
+      vol *= -1;
+    } 
+    else {
+      document.querySelector(output_update_tags[i]).value = vol;
     }
   }
 </script>
@@ -46,144 +72,20 @@
     <button type="button" id="continue">Continue</button>
   </section>
 
-  <section class="instructions2 hidden">
-    <h3>Arsenic/Chromium-3 Information Treatment</h3>
-
-    <p>Below are the EPA standards for both Arsenic and Chromium-3.</p>
-
-    <table>
-      <thead>
-        <th>Arsenic</th>
-        <th>Chromium-3</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>10 ppb</td>
-          <td>100 ppb</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <p><strong><u>Arsenic</u>:</strong><br>
-    "Absorption of arsenic through the skin is minimal and thus handwashing, 
-    bathing, laundry, etc. with water containing arsenic do not ppose human
-    health risks."<br>
-    (<a href="http://www.who.int/water_sanitation_health/diseases/arsenicosis/en/"
-    target="_blank">
-    link
-    </a>)
-    </p>
-
-    <p>"Long term exposure (5 to 20 years) to drinking water containing arsenic 
-    has been linked to cancer of the bladder, lunks, skin, kidneys, nasal 
-    passages, liver, and prostate. Short term exposure to high doses can cause
-    other adver health effects, but such effects are unlikely to occur from U.S.
-    public water supplies that are in compliance with the arsenic standard."<br>
-    (<a href="http://water.epa.gov/lawsregs/rulesregs/sdwa/arsenic/Basic-Information.cfm#three"
-    target="_blank">
-    link
-    </a>)</p>
-
-    <p><strong><u>Chromium</u>:</strong><br>
-    "Chromium-3 is nutrionally essential element in humans and is often added to 
-    vitamins as a dietary supplement. Chromium-3 has relatively low toxicity and
-    would be a concern in drinking water only at very high levels of
-    contamination; People who use water containing total chromium in excess of
-    the maximum contaminant level (MCL) over many years could experience allergic
-    dermatitis."<br>
-    (<a href="http://water.epa.gov/drink/contaminants/basicinformation/chromium.cfm#three"
-    target="_blank">
-    link
-    </a>)</p>
-
-    <button type="button" id="continue">Continue</button>
-  </section>
-
   <section class="experiment hidden">
     <div class="experimentqs">
     </div>
+    <div class="warning"></div>
     <button type="button" id="submit" onclick="grabValues()">Submit</button>
   </section>
 
   <section class="survey hidden">
-      <ol>
-          <li class="special">
-            How thirsty are you right now? <b><output for="thirsty" id="thirstyValue">5</output></b>
-            <form class="form-inline" role="form">
-              <div class="input-group">
-                <span class="input-group-addon">Not Thirsty (1)</span>
-                <input id="thirsty" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 0)">
-                <span class="input-group-addon">Very Thirsty (9)</span>
-              </div>
-            </form>
-          </li>
-          <li class="special">
-            In a typical week, approximately how many glasses (12 oz.) of tap water do you consume?
-            <input type="number" id="amtWaterDrink" class="form-control input-lg">
-          </li>
-          <li class="special">
-            How often does your household drink the following types of water?
-            <form class="form-inline" role="form">
-              <p>Tap Water: <b><output for="tap-water-often" id="tap-water-oftenValue">50</output>%</b></p>
-              <div class="input-group">
-                <span class="input-group-addon">Never (0%)</span>
-                <input id="tap-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 4)">
-                <span class="input-group-addon">Very Often (100%)</span>
-              </div>
-            </form>
-            <form class="form-inline" role="form">
-              <p>Filtered Tap Water: <b><output for="tap-water-often" id="fil-tap-water-oftenValue">50</output>%</b></p>
-              <div class="input-group">
-                <span class="input-group-addon">Never (0%)</span>
-                <input id="fil-tap-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 5)">
-                <span class="input-group-addon">Very Often (100%)</span>
-              </div>
-            </form>
-            <form class="form-inline" role="form">
-              <p>Bottled Water: <b><output for="tap-water-often" id="bot-water-oftenValue">50</output>%</b></p>
-              <div class="input-group">
-                <span class="input-group-addon">Never (0%)</span>
-                <input id="bot-water-often" type="range" value="50" min="0" max="100" step="25" data-show-value="true" oninput="outputUpdate(value, 6)">
-                <span class="input-group-addon">Very Often (100%)</span>
-              </div>
-            </form>
-          </li>
-          <li class="special">
-            Are you concerned about the quality of your drinking water?
-            <form class="form-inline">
-              <div class="radio-btn-frm">
-                <label>Yes</label>
-                <input type="radio" name="qualityConcern" value="Yes">
-                <label>No</label>
-                <input type="radio" name="qualityConcern" value="No">
-              </div>
-            </form>
-          </li>
-          <li class="special">
-            Are you concerned about exposng yourself to water in your community through touch?
-            <form class="form-inline">
-              <div class="radio-btn-frm">
-                <label>Yes</label>
-                <input type="radio" name="touchExpose" value="Yes">
-                <label>No</label>
-                <input type="radio" name="touchExpose" value="No">
-              </div>
-            </form>
-          </li>
-          <li class="special">
-            Are you concerned about exposing yourself to water in your community through touch?
-            <form class="form-inline">
-              <div class="radio-btn-frm">
-                <label>Yes</label>
-                <input type="radio" name="inhaleExpose" value="Yes">
-                <label>No</label>
-                <input type="radio" name="inhaleExpose" value="No">
-              </div>
-            </form>
-          </li>
-      </ol>
+    <ol id="surveyqs">
+    </ol>
 
+    <div class="warning"></div>
 
+    <button type="button" id="submit" onclick="gravRadioValues()  ">Submit</button>
   </section>
 
   <section class="dice-roll hidden">
@@ -200,8 +102,6 @@
     <p>The option information is below for review:</p>
     <p id="selected-option"></p>
   </section>
-
-  <section class="warning hidden"></section>
 
   <textarea class="hidden" id="question0-sel"></textarea>
   <textarea class="hidden" id="question1-sel"></textarea>
