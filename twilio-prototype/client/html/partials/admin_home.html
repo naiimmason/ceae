@@ -1,28 +1,77 @@
 <div class="head-banner"></div>
 
 <div class="page-wrapper">
-  <p>Welcome <strong>{{ user.displayName }}</strong>!</p>
+  <p>Welcome <strong>{{ user.emails[0].value }}</strong>!</p>
 
-  <button>Start Reporting Period</button>
+  <button type="button" ng-click="toggle_show_reporting()">Start Reporting Period</button>
+
+  <section class="reporting-period-sec" ng-show="show_reporting">
+    <form name="reporting-period" ng-submit="start_reporting()" novalidate>
+      <div class="input-group">
+        <label>Start Date</label>
+        <input type="date" ng-model="newreport.start" required>
+      </div>
+
+      <br>
+
+      <div class="input-group">
+        <label>End Date</label>
+        <input type="date" ng-model="newreport.end" required>
+      </div>
+
+      <button type="Submit" id="submitReporting">Start</button>
+    </form>
+  </section>
 
   <hr>
 
-  <section class="user-list">
-    <button type="button">Show Users</button>
+  <button type="button" ng-click="toggle_show_users()">{{ show_users_string }} Users</button>
+  <section class="user-list" ng-show="show_users">
     <ul>
-      <li ng-repeat="user in users"><a href="admin#/u/{{ user._id }}">{{ user.number }}</a></li>
+      <li ng-repeat="user in users"><a href="admin#/u/{{ user._id }}">{{ user.firstname }} {{user.lastname}} - {{ user.number }}</a></li>
     </ul>
   </section>
 
   <hr>
 
-  <section class="add-user">
-    <button type="button">Add Cell Number</button>
+  <button type="button" ng-click="toggle_show_add_cell()">{{ show_add_cell_string }}</button>
+
+  <section class="add-user" ng-show="show_add_cell">
+    <form name="user-addition" ng-submit="add_user()" novalidate>
+      <div class="input-group">
+        <label>First Name:</label>
+        <input class="ng-invalid ng-touched" ng-model="newuser.firstname" type="text" id="firstname" required>
+      </div>
+
+      <br>
+
+      <div class="input-group">
+        <label>Last Name:</label>
+        <input class="ng-invalid ng-touched" ng-model="newuser.lastname" type="text" id="lastname" required>
+      </div>
+
+      <br>
+
+      <div class="input-group">
+        <label>Cell Number (+12345678900):</label>
+        <input class="ng-invalid ng-touched" maxlength="11" minlength="11" ng-model="newuser.number" type="text" id="cellnumber" required>
+      </div>
+
+      <button type="Submit" id="submitUser">Add User</button>
+    </form>
   </section>
 
   <hr>
 
-  <section class="send-message">
-    <button type="button">Broadcast Message</button>
+  <button ng-click="toggle_broadcast()" type="button">{{ broadcast_btn_string }}</button>
+  <section class="send-message" ng-show="show_broadcast">
+    <form name="broadcast" ng-submit="broadcast_message()" novalidate>
+      <div class="input-group">
+        <label>Message:</label>
+        <input class="ng-invalid ng-touched" maxlength="120" ng-model="newmessage.message" type="text" id="newmessage" required>
+      </div>
+
+      <button type="Submit" id="submitBroadcast">Send Message</button>
+    </form>
   </section>
 </div>

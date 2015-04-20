@@ -76,18 +76,6 @@ router.post("/m/receive", function(req, res, next) {
   //   });
   // });
   // Receive the twilio message and tell the user, thank you
-  twilioclient.sendMessage({
-    to: req.body.From,
-    from: auth.number,
-    body: "Thank you for submitting your value!"
-  }, function(err, text) {
-    if(!err) {
-      console.log("To: " + req.body.From);
-      console.log('You sent: '+ text.body);
-    } else {
-      console.log(err);
-    }
-  });
 
   // Make a json object in the schema of our mongodb
   amessage = {
@@ -99,9 +87,8 @@ router.post("/m/receive", function(req, res, next) {
   User.find({ number: amessage.sender }, function(err, user) {
     if (err) next(err);
     if (user.length === 0) {
-      User.create({number: req.body.From}, function(err2, user) {
-        if (err2) next(err2);
-      });
+      sendMessage(null, "You are not part of our database! Contact a program " +
+                  "administrator for further details.",  req.body.From);
     }
   });
 
@@ -125,9 +112,8 @@ router.post("/m", function(req, res, next) {
   User.find({ number: amessage.sender }, function(err, user) {
     if (err) next(err);
     if (user.length === 0) {
-      User.create({number: req.body.From}, function(err2, user) {
-        if (err2) next(err2);
-      });
+      sendMessage(null, "You are not part of our database! Contact a program " +
+                  "administrator for further details.",  req.body.From);
     }
   });
 
@@ -137,16 +123,21 @@ router.post("/m", function(req, res, next) {
   });
 });
 
+router.post("/m/broadcast", loggedIn, isAdmin, function(req, res, next){
+  User.find(function(err, users) {
+    if (err) next(err);
+    for(var i = 0; i < users.length; i++) {
+      sendMessage(err, req.body.message, users[i].number);
+    }
+    res.json(users);
+  });
+});
 // ______________________________users______________________________
 
 router.post("/u", function(req, res, next) {
-  auser = {
-    number: req.body.number
-  };
-
-  User.create(auser, function(err, user) {
+  User.create(req.body, function(err, user) {
     if (err) next(err);
-    res.json(user);
+    res.json(req.body);
   });
 });
 
@@ -195,6 +186,24 @@ function isAdmin(req, res, next) {
   }
   else {
     res.redirect("/");
+  }
+}
+
+function sendMessage(err, text, number) {
+  textmessage = {
+    to: number,
+    from: auth.number,
+    body: text
+  };
+  twilioclient.sendMessage(textmessage, messageSent(err, textmessage, number));
+}
+
+function messageSent(err, text, number) {
+  if (!err) {
+    console.log("To: " + number);
+    console.log("You Sent: " + text.body);
+  } else {
+    console.log(err);
   }
 }
 

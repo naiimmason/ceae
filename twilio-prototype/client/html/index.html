@@ -18,21 +18,32 @@
       <h4>Information</h4>
         <p>Thank you for visiting our website! If you are here to make a water meter
         reporting please fill out the form below with your ID and your water meter
-        value. If you are here because you are looking for CBEAR please 
+        value. If you are here because you are looking for CBEAR please
         <a href="http://centerbear.org/">click here</a>.</p>
 
-        <p>Remember, you can also report your water meter readings via text if you 
+        <p>Remember, you can also report your water meter readings via text if you
         have signed up with us beforehand. Simply text <em>(302) 543-2859</em> and follow the
         instructions provided.</p>
 
         <form class="water-submission">
           <h4>Water Meter Input</h4>
-          
-          <label for="farmerid">ID:</label>
-          <input type="number" id="farmerid">
-          <label for="meterinput">Water Meter Value:</label>
-          <input type="number" id="meterinput">
-          <button type="submit">Submit</button>
+
+          <br>
+
+          <div class="input-group">
+            <label for="farmerid">ID:</label>
+            <input type="number" id="farmerid" required>
+          </div>
+
+          <br>
+
+          <div class="input-group">
+            <label for="meterinput">Water Meter Value:</label>
+            <input type="number" id="meterinput" required>
+          </div>
+
+          <button type="submit" onclick="alert('Reporting from the website is sitll a work in progress and does not work. Sorry.')">Submit</button>
+
         </form>
       </section>
 

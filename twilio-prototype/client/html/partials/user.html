@@ -1,5 +1,6 @@
 <section>
   <a href="/admin#/">Back</a>
   <h1>{{ user.number }}</h1>
+  <h4>{{ user.firstname }} {{ user.lastname }}</h4>
   <p ng-repeat="message in messages">{{ message.body }} - {{ message.date }}</p>
 </section>
