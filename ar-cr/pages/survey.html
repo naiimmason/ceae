@@ -6,21 +6,19 @@
 </li>
 <li>
   In the typical week, approximately how many glasses (12 oz.) of tap water do you consume?
-  <input type="text" id="q1">
+  <input type="text" id="surveyq1-sel">
 </li>
 <li>
+  How often does your household drink the following types of water?
+  <br>
   Tap Water: <strong><output for="r2" id="surveyq2-sel">5</output></strong>
   <div class="slider">
     <span>Not Often (1)</span><input id="r2" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 1)"><span>Very Often (9)</span>
   </div>
-</li>
-<li>
   Filtered tap Water: <strong><output for="r3" id="surveyq3-sel">5</output></strong>
   <div class="slider">
     <span>Not Often (1)</span><input id="r3" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 2)"><span>Very Often (9)</span>
   </div>
-</li>
-<li>
   Bottled Water: <strong><output for="r4" id="surveyq4-sel">5</output></strong>
   <div class="slider">
     <span>Not Often (1)</span><input id="r4" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 3)"><span>Very Often (9)</span>
@@ -66,40 +64,37 @@
   </div>
 </li>
 <li>
+  How concerned are you about the following in your water?
+  <br>
   Arsenic: <strong><output for="r8" id="surveyq8-sel">5</output></strong>
   <div class="slider">
     <span>Not Concerned (1)</span><input id="r8" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 4)"><span>Very Concerned (9)</span>
   </div>
-</li>
-<li>
+
   Chromium: <strong><output for="r9" id="surveyq9-sel">5</output></strong>
   <div class="slider">
     <span>Not concerned (1)</span><input id="r9" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 5)"><span>Very Concerned (9)</span>
   </div>
-</li>
-<li>
+
   Lead: <strong><output for="r10" id="surveyq10-sel">5</output></strong>
   <div class="slider">
     <span>Not Concerned (1)</span><input id="r10" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 6)"><span>Very Concerned (9)</span>
   </div>
-</li>
-<li>
+
   Medication: <strong><output for="r11" id="surveyq11-sel">5</output></strong>
   <div class="slider">
     <span>Not Concerned (1)</span><input id="r11" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 7)"><span>Very Concerned (9)</span>
   </div>
-</li>
-<li>
   Nutrients: <strong><output for="r12" id="surveyq12-sel">5</output></strong>
   <div class="slider">
     <span>Not Concerned (1)</span><input id="r12" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 8)"><span>Very Concerned (9)</span>
   </div>
-</li>
-<li>
+
   Other (please specify) <strong><output for="r13" id="surveyq13-sel">5</output></strong>
   <div class="slider">
     <span>Not Concerned (1)</span><input id="r13" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 9)"><span>Very Concerned (9)</span>
   </div>
+  <input type="text" id="surveyq50-sel">
 </li>
 <li>
   How risky do you consider drinking tap water? <strong><output for="r14" id="surveyq14-sel">5</output></strong>
@@ -251,6 +246,7 @@
   <div class="radio-item">
     <input type="radio" name="q34" value="Other">
     <label>Other</label>
+    <input type="text" id="surveyq51-sel">
   </div>
 </li>
 <li>
@@ -279,19 +275,19 @@
 </li>
 <li>
   If yes, how many children live at home?
-  <input type="text" id="q37">
+  <input type="text" id="surveyq37-sel">
 </li>
 <li>
   What are their ages?
-  <input type="text" id="q38">
+  <input type="text" id="surveyq38-sel">
 </li>
 <li>
   What is your age?
-  <input type="text" id="q39">
+  <input type="text" id="surveyq39-sel">
 </li>
 <li>
   Including yourself, how many people live in your household?
-  <input type="text" id="q40">
+  <input type="text" id="surveyq40-sel">
 </li>
 <li>
   What is your relationship status?
@@ -337,6 +333,7 @@
   <div class="radio-item">
     <input type="radio" name="q42" value="Other (please specify)">
     <label>Other (please specify)</label>
+    <input type="text" id="surveyq52">
   </div>
 </li>
 <li>
@@ -413,6 +410,7 @@
   <div class="radio-item">
     <input type="radio" name="q46" value="Other (please list)">
     <label>Other (please list)</label>
+    <input type="text" id="surveyq53-sel">
   </div>
 </li>
 <li>
@@ -460,11 +458,11 @@
 </li>
 <li>
   What is the zip code of your current primary residence?
-  <input type="text" id="q48">
+  <input type="text" id="surveyq48-sel">
 </li>
 <li>
   What zip code (or town) did you grow up in?
-  <input type="text" id="q49">
+  <input type="text" id="surveyq49-sel">
 </li>
 <textarea class="hidden" id="surveyq5-sel"></textarea>
 <textarea class="hidden" id="surveyq6-sel"></textarea>

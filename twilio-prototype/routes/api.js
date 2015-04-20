@@ -67,7 +67,7 @@ router.get("/u/me", loggedIn, isAdmin, function(req, res, next) {
 
 // _____________________________messags______________________________
 
-// Receive a post a request from 
+// Receive a post a request from
 router.post("/m/receive", function(req, res, next) {
   //console.log(req.body);
   // client.messages.list(function(err, data) {
@@ -185,11 +185,11 @@ function isAdmin(req, res, next) {
   var admin = false;
 
   for(var i = 0; i < admins.length; i++) {
-    if (req.user.id === admins[i]) {
+    if (req.user.emails[0].value === admins[i]) {
       admin = true;
     }
   }
-  
+
   if (admin) {
     next();
   }

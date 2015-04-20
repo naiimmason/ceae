@@ -1,7 +1,7 @@
 var app = angular.module("twilio-admin", ["ngRoute"]);
 
 // Configure routes for this application
-app.config(["$routeProvider", "$locationProvider", 
+app.config(["$routeProvider", "$locationProvider",
   function($routeProvider, $locationProvider) {
     $routeProvider.when("/", {
       templateUrl: "/html/partials/admin_home.html",
@@ -16,22 +16,8 @@ app.config(["$routeProvider", "$locationProvider",
     });
 }]);
 
-// This controll controls the home page!!!
-// Doesn't really do anything, the home page should just be a static page
-app.controller("HomeController", ["$scope", "$location", "$http",
-  function($scope, $location, $http) {
-  }
-]);
-
 app.controller("UserController", ["$scope", "$routeParams", "$location", "$http",
   function($scope, $routeParams, $location, $http) {
-    $http.get("/api/u/me").success(function(data) {
-      $scope.user = data
-      if(!$scope.user.admin) {
-        $location.path("/#/");
-      }
-    })
-
     $scope.messages = [];
     $scope.user = {};
     $http.get("/api/u/id/" + $routeParams.id).success(function(data) {
@@ -44,20 +30,14 @@ app.controller("UserController", ["$scope", "$routeParams", "$location", "$http"
   }
 ]);
 
-app.controller("AdminController", ["$scope", "$http", "$location", 
+app.controller("AdminController", ["$scope", "$http", "$location",
   function($scope, $http, $location) {
     $scope.user = {};
-
-    $http.get("/api/u/me").success(function(data) {
-      $scope.user = data
-      if(!$scope.user.admin) {
-        $location.path("/#/");
-      }
-    })
 
     $scope.users = [];
 
     $http.get("/api/u").success(function(data) {
+      //console.log(data);
       $scope.users = data;
     });
   }

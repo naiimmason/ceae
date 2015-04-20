@@ -33,6 +33,8 @@ survey_filepath1 = "db/" + time + "-SURVEY.csv"
 
 data_file = open(data_filepath1, "w")
 data_file.write("DATA FILE, Date," + time + "\n")
+data_file.write("subject_id, treatment (A = no epa info / B = epa info), Option " \
+                + "selected, option 1, option 2, option 3, option 4, option 5, option 6" + "\n")
 data_file.close()
 
 survey_file = open(survey_filepath1, "w")

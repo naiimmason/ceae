@@ -13,13 +13,13 @@ var twilio         = require("twilio");
     methodOverride = require("method-override");
     mongoose       = require("mongoose");
     passport       = require("passport");
-    FBStrategy     = require('passport-facebook').Strategy;
+    GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
     session        = require("express-session");
 
 // =============================================================================
 // CONFIGURATION
 // =============================================================================
-var FBAuth = require("./config/auth").FBAuth;
+var GoogleAuth = require("./config/auth").GoogleAuth;
 
 // Allow passport to serialize and deserialize users
 passport.serializeUser(function(user, done) {
@@ -31,10 +31,10 @@ passport.deserializeUser(function(obj, done) {
 });
 
 // Use the facebook strategy for authentication purposes
-passport.use(new FBStrategy({
-    clientID: FBAuth.clientID,
-    clientSecret: FBAuth.clientSecret,
-    callbackURL: FBAuth.callbackURL
+passport.use(new GoogleStrategy({
+    clientID: GoogleAuth.clientID,
+    clientSecret: GoogleAuth.clientSecret,
+    callbackURL: GoogleAuth.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
@@ -43,14 +43,14 @@ passport.use(new FBStrategy({
 ));
 
 // configure Express and express middlewear
-app.use(express.static(__dirname + '/client'));
-app.set('views', __dirname + '/client/html');
-app.use(morgan("combined"));
+app.use(express.static(__dirname + "/client"));
+app.set("views", __dirname + "/client/html");
+app.use(morgan("dev"));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
 app.use(methodOverride());
-app.use(session({ 
-  secret: FBAuth.sessionSecret,
+app.use(session({
+  secret: GoogleAuth.clientSecret,
   resave: false,
   saveUninitialized: true
 }));
@@ -69,14 +69,15 @@ mongoose.connect(dbConfig.url);
 // =============================================================================
 // ROUTES
 // =============================================================================
-var api = require("./routes/api");
 var routes = require("./routes/routes");
+var api = require("./routes/api");
 var auth = require("./routes/auth");
-app.use("/api", api);
+
 app.use("/", routes);
+app.use("/api", api);
 app.use("/auth", auth);
 
-// The last middle wear to use is the 404 middlewear. If they didn't get
+// The last middle wear to use is the 404 middlewear. If they didn"t get
 // anywhere show them the 404
 app.use(function(req, res){
   res.sendStatus(404);
