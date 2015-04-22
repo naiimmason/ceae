@@ -47,7 +47,7 @@ app.use(express.static(__dirname + "/client"));
 app.set("views", __dirname + "/client/html");
 app.use(morgan("dev"));
 app.use(cookieParser());
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride());
 app.use(session({
   secret: GoogleAuth.clientSecret,
