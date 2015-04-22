@@ -91,9 +91,9 @@ app.controller("AdminController", ["$scope", "$http", "$location",
         $scope.show_add_cell_string = "Cancel Adding";
       else {
         $scope.show_add_cell_string = "Add Cell Number";
-        $scope.newuser.firstname = "";
-        $scope.newuser.lastname = "";
-        $scope.newuser.number = "";
+        // $scope.newuser.firstname = "";
+        // $scope.newuser.lastname = "";
+        // $scope.newuser.number = "";
       }
     };
 
