@@ -112,9 +112,9 @@ app.controller("AdminController", ["$scope", "$http", "$location",
       $http.post("/api/u", $scope.newuser).success(function(data) {
         console.log(data);
       });
-      $scope.newuser.firstname = "";
-      $scope.newuser.lastname = "";
-      $scope.newuser.number = "";
+      // $scope.newuser.firstname = "";
+      // $scope.newuser.lastname = "";
+      // $scope.newuser.number = "";
     };
 
     // BROADCAST MESSAGE
