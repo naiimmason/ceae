@@ -38,10 +38,11 @@ app.controller("AdminController", ["$scope", "$http", "$location",
       $scope.user = data;
     });
 
+    // REPORTING PERIOD
     $scope.show_reporting = false;
     $scope.newreport= {
-      start: "",
-      end: ""
+      startDate: "",
+      endDate: ""
     };
 
     $scope.toggle_show_reporting = function() {
@@ -49,7 +50,15 @@ app.controller("AdminController", ["$scope", "$http", "$location",
     };
 
     $scope.start_reporting = function() {
-      console.log($scope.newreport);
+      console.log(Date.now());
+      if ($scope.newreport.startDate < Date.now() && $scope.newreport.endDate > Date.now()) {
+        console.log("Now falls between that range");
+      } else {
+        console.log("You are not in range!");
+      }
+      $http.post("/api/p", $scope.newreport).success(function(data){
+         console.log(data);
+      });
     };
 
     // USER LIST

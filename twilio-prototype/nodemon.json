@@ -1,4 +1,4 @@
 {
   "verbose": true,
-  "ignore": ["client/*", "stylus/*"]
+  "ignore": ["client/*", "stylus/*", "scripts/*"]
 }

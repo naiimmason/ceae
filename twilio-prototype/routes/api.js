@@ -4,6 +4,7 @@ var auth = require("../config/auth").twilioAuth;
 var twilioclient = new twilio.RestClient(auth.sid, auth.token);
 var Message = require("../models/Message");
 var User = require("../models/User");
+var ReportPeriod = require("../models/ReportPeriod");
 var admins = require("../config/admins");
 
 // =============================================================================
@@ -30,6 +31,7 @@ router.get("/m/id/:id", loggedIn, isAdmin, function(req, res, next) {
 
 // ______________________________users______________________________
 
+// retrieve a list of all users
 router.get("/u", loggedIn, isAdmin, function(req, res, next) {
   User.find(function(err, users) {
     if (err) next(err);
@@ -37,6 +39,7 @@ router.get("/u", loggedIn, isAdmin, function(req, res, next) {
   });
 });
 
+// retrieve just the specific user based on id
 router.get("/u/id/:id", loggedIn, isAdmin, function(req, res, next) {
   User.findById(req.params.id, function(err, user) {
     if (err) next(err);
@@ -44,22 +47,48 @@ router.get("/u/id/:id", loggedIn, isAdmin, function(req, res, next) {
   });
 });
 
+// find all messages sent by a user with a specific id
 router.get("/u/id/:id/m", loggedIn, isAdmin, function(req, res, next) {
   User.findById(req.params.id, function(err, user) {
     if(err) next(err);
 
-    Message.find({sender: user.number}, function(err, messages) {
+    Message.find({ sender: user.number }, function(err, messages) {
       if (err) next(err);
       res.json(messages);
     });
   });
 });
 
+// ______________________________reporting period______________________________
+
+// return all reporting periods
+router.get("/p", loggedIn, isAdmin, function(req, res, next) {
+  ReportPeriod.find(function(err, periods) {
+    if (err) next(err);
+    res.json(periods);
+  });
+});
+
+
+// return a reporting period based on its id
+router.get("/p/id/:id", loggedIn, isAdmin, function(req, res, next) {
+  ReportPeriod.findById(req.params.id, function(err, period) {
+    if (err) next(err);
+    res.json(period);
+  });
+});
+
+// return
+
+
+// ______________________________misc.______________________________
 // Check to see if the user is an admin or not
 router.get("/u/me", loggedIn, isAdmin, function(req, res, next) {
   req.user.admin = true;
   res.json(req.user);
 });
+
+
 
 // =============================================================================
 // POST
@@ -84,13 +113,36 @@ router.post("/m/receive", function(req, res, next) {
     sid: req.body.sid
   };
 
-  User.find({ number: amessage.sender }, function(err, user) {
+  partof = true;
+  reporting = false;
+  now = Date.now();
+  period = null;
+
+  User.findOne({ number: amessage.sender }, function(err, user) {
     if (err) next(err);
-    if (user.length === 0) {
+    if (user === null) {
       sendMessage(null, "You are not part of our database! Contact a program " +
-                  "administrator for further details.",  req.body.From);
+                  "administrator for further details.",  amessage.sender);
+      partof = false;
     }
   });
+
+  ReportPeriod.find(function(err, periods) {
+    if (err) next(err);
+    for(var i = 0; i < periods.length; i++) {
+      if(periods[i].startDate < now && periods[i].endDate > now) {
+        reporting = true;
+        period = periods[i];
+      }
+    }
+  });
+
+  if(reporting && partof) {
+    sendMessage(null, "Thank you for reporting! Your value of \"" + amessage.body +
+                "\" has been stored.", amessage.sender);
+  } else if(!reporting && partof) {
+    sendMessage(null, "Reporting is not available right now.", amessage.sender);
+  }
 
   // Create the message object and store it in our database
   Message.create(amessage, function(err, message) {
@@ -109,9 +161,9 @@ router.post("/m", function(req, res, next) {
 
   console.log(amessage);
 
-  User.find({ number: amessage.sender }, function(err, user) {
+  User.findOne({ number: amessage.sender }, function(err, user) {
     if (err) next(err);
-    if (user.length === 0) {
+    if (user === null) {
       sendMessage(null, "You are not part of our database! Contact a program " +
                   "administrator for further details.",  req.body.From);
     }
@@ -132,12 +184,24 @@ router.post("/m/broadcast", loggedIn, isAdmin, function(req, res, next){
     res.json(users);
   });
 });
-// ______________________________users______________________________
 
+
+// ______________________________users______________________________
 router.post("/u", function(req, res, next) {
   User.create(req.body, function(err, user) {
     if (err) next(err);
     res.json(req.body);
+
+    sendMessage(err, "You have been registered for the CBEAR water reporting program.", req.body.number);
+  });
+});
+
+// ______________________________reporting period______________________________
+
+router.post("/p", loggedIn, isAdmin, function(req, res, next) {
+  ReportPeriod.create(req.body, function(err, period) {
+    if (err) next(err);
+    res.json(period);
   });
 });
 
