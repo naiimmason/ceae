@@ -64,6 +64,8 @@ app.controller("AdminController", ["$scope", "$http", "$location",
       $http.post("/api/p", transformRequest($scope.newreport), options).success(function(data){
          console.log(data);
       });
+
+      $scope.show_reporting = !$scope.show_reporting;
     };
 
     // USER LIST

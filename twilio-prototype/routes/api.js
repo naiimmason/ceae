@@ -124,7 +124,7 @@ router.post("/m/receive", function(req, res, next) {
         ReportPeriod.find(function(err, periods) {
         if (err) next(err);
 
-        reporting = false
+        reporting = false;
         for(var i = 0; i < periods.length; i++) {
           if(periods[i].startDate < now && periods[i].endDate > now) {
             sendMessage(null, "Thank you for reporting! Your value of \"" + amessage.body +
