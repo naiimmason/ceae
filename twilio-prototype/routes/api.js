@@ -98,7 +98,7 @@ router.get("/u/me", loggedIn, isAdmin, function(req, res, next) {
 
 // Receive a post a request from
 router.post("/m/receive", function(req, res, next) {
-  //console.log(req.body);
+  console.log(req.body);
   // client.messages.list(function(err, data) {
   //   data.messages.forEach(function(message) {
   //     console.log(message.body);
