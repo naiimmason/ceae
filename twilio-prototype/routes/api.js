@@ -189,6 +189,7 @@ router.post("/m/broadcast", loggedIn, isAdmin, function(req, res, next){
 
 // ______________________________users______________________________
 router.post("/u", function(req, res, next) {
+  //console.log(req.body);
   User.create(req.body, function(err, user) {
     if (err) next(err);
     res.json(req.body);

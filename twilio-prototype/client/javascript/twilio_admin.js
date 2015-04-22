@@ -56,7 +56,12 @@ app.controller("AdminController", ["$scope", "$http", "$location",
       } else {
         console.log("You are not in range!");
       }
-      $http.post("/api/p", $scope.newreport).success(function(data){
+
+      var options = {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+      };
+
+      $http.post("/api/p", transformRequest($scope.newreport), options).success(function(data){
          console.log(data);
       });
     };
@@ -108,8 +113,13 @@ app.controller("AdminController", ["$scope", "$http", "$location",
       $scope.show_add_cell = false;
       $scope.show_add_cell_string = "Add Cell Number";
       console.log($scope.newuser);
-      $scope.newuser.number = "+" + String($scope.newuser.number) ;
-      $http.post("/api/u", $scope.newuser).success(function(data) {
+      $scope.newuser.number = "+" + String($scope.newuser.number);
+
+      var options = {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+      };
+
+      $http.post("/api/u", transformRequest($scope.newuser), options).success(function(data) {
         console.log(data);
       });
       // $scope.newuser.firstname = "";
@@ -137,12 +147,23 @@ app.controller("AdminController", ["$scope", "$http", "$location",
       $scope.broadcast_btn_string = "Broadcast Message";
       amessage = $scope.newmessage;
 
-      $http.post("/api/m/broadcast", amessage).success(function(data) {
+      var options = {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+      };
+
+      $http.post("/api/m/broadcast", transformRequest(amessage), options).success(function(data) {
         console.log(data);
       });
     };
   }
 ]);
+
+function transformRequest(obj) {
+  var str = [];
+  for(var p in obj)
+  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+  return str.join("&");
+}
 
 // Simple logging to make sure everything loaded correctly
 console.log("Angular has been loaded!");
