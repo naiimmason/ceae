@@ -2,7 +2,6 @@ econwillow/
 node_modules/
 config/
 .sass-cache
-auth.js
 */log/
 *.numbers
 *.xlsx
@@ -20,7 +19,7 @@ survey-example/
 *.log
 *.sql
 *.sqlite
- 
+
 # OS generated files #
 ######################
 .DS_Store
