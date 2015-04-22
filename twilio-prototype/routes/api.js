@@ -98,7 +98,7 @@ router.get("/u/me", loggedIn, isAdmin, function(req, res, next) {
 
 // Receive a post a request from
 router.post("/m/receive", function(req, res, next) {
-  //console.log(req);
+  //  console.log(req);
   // client.messages.list(function(err, data) {
   //   data.messages.forEach(function(message) {
   //     console.log(message.body);
@@ -140,7 +140,8 @@ router.post("/m/receive", function(req, res, next) {
   if(reporting && partof) {
     sendMessage(null, "Thank you for reporting! Your value of \"" + amessage.body +
                 "\" has been stored.", amessage.sender);
-  } else if(!reporting && partof) {
+  }
+  if(!reporting && partof) {
     sendMessage(null, "Reporting is not available right now.", amessage.sender);
   }
 
