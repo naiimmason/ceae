@@ -113,37 +113,32 @@ router.post("/m/receive", function(req, res, next) {
     sid: req.body.sid
   };
 
-  partof = true;
-  reporting = false;
   now = Date.now();
-  period = null;
 
   User.findOne({ number: amessage.sender }, function(err, user) {
     if (err) next(err);
     if (user === null) {
       sendMessage(null, "You are not part of our database! Contact a program " +
                   "administrator for further details.",  amessage.sender);
-      partof = false;
-    }
-  });
+    } else {
+        ReportPeriod.find(function(err, periods) {
+        if (err) next(err);
 
-  ReportPeriod.find(function(err, periods) {
-    if (err) next(err);
-    for(var i = 0; i < periods.length; i++) {
-      if(periods[i].startDate < now && periods[i].endDate > now) {
-        reporting = true;
-        period = periods[i];
-      }
-    }
-  });
-
-  if(reporting && partof) {
-    sendMessage(null, "Thank you for reporting! Your value of \"" + amessage.body +
+        reporting = false
+        for(var i = 0; i < periods.length; i++) {
+          if(periods[i].startDate < now && periods[i].endDate > now) {
+            sendMessage(null, "Thank you for reporting! Your value of \"" + amessage.body +
                 "\" has been stored.", amessage.sender);
-  }
-  if(!reporting && partof) {
-    sendMessage(null, "Reporting is not available right now.", amessage.sender);
-  }
+            reporting = true;
+          }
+        }
+
+        if(!reporting){
+          sendMessage(null, "Reporting is not available right now.", amessage.sender);
+        }
+      });
+    }
+  });
 
   // Create the message object and store it in our database
   Message.create(amessage, function(err, message) {
