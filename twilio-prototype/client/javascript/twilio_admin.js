@@ -53,6 +53,8 @@ app.controller("AdminController", ["$scope", "$http", "$location",
         $scope.add_report_string = "Cancel Adding";
       } else {
         $scope.add_report_string = "Add Reporting Period";
+        $scope.newreport.startDate = "";
+        $scope.newreport.endDate = "";
       }
     };
 
