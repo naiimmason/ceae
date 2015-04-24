@@ -215,7 +215,7 @@ router.delete("/m/:id", loggedIn, isAdmin, function(req, res, next) {
 });
 
 // ______________________________users______________________________
-router.delete("/u/:id", loggedIn, isAdmin, function(req, res, next) {
+router.delete("/u/id/:id", loggedIn, isAdmin, function(req, res, next) {
   User.findByIdAndRemove(req.params.id, req.body, function(err, user) {
     if(err) next(err);
     res.json(user);

@@ -69,7 +69,7 @@ def start(me, subj_id, datafilepath1, datafilepath2, surveyfilepath1, surveyfile
     experiment_choice = reconnect.grabValue(subj_id, "experiment")
     if experiment_choice == None:
       reconnect.incTreat()
-      if reconnect.getTreat() % 10 > 3:
+      if reconnect.getTreat() % 10 > 2:
         experiment_choice = "maik"
       else:
         experiment_choice = "yosef"

@@ -1,77 +1,83 @@
 <div class="head-banner"></div>
 
-<div class="page-wrapper">
+<div class="container">
+  <div class="page-header">
+    <h1>Admin Panel</h1>
+  </div>
   <p>Welcome <strong>{{ user.emails[0].value }}</strong>!</p>
 
-  <button type="button" ng-click="toggle_show_reporting()">Start Reporting Period</button>
+  <!-- Reporting period  -->
+  <button type="button" class="btn btn-success" ng-click="toggle_show_reporting()">Start Reporting Period</button>
 
   <section class="reporting-period-sec" ng-show="show_reporting">
+    <br>
+
     <form name="reporting-period" ng-submit="start_reporting()" novalidate>
-      <div class="input-group">
+      <div class="form-group">
         <label>Start Date</label>
-        <input type="date" ng-model="newreport.startDate" required>
+        <input type="date" class="form-control" ng-model="newreport.startDate" required>
       </div>
 
-      <br>
-
-      <div class="input-group">
+      <div class="form-group">
         <label>End Date</label>
-        <input type="date" ng-model="newreport.endDate" required>
+        <input type="date" class="form-control" ng-model="newreport.endDate" required>
       </div>
 
-      <button type="Submit" id="submitReporting">Start</button>
+      <button type="Submit" class="btn btn-primary" id="submitReporting">Start</button>
     </form>
   </section>
 
   <hr>
 
-  <button type="button" ng-click="toggle_show_users()">{{ show_users_string }} Users</button>
+  <!-- User list -->
+  <button type="button" class="btn btn-success" ng-click="toggle_show_users()">{{ show_users_string }} Users</button>
   <section class="user-list" ng-show="show_users">
+    <br>
     <ul>
-      <li ng-repeat="user in users"><a href="admin#/u/{{ user._id }}">{{ user.firstname }} {{user.lastname}} - {{ user.number }}</a></li>
+      <li ng-repeat="user in users"><a href="admin#/u/{{ user._id }}">{{ user.firstname }} {{user.lastname}} - {{ user.number }}</a> <i class="fa fa-times" ng-click="delete_user($index)"></i></li>
     </ul>
   </section>
 
   <hr>
 
-  <button type="button" ng-click="toggle_show_add_cell()">{{ show_add_cell_string }}</button>
+  <!-- Add User  -->
+  <button type="button" class="btn btn-success" ng-click="toggle_show_add_cell()">{{ show_add_cell_string }}</button>
 
   <section class="add-user" ng-show="show_add_cell">
+    <br>
     <form name="user-addition" ng-submit="add_user()" novalidate>
-      <div class="input-group">
+      <div class="form-group">
         <label>First Name:</label>
-        <input class="ng-invalid ng-touched" ng-model="newuser.firstname" type="text" id="firstname" required>
+        <input class="ng-invalid ng-touched form-control " ng-model="newuser.firstname" type="text" id="firstname" required>
       </div>
 
-      <br>
-
-      <div class="input-group">
+      <div class="form-group">
         <label>Last Name:</label>
-        <input class="ng-invalid ng-touched" ng-model="newuser.lastname" type="text" id="lastname" required>
+        <input class="ng-invalid ng-touched form-control " ng-model="newuser.lastname" type="text" id="lastname" required>
       </div>
 
-      <br>
-
-      <div class="input-group">
-        <label>Cell Number (+12345678900):</label>
-        <input class="ng-invalid ng-touched" maxlength="11" minlength="11" ng-model="newuser.number" type="text" id="cellnumber" required>
+      <div class="form-group">
+        <label>Cell Number (12345678900):</label>
+        <input class="ng-invalid ng-touched form-control " maxlength="11" minlength="11" ng-model="newuser.number" type="number" id="cellnumber" required>
       </div>
 
-      <button type="Submit" id="submitUser">Add User</button>
+      <button type="Submit" class="btn btn-primary" id="submitUser">Add User</button>
     </form>
   </section>
 
   <hr>
 
-  <button ng-click="toggle_broadcast()" type="button">{{ broadcast_btn_string }}</button>
+  <!-- Broadcast message -->
+  <button ng-click="toggle_broadcast()" class="btn btn-success" type="button">{{ broadcast_btn_string }}</button>
   <section class="send-message" ng-show="show_broadcast">
+    <br>
     <form name="broadcast" ng-submit="broadcast_message()" novalidate>
-      <div class="input-group">
+      <div class="form-group">
         <label>Message:</label>
-        <input class="ng-invalid ng-touched" maxlength="120" ng-model="newmessage.message" type="text" id="newmessage" required>
+        <input class="ng-invalid ng-touched form-control" maxlength="120" ng-model="newmessage.message" type="text" id="newmessage" required>
       </div>
 
-      <button type="Submit" id="submitBroadcast">Send Message</button>
+      <button type="Submit" class="btn btn-primary" id="submitBroadcast">Send Message</button>
     </form>
   </section>
 </div>

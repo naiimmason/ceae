@@ -157,6 +157,15 @@ app.controller("AdminController", ["$scope", "$http", "$location",
         console.log(data);
       });
     };
+
+    $scope.delete_user = function(index) {
+      $http.delete("/api/u/id/" + $scope.users[index]._id).success(function(data) {
+        console.log(data);
+        $http.get("/api/u").success(function(data) {
+          $scope.users = data;
+        });
+      });
+    };
   }
 ]);
 
