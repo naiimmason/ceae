@@ -207,7 +207,7 @@ router.post("/p", loggedIn, isAdmin, function(req, res, next) {
 // =============================================================================
 
 // ______________________________messages______________________________
-router.delete("/m/:id", loggedIn, isAdmin, function(req, res, next) {
+router.delete("/m/id/:id", loggedIn, isAdmin, function(req, res, next) {
   Message.findByIdAndRemove(req.params.id, req.body, function(err, message) {
     if(err) next(err);
     res.json(message);
@@ -219,6 +219,13 @@ router.delete("/u/id/:id", loggedIn, isAdmin, function(req, res, next) {
   User.findByIdAndRemove(req.params.id, req.body, function(err, user) {
     if(err) next(err);
     res.json(user);
+  });
+});
+
+router.delete("/p/id/:id", loggedIn, isAdmin, function(req, res, next) {
+  ReportPeriod.findByIdAndRemove(req.params.id, req.body, function(err, period) {
+    if (err) next(err);
+    res.json(period);
   });
 });
 
