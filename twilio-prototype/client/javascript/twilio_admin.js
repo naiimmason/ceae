@@ -45,8 +45,15 @@ app.controller("AdminController", ["$scope", "$http", "$location",
       endDate: ""
     };
 
+    $scope.add_report_string = "Add Reporting Period";
+
     $scope.toggle_show_reporting = function() {
       $scope.show_reporting = !$scope.show_reporting;
+      if($scope.show_reporting) {
+        $scope.add_report_string = "Cancel Adding";
+      } else {
+        $scope.add_report_string = "Add Reporting Period";
+      }
     };
 
     $scope.start_reporting = function() {
@@ -68,6 +75,7 @@ app.controller("AdminController", ["$scope", "$http", "$location",
       });
 
       $scope.show_reporting = !$scope.show_reporting;
+      $scope.add_report_string = "Add Reporting Period";
     };
 
     // PERIOD LIST
@@ -79,9 +87,22 @@ app.controller("AdminController", ["$scope", "$http", "$location",
       $scope.show_periods = !$scope.show_periods;
       if($scope.show_periods) {
         $scope.show_periods_string = "Hide Reporting Periods";
+        $http.get("/api/p").success(function(data) {
+          $scope.periods = data;
+        });
       } else {
         $scope.show_periods_string = "Show Reporting Periods";
       }
+    };
+
+    $scope.delete_period = function(index) {
+      $http.delete("/api/p/id/" + $scope.periods[index]._id).success(function(data) {
+        console.log(data);
+
+        $http.get("/api/p").success(function(data) {
+          $scope.periods = data;
+        });
+      });
     };
 
     // USER LIST

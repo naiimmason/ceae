@@ -222,6 +222,7 @@ router.delete("/u/id/:id", loggedIn, isAdmin, function(req, res, next) {
   });
 });
 
+// ______________________________reporting period______________________________
 router.delete("/p/id/:id", loggedIn, isAdmin, function(req, res, next) {
   ReportPeriod.findByIdAndRemove(req.params.id, req.body, function(err, period) {
     if (err) next(err);

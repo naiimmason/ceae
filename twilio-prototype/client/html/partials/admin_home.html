@@ -7,7 +7,7 @@
   <p>Welcome <strong>{{ user.emails[0].value }}</strong>!</p>
 
   <!-- Reporting period  -->
-  <button type="button" class="btn btn-success" ng-click="toggle_show_reporting()">Add Reporting Period</button>
+  <button type="button" class="btn btn-success" ng-click="toggle_show_reporting()">{{ add_report_string }}</button>
 
   <section class="reporting-period-sec" ng-show="show_reporting">
     <br>
@@ -35,7 +35,7 @@
     <br>
 
     <ul>
-      <li ng-repeat="period in periods">{{ period.startDate }} - {{ period.endDate }} <i class="fa fa-times" nc-click="delete_period()"></i></li>
+      <li ng-repeat="period in periods">{{ period.startDate }} - {{ period.endDate }} <i class="fa fa-times" ng-click="delete_period($index)"></i></li>
     </ul>
   </section>
 
