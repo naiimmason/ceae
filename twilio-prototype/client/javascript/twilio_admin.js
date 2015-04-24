@@ -70,6 +70,20 @@ app.controller("AdminController", ["$scope", "$http", "$location",
       $scope.show_reporting = !$scope.show_reporting;
     };
 
+    // PERIOD LIST
+    $scope.periods = [];
+    $scope.show_periods = false;
+    $scope.show_periods_string = "Show Reporting Periods";
+
+    $scope.toggle_show_periods = function() {
+      $scope.show_periods = !$scope.show_periods;
+      if($scope.show_periods) {
+        $scope.show_periods_string = "Hide Reporting Periods";
+      } else {
+        $scope.show_periods_string = "Show Reporting Periods";
+      }
+    };
+
     // USER LIST
     // This code shows / hides the list of total users and updates the list
     $scope.show_users = false;

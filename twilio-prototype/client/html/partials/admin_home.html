@@ -7,7 +7,7 @@
   <p>Welcome <strong>{{ user.emails[0].value }}</strong>!</p>
 
   <!-- Reporting period  -->
-  <button type="button" class="btn btn-success" ng-click="toggle_show_reporting()">Start Reporting Period</button>
+  <button type="button" class="btn btn-success" ng-click="toggle_show_reporting()">Add Reporting Period</button>
 
   <section class="reporting-period-sec" ng-show="show_reporting">
     <br>
@@ -23,7 +23,7 @@
         <input type="date" class="form-control" ng-model="newreport.endDate" required>
       </div>
 
-      <button type="Submit" class="btn btn-primary" id="submitReporting">Start</button>
+      <button type="Submit" class="btn btn-primary" id="submitReporting">Add</button>
     </form>
   </section>
 
@@ -34,7 +34,9 @@
   <section class="report-periods" ng-show="show_periods">
     <br>
 
-
+    <ul>
+      <li ng-repeat="period in periods">{{ period.startDate }} - {{ period.endDate }} <i class="fa fa-times" nc-click="delete_period()"></i></li>
+    </ul>
   </section>
 
   <hr>
