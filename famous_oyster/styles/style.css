@@ -1,0 +1,471 @@
+/* Hard CSS reset in order to give a more uniform appearance across multiple
+devices with unknown default formatting options */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* End of the CSS reset */
+
+.consent-page {
+  line-height: 110%;
+}
+
+.close-button {
+  font-size: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+/* A simple page wrapper that sets default values for an entire page wrapped in 
+this class */
+.page-wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  font-family: Verdana;
+}
+
+/* Simply make any images take up 100% of the width of their parent element */
+img {
+  width: 100%;
+}
+
+/* Make the label and input font sizes match */
+label {
+  font-size: 40px;
+}
+
+/* Create a sleek modern blue button that matches the color of the UD logo */ 
+button {
+  color: #ffffff;
+  font-size: 40px;
+  border-radius: 10px;
+  display: block;
+  float: right;
+  background: #00539f;
+  outline: 0;
+  border:none;
+  padding:10px;
+}
+
+button:hover {
+  background: #2268A8;
+  cursor: pointer;
+}
+
+/* Some default list styles and and bold styles */
+ul {
+  list-style: disc;
+  padding-left: 40px;
+}
+ol {
+  list-style: decimal;
+  padding-left: 60px;
+}
+
+li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+u {
+  text-decoration: underline;
+}
+
+a:link, a {
+  color: #00539f;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+a:visited {
+  color: #00539f;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #2268A8;
+  text-decoration: underline;
+}
+
+p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-radius: 10px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius:5px
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius:5px
+}
+
+table th:first-child {
+  border-top-left-radius: 5px;
+}
+
+table th:last-child {
+  border-top-right-radius: 5px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+th {/*
+  font-weight: bold;*/
+}
+
+.note {
+  margin-top: 20px;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.button {
+  margin-top: 20px;
+}
+
+/* Create a radius to round the corners for a sleeker look and add a drop shadow
+to make it even more "modern" looking. Make sure to get rid of any hilighting
+outline and redefine what happens when you focus it.*/
+input[type=text] {
+  font-size: 40px;
+  border: 3px solid #ccc;
+  border-radius: 5px;
+/*  box-shadow: 2px 2px 3px #666;*/
+  padding: 7px;
+  outline: 0;
+}
+
+input[type=text]:focus {
+  border-color: #00539f;
+}
+
+/* Double-sized Checkboxes */
+input[type=checkbox] {
+  transform: scale(2);
+  position: relative;
+  top: -8px;
+}
+
+input[type=radio] {
+  transform: scale(2);
+  position: relative;
+  top: 4px;
+  width: 32px;
+  height: 32px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+}
+
+/* Create a gradient line break and make it thinner for a sleekr, more modern 
+look */
+hr {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+}
+
+
+/* FIRST PAGE
+   Create some spacing between elements on the first page */ 
+.id, .consent, .continue {
+  margin-top: 20px;
+}
+
+.consent {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.consent label {
+  line-height: 110%;
+}
+
+.consent p {
+  text-align: center;
+  line-height: 110%;
+  font-size: 20px;
+}
+
+#id-input {
+  width: 60%;
+}
+
+/* SECOND PAGE
+   Create a warning that grabs the attention of people */
+.warning {
+  text-align: center;
+  font-size: 40px;
+  background: red;
+  color: #fff;
+  width:80%;
+  margin: auto;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.warning p {
+  padding: 10px;
+}
+
+.reconnect {
+  float: none;
+}
+
+/* Set font sizes and add some spacing */
+.instructions {
+  font-size: 30px;
+  line-height: 120%;
+}
+
+h3 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.number-selection {
+  font-size: 40px;
+}
+
+.oyster-selection {
+  font-size: 30px;
+}
+
+.oyster-selection h3 {
+  text-align: center;
+}
+
+.selection-intro {
+  font-size: 30px;
+  margin-bottom: 80px;
+  line-height: 120%;
+}
+
+.oyster-selection input {
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.oyster-selection img {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.oyster-selection h2 {
+  text-align: left;
+  font-size: 25px;
+  position: relative;
+  top: -20px;
+}
+
+.oyster-selection .half {
+  display: inline-block;
+  width: 30%;
+  margin:auto;
+  margin-top:20px;
+}
+
+.oyster-selection hr {
+  color:black;
+  background-image: none;
+  background-color: black;
+  height: 6px;
+  width: 100% !important
+}
+
+.oyster-selection input[type=radio] {
+  top: -9px;
+  width: 32px;
+  height: 32px;
+}
+
+.yesnolabel {
+  position: relative;
+  top: -8px;
+}
+
+.treatment-instructions {
+  margin-bottom: 80px;
+}
+
+.oyster-list {
+  text-align: center;
+}
+
+.survey, .survey input[type=text], .survey label {
+  font-size: 30px;
+}
+
+.survey input[type=radio] {
+  transform: scale(2);
+  position: relative;
+  top: -3px;
+  width:16px;
+  height:16px;
+}
+
+.survey input[type=text] {
+  font-size: 25px;
+}
+.survey li {
+  margin-bottom: 15px;
+}
+
+.radio-item {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.slider {
+  margin-top: 20px;
+}
+.consumption-selection, .consumption-selection label {
+  font-size: 30px;
+}
+.dice-roll p {
+  text-align: center;
+  line-height: 110%;
+  font-size: 40px;
+}
+
+.dice-roll h2 {
+  text-align: center;
+  font-size: 70px;
+  font-weight: bolder;
+  margin-bottom: 20px;
+}
+
+.dice-roll input[type=text] {
+  display:block;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dice-roll button {
+  float:none;
+  margin:auto;
+}
+
+.thank-you {
+  font-size: 30px;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.slider span {
+  position: relative;
+  top: -20px;
+  font-size: 20px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  /*height: 40px;*/
+  width: 300px;
+  border-radius:5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  position: relative;
+  top: 0px;
+  z-index: 1;
+  width: 20px;
+  height: 50px;
+  cursor: pointer;
+/*  -webkit-box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.6);
+  box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.6);*/
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#337ab7), color-stop(50%,#337ab7), color-stop(51%,#337ab7), color-stop(100%,#337ab7));
+}
+
+input[type="range"]:hover ~ #rangevalue,input[type="range"]:active ~ #rangevalue {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  opacity: 1;
+  top: -75px;
+}
+
+.row-buttons input[type=radio] {
+  margin-left: 10px;
+}
