@@ -13,12 +13,12 @@
     <br>
 
     <form name="reporting-period" ng-submit="start_reporting()" novalidate>
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label>Start Date</label>
         <input type="date" class="form-control" ng-model="newreport.startDate" required>
       </div>
 
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label>End Date</label>
         <input type="date" class="form-control" ng-model="newreport.endDate" required>
       </div>
@@ -29,6 +29,15 @@
 
   <hr>
 
+  <!-- Reporting Period List -->
+  <button type="button" class="btn btn-success" ng-click="toggle_show_periods()">{{ show_periods_string }}</button>
+  <section class="report-periods" ng-show="show_periods">
+    <br>
+
+
+  </section>
+
+  <hr>
   <!-- User list -->
   <button type="button" class="btn btn-success" ng-click="toggle_show_users()">{{ show_users_string }} Users</button>
   <section class="user-list" ng-show="show_users">

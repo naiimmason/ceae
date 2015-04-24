@@ -63,6 +63,8 @@ app.controller("AdminController", ["$scope", "$http", "$location",
 
       $http.post("/api/p", transformRequest($scope.newreport), options).success(function(data){
          console.log(data);
+         $scope.newreport.startDate = "";
+         $scope.newreport.endDate = "";
       });
 
       $scope.show_reporting = !$scope.show_reporting;
@@ -90,6 +92,11 @@ app.controller("AdminController", ["$scope", "$http", "$location",
     // Show / hide the add user interface
     $scope.show_add_cell = false;
     $scope.show_add_cell_string = "Add Cell Number";
+    $scope.newuser = {
+      firstname: "",
+      lastname: "",
+      number: ""
+    };
 
     // code to call when clicking add cell button
     $scope.toggle_show_add_cell = function() {
@@ -98,16 +105,10 @@ app.controller("AdminController", ["$scope", "$http", "$location",
         $scope.show_add_cell_string = "Cancel Adding";
       else {
         $scope.show_add_cell_string = "Add Cell Number";
-        // $scope.newuser.firstname = "";
-        // $scope.newuser.lastname = "";
-        // $scope.newuser.number = "";
+        $scope.newuser.firstname = "";
+        $scope.newuser.lastname = "";
+        $scope.newuser.number = "";
       }
-    };
-
-    $scope.newuser = {
-      firstname: "",
-      lastname: "",
-      number: ""
     };
 
     // send a post request to the api with all of the variables
@@ -123,10 +124,10 @@ app.controller("AdminController", ["$scope", "$http", "$location",
 
       $http.post("/api/u", transformRequest($scope.newuser), options).success(function(data) {
         console.log(data);
+        $scope.newuser.firstname = "";
+        $scope.newuser.lastname = "";
+        $scope.newuser.number = "";
       });
-      // $scope.newuser.firstname = "";
-      // $scope.newuser.lastname = "";
-      // $scope.newuser.number = "";
     };
 
     // BROADCAST MESSAGE
@@ -155,12 +156,15 @@ app.controller("AdminController", ["$scope", "$http", "$location",
 
       $http.post("/api/m/broadcast", transformRequest(amessage), options).success(function(data) {
         console.log(data);
+        $scope.newmessage = "";
       });
     };
 
+    // Delete a user from the user list
     $scope.delete_user = function(index) {
       $http.delete("/api/u/id/" + $scope.users[index]._id).success(function(data) {
         console.log(data);
+
         $http.get("/api/u").success(function(data) {
           $scope.users = data;
         });
