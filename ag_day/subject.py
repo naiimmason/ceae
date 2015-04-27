@@ -69,7 +69,7 @@ def start(me, subj_id, datafilepath1, datafilepath2, surveyfilepath1, surveyfile
     experiment_choice = reconnect.grabValue(subj_id, "experiment")
     if experiment_choice == None:
       reconnect.incTreat()
-      if reconnect.getTreat() % 10 > 2:
+      if reconnect.getTreat() % 9 > 2:
         experiment_choice = "maik"
       else:
         experiment_choice = "yosef"
@@ -243,6 +243,7 @@ def start(me, subj_id, datafilepath1, datafilepath2, surveyfilepath1, surveyfile
     datafile.write(thirdline)
     datafile.close()
 
+    #add_answer_to_admin(firstline, secondline, thirdline, subj_id)
     add("<p>" + firstline + secondline + thirdline + "</p>", clients=0)
 
     survey_answers = reconnect.grabValue(subj_id, "survey-answers")
@@ -255,7 +256,7 @@ def start(me, subj_id, datafilepath1, datafilepath2, surveyfilepath1, surveyfile
     surveyfile.write(linetowrite)
     surveyfile.close()
 
-    add("<p>" + linetowrite + "</p>", clients=0)
+    #add("<p>" + linetowrite + "</p>", clients=0)
 
     reconnect.updatePosition(subj_id, "end")
 
@@ -481,3 +482,8 @@ def dice_number(num):
   let(str(newnum), "#dice-number")
   let(str(newnum), "#final-option")
   poke("value", str(newnum), "#dice-number")
+
+# def add_answer_to_admin(firstline, secondline, thridline, subj_id):
+#   add("<div id=\"" + str(subj_id) + "\"></div>", "#ans-row", clients=0)
+#   add("", "#" + str(subj_id), clients=0)
+#   pass
