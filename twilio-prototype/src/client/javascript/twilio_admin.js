@@ -221,8 +221,8 @@ app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParam
     $scope.exportArray = [];
 
     $http.get('/api/p/id/' + $routeParams.id).success(function(data) {
-      console.log(period);
-      period = data;
+      console.log($scope.period);
+      $scope.period = data;
     });
 
     $http.get('/api/p/id/' + $routeParams.id + '/m').success(function(data) {
