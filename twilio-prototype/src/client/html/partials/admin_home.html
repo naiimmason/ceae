@@ -34,7 +34,7 @@
     <br>
 
     <ul>
-      <li ng-repeat="period in periods">{{ period.startDate }} - {{ period.endDate }} <i class="fa fa-times" ng-click="delete_period($index)"></i></li>
+      <li ng-repeat="period in periods"><a href="admin#/p/{{period._id}}">{{ period.startDate }} - {{ period.endDate }}</a> <i class="fa fa-times" ng-click="delete_period($index)"></i></li>
     </ul>
   </section>
 
