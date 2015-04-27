@@ -217,10 +217,15 @@ app.controller('AdminController', ['$scope', '$http', '$location',
 app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParams',
   function($scope, $http, $location, $routeParams) {
     $scope.messages = [];
+    $scope.period = '';
 
-    // $http.get('/api/p/id/' + $routeParams.id + '/m').success(function(data) {
+    $http.get('/api/p/id/' + $routeParams.id).success(function(data) {
+      period = data;
+    });
 
-    // });
+    $http.get('/api/p/id/' + $routeParams.id + '/m').success(function(data) {
+      $scope.messages = data;
+    });
   }
 ]);
 
