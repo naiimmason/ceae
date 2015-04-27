@@ -83,21 +83,9 @@ router.get('/p/id/:id/m', loggedIn, isAdmin, function(req, res, next) {
   ReportPeriod.findById(req.params.id, function(err, period) {
     if (err) next(err);
 
-    messages = [];
-    var addMessage = function(err, message) {
-      if (err) next(err);
-      messages.push(message);
-      console.log(messages);
-    };
-
-    for(var i = 0; i < period.messageids.length; i++) {
-      //console.log(period.messageids[i]);
-      Message.findById(period.messageids[i], addMessage);
-    }
-
-    console.log(messages);
-    period.messages = messages;
-    res.json(period);
+    Message.find({'_id': {$in: period.messageids}}, function(err, messages) {
+      res.json(messages);
+    });
   });
 });
 
