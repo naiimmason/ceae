@@ -90,10 +90,11 @@ router.get('/p/id/:id/m', loggedIn, isAdmin, function(req, res, next) {
     };
 
     for(var i = 0; i < period.messageids.length; i++) {
-      console.log(period.messageids[i]);
+      //console.log(period.messageids[i]);
       Message.findById(period.messageids[i], addMessage);
     }
 
+    console.log(messages);
     period.messages = messages;
     res.json(period);
   });
