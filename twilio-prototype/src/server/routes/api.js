@@ -91,7 +91,7 @@ router.get('/p/id/:id/m', loggedIn, isAdmin, function(req, res, next) {
 
     for(var i = 0; i < period.messageids.length; i++) {
       console.log(period.messageids[i]);
-      messages.push(Message.findById(period.messageids[i], addMessage(err, message)));
+      Message.findById(period.messageids[i], addMessage);
     }
 
     period.messages = messages;
