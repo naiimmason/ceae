@@ -86,7 +86,7 @@ router.get('/p/id/:id/m', loggedIn, isAdmin, function(req, res, next) {
     messages = [];
     for(var i = 0; i < period.messageids.length; i++) {
       console.log(period.messageids[i]);
-      Message.findById(period.messageids[i], addMessages(err, message, messages));
+      messages.push(Message.findById(period.messageids[i], addMessages));
     }
 
     period.messages = messages;
@@ -94,9 +94,9 @@ router.get('/p/id/:id/m', loggedIn, isAdmin, function(req, res, next) {
   });
 });
 
-function addMessages(err, message, messages) {
+function addMessages(err, message) {
   if (err) next(err);
-  messages.push(message);
+  return message;
 }
 
 
@@ -146,6 +146,54 @@ router.post('/m/receive', function(req, res, next) {
       sendMessage(null, 'You are not part of our database! Contact a program ' +
                   'administrator for further details.',  amessage.sender);
     } else {
+      ReportPeriod.find(function(err, periods) {
+        if (err) next(err);
+
+        reporting = false;
+
+        for(var i = 0; i < periods.length; i++) {
+          if(periods[i].startDate < now && periods[i].endDate > now) {
+            sendMessage(null, 'Thank you for reporting! Your value of \'' + amessage.body +
+                '\' has been stored.', amessage.sender);
+            periods[i].messageids.push(amessage._id);
+            periods[i].save();
+            reporting = true;
+          }
+        }
+
+        if(!reporting){
+          sendMessage(null, 'Reporting is not available right now.', amessage.sender);
+        }
+      });
+    }
+  });
+
+  res.json(amessage);
+});
+
+// A test post method that puts a new message in the database
+router.post('/m', function(req, res, next) {
+
+  amessage = {
+    sender: req.body.From,
+    body: req.body.Body,
+    sid: req.body.sid
+  };
+
+  Message.create(amessage, function(err, message) {
+    if (err) next(err);
+    amessage = message;
+  });
+
+  console.log(amessage);
+  now = Date.now();
+
+  User.findOne({ number: amessage.sender }, function(err, user) {
+    if (err) next(err);
+    if (user === null) {
+      sendMessage(null, 'You are not part of our database! Contact a program ' +
+                  'administrator for further details.',  amessage.sender);
+    } else {
         ReportPeriod.find(function(err, periods) {
         if (err) next(err);
 
@@ -167,35 +215,7 @@ router.post('/m/receive', function(req, res, next) {
     }
   });
 
-  // Create the message object and store it in our database
-  Message.create(amessage, function(err, message) {
-    if (err) next(err);
-    res.json(message);
-  });
-});
-
-// A test post method that puts a new message in the database
-router.post('/m', function(req, res, next) {
-  amessage = {
-    sender: req.body.From,
-    body: req.body.Body,
-    sid: req.body.sid
-  };
-
-  console.log(amessage);
-
-  User.findOne({ number: amessage.sender }, function(err, user) {
-    if (err) next(err);
-    if (user === null) {
-      sendMessage(null, 'You are not part of our database! Contact a program ' +
-                  'administrator for further details.',  req.body.From);
-    }
-  });
-
-  Message.create(amessage, function(err, message) {
-    if (err) next(err);
-    res.json(message);
-  });
+  res.json(amessage);
 });
 
 router.post('/m/broadcast', loggedIn, isAdmin, function(req, res, next){

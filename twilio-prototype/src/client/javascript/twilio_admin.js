@@ -218,9 +218,9 @@ app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParam
   function($scope, $http, $location, $routeParams) {
     $scope.messages = [];
 
-    $http.get('/api/p/id/' + $routeParams.id + '/m').success(function(data) {
+    // $http.get('/api/p/id/' + $routeParams.id + '/m').success(function(data) {
 
-    });
+    // });
   }
 ]);
 
