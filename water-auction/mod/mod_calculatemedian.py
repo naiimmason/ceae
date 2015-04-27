@@ -27,8 +27,23 @@ def calculate(me):
   water1_median = np.median(water1_values)
   water2_median = np.median(water2_values)
   water3_median = np.median(water3_values)
-
-  # for value in water1_values:
+  
+  if water1_median in water1_values:
+      try:
+        water1_median = (water1_median + min([ mVal for mVal in water1_values if mVal > water1_median ]))/2
+      except:
+        pass
+  if water2_median in water2_values:
+      try:
+        water2_median = (water2_median + min([ mVal for mVal in water2_values if mVal > water2_median ]))/2
+      except:
+        pass
+  if water3_median in water3_values:
+      try:
+        water3_median = (water3_median + min([ mVal for mVal in water3_values if mVal > water3_median ]))/2
+      except:
+        pass
+# for value in water1_values:
   #   if value == water1_median:
   #     water1_median = min(water1_values)
   #     break;

@@ -2,7 +2,7 @@ from willow.willow import *
 import random as rand
 import utilities
 
-chat_time = 30
+chat_time = 300
                               #chatbox should run in the background to send and receive messages
 def chatbox(me, subj_id, num):
   members = take({"tag": "chatBox" + str(num)})

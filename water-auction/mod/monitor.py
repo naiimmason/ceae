@@ -29,7 +29,7 @@ positions = [
   "finished"
 ]
 
-chat_time = 30
+chat_time = 300
 
 # Main logic thread for the admin
 def start(me, waters, rand_waters):
