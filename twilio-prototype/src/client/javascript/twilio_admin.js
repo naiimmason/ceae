@@ -226,7 +226,7 @@ app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParam
 
     $http.get('/api/p/id/' + $routeParams.id + '/m').success(function(data) {
       for(var i = 0; i < data.length; i++) {
-        exportArray.push({a: data[i].sender, b: data[i].body});
+        $scope.exportArray.push({a: data[i].sender, b: data[i].body});
       }
       $scope.messages = data;
     });
