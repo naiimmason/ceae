@@ -3,12 +3,12 @@ var router = require("express").Router();
 
 // Send the basic landing page for farmers to report their water meter usage
 router.get("/", function(req, res) {
-  res.sendFile(path.resolve("./client/html/index.html"));
+  res.sendFile(path.resolve("./src/client/html/index.html"));
 });
 
 // The admin page
 router.get("/admin", loggedIn, isAdmin, function(req, res) {
-  res.sendFile(path.resolve("./client/html/admin.html"));
+  res.sendFile(path.resolve("./src/client/html/admin.html"));
 });
 
 // Check to see if a user is logged in, if not, redirect them

@@ -2,24 +2,25 @@
 // MODULES
 // =============================================================================
 
-var twilio         = require("twilio");
-    express        = require("express");
+var twilio         = require('twilio');
+    express        = require('express');
     app            = express();
-    http           = require("http");
-    util           = require("util");
-    morgan         = require("morgan");
-    bodyParser     = require("body-parser");
-    cookieParser   = require("cookie-parser");
-    methodOverride = require("method-override");
-    mongoose       = require("mongoose");
-    passport       = require("passport");
-    GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
-    session        = require("express-session");
+    http           = require('http');
+    util           = require('util');
+    morgan         = require('morgan');
+    bodyParser     = require('body-parser');
+    cookieParser   = require('cookie-parser');
+    methodOverride = require('method-override');
+    mongoose       = require('mongoose');
+    passport       = require('passport');
+    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+    session        = require('express-session');
+    path           = require('path');
 
 // =============================================================================
 // CONFIGURATION
 // =============================================================================
-var GoogleAuth = require("./config/auth").GoogleAuth;
+var GoogleAuth = require('./config/auth').GoogleAuth;
 
 // Allow passport to serialize and deserialize users
 passport.serializeUser(function(user, done) {
@@ -43,9 +44,9 @@ passport.use(new GoogleStrategy({
 ));
 
 // configure Express and express middlewear
-app.use(express.static(__dirname + "/client"));
-app.set("views", __dirname + "/client/html");
-app.use(morgan("dev"));
+app.use(express.static(path.resolve('./src/client')));
+app.set('views', path.resolve('./src/client/html'));
+app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
@@ -63,21 +64,21 @@ app.use(passport.session());
 // =============================================================================
 // DATABASE
 // =============================================================================
-var dbConfig = require("./config/db");
+var dbConfig = require('./config/db');
 mongoose.connect(dbConfig.url);
 
 // =============================================================================
 // ROUTES
 // =============================================================================
-var routes = require("./routes/routes");
-var api = require("./routes/api");
-var auth = require("./routes/auth");
+var routes = require('./routes/routes');
+var api = require('./routes/api');
+var auth = require('./routes/auth');
 
-app.use("/", routes);
-app.use("/api", api);
-app.use("/auth", auth);
+app.use('/', routes);
+app.use('/api', api);
+app.use('/auth', auth);
 
-// The last middle wear to use is the 404 middlewear. If they didn"t get
+// The last middle wear to use is the 404 middlewear. If they didn't get
 // anywhere show them the 404
 app.use(function(req, res){
   res.sendStatus(404);
@@ -87,9 +88,5 @@ app.use(function(req, res){
 // START SERVER
 // =============================================================================
 var server = http.createServer(app);
+module.exports = server;
 
-// Start the server (taken from Andy which is taken from Cloud9)
-server.listen(process.env.PORT || 3100, process.env.IP || "0.0.0.0", function() {
-  var address = server.address();
-  console.log("Server is now started on ", address.address + ":" + address.port);
-});

@@ -14,7 +14,7 @@ tmux send-keys "mongod" C-m
 
 # Start ndemon in a pane
 tmux select-pane -t 0
-tmux send-keys "nodemon app.js" C-m
+tmux send-keys "nodemon server.js" C-m
 
 # Start grunt in a pane
 tmux select-pane -t 1

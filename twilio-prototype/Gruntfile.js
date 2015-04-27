@@ -1,8 +1,8 @@
-js_files = ["Gruntfile.js", "client/javascript/**/*.js", "app.js", "routes/**/*.js", "models/**/*.js", "config/**/*.js"];
+js_files = ['Gruntfile.js', 'src/client/javascript/**/*.js', 'server.js', 'src/server/**/*.js'];
 
 module.exports = function(grunt) {
   grunt.initConfig({
-    pkg: grunt.file.readJSON("package.json"),
+    pkg: grunt.file.readJSON('package.json'),
 
     jshint: {
       all: js_files
@@ -14,7 +14,7 @@ module.exports = function(grunt) {
 
         },
         files: {
-          'client/stylesheets/style.css': 'stylus/main.styl'
+          'src/client/stylesheets/style.css': 'src/stylus/main.styl'
         }
       }
     },
@@ -26,15 +26,15 @@ module.exports = function(grunt) {
 
       scripts: {
         files: js_files,
-        tasks: ["jshint"],
+        tasks: ['jshint'],
         options: {
           spawn: false
         }
       },
 
       css: {
-        files: ["stylus/*.styl"],
-        tasks: ["stylus"],
+        files: ['src/stylus/*.styl'],
+        tasks: ['stylus'],
         options: {
           spawn: false
         }
@@ -43,5 +43,5 @@ module.exports = function(grunt) {
   });
 
   require('load-grunt-tasks')(grunt);
-  grunt.registerTask("default", ["jshint", "stylus","watch"]);
+  grunt.registerTask('default', ['jshint', 'stylus','watch']);
 };
