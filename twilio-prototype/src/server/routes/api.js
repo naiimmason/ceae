@@ -87,6 +87,7 @@ router.get('/p/id/:id/m', loggedIn, isAdmin, function(req, res, next) {
     var addMessage = function(err, message) {
       if (err) next(err);
       messages.push(message);
+      console.log(messages);
     };
 
     for(var i = 0; i < period.messageids.length; i++) {
