@@ -84,21 +84,20 @@ router.get('/p/id/:id/m', loggedIn, isAdmin, function(req, res, next) {
     if (err) next(err);
 
     messages = [];
+    var addMessage = function(err, message) {
+      if (err) next(err);
+      messages.push(message);
+    };
+
     for(var i = 0; i < period.messageids.length; i++) {
       console.log(period.messageids[i]);
-      messages.push(Message.findById(period.messageids[i], addMessages));
+      messages.push(Message.findById(period.messageids[i], addMessage(err, message)));
     }
 
     period.messages = messages;
     res.json(period);
   });
 });
-
-function addMessages(err, message) {
-  if (err) next(err);
-  return message;
-}
-
 
 // ______________________________misc.______________________________
 // Check to see if the user is an admin or not
