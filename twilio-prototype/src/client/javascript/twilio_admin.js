@@ -1,4 +1,4 @@
-var app = angular.module('twilio-admin', ['ngRoute']);
+var app = angular.module('twilio-admin', ['ngRoute', 'ngSanitize', 'ngCsv']);
 
 // Configure routes for this application
 app.config(['$routeProvider', '$locationProvider',
@@ -218,12 +218,16 @@ app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParam
   function($scope, $http, $location, $routeParams) {
     $scope.messages = [];
     $scope.period = '';
+    $scope.exportArray = [];
 
     $http.get('/api/p/id/' + $routeParams.id).success(function(data) {
       period = data;
     });
 
     $http.get('/api/p/id/' + $routeParams.id + '/m').success(function(data) {
+      for(var i = 0; i < data.length; i++) {
+        exportArray.push({a: data[i].sender, b: data[i].body});
+      }
       $scope.messages = data;
     });
   }

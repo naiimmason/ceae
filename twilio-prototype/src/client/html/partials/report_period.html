@@ -5,4 +5,12 @@
     <h1>Reporting period</h1>
   </div>
   <a href="/admin#/"><button class="btn btn-success">Back</button></a>
+  <h4>Dates</h4>
+  <p>Start: {{period.startDate}}</p>
+  <p>End: {{period.endDate}}</p>
+  <h4>Messages</h4>
+  <ul>
+    <li ng-repeat="message in messages">{{message.body}} - {{message.sender}}</li>
+  </ul>
+  <button class="btn btn-primary" ng-csv="exportArray" filename="data.csv">Export to CSV</button>
 </div>
