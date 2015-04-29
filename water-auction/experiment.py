@@ -13,6 +13,7 @@ waters = ["Penta Ultra Purified water", "re-use tap water", "re-use tap water th
 rand_waters = rand.sample(waters, len(waters))
 output_path = "db/data" + time + ".csv"
 survey_path = "db/survey" + time + ".csv"
+chat_path = "db/chat" + time + ".txt"
 
 # Initialize the output file
 output_file = open(output_path, "w")
@@ -70,7 +71,7 @@ def session(me):
     let("")
     add(open("pages/subject/reconnect.html"))
     subj_id = str(mod.reconnect.wait(me))
-    mod.subject.start(me, subj_id, waters, rand_waters, output_path, survey_path)
+    mod.subject.start(me, subj_id, waters, rand_waters, output_path, survey_path, chat_path)
 
   # New unique person is added and starts the experiment
   else:
@@ -80,6 +81,6 @@ def session(me):
     put({"tag": "userInfo", "user": subj_id, "results": [-1, -1, -1, -1, -1, -1], 
       "pers_rand_waters": temp_waters, "position": "Start", "practice_results": [-1, -1], "payout": 25, "paid": False})
     mod.utilities.addUserRow(subj_id)
-    mod.subject.start(me, subj_id, waters, rand_waters, output_path, survey_path)
+    mod.subject.start(me, subj_id, waters, rand_waters, output_path, survey_path, chat_path)
 
 run(session)

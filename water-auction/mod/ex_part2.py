@@ -4,7 +4,7 @@ import utilities
 
 chat_time = 300
                               #chatbox should run in the background to send and receive messages
-def chatbox(me, subj_id, num):
+def chatbox(me, subj_id, num, chat_path):
   members = take({"tag": "chatBox" + str(num)})
   inchat = False
   for user in members["users"]:
@@ -63,6 +63,9 @@ def chatbox(me, subj_id, num):
                 for user in users:
                     put({"tag" : "chat","sender":str(subj_id),"msg":txt, "receiver":user})
                 add(txt, "#chatbox", clients=utilities.findAdmin())
+                chat_file = open(chat_path, "a")
+                chat_file.write(txt)
+                chat_file.close()
               poke("value","","#chatbar")
       elif msg["tag"] == "key":
                                               #message cannot be empty
@@ -104,7 +107,7 @@ def chatbox(me, subj_id, num):
         put(msg)
 
 # Go through each 
-def start(me, subj_id, waters, temp_waters, median_values, all_water, water_pos, output_path):
+def start(me, subj_id, waters, temp_waters, median_values, all_water, water_pos, output_path, chat_path):
   let("")
   utilities.updateStage(subj_id, "Part C water " + str(water_pos + 1))
   print all_water
@@ -139,7 +142,7 @@ def start(me, subj_id, waters, temp_waters, median_values, all_water, water_pos,
   if(comm["communication"]):
     add(open("chat.html"), "#chatBox")
     add(str(subj_id),"#nameDisplay")
-    chatbox(me, subj_id, water_pos)
+    chatbox(me, subj_id, water_pos, chat_path)
   let("<p>Chatting has ceased!</p>", "#timer")
 
   add("<button type=\"button\" class=\"btn btn-lg\" id=\"Yes\">Yes</button>", "#buttonYes")

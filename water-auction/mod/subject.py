@@ -8,7 +8,7 @@ import practice
 import subj
 
 # The main logic that runs the subject's portion of the experiment
-def start(me, subj_id, waters, rand_waters, output_path, survey_path):
+def start(me, subj_id, waters, rand_waters, output_path, survey_path, chat_path):
   let("")
   temp_waters = utilities.grabInfo(subj_id)["pers_rand_waters"]
   results = utilities.grabInfo(subj_id)["results"] # This is where all data collected will be stored

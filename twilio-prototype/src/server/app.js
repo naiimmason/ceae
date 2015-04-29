@@ -46,7 +46,7 @@ passport.use(new GoogleStrategy({
 // configure Express and express middlewear
 app.use(express.static(path.resolve('./src/client')));
 app.set('views', path.resolve('./src/client/html'));
-app.use(morgan('dev'));
+app.use(morgan('combined'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
