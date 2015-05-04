@@ -98,7 +98,7 @@ function genResults() {
     if(p2inftemp < p2dam[temp]) {
       p2inf.push(p2inftemp);
     } else {
-      p1inf.push(p1dam[temp]);
+      p2inf.push(p2dam[temp]);
     }
 
     p2rev.push(A * Math.pow(p2xinp, alpha));
