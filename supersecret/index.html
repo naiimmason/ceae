@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Super Secret Graph Thing</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>You Are Player 1</h1>
+    <div class="chart-input">
+      <div id="p1inputs">
+        <h4>Player 1 Input</h4>
+        <div id="p1xDiv">
+          <p for="p1xInput">X Value: <span id="showp1XValue">0</span></p>
+          <input id="p1xInput" class="form-control" type="range" value="0" min="-100" max="0" step="1" data-show-value="true" oninput="updateData()">
+        </div>
+
+        <div id="p1iDiv">
+          <p for="p1iInput">I Value: <span id="showp1IValue">0</span></p>
+          <input id="p1iInput" class="form-control" type="range" value="0" min="-100" max="100" step="1" data-show-value="true" oninput="updateData()">
+        </div>
+      </div>
+      <div class="chart">
+      </div>
+
+      <div id="p2inputs">
+        <h4>Player 2 Input</h4>
+        <div id="p2xDiv">
+          <p for="p2xInput">X Value: <span id="showp2XValue">2</span></p>
+          <input id="p2xInput" class="form-control" type="range" value="0" min="-100" max="0" step="1" data-show-value="true" oninput="updateData()">
+        </div>
+
+        <div id="p2iDiv">
+          <p for="p2iInput">I Value: <span id="showp2IValue">0</span></p>
+          <input id="p2iInput" class="form-control" type="range" value="0" min="-100" max="100" step="1" data-show-value="true" oninput="updateData()">
+        </div>
+      </div>
+    </div>
+<!--
+    <div class="col-md-6">
+      <label for="p1xInput">X Value: <span id="showXValue">0</span></label>
+      <form class="form-inline">
+        <div class="input-group">
+          <div class="input-group-addon">Minimum (0)</div>
+          <input id="p1xInput" class="form-control" type="range" value="0" min="0" max="100" step="1" data-show-value="true" oninput="updateData()">
+          <div class="input-group-addon">Maximum (100)</div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <label for="p1iInput">I Value: <span id="showIValue">0</span></label>
+      <form class="form-inline">
+        <div class="input-group">
+          <div class="input-group-addon">Minimum (-100)</div>
+          <input id="p1iInput" class="form-control" type="range" value="0" min="-100" max="100" step="1" data-show-value="true" oninput="updateData()">
+          <div class="input-group-addon">Maximum (100)</div>
+        </div>
+      </form>
+    </div> -->
+  <script type="text/javascript" src="http://d3js.org/d3.v3.js"></script>
+  <script type="text/javascript" src="d3.legend.js"></script>
+  <script type="text/javascript" src="linechart.js"></script>
+</body>
+</html>
