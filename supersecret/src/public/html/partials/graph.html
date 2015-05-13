@@ -1,0 +1,118 @@
+
+<h1 class="center-text">TURN {{ turn }}</h1>
+
+<div ng-show="waiting" class="alert alert-danger">
+  <p class="center-text"><b>Waiting for the competition to make a move</b></p>
+</div>
+
+<div ng-hide="waiting" class="alert alert-success">
+  <p class="center-text"><b>You may now make a move!</b></p>
+</div>
+
+<div class="chart-input">
+  <div id="p1inputs">
+    <h4>YOUR Input</h4>
+    <div id="p1xDiv">
+      <p for="p1xInput">Output: <span>{{ p1xinpreal }}</span></p>
+      <input id="p1xInput" class="form-control" type="range" value="0" min="-100" max="0" step="1" data-show-value="true" ng-model="p1xinp" ng-change="updateData()">
+    </div>
+
+    <div id="p1iDiv">
+      <p for="p1iInput">Investment: <span>{{ p1iinpreal }}</span></p>
+      <input id="p1iInput" class="form-control" type="range" value="0" min="-100" max="100" step="1" data-show-value="true" ng-model="p1iinp" ng-change="updateData()">
+    </div>
+  </div>
+
+  <div class="chart">
+  </div>
+
+  <div id="p2inputs">
+    <h4>Competition Input</h4>
+    <div id="p2xDiv">
+      <p for="p2xInput">Output: <span>{{ p2xinpreal }}</span></p>
+      <input id="p2xInput" class="form-control" type="range" value="0" min="-100" max="0" step="1" data-show-value="true" ng-model="p2xinp" ng-change="updateData()">
+    </div>
+
+    <div id="p2iDiv">
+      <p for="p2iInput">Investment: <span>{{ p2iinpreal }}</span></p>
+      <input id="p2iInput" class="form-control" type="range" value="0" min="-100" max="100" step="1" data-show-value="true" ng-model="p2iinp" ng-change="updateData()">
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="container">
+  <h4 class="center-text">RESULTS MONITOR</h4>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th></th>
+        <th colspan="2">Sales</th>
+        <th rowspan="2">Total Damage</th>
+        <th colspan="2">Infrastructure</th>
+        <th colspan="2">Earnings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Period</td>
+        <td>YOU</td>
+        <td>Competition</td>
+        <td></td>
+        <td>YOU</td>
+        <td>Competition</td>
+        <td>YOU</td>
+        <td>Competition</td>
+      </tr>
+
+      <tr ng-repeat="result in results">
+        <td>{{ $index + 1 }}</td>
+        <td>$ {{ p1sales[$index] }}</td>
+        <td>$ {{ p2sales[$index] }}</td>
+        <td>$ {{ dmg[$index] }}</td>
+        <td>$ {{ p1inf[$index] }}</td>
+        <td>$ {{ p2inf[$index] }}</td>
+        <td>$ {{ p1earns[$index].profit }}</td>
+        <td>$ {{ p2earns[$index].profit }}</td>
+      </tr>
+
+      <tr>
+        <td>{{ turn }}</td>
+        <td>$ {{ p1sales[turn - 1] }}</td>
+        <td>$ {{ p2sales[turn - 1] }}</td>
+        <td>$ {{ dmg[turn - 1] }}</td>
+        <td>$ {{ p1inf[turn - 1] }}</td>
+        <td>$ {{ p2inf[turn - 1] }}</td>
+        <td>$ {{ p1earns[turn - 1].profit }}</td>
+        <td>$ {{ p2earns[turn - 1].profit }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+  <h4>Turn Input</h4>
+  <p>What values would you like to use for this turn?</p>
+  <form class="form-inline">
+    <div class="form-group">
+      <label>Output</label>
+      <input ng-model="playeroutput" ng-disabled="waiting"  type="number" class="form-control input-lg">
+    </div>
+    <div class="form-group">
+      <label>Investment</label>
+      <input ng-model="playerinvestment" ng-disabled="waiting" type="number" class="form-control input-lg">
+    </div>
+    <div class="form-group">
+      <button ng-disabled="waiting" type="submit" class="btn btn-primary btn-lg" ng-click="submitNextMove()">SUBMIT</button>
+    </div>
+  </form>
+</div>
+
+<br>
+
+<div ng-show="waiting" class="alert alert-danger">
+  <p class="center-text"><b>Waiting for the competition to make a move</b></p>
+</div>
+
+<div ng-hide="waiting" class="alert alert-success">
+  <p class="center-text"><b>You may now make a move!</b></p>
+</div>

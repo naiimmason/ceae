@@ -1,5 +1,20 @@
-body {
-  font: 10px sans-serif;
+.full-page-img {
+  width: 100%;
+}
+
+.big-text {
+  font-size: 25px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  position: relative;
+  top: 5px;
+  width: 24px;
+  height: 24px;
 }
 
 .axis path,
@@ -31,6 +46,7 @@ input[type="range"], .slider {
   border: 1px solid #ccc;
   height: 40px;
   transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
   position: absolute;
   width: 200px !important;
 
@@ -84,7 +100,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #p1iDiv {
-  position: absolute;;
+  position: absolute;
   top: 200px;
   left: 40px;
 }
@@ -117,7 +133,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #p2iDiv {
-  position: absolute;;
+  position: absolute;
   top: 200px;
   left: 40px;
 }
