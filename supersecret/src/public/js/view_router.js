@@ -132,6 +132,7 @@ app.controller('GraphController', ['$scope', '$location', 'UserProps',
     $scope.waiting = false;
     $scope.playeroutput = 0;
     $scope.playerinvestment = 0;
+    $scope.gameover = false;
 
     // ============================================================================
     // MODEL VARIABLES AND EQUATIONS
@@ -447,6 +448,22 @@ app.controller('GraphController', ['$scope', '$location', 'UserProps',
       $scope.updateData();
       $scope.$apply();
     });
+
+    socket.on('endGame', function(data) {
+      console.log('END THE GAME!');
+      console.log(data);
+      $scope.results = data.results;
+      $scope.game = data;
+      $scope.gameover = true;
+      $scope.$apply();
+      genResults();
+      $scope.updateData();
+      $scope.$apply();
+    });
+
+    $scope.waitingroom = function() {
+      $location.path('waiting');
+    };
   }
 ]);
 

@@ -1,6 +1,10 @@
 
 <h1 class="center-text">TURN {{ turn }}</h1>
 
+<div ng-show="gameover" class="alert alert-info">
+  <p class="center-text"><b>The game is over! Please review the final decisions below.</b></p>
+</div>
+
 <div ng-show="waiting" class="alert alert-danger">
   <p class="center-text"><b>Waiting for the competition to make a move</b></p>
 </div>
@@ -77,7 +81,7 @@
       </tr>
 
       <tr>
-        <td>{{ turn }}</td>
+        <td>{{ turn }} (CURRENT)</td>
         <td>$ {{ p1sales[turn - 1] }}</td>
         <td>$ {{ p2sales[turn - 1] }}</td>
         <td>$ {{ dmg[turn - 1] }}</td>
@@ -116,3 +120,9 @@
 <div ng-hide="waiting" class="alert alert-success">
   <p class="center-text"><b>You may now make a move!</b></p>
 </div>
+
+<div ng-show="gameover" class="alert alert-info">
+  <p class="center-text"><b>The game is over! Please review the final decisions above.</b></p>
+</div>
+
+<button ng-click="waitingroom()" ng-show="gameover" class="btn btn-lg center-block btn-primary">Continue to Next Round</button>
