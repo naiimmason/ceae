@@ -75,81 +75,72 @@ input[type="range"]::-webkit-slider-thumb {
   opacity:0.8;
 }
 
-#p1inputs {
-  position: absolute;
+.chart {
+  display: inline-block;
+  width: 49%;
+  vertical-align: top;
 }
 
-#p1inputs h4 {
-  position: absolute;
-  width: 150px;
-  top: 50px;
-  left: 50px;
+.playerinputs {
+  display: inline-block;
+  width: 25%;
 }
 
-#p1xDiv {
-  position: absolute;
-  top: 200px;
-  left: -50px;
+.playerinputs h4 {
+  text-align: center;
 }
 
-#p1xDiv p, #p1iDiv p {
-  position: absolute;
-  top: -100px;
-  left: 65px;
+.periodDiv {
+  display: inline-block;
+  width: 13%;
+  vertical-align: top;
+  padding-left: 5px;
+  font-size: 20px;
 }
 
-#p1xDiv p {
-  width: 80px;
+.periodDiv p {
+  margin-top:7px;
+  text-align: center;
 }
 
-#p1iDiv p {
-  width: 110px;
+.xDiv {
+  display: inline-block;
+  width: 42%;
+  vertical-align: top;
+  font-size: 20px;
 }
 
-#p1iDiv {
-  position: absolute;;
-  top: 200px;
-  left: 40px;
+.iDiv {
+  display: inline-block;
+  width: 42%;
+  vertical-align: top;
+  font-size: 20px;
 }
 
-
-#p2inputs {
-  position: absolute;
-  top: 141px;
-  left: 1050px;
+.btn-left {
+  display: inline-block;
+  width: 20%;
+  padding-bottom: 2px;
+  padding-right: 4px;
+  padding-top: 6px;
+  padding-left: 3px;
+  margin-left: 20%;
 }
 
-#p2inputs h4 {
-  position: absolute;
-  width: 150px;
-  top: 50px;
-  left: 25px;
+.turn-value {
+  display: inline-block;
+  width: 20%;
+  font-size: 20px;
+  margin-right: 10px
 }
 
-#p2xDiv {
-  position: absolute;
-  top: 200px;
-  left: -50px;
-}
-
-#p2xDiv p, #p2iDiv p {
-  position: absolute;
-  top: -100px;
-  left: 65px;
-}
-
-#p2xDiv p {
-  width: 80px;
-}
-
-#p2iDiv p {
-  width: 110px;
-}
-
-#p2iDiv {
-  position: absolute;;
-  top: 200px;
-  left: 40px;
+.btn-right {
+  display: inline-block;
+  width: 20%;
+  padding-bottom: 2px;
+  padding-right: 4px;
+  padding-top: 6px;
+  padding-left: 5px;
 }
 
 body {

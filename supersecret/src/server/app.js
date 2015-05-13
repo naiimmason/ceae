@@ -62,7 +62,7 @@ var server = http.createServer(app);
 // =============================================================================
 // GAME LOGIC AND IO
 // =============================================================================
-var NUMROUNDS = 10;
+var NUMROUNDS = 6;
 
 
 // Experiment class that holds everything
@@ -161,18 +161,18 @@ Game.prototype.submitted = function() {
 
 Game.prototype.nextTurn = function() {
   // CONSTANTS
-  var R = 6.00;
+  var R = 1.40;
   var alpha = 1.0;
-  var D0 = 1.0;
+  var D0 = 0.0;
   var D1 = 0.5;
-  var D2 = 2.00;
+  var D2 = 1.50;
   var capdelta = 0.9;
   var C = 1.0;
   var A = 2.0;
   var beta = 0.7;
   var profdelta = 0.7;
-  var profscaling = 0.02;
-  var timestamps = 11.000;
+  var profscaling = 0.1;
+  var timestamps = 6.00;
 
   // Player inputs
   console.log('CHOICES:');
@@ -190,7 +190,8 @@ Game.prototype.nextTurn = function() {
     p1inf: null,
     p2inf: null,
     p1earn: null,
-    p2earn: null
+    p2earn: null,
+    turn: this.turn
   };
 
   // Update sales
@@ -199,7 +200,7 @@ Game.prototype.nextTurn = function() {
 
   // Update damage
   if(this.turn === 1) {
-    result.dmg = D0 * D1 + D2 * p1xinp + D2 * p2xinp;
+    result.dmg = D0 * D1 + D2 * (p1xinp + p2xinp);
   }
   else {
     result.dmg = this.results[this.turn - 2].dmg * D1 + D2 * (p1xinp + p2xinp);
@@ -207,37 +208,33 @@ Game.prototype.nextTurn = function() {
 
   // Update infrastructure
   if(this.turn === 1) {
-    if(C * p1iinp < result.dmg) {
-      result.p1inf = C * p1iinp;
-    }
-    else {
-      result.p1inf = result.dmg;
-    }
-
-    if(C * p2iinp < result.dmg) {
-      result.p2inf = C * p1iinp;
-    }
-    else {
-      result.p2inf = result.dmg;
-    }
+    result.p1inf = C * p1iinp;
+    result.p2inf = C * p2iinp;
+  } else {
+    result.p1inf = capdelta * this.results[this.turn - 2].p1inf + C * p1iinp;
+    result.p2inf = capdelta * this.results[this.turn - 2].p2inf + C * p2iinp;
   }
-  else {
-    if((capdelta * this.p1choices[this.turn - 2].i + C * p1iinp) < result.dmg) {
-      result.p1inf = (capdelta * this.p1choices[this.turn - 2].i + C * p1iinp);
-    } else {
-      result.p1inf = result.dmg;
-    }
 
-    if((capdelta * this.p2choices[this.turn - 2].i + C * p2iinp) < result.dmg) {
-      result.p2inf = (capdelta * this.p2choices[this.turn - 2].i + C * p2iinp);
-    } else {
-      result.p2inf = result.dmg;
-    }
+  // Update actual earnings
+  var p1realearnings = p1xinp - result.dmg - p1iinp;
+  var p2realearnings = p2xinp - result.dmg- p2iinp;
+
+
+  if(result.p1inf * A < result.dmg) {
+    p1realearnings += result.p2inf * A;
+  } else {
+    p1realearnings += result.dmg;
+  }
+
+  if(result.p2inf * A < result.dmg) {
+    p2realearnings += result.p2inf * A;
+  } else {
+    p2realearnings += result.dmg;
   }
 
   // Update earnings
-  result.p1earn = { 'timestamp': this.turn - 1, 'profit': result.p1sales - result.dmg - p1iinp + result.p1inf * A };
-  result.p2earn = { 'timestamp': this.turn - 1, 'profit': result.p2sales - result.dmg - p2iinp + result.p2inf * A };
+  result.p1earn = { 'timestamp': this.turn - 1, 'profit': p1realearnings * profscaling };
+  result.p2earn = { 'timestamp': this.turn - 1, 'profit': p2realearnings * profscaling };
   this.results.push(result);
 
   this.turn++;

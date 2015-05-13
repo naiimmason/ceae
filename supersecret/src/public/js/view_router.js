@@ -125,8 +125,8 @@ app.controller('WaitingController', ['$scope', '$location', 'UserProps',
 app.controller('GraphController', ['$scope', '$location', 'UserProps',
   function($scope, $location, UserProps) {
     $scope.game = -1;
-    var GRAPH_WIDTH = 900;
-    var GRAPH_HEIGHT = 400;
+    var GRAPH_WIDTH = 600;
+    var GRAPH_HEIGHT = 350;
     $scope.results = [];
     $scope.turn = 1;
     $scope.waiting = false;
@@ -138,18 +138,18 @@ app.controller('GraphController', ['$scope', '$location', 'UserProps',
     // MODEL VARIABLES AND EQUATIONS
     // ============================================================================
     // CONSTANTS
-    var R = 6.00;
+    var R = 1.40;
     var alpha = 1.0;
-    var D0 = 1.0;
+    var D0 = 0.0;
     var D1 = 0.5;
-    var D2 = 2.00;
+    var D2 = 1.50;
     var capdelta = 0.9;
     var C = 1.0;
     var A = 2.0;
     var beta = 0.7;
     var profdelta = 0.7;
-    var profscaling = 0.02;
-    var timestamps = 11.000;
+    var profscaling = 0.1;
+    var timestamps = 6.00;
 
     // Player inputs
     $scope.p1xinp = 0;
@@ -163,25 +163,25 @@ app.controller('GraphController', ['$scope', '$location', 'UserProps',
     $scope.p2iinpreal= 0;
 
     // Player 1 variables
-    var p1x = [];
-    var p1i = [];
+    $scope.p1x = [0, 0, 0, 0, 0, 0];
+    $scope.p1i = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+    var p1acearns = [];
 
     // Player 2 variables
-    var p2x = [];
-    var p2i = [];
+    $scope.p2x = [0, 0, 0, 0, 0, 0];
+    $scope.p2i = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+    var p2acearns = [];
 
     function genResults() {
       // RESET VARIABLES
       // Player 1 variables
-      p1x = [];
-      p1i = [];
+      p1acearns = [];
       $scope.p1sales = [];
       $scope.p1inf = [];
       $scope.p1earns = [];
 
       // Player 2 variables
-      p2x = [];
-      p2i = [];
+      p2acearns = [];
       $scope.p2sales = [];
       $scope.p2inf = [];
       $scope.p2earns = [];
@@ -204,11 +204,11 @@ app.controller('GraphController', ['$scope', '$location', 'UserProps',
         // on if they are first player or second player
         for(var temp1 = 0, len = $scope.results.length; temp1 < len; temp1++) {
           if (firstplayer) {
-            p1x.push($scope.game.p1choices[temp1].x);
-            p1i.push($scope.game.p1choices[temp1].i);
+            $scope.p1x[temp1] = ($scope.game.p1choices[temp1].x);
+            $scope.p1i[temp1] = ($scope.game.p1choices[temp1].i);
 
-            p2x.push($scope.game.p2choices[temp1].x);
-            p2i.push($scope.game.p2choices[temp1].i);
+            $scope.p2x[temp1] = ($scope.game.p2choices[temp1].x);
+            $scope.p2i[temp1] = ($scope.game.p2choices[temp1].i);
 
             $scope.p1sales.push($scope.results[temp1].p1sales);
             $scope.p2sales.push($scope.results[temp1].p2sales);
@@ -221,11 +221,11 @@ app.controller('GraphController', ['$scope', '$location', 'UserProps',
             $scope.p1earns.push($scope.results[temp1].p1earn);
             $scope.p2earns.push($scope.results[temp1].p2earn);
           } else {
-            p1x.push($scope.game.p2choices[temp1].x);
-            p1i.push($scope.game.p2choices[temp1].i);
+            $scope.p1x[temp1] = ($scope.game.p2choices[temp1].x);
+            $scope.p1i[temp1] = ($scope.game.p2choices[temp1].i);
 
-            p2x.push($scope.game.p1choices[temp1].x);
-            p2i.push($scope.game.p1choices[temp1].i);
+            $scope.p2x[temp1] = ($scope.game.p1choices[temp1].x);
+            $scope.p2i[temp1] = ($scope.game.p1choices[temp1].i);
 
             $scope.p1sales.push($scope.results[temp1].p2sales);
             $scope.p2sales.push($scope.results[temp1].p1sales);
@@ -243,55 +243,46 @@ app.controller('GraphController', ['$scope', '$location', 'UserProps',
 
       // Loop through and predict the following rounds
       for(var temp = $scope.turn - 1; temp < timestamps; temp++){
-        // Update xs and is
-        p1x.push($scope.p1xinpreal);
-        p1i.push($scope.p1iinpreal);
-
-        p2x.push($scope.p2xinpreal);
-        p2i.push($scope.p2iinpreal);
-
         // Update Sales
-        $scope.p1sales.push(p1x[temp] * R);
-        $scope.p2sales.push(p2x[temp] * R);
+        $scope.p1sales.push($scope.p1x[temp] * R);
+        $scope.p2sales.push($scope.p2x[temp] * R);
 
         // Update damage
         if(temp === 0) {
-          $scope.dmg.push(D0 * D1 + D2 * p1x[temp] + D2 * p2x[temp]);
+          $scope.dmg.push(D0 * D1 + D2 * ($scope.p1x[temp] + $scope.p2x[temp]));
         } else {
-          $scope.dmg.push($scope.dmg[temp - 1] * D1 + D2 * (p1x[temp] + p2x[temp]));
+          $scope.dmg.push($scope.dmg[temp - 1] * D1 + D2 * ($scope.p1x[temp] + $scope.p2x[temp]));
         }
 
         // Update infrastructure
         if (temp === 0) {
-          if(C * p1i[temp] < $scope.dmg[temp]) {
-            $scope.p1inf.push(C * p1i[temp]);
-          } else {
-            $scope.p1inf.push($scope.dmg[temp]);
-          }
-
-          if(C * p2i[temp] < $scope.dmg[temp]) {
-            $scope.p2inf.push(C * p2i[temp]);
-          } else {
-            $scope.p2inf.push($scope.dmg[temp]);
-          }
+          $scope.p1inf.push(C * $scope.p1i[temp]);
+          $scope.p2inf.push(C * $scope.p2i[temp]);
         }
         else {
-          if((capdelta * p1i[temp - 1] + C * p1i[temp]) < $scope.dmg[temp]) {
-            $scope.p1inf.push(capdelta * p1i[temp - 1] + C * p1i[temp]);
-          } else {
-            $scope.p1inf.push($scope.dmg[temp]);
-          }
+          $scope.p1inf.push(capdelta * $scope.p1inf[temp - 1] + C * $scope.p1i[temp]);
+          $scope.p2inf.push(capdelta * $scope.p2inf[temp - 1] + C * $scope.p2i[temp]);
+        }
 
-          if((capdelta * p2i[temp - 1] + C * p2i[temp]) < $scope.dmg[temp]) {
-            $scope.p2inf.push(capdelta * p2i[temp - 1] + C * p2i[temp]);
-          } else {
-            $scope.p2inf.push($scope.dmg[temp]);
-          }
+        // Update actual earnings
+        var p1realearnings = $scope.p1x[temp] - $scope.dmg[temp] - $scope.p1i[temp];
+        var p2realearnings = $scope.p2x[temp] - $scope.dmg[temp] - $scope.p2i[temp];
+
+        if($scope.p1inf[temp] * A < $scope.dmg[temp]) {
+          p1realearnings += $scope.p1inf[temp] * A;
+        } else {
+          p1realearnings += $scope.dmg[temp];
+        }
+
+        if($scope.p2inf[temp] * A < $scope.dmg[temp]) {
+          p2realearnings += $scope.p2inf[temp] * A;
+        } else {
+          p2realearnings += $scope.dmg[temp];
         }
 
         // Update earnings
-        $scope.p1earns.push({ 'timestamp': temp, 'profit': $scope.p1sales[temp] - $scope.dmg[temp] - p1i[temp] + $scope.p1inf[temp] * A });
-        $scope.p2earns.push({ 'timestamp': temp, 'profit': $scope.p2sales[temp] - $scope.dmg[temp] - p2i[temp] + $scope.p2inf[temp] * A });
+        $scope.p1earns.push({ 'timestamp': temp, 'profit': p1realearnings * profscaling });
+        $scope.p2earns.push({ 'timestamp': temp, 'profit': p2realearnings * profscaling });
       }
     }
 
@@ -381,16 +372,6 @@ app.controller('GraphController', ['$scope', '$location', 'UserProps',
       .call(d3.legend);
 
     $scope.updateData = function() {
-      $scope.p1xinpreal = $scope.p1xinp;
-      $scope.p1xinpreal *= -1;
-      $scope.p1iinpreal = $scope.p1iinp;
-      $scope.p1iinpreal *= -1;
-
-      $scope.p2xinpreal = $scope.p2xinp;
-      $scope.p2xinpreal *= -1;
-      $scope.p2iinpreal = $scope.p2iinp;
-      $scope.p2iinpreal *= -1;
-
       genResults();
 
       data1 = $scope.p1earns;
@@ -463,6 +444,50 @@ app.controller('GraphController', ['$scope', '$location', 'UserProps',
 
     $scope.waitingroom = function() {
       $location.path('waiting');
+    };
+
+    $scope.incrementValue = function(array, index) {
+      if(array === 'p1x' || array === 'p2x') {
+        if($scope[array][index] !== 10) {
+          $scope[array][index]++;
+        }
+      }
+
+      if(array === 'p1i') {
+        console.log(($scope[array][index] + 0.1).toPrecision(4));
+        console.log($scope.p1sales[index].toPrecision(4));
+        if(($scope[array][index] + 0.1).toPrecision(4) <= $scope.p1sales[index].toPrecision(4)) {
+          $scope[array][index] += 0.1;
+        }
+      }
+
+      if(array === 'p2i') {
+        if(($scope[array][index] + 0.1).toPrecision(4) <= $scope.p2sales[index].toPrecision(4)) {
+          $scope[array][index] += 0.1;
+        }
+      }
+      $scope.updateData();
+    };
+
+    $scope.decrementValue = function(array, index) {
+      if(array === 'p1x' || array === 'p2x') {
+        if($scope[array][index] !== 0) {
+          $scope[array][index]--;
+        }
+      }
+
+      if(array === 'p1i' || array === 'p2i') {
+        if($scope[array][index] >= 0.1) {
+          $scope[array][index] -= 0.1;
+          if($scope[array][index] > 0 && $scope[array][index] < 0.1) {
+            $scope[array][index] = 0;
+          }
+        } else {
+          $scope[array][index] = 0;
+        }
+      }
+
+      $scope.updateData();
     };
   }
 ]);
