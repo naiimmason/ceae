@@ -35,7 +35,7 @@
     <br>
 
     <ul>
-      <li ng-repeat="period in periods"><a href="admin#/p/{{period._id}}">{{ period.startDate }} - {{ period.endDate }}</a> <i class="fa fa-times" ng-click="delete_period($index)"></i></li>
+      <li ng-repeat="period in periods"><a href="admin#/p/{{period._id}}">{{ period.startDate.toString() }} - {{ period.endDate.toString() }}</a> <i class="fa fa-times" ng-click="delete_period($index)"></i></li>
     </ul>
   </section>
 
@@ -45,7 +45,7 @@
   <section class="user-list" ng-show="show_users">
     <br>
     <ul>
-      <li ng-repeat="user in users"><a href="admin#/u/{{ user._id }}">{{ user.firstname }} {{user.lastname}} - {{ user.number }}</a> <i class="fa fa-times" ng-click="delete_user($index)"></i></li>
+      <li ng-repeat="user in users"><a href="admin#/u/{{ user._id }}">{{ user.firstname }} {{user.lastname}} - {{ user.number }} - {{ user.farmerid }}</a> <i class="fa fa-times" ng-click="delete_user($index)"></i></li>
     </ul>
   </section>
 

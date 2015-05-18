@@ -131,7 +131,7 @@ router.post('/m/receive', function(req, res, next) {
   amessage = {
     sender: req.body.From,
     body: req.body.Body,
-    sid: req.body.sid
+    sid: req.body.sid,
   };
 
   // Create the message object and store it in our database
@@ -148,6 +148,9 @@ router.post('/m/receive', function(req, res, next) {
       sendMessage(null, 'You are not part of our database! Contact a program ' +
                   'administrator for further details.', amessage.sender);
     } else {
+      amessage.farmerid = user.farmerid;
+      amessage.save();
+
       // Check to see which command they sent.
       // HELP COMMAND
       if(amessage.body.toUpperCase() === 'HELP') {
@@ -263,6 +266,59 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
   ReportPeriod.create(req.body, function(err, period) {
     if (err) next(err);
     // Create schduled jobs to send messages to everyone at certain points
+
+    // If the period has already started send out a message to all users saying
+    // that the period has started
+    if(period.startDate < Date.now() && period.endDate > Date.now()) {
+      User.find(function(err, users) {
+        for(var i = 0, len = users.length; i < len; i++) {
+          sendMessage(err, 'Dear ' + users[i].salutation + ' ' + users[i].lastname +
+            ', a new reporting period has started between ' + period.startDate.toDateString() +
+            ' and ' + period.endDate.toDateString(), users[i].number);
+        }
+      });
+    }
+
+    // Calculate the evening before and the day before ending and print out to
+    // console just to be sure
+    var eveningBefore = period.startDate;
+    eveningBefore.setDate(period.startDate.getDate() - 1);
+    eveningBefore.setHours(17);
+    console.log(eveningBefore.toString());
+
+    var eveningEnding = period.endDate;
+    eveningEnding.setDate(period.endDate.getDate() -1);
+    console.log(eveningEnding.toString());
+
+    // Create job to run on evening before to remind people that a reporting
+    // period is coming up
+    var eveningReminder = schedule.scheduleJob(eveningBefore, function() {
+      User.find(function(err, users) {
+        for(var i = 0, len = users.length; i < len; i++) {
+          tosend = 'Dear ' + users[i].salutation + ' ' + users[i].lastname +
+            ', a new reporting period has started between ' + period.startDate.toDateString() +
+            ' and ' + period.endDate.toDateString() + '. ';
+
+          if(users[i].contractType === 'A') {
+            tosend += 'If you text your meter reading in the next three days ' +
+              'you will receive $' + submitAmount + ' on your VISA card.';
+          } else if(users[i].contractType === 'B'){
+            tosend += 'If you text your meter reading in the next three days ' +
+              'you will keep $' + submitAmount + ' on your VISA card.';
+          }
+          sendMessage(err, tosend, users[i].number);
+        }
+      });
+    });
+
+    // Create job to run with 24 hours left in reporting period
+    var endingReminder = schedule.scheduleJob(eveningEnding, function() {
+
+    });
+
+    // Create a job to run at the end of the period to tell people who have
+    // failed to submit that they have failed.
+
     res.json(period);
   });
 });
@@ -277,6 +333,7 @@ console.log(now);
 var j = schedule.scheduleJob(date, function() {
   console.log('HERE IT IS');
 });
+
 // =============================================================================
 // PUT
 // =============================================================================

@@ -127,6 +127,7 @@ app.controller('AdminController', ['$scope', '$http', '$location',
         $http.get('/api/p').success(function(data) {
           $scope.periods = [];
           $scope.periods = data;
+          //console.log($scope.periods[0].startDate);
         });
       } else {
         $scope.show_periods_string = 'Show Reporting Periods';
@@ -264,26 +265,50 @@ app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParam
     $scope.messages = [];
     $scope.users = [];
     $scope.period = '';
-    $scope.exportArray = [];
+    $scope.exportArray = [{ a: 'Cell Number', b: 'Farmer ID', c: 'Message Content',
+      d: 'Contract Type', e: 'First Name', f: 'Last Name', g: 'Bank' }];
 
+    // Grab the period information
     $http.get('/api/p/id/' + $routeParams.id).success(function(data) {
       console.log($scope.period);
       $scope.period = data;
     });
 
+    // Grab all messages from that period
     $http.get('/api/p/id/' + $routeParams.id + '/m').success(function(data) {
-      for(var i = 0; i < data.length; i++) {
-        $scope.exportArray.push({ a: data[i].sender, b: data[i].body });
+      // Loop  through each message and add its information to the temp export array
+      var tempexport = [];
+      for(var i = 0, leni = data.length; i < leni; i++) {
+        tempexport.push({ a: data[i].sender, b: data[i].farmerid, c: data[i].body.replace(/,/g , '') });
       }
+
       $scope.messages = data;
 
+      // Grab all users who have submitted and loop through each messages for
+      // each user to pair up messages with the correct user then push it on
+      // to the export array
       $http.get('/api/p/id/' + $routeParams.id + '/u').success(function(users) {
         $scope.users = users;
+
+        for(var j = 0, lenj = tempexport.length; j < lenj; j++) {
+          for(var k = 0, lenk = users.length; k < lenk; k++) {
+            if(tempexport[j].a === users[k].number) {
+              tempexport[j].d = users[k].contractType;
+              tempexport[j].e = users[k].firstname;
+              tempexport[j].f = users[k].lastname;
+              tempexport[j].g = users[k].bank;
+              break;
+            }
+          }
+
+          $scope.exportArray.push(tempexport[j]);
+        }
       });
     });
   }
 ]);
 
+// Transform a JSON objecct into a urlencoded object thing
 function transformRequest(obj) {
   var str = [];
   for(var p in obj)
