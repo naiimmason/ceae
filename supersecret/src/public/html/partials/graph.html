@@ -1,5 +1,5 @@
 
-<h1 class="center-text">TURN {{ turn }}</h1>
+<h1 class="center-text">Practice Tool</h1>
 
 <div ng-show="gameover" class="alert alert-info">
   <p class="center-text"><b>The game is over! Please review the final decisions below.</b></p>
@@ -9,13 +9,13 @@
   <p class="center-text"><b>Waiting for the competition to make a move</b></p>
 </div>
 
-<div ng-hide="waiting" class="alert alert-success">
+<div ng-hide="!waiting" class="alert alert-success">
   <p class="center-text"><b>You may now make a move!</b></p>
 </div>
 
 <div class="chart-input">
   <div class="playerinputs">
-    <h4>YOUR Input</h4>
+    <h4>YOUR Decision</h4>
     <div class="periodDiv">
       <p>Period</p>
       <p>1</p>
@@ -24,6 +24,10 @@
       <p>4</p>
       <p>5</p>
       <p>6</p>
+      <p>7</p>
+      <p>8</p>
+      <p>9</p>
+      <p>10</p>
     </div>
     <div class="xDiv">
       <p class="center-text">Output</p>
@@ -83,6 +87,46 @@
         </button>
         <p class="turn-value">{{ p1x[5] }}</p>
         <button ng-click="incrementValue('p1x', 5)" ng-disabled="gameover" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p1x', 6)" ng-disabled="gameover" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p1x[6] }}</p>
+        <button ng-click="incrementValue('p1x', 6)" ng-disabled="gameover" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p1x', 7)" ng-disabled="gameover" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p1x[7] }}</p>
+        <button ng-click="incrementValue('p1x', 7)" ng-disabled="gameover" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p1x', 8)" ng-disabled="gameover" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p1x[8] }}</p>
+        <button ng-click="incrementValue('p1x', 8)" ng-disabled="gameover" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p1x', 9)" ng-disabled="gameover" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p1x[9] }}</p>
+        <button ng-click="incrementValue('p1x', 9)" ng-disabled="gameover" type="button" class="btn btn-default btn-right btn-lg">
           <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
         </button>
       </div>
@@ -148,6 +192,46 @@
           <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
         </button>
       </div>
+
+            <div class="turninput">
+        <button ng-click="decrementValue('p1i', 6)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p1i[6].toPrecision(3) }}</p>
+        <button ng-click="incrementValue('p1i', 6)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+            <div class="turninput">
+        <button ng-click="decrementValue('p1i', 7)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p1i[7].toPrecision(3) }}</p>
+        <button ng-click="incrementValue('p1i', 7)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p1i', 8)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p1i[8].toPrecision(3) }}</p>
+        <button ng-click="incrementValue('p1i', 8)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p1i', 9)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p1i[9].toPrecision(3) }}</p>
+        <button ng-click="incrementValue('p1i', 9)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -155,7 +239,7 @@
   </div>
 
   <div class="playerinputs">
-    <h4>Competition Input</h4>
+    <h4>Competition Decision</h4>
     <div class="periodDiv">
       <p>Period</p>
       <p>1</p>
@@ -164,6 +248,10 @@
       <p>4</p>
       <p>5</p>
       <p>6</p>
+      <p>7</p>
+      <p>8</p>
+      <p>9</p>
+      <p>10</p>
     </div>
     <div class="xDiv">
       <p class="center-text">Output</p>
@@ -223,6 +311,46 @@
         </button>
         <p class="turn-value">{{ p2x[5] }}</p>
         <button ng-click="incrementValue('p2x', 5)" ng-disabled="gameover" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+            <div class="turninput">
+        <button ng-click="decrementValue('p2x', 6)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p2x[6] }}</p>
+        <button ng-click="incrementValue('p2x', 6)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+            <div class="turninput">
+        <button ng-click="decrementValue('p2x', 7)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p2x[7] }}</p>
+        <button ng-click="incrementValue('p2x', 7)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p2x', 8)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p2x[8] }}</p>
+        <button ng-click="incrementValue('p2x', 8)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p2x', 9)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p2x[9] }}</p>
+        <button ng-click="incrementValue('p2x', 9)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
           <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
         </button>
       </div>
@@ -288,6 +416,46 @@
           <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
         </button>
       </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p2i', 6)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p2i[6].toPrecision(3) }}</p>
+        <button ng-click="incrementValue('p2i', 6)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p2i', 7)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p2i[7].toPrecision(3) }}</p>
+        <button ng-click="incrementValue('p2i', 7)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p2i', 8)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p2i[8].toPrecision(3) }}</p>
+        <button ng-click="incrementValue('p2i', 8)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="turninput">
+        <button ng-click="decrementValue('p2i', 9)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-left btn-lg">
+          <span class="glyphicon glyphicon-minus glyphicon-large" aria-hidden="true"></span>
+        </button>
+        <p class="turn-value">{{ p2i[9].toPrecision(3) }}</p>
+        <button ng-click="incrementValue('p2i', 9)" ng-disabled="turn > 1" type="button" class="btn btn-default btn-right btn-lg">
+          <span class="glyphicon glyphicon-plus glyphicon-large" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
 </div>
 
@@ -302,6 +470,7 @@
         <th rowspan="2">Total Damage</th>
         <th colspan="2">Infrastructure</th>
         <th colspan="2">Earnings</th>
+        <th colspan="2">Total Earnings</th>
       </tr>
     </thead>
     <tbody>
@@ -314,17 +483,21 @@
         <td>Competition</td>
         <td>YOU</td>
         <td>Competition</td>
+        <td>YOU</td>
+        <td>Competition</td>
       </tr>
 
-      <tr>
-        <td>{{ turn }} (CURRENT)</td>
-        <td>$ {{ p1sales[turn - 1].toPrecision(4) }}</td>
-        <td>$ {{ p2sales[turn - 1].toPrecision(4) }}</td>
-        <td>$ {{ dmg[turn - 1].toPrecision(4) }}</td>
-        <td>$ {{ p1inf[turn - 1].toPrecision(4) }}</td>
-        <td>$ {{ p2inf[turn - 1].toPrecision(4) }}</td>
-        <td>$ {{ p1earns[turn - 1].profit.toPrecision(4) }}</td>
-        <td>$ {{ p2earns[turn - 1].profit.toPrecision(4) }}</td>
+      <tr ng-repeat="t in turns">
+        <td>{{ t }}</td>
+        <td>$ {{ p1sales[t - 1].toPrecision(4) }}</td>
+        <td>$ {{ p2sales[t- 1].toPrecision(4) }}</td>
+        <td>$ {{ dmg[t - 1].toPrecision(4) }}</td>
+        <td>$ {{ p1inf[t - 1].toPrecision(4) }}</td>
+        <td>$ {{ p2inf[t - 1].toPrecision(4) }}</td>
+        <td>$ {{ p1earns[t - 1].profit.toPrecision(4) }}</td>
+        <td>$ {{ p2earns[t - 1].profit.toPrecision(4) }}</td>
+        <td>$ {{ p1totalearns[t -1].toPrecision(4) }}</td>
+        <td>$ {{ p2totalearns[t -1].toPrecision(4) }}</td>
       </tr>
 
       <tr ng-repeat="result in results | orderBy:'-turn'">
@@ -336,11 +509,14 @@
         <td>$ {{ p2inf[$index].toPrecision(4) }}</td>
         <td>$ {{ p1earns[$index].profit.toPrecision(4) }}</td>
         <td>$ {{ p2earns[$index].profit.toPrecision(4) }}</td>
+        <td>$ {{ p1totalearns[$index].toPrecision(4) }}</td>
+        <td>$ {{ p2totalearns[$index].toPrecision(4) }}</td>
       </tr>
     </tbody>
   </table>
 
   <br>
+  <span class="hidden">
   <h4>Turn Input</h4>
   <p>What values would you like to use for this turn?</p>
   <form class="form-inline">
@@ -356,6 +532,7 @@
       <button ng-disabled="waiting" type="submit" class="btn btn-primary btn-lg" ng-click="submitNextMove()">SUBMIT</button>
     </div>
   </form>
+  </span>
 </div>
 
 <br>
@@ -364,7 +541,7 @@
   <p class="center-text"><b>Waiting for the competition to make a move</b></p>
 </div>
 
-<div ng-hide="waiting" class="alert alert-success">
+<div ng-hide="!waiting" class="alert alert-success">
   <p class="center-text"><b>You may now make a move!</b></p>
 </div>
 

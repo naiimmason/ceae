@@ -11,7 +11,8 @@
   <section class="reporting-period-sec" ng-show="show_reporting">
     <br>
 
-    <form name="reporting-period" ng-submit="start_reporting()" novalidate>
+    <form name="reportingperiod" ng-submit="start_reporting()" novalidate>
+      <p>YEAR-MONTH-DAY (2015-05-07)</p>
       <div class="form-group col-md-6">
         <label>Start Date</label>
         <input class="ng-invalid ng-touched form-control" type="date" class="form-control" ng-model="newreport.startDate" required>
@@ -22,7 +23,7 @@
         <input class="ng-invalid ng-touched form-control" type="date" class="form-control" ng-model="newreport.endDate" required>
       </div>
 
-      <button type="Submit" class="btn btn-primary" id="submitReporting">Add</button>
+      <button ng-disabled="reportingperiod.$invalid" type="Submit" class="btn btn-primary" id="submitReporting">Add</button>
     </form>
   </section>
 
@@ -55,7 +56,7 @@
 
   <section class="add-user" ng-show="show_add_cell">
     <br>
-    <form name="user-addition" ng-submit="add_user()" novalidate>
+    <form name="useraddition" ng-submit="add_user()" novalidate>
       <div class="form-group">
         <label>First Name:</label>
         <input class="ng-invalid ng-touched form-control" ng-model="newuser.firstname" type="text" id="firstname" required>
@@ -67,11 +68,31 @@
       </div>
 
       <div class="form-group">
+        <label>Salutation:</label>
+        <input class="ng-invalid ng-touched form-control" ng-model="newuser.salutation" type="text" id="salutation" required>
+      </div>
+
+      <div class="form-group">
         <label>Cell Number (12345678900):</label>
         <input class="ng-invalid ng-touched form-control" maxlength="11" minlength="11" ng-model="newuser.number" type="number" id="cellnumber" required>
       </div>
 
-      <button type="Submit" class="btn btn-primary" id="submitUser">Add User</button>
+      <div class="form-group">
+        <label>Unique ID Number:</label>
+        <input class="ng-invalid ng-touched form-control" maxlength="4" minlength="4" ng-model="newuser.farmerid" type="number" id="farmerIdInput" required>
+      </div>
+
+      <div class="form-group">
+        <label>Water Meter Number:</label>
+        <input class="ng-invalid ng-touched form-control" minlength="1" ng-model="newuser.watermeterNumber" type="text" id="watermeterNumber" required>
+      </div>
+
+      <div class="form-group">
+        <label>Contract Type:</label>
+        <input class="ng-invalid ng-touched form-control" ng-model="newuser.contractType" type="text" id="contractType" required>
+      </div>
+
+      <button ng-disabled="useraddition.$invalid" type="Submit" class="btn btn-primary" id="submitUser">Add User</button>
     </form>
   </section>
 
@@ -87,7 +108,7 @@
         <input class="ng-invalid ng-touched form-control" maxlength="120" ng-model="newmessage.message" type="text" id="newmessage" required>
       </div>
 
-      <button type="Submit" class="btn btn-primary" id="submitBroadcast">Send Message</button>
+      <button ng-disabled="broadcast.$invalid" type="Submit" class="btn btn-primary" id="submitBroadcast">Send Message</button>
     </form>
   </section>
 </div>

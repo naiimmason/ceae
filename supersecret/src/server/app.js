@@ -77,6 +77,7 @@ var Experiment = function() {
   this.num_subj = 0;
   this.subj_finished_rnd = 0;
   this.numrounds = NUMROUNDS;
+  this.partnum = 1;
 };
 
 Experiment.prototype.dividePlayers = function() {
@@ -85,21 +86,29 @@ Experiment.prototype.dividePlayers = function() {
     player2s: []
   };
 
-  for(var i = 0, len = this.subjects/2; i < len; i++) {
-    do {
-      randid = Math.floor(Math.random() * this.subjects.ids.length);
-    } while(randid != i && this.subjects[i].hasPlayed(this.subjects[randid].subj_id));
-    split.player1s.push(this.subjects.ids[i]);
-    split.player2s.push(randid);
+  if(this.partnum === 1) {
+    for(var i = 0, len = this.subjects.ids.length/2; i < len; i++) {
+      do {
+        randid = Math.floor(Math.random() * this.subjects.ids.length);
+      } while(randid === i &&
+        this.subjects[this.subjects.ids[i]].hasPlayed(this.subjects[this.subjects.ids[randid]].subj_id, this.partnum) &&
+        this.subjects[this.subjects.ids[randid]].hasPlayed(this.subjects[this.subjects.ids[i]].subj_id, this.partnum));
+
+      this.subjects[this.subjects.ids[i]]['playedpart' + this.partnum].push(this.subjects.ids[randid]);
+      this.subjects[this.subjects.ids[randid]]['playedpart' + this.partnum].push(this.subjects.ids[i]);
+
+      split.player1s.push(this.subjects.ids[i]);
+      split.player2s.push(this.subjects.ids[randid]);
+    }
+  } else {
+    for(var i = 0, len = this.subjects.ids.length/2; i < len; i++) {
+      do {
+        randid = Math.floor(Math.random() * this.subjects.ids.length);
+      } while(randid != i && this.subjects.ids[i]);
+    }
   }
 
   return split;
-};
-
-// ENUM for the two types of games
-var GameType = {
-  'SIMULTANEOUS' : 0,
-  'SEQUENTIAL': 1
 };
 
 // Game class that stores all relavent information
@@ -114,6 +123,7 @@ var Game = function(gametype, gameid) {
   this.p1submitted = false;
   this.p2submitted = false;
   this.gameid = gameid;
+  this.gameover = false;
 };
 
 Game.prototype.addPlayer = function(player) {
@@ -126,8 +136,8 @@ Game.prototype.addPlayer = function(player) {
   }
   else if (this.p2id === -1) {
     this.p2id = player.subj_id;
-    exp.subjects[this.p1id].played.push(this.p2id);
-    exp.subjects[this.p2id].played.push(this.p1id);
+    exp.subjects[this.p1id]['playedpart' + exp.partnum].push(this.p2id);
+    exp.subjects[this.p2id]['playedpart' + exp.partnum].push(this.p1id);
   }
   else {
     return false;
@@ -168,11 +178,12 @@ Game.prototype.nextTurn = function() {
   var D2 = 1.50;
   var capdelta = 0.9;
   var C = 1.0;
-  var A = 2.0;
+  var A = 2.2;
   var beta = 0.7;
   var profdelta = 0.7;
   var profscaling = 0.1;
   var timestamps = 6.00;
+  var initialbalance = 25.00;
 
   // Player inputs
   console.log('CHOICES:');
@@ -191,6 +202,8 @@ Game.prototype.nextTurn = function() {
     p2inf: null,
     p1earn: null,
     p2earn: null,
+    p1totalearn: null,
+    p2totalearn: null,
     turn: this.turn
   };
 
@@ -216,8 +229,8 @@ Game.prototype.nextTurn = function() {
   }
 
   // Update actual earnings
-  var p1realearnings = p1xinp - result.dmg - p1iinp;
-  var p2realearnings = p2xinp - result.dmg- p2iinp;
+  var p1realearnings = result.p1sales - result.dmg - p1iinp;
+  var p2realearnings = result.p2sales - result.dmg- p2iinp;
 
 
   if(result.p1inf * A < result.dmg) {
@@ -235,6 +248,16 @@ Game.prototype.nextTurn = function() {
   // Update earnings
   result.p1earn = { 'timestamp': this.turn - 1, 'profit': p1realearnings * profscaling };
   result.p2earn = { 'timestamp': this.turn - 1, 'profit': p2realearnings * profscaling };
+
+
+  if(this.turn === 1) {
+    result.p1totalearn = initialbalance + result.p1earn.profit;
+    result.p2totalearn = initialbalance + result.p2earn.profit;
+  } else {
+    result.p1totalearn = this.results[this.turn - 2].p1totalearn + result.p1earn.profit;
+    result.p2totalearn = this.results[this.turn - 2].p2totalearn + result.p2earn.profit;
+  }
+
   this.results.push(result);
 
   this.turn++;
@@ -245,17 +268,21 @@ Game.prototype.nextTurn = function() {
 // Subject class containing everything about the subject
 var Subject = function(id) {
   this.subj_id = id;
+  this.isplayer1 = false;
+  this.isplayer2 = false;
   this.curgame = 0;
-  this.played = [];
+  this.playedpart1 = [];
+  this.playedpart2 = [];
   this.game1id = '';
   this.game2id = '';
   this.game3id = '';
   this.game4id = '';
 };
 
-Subject.prototype.hasPlayed = function(playerid) {
-  for(var i = 0, len = this.played.length; i < len; i++) {
-    if(this.played[i] === playerid) {
+Subject.prototype.hasPlayed = function(playerid, part) {
+  console.log('Checking has played ' + playerid + ' and part ' + part);
+  for(var i = 0, len = this['playedpart' + part].length; i < len; i++) {
+    if(this['playedpart' + part][i] === playerid) {
       return true;
     }
   }
@@ -264,6 +291,7 @@ Subject.prototype.hasPlayed = function(playerid) {
 };
 // create the main experiment object
 var exp = new Experiment();
+//console.log(exp.dividePlayers());
 
 // This communicates between the server and the client
 var io = socketio.listen(server);
@@ -322,6 +350,8 @@ io.sockets.on('connection', function(socket) {
       return;
     }
 
+    console.log(exp.dividePlayers());
+
     // Print out a list of players
     var strplayers = '';
     for(var i = 0, len = exp.subjects.ids.length; i < len; i++) {
@@ -359,7 +389,7 @@ io.sockets.on('connection', function(socket) {
     console.log(data);
     gametojoin = data.gameids[data.curgame - 1];
     if (!exp.games[gametojoin]) {
-      exp.games[gametojoin] = new Game(GameType.SIMULTANEOUS, gametojoin);
+      exp.games[gametojoin] = new Game(0, gametojoin);
     }
 
     socket.leave('waiting');
@@ -387,6 +417,7 @@ io.sockets.on('connection', function(socket) {
       exp.games[data.gameid].nextTurn();
       if (exp.games[data.gameid].turn === exp.numrounds + 1) {
         console.log(data.gameid + ': END GAME!!!!!');
+        exp.games[data.gameid].gameover = true;
         io.sockets.in(data.gameid).emit('endGame', exp.games[data.gameid]);
       } else {
         console.log(data.gameid + ': Continue to turn ' + exp.games[data.gameid].turn);
@@ -401,9 +432,28 @@ io.sockets.on('connection', function(socket) {
 
       // Divide players again
       if(exp.subj_finished_rnd === exp.num_subj) {
-        split = exp.dividePlayers();
-        console.log(split);
+        //split = exp.dividePlayers();
+        //console.log(split);
       }
+    }
+  });
+
+  socket.on('checknameRec', function(data) {
+    console.log('Name check!');
+    if(exp.subjects[data.subj_id]) {
+      console.log('It exists!');
+      if(exp.subjects[data.subj_id].game1id !== '') {
+        console.log('Game already created!');
+        socket.emit('safeToGraphReconnect');
+        setTimeout(function() { socket.emit('reconnectGame', {
+          game: exp.games[exp.subjects[data.subj_id]['game' + exp.subjects[data.subj_id].curgame +'id']],
+          player: exp.subjects[data.subj_id] }); }, 1000);
+      } else {
+        console.log('Game not created!');
+        socket.emit('safeToWaitingReconnect');
+      }
+    } else {
+      console.log('It doesn\'t exist!');
     }
   });
 });

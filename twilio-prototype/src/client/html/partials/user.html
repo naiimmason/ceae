@@ -5,6 +5,59 @@
     <h1>{{ user.number }}</h1>
   </div>
   <a href="/admin#/"><button class="btn btn-success">Back</button></a>
-  <h4>{{ user.firstname }} {{ user.lastname }}</h4>
+
+  <br>
+  <br>
+
+  <div class="user-field-input">
+    <form class="form-inline">
+      <input ng-disabled="!updating" class="form-control input-lg" type="text" ng-model="user.salutation">
+      <input ng-disabled="!updating" class="form-control input-lg" type="text" ng-model="user.lastname">
+      ,
+      <input ng-disabled="!updating" class="form-control input-lg" type="text" ng-model="user.firstname">
+    </form>
+  </div>
+
+  <br>
+
+  <div class="user-field-input">
+    <form class="form-inline">
+      <label>ID Number: </label>
+      <input ng-disabled="!updating" class="form-control input-lg" type="number" ng-model="user.farmerid">
+    </form>
+  </div>
+
+  <br>
+
+  <div class="user-field-input">
+    <form class="form-inline">
+      <label>Contract Type:</label>
+      <input ng-disabled="!updating" class="form-control input-lg" type="text" ng-model="user.contractType">
+    </form>
+  </div>
+
+  <br>
+
+  <div class="user-field-input">
+    <form class="form-inline">
+      <label>Money in Bank: $</label>
+      <input ng-disabled="!updating" class="form-control input-lg" type="number" ng-model="user.bank">
+    </form>
+  </div>
+
+  <br>
+
+  <div class="user-field-input">
+    <form class="form-inline">
+      <label>Water Meter ID:</label>
+      <input ng-disabled="!updating" class="form-control input-lg" type="text" ng-model="user.watermeterNumber">
+  </div>
+
+  <button ng-show="!updating" class="btn btn-primary btn-lg" ng-click="updating=true">Update User</button>
+  <button ng-show="updating" class="btn btn-success btn-lg" ng-click="saveUser()">Save User</button>
+
+  <hr>
+
+  <h4>Sent Messages:</h4>
   <p ng-repeat="message in messages">{{ message.body }} - {{ message.date }}</p>
 </div>

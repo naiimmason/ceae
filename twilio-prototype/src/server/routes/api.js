@@ -6,6 +6,10 @@ var Message = require('../models/Message');
 var User = require('../models/User');
 var ReportPeriod = require('../models/ReportPeriod');
 var admins = require('../config/admins');
+var schedule = require('node-schedule');
+
+// CONSTANTS
+var submitAmount = 100;
 
 // =============================================================================
 // GET
@@ -83,8 +87,19 @@ router.get('/p/id/:id/m', loggedIn, isAdmin, function(req, res, next) {
   ReportPeriod.findById(req.params.id, function(err, period) {
     if (err) next(err);
 
-    Message.find({'_id': {$in: period.messageids}}, function(err, messages) {
+    Message.find({ '_id': { $in: period.messageids }}, function(err, messages) {
       res.json(messages);
+    });
+  });
+});
+
+// return a reporting periods submitted users
+router.get('/p/id/:id/u', loggedIn, isAdmin, function(req, res, next) {
+  ReportPeriod.findById(req.params.id, function(err, period) {
+    if (err) next(err);
+
+    User.find({ '_id': { $in: period.submittedUsers }}, function(err, users) {
+      res.json(users);
     });
   });
 });
@@ -95,8 +110,6 @@ router.get('/u/me', loggedIn, isAdmin, function(req, res, next) {
   req.user.admin = true;
   res.json(req.user);
 });
-
-
 
 // =============================================================================
 // POST
@@ -133,80 +146,92 @@ router.post('/m/receive', function(req, res, next) {
     if (err) next(err);
     if (user === null) {
       sendMessage(null, 'You are not part of our database! Contact a program ' +
-                  'administrator for further details.',  amessage.sender);
+                  'administrator for further details.', amessage.sender);
     } else {
-      ReportPeriod.find(function(err, periods) {
-        if (err) next(err);
-
-        reporting = false;
-
-        for(var i = 0; i < periods.length; i++) {
-          if(periods[i].startDate < now && periods[i].endDate > now) {
-            sendMessage(null, 'Thank you for reporting! Your value of \'' + amessage.body +
-                '\' has been stored.', amessage.sender);
-            periods[i].messageids.push(amessage._id);
-            periods[i].save();
-            reporting = true;
-          }
-        }
-
-        if(!reporting){
-          sendMessage(null, 'Reporting is not available right now.', amessage.sender);
-        }
-      });
-    }
-  });
-
-  res.json(amessage);
-});
-
-// A test post method that puts a new message in the database
-router.post('/m', function(req, res, next) {
-
-  amessage = {
-    sender: req.body.From,
-    body: req.body.Body,
-    sid: req.body.sid
-  };
-
-  Message.create(amessage, function(err, message) {
-    if (err) next(err);
-    amessage = message;
-  });
-
-  console.log(amessage);
-  now = Date.now();
-
-  User.findOne({ number: amessage.sender }, function(err, user) {
-    if (err) next(err);
-    if (user === null) {
-      sendMessage(null, 'You are not part of our database! Contact a program ' +
-                  'administrator for further details.',  amessage.sender);
-    } else {
+      // Check to see which command they sent.
+      // HELP COMMAND
+      if(amessage.body.toUpperCase() === 'HELP') {
+        sendMessage(null, 'Please call XXX-XXX-XXXX with your question and we will be sure' +
+          ' to get back to you within 24 hours. You can also email blank@example.com with' +
+          ' any questions.', amessage.sender);
+      }
+      // BALANCE COMMAND
+      else if(amessage.body.toUpperCase() === 'BALANCE') {
+        sendMessage(null, 'Dear ' + user.salutation + ' ' + user.lastname + ', '  +
+          'your current account balance is $'  + user.bank, amessage.sender);
+      }
+      // Check to see if it is a reporting period or not.
+      else {
+        // Iterate through all reporting periods checking against the current
+        // date
         ReportPeriod.find(function(err, periods) {
-        if (err) next(err);
+          if (err) next(err);
 
-        reporting = false;
-        for(var i = 0; i < periods.length; i++) {
-          if(periods[i].startDate < now && periods[i].endDate > now) {
-            sendMessage(null, 'Thank you for reporting! Your value of \'' + amessage.body +
-                '\' has been stored.', amessage.sender);
-            periods[i].messageids.push(amessage._id);
-            periods[i].save();
-            reporting = true;
+          reporting = false;
+          for(var i = 0, len = periods.length; i < len; i++) {
+            // If there is a reporting period tell them, update stuff as well
+            if(periods[i].startDate < now && periods[i].endDate > now) {
+              var messagestart = 'Thank you for your report, ' + user.salutation +
+                ' ' + user.lastname + '!';
+
+
+              // Iterate through all of the user's submitted periods to check to see
+              // if they ahve submitted already for this period
+              // TODO: FIX
+              console.log('PERIOD ID ' + periods[i]._id);
+              var submitted = false;
+              for(var j = 0, lenj = user.submittedPeriods.length; j < lenj; j++) {
+                if(periods[i]._id == user.submittedPeriods[j]) {
+                  submitted = true;
+                  sendMessage(err, messagestart + ' Both this value and your previous '  +
+                    'value(s) were recorded. We will use the most recent one.', amessage.sender);
+                }
+              }
+
+              console.log(submitted);
+
+              if(!submitted) {
+                // If they haven't submitted then update their shit
+                var tosend = messagestart;
+                // Depending on user contract type send different messages
+                if(user.contractType === 'A') {
+                  tosend += ' $' + submitAmount + ' remained on your VISA card ' +
+                    'for a total reamining of $' + (user.bank + submitAmount) + ' this year.';
+                }
+                else if (user.contractType === 'B') {
+                  tosend += ' $' + submitAmount + ' has been added to your VISA ' +
+                    'card for a total of $' + (user.bank + submitAmount) + ' this year.';
+                }
+                else {
+                  tosend += 'Your value of \'' + amessage.body + '\' has been stored.';
+                }
+                sendMessage(null, tosend, amessage.sender);
+
+                // Update the period and user objects then save them
+                periods[i].messageids.push(amessage._id);
+                periods[i].submittedUsers.push(user._id);
+                periods[i].save();
+                reporting = true;
+
+                user.bank = user.bank + submitAmount;
+                user.submittedPeriods.push(periods[i]._id);
+                user.save();
+              }
+            }
           }
-        }
 
-        if(!reporting){
-          sendMessage(null, 'Reporting is not available right now.', amessage.sender);
-        }
-      });
+          if(!reporting){
+            sendMessage(null, 'Reporting is not available right now.', amessage.sender);
+          }
+        });
+      }
     }
   });
 
   res.json(amessage);
 });
 
+// Broadcast a uniform message to every participent
 router.post('/m/broadcast', loggedIn, isAdmin, function(req, res, next){
   User.find(function(err, users) {
     if (err) next(err);
@@ -225,16 +250,49 @@ router.post('/u', function(req, res, next) {
     if (err) next(err);
     res.json(req.body);
 
-    sendMessage(err, 'You have been registered for the CBEAR water reporting program.', req.body.number);
+    sendMessage(err, 'Dear ' + req.body.salutation + ' ' + req.body.lastname +
+     ', \nYou have been registered for the CBEAR water reporting program. Text HELP ' +
+     'to receive help or if you have any questions. You may also text BALANCE to ' +
+     'this number to view your current account balance.', req.body.number);
   });
 });
 
 // ______________________________reporting period______________________________
-
+// Store the reporting periods
 router.post('/p', loggedIn, isAdmin, function(req, res, next) {
   ReportPeriod.create(req.body, function(err, period) {
     if (err) next(err);
+    // Create schduled jobs to send messages to everyone at certain points
     res.json(period);
+  });
+});
+
+
+
+var date = new Date(2015, 4, 18, 0, 56, 0);
+console.log(date);
+var now = new Date(Date.now());
+console.log(now);
+
+var j = schedule.scheduleJob(date, function() {
+  console.log('HERE IT IS');
+});
+// =============================================================================
+// PUT
+// =============================================================================
+router.put('/u', loggedIn, isAdmin, function(req, res, next) {
+  console.log(req.body);
+  User.findById(req.body._id, function(err, user) {
+    if(err) next(err);
+    user.firstname = req.body.firstname;
+    user.lastname = req.body.lastname;
+    user.salutation = req.body.salutation;
+    user.bank = req.body.bank;
+    user.contractType = req.body.contractType;
+    user.farmerid = req.body.farmerid;
+    user.updated = Date.now();
+    user.save();
+    res.json(user);
   });
 });
 
@@ -268,7 +326,7 @@ router.delete('/p/id/:id', loggedIn, isAdmin, function(req, res, next) {
 
 // Check to see if a user is logged in, if not, redirect them
 function loggedIn(req, res, next) {
-  if (req.user) {
+  if (req.isAuthenticated()) {
     next();
   } else {
     console.log('not logged in');
@@ -294,6 +352,8 @@ function isAdmin(req, res, next) {
   }
 }
 
+// Send a message to the specified number with that specific message, basically
+// a wrapper for the twilioclient
 function sendMessage(err, text, number) {
   textmessage = {
     to: number,
@@ -303,6 +363,7 @@ function sendMessage(err, text, number) {
   twilioclient.sendMessage(textmessage, messageSent(err, textmessage, number));
 }
 
+// Calls when you send a message
 function messageSent(err, text, number) {
   if (!err) {
     console.log('To: ' + number);

@@ -8,6 +8,10 @@
   <h4>Dates</h4>
   <p>Start: {{period.startDate}}</p>
   <p>End: {{period.endDate}}</p>
+  <h4>People Who Have Submitted</h4>
+  <ul>
+    <li ng-repeat="user in users">{{ user.salutation }} {{ user.lastname }}, {{ user.firstname }}</li>
+  </ul>
   <h4>Messages</h4>
   <ul>
     <li ng-repeat="message in messages">{{message.body}} - {{message.sender}}</li>

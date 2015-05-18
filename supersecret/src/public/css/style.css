@@ -79,6 +79,7 @@ input[type="range"]::-webkit-slider-thumb {
   display: inline-block;
   width: 49%;
   vertical-align: top;
+  padding-top: 75px;
 }
 
 .playerinputs {
