@@ -58,6 +58,22 @@
 
   <hr>
 
-  <h4>Sent Messages:</h4>
-  <p ng-repeat="message in messages">{{ message.body }} - {{ message.date }}</p>
+  <div class="col-md-6">
+    <h4>Sent Messages:</h4>
+    <p ng-repeat="message in messages">{{ message.body }} - {{ message.date }}</p>
+  </div>
+
+  <div class="col-md-6">
+    <h4>Periods Submitted:</h4>
+
+    <ul>
+      <li ng-repeat="submitted in user.submittedPeriods"><a href="/admin#/p/{{ submitted }}">{{ submitted }}</a></li>
+    </ul>
+
+    <h4>Missed Periods:</h4>
+
+    <ul>
+      <li ng-repeat="missed in user.missedPeriods"><a href="/admin#/p/{{ missed }}">{{ missed }}</a></li>
+    </ul>
+  </div>
 </div>

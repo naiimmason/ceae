@@ -155,7 +155,7 @@ router.post('/m/receive', function(req, res, next) {
       // HELP COMMAND
       if(amessage.body.toUpperCase() === 'HELP') {
         sendMessage(null, 'Please call XXX-XXX-XXXX with your question and we will be sure' +
-          ' to get back to you within 24 hours. You can also email blank@example.com with' +
+          ' to get back to you within 24 hours. You can also email GAwaterreporting@h2opolicycenter.org with' +
           ' any questions.', amessage.sender);
       }
       // BALANCE COMMAND
@@ -198,12 +198,12 @@ router.post('/m/receive', function(req, res, next) {
                 var tosend = messagestart;
                 // Depending on user contract type send different messages
                 if(user.contractType === 'A') {
-                  tosend += ' $' + submitAmount + ' remained on your VISA card ' +
-                    'for a total reamining of $' + (user.bank + submitAmount) + ' this year.';
+                  tosend += ' $' + submitAmount + ' hass been add to your VISA card ' +
+                    'for a total of $' + (user.bank + submitAmount) + ' this year.';
                 }
                 else if (user.contractType === 'B') {
-                  tosend += ' $' + submitAmount + ' has been added to your VISA ' +
-                    'card for a total of $' + (user.bank + submitAmount) + ' this year.';
+                  tosend += ' $' + submitAmount + ' has remained on your VISA ' +
+                    'card for a total remaining of $' + (user.bank + submitAmount) + ' this year.';
                 }
                 else {
                   tosend += 'Your value of \'' + amessage.body + '\' has been stored.';
@@ -269,24 +269,20 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
 
     // If the period has already started send out a message to all users saying
     // that the period has started
+    var alreadyStart = false;
     if(period.startDate < Date.now() && period.endDate > Date.now()) {
-      User.find(function(err, users) {
-        for(var i = 0, len = users.length; i < len; i++) {
-          sendMessage(err, 'Dear ' + users[i].salutation + ' ' + users[i].lastname +
-            ', a new reporting period has started between ' + period.startDate.toDateString() +
-            ' and ' + period.endDate.toDateString(), users[i].number);
-        }
-      });
+      alreadyStart = true;
     }
+    alreadyStart = false;
 
     // Calculate the evening before and the day before ending and print out to
     // console just to be sure
-    var eveningBefore = period.startDate;
+    var eveningBefore = new Date(period.startDate.toISOString());
     eveningBefore.setDate(period.startDate.getDate() - 1);
     eveningBefore.setHours(17);
     console.log(eveningBefore.toString());
 
-    var eveningEnding = period.endDate;
+    var eveningEnding = new Date(period.endDate.toISOString());
     eveningEnding.setDate(period.endDate.getDate() -1);
     console.log(eveningEnding.toString());
 
@@ -294,10 +290,19 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
     // period is coming up
     var eveningReminder = schedule.scheduleJob(eveningBefore, function() {
       User.find(function(err, users) {
+        if(err) next(err);
+
         for(var i = 0, len = users.length; i < len; i++) {
-          tosend = 'Dear ' + users[i].salutation + ' ' + users[i].lastname +
-            ', a new reporting period has started between ' + period.startDate.toDateString() +
-            ' and ' + period.endDate.toDateString() + '. ';
+          tosend = '';
+          if(alreadyStart) {
+            tosend += 'Dear ' + users[i].salutation + ' ' + users[i].lastname +
+              ', a new reporting period has started between ' + period.startDate.toDateString() +
+              ' and ' + period.endDate.toDateString() + '. ';
+          } else {
+            tosend += 'Dear ' + users[i].salutation + ' ' + users[i].lastname +
+              ', a new reporting period begins between ' + period.startDate.toDateString() +
+              ' and ' + period.endDate.toDateString() + '. ';
+          }
 
           if(users[i].contractType === 'A') {
             tosend += 'If you text your meter reading in the next three days ' +
@@ -311,20 +316,66 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
       });
     });
 
+    //Message.find({ '_id': { $in: period.messageids }}, function(err, messages) {
     // Create job to run with 24 hours left in reporting period
     var endingReminder = schedule.scheduleJob(eveningEnding, function() {
+      ReportPeriod.findById(period._id, function(err, theperiod) {
+        if (err) next(err);
+        User.find({ '_id': { $nin: theperiod.submittedUsers }}, function(err, users) {
+          if (err) next(err);
+          console.log('ENDING REMINDER');
+          console.log(users);
 
-    });
+          for(var i = 0, len = users.length; i < len; i++) {
+            tosend = 'Dear ' + users[i].salutation + ' ' + users[i].lastname +
+              ', only 24 hours are left to text your meter reading and ';
+
+            if(users[i].contractType === 'A') {
+              tosend += 'receive $' + submitAmount + ' on your VISA card.';
+            } else if(users[i].contractType === 'B') {
+              tosend += 'keep $' + submitAmount + ' on your VISA card.';
+            }
+
+            sendMessage(err, tosend, users[i].number);
+          }
+        });
+      });
+    });//.bind(null, period._id);
 
     // Create a job to run at the end of the period to tell people who have
     // failed to submit that they have failed.
+    var failedReminder = schedule.scheduleJob(period.endDate, function() {
+      ReportPeriod.findById(period._id, function(err, theperiod) {
+        if (err) next(err);
+
+        User.find({ '_id': { $nin: theperiod.submittedUsers }}, function(err, users) {
+          if (err) next(err);
+
+          for(var i = 0, len = users.length; i < len; i++) {
+            tosend = 'Dear ' + users[i].salutation + ' ' + users[i].lastname +
+              ', the reporting window from ' + theperiod.startDate.toDateString() + ' to ' +
+              theperiod.endDate.toDateString() + ' has closed. Unfortunately we did not ' +
+              'receive a report from you and thus cannot reward you. We hope that you ' +
+              'will be able to submit a report next month. Please text \'HELP\' ' +
+              'if you wish to speak to us via phone, or call directly at XXX-XXX-XXXX ' +
+              'or email us at GAwaterreporting@h2opolicycenter.org';
+            sendMessage(err, tosend, users[i].number);
+
+            theperiod.missedUsers.push(users[i]._id);
+            users[i].missedPeriods.push(theperiod._id);
+            users[i].save();
+          }
+
+          theperiod.save();
+        });
+      });
+    });
 
     res.json(period);
   });
 });
 
-
-
+// Just a test of schedule to make sure it works alright
 var date = new Date(2015, 4, 18, 0, 56, 0);
 console.log(date);
 var now = new Date(Date.now());

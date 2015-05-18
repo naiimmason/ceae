@@ -25,10 +25,33 @@ app.controller('UserController', ['$scope', '$routeParams', '$location', '$http'
   function($scope, $routeParams, $location, $http) {
     $scope.updating = false;
     $scope.messages = [];
+    $scope.missedPeriods = [];
+    $scope.submittedPeriods = [];
     $scope.user = {};
+
+    // function addToSubmitted(tosub) {
+    //   console.log('HERE');
+    //   console.log(tosub);
+    //   $scope.submittedPeriods.push(tosub);
+    // }
+
+    // function  addToMissed(tomiss) {
+    //   $scope.missedPeriods.push(tomiss);
+    // }
+
     $http.get('/api/u/id/' + $routeParams.id).success(function(data) {
       $scope.user = data;
-      $scope.originaluser = data;
+      // console.log(data);
+      // console.log(data.submittedPeriods);
+
+      // for(var i = 0, len = data.submittedPeriods.length; i < len; i++) {
+      //   console.log(data.submittedPeriods[i]);
+      //   $http.get('/api/p/id/' + data.submittedPeriods[i]).success(addToSubmitted(data));
+      // }
+
+      // for(i = 0, len = data.missedPeriods.length; i < len; i++) {
+      //   $http.get('/api/p/id/'  + data.missedPeriods[i]).success(addToMissed(data));
+      // }
     });
 
     $http.get('/api/u/id/' + $routeParams.id + '/m').success(function(data) {
