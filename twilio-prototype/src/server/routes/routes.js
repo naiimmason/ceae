@@ -1,14 +1,28 @@
-var path = require("path");
-var router = require("express").Router();
+var path = require('path');
+var router = require('express').Router();
 
 // Send the basic landing page for farmers to report their water meter usage
-router.get("/", function(req, res) {
-  res.sendFile(path.resolve("./src/client/html/index.html"));
+router.get('/', function(req, res) {
+  res.sendFile(path.resolve('./src/client/html/index.html'));
 });
 
 // The admin page
-router.get("/admin", loggedIn, isAdmin, function(req, res) {
-  res.sendFile(path.resolve("./src/client/html/admin.html"));
+router.get('/admin', loggedIn, isAdmin, function(req, res) {
+  res.sendFile(path.resolve('./src/client/html/admin.html'));
+});
+
+// The registration page
+router.get('/signup', function(req ,res) {
+  res.sendFile(path.resolve('./src/client/html/signup.html'));
+});
+
+// Instructions page
+router.get('/instructions', function(req, res) {
+  res.sendFile(path.resolve('./src/client/html/instructions.html'));
+});
+
+router.get('/success', function(req, res) {
+  res.sendFile(path.resolve('./src/client/html/success.html'));
 });
 
 // Check to see if a user is logged in, if not, redirect them
@@ -16,8 +30,8 @@ function loggedIn(req, res, next) {
   if (req.user) {
     next();
   } else {
-    console.log("not logged in");
-    res.redirect("/auth/google");
+    console.log('not logged in');
+    res.redirect('/auth/google');
   }
 }
 
@@ -35,7 +49,7 @@ function isAdmin(req, res, next) {
     next();
   }
   else {
-    res.redirect("/");
+    res.redirect('/');
   }
 }
 

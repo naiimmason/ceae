@@ -8,9 +8,10 @@
   <h4>Dates</h4>
   <p>Start: {{period.startDate}}</p>
   <p>End: {{period.endDate}}</p>
-  <h4>People Who Have Submitted</h4>
+
+  <h4>Meters Submitted</h4>
   <ul>
-    <li ng-repeat="user in users"><a href="/admin#/u/{{ user._id }}">{{ user.salutation }} {{ user.lastname }}, {{ user.firstname }}</a></li>
+    <li ng-repeat="meter in meters"><a href="/admin#/w/{{ user._id }}">{{{{ user.salutation }} {{ user.lastname }}, {{ user.firstname }}}}</a></li>
   </ul>
 
   <h4>Messages</h4>

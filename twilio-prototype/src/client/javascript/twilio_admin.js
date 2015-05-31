@@ -25,38 +25,21 @@ app.controller('UserController', ['$scope', '$routeParams', '$location', '$http'
   function($scope, $routeParams, $location, $http) {
     $scope.updating = false;
     $scope.messages = [];
-    $scope.missedPeriods = [];
-    $scope.submittedPeriods = [];
+    $scope.meters = [];
     $scope.user = {};
-
-    // function addToSubmitted(tosub) {
-    //   console.log('HERE');
-    //   console.log(tosub);
-    //   $scope.submittedPeriods.push(tosub);
-    // }
-
-    // function  addToMissed(tomiss) {
-    //   $scope.missedPeriods.push(tomiss);
-    // }
 
     $http.get('/api/u/id/' + $routeParams.id).success(function(data) {
       $scope.user = data;
-      // console.log(data);
-      // console.log(data.submittedPeriods);
-
-      // for(var i = 0, len = data.submittedPeriods.length; i < len; i++) {
-      //   console.log(data.submittedPeriods[i]);
-      //   $http.get('/api/p/id/' + data.submittedPeriods[i]).success(addToSubmitted(data));
-      // }
-
-      // for(i = 0, len = data.missedPeriods.length; i < len; i++) {
-      //   $http.get('/api/p/id/'  + data.missedPeriods[i]).success(addToMissed(data));
-      // }
     });
 
     $http.get('/api/u/id/' + $routeParams.id + '/m').success(function(data) {
       $scope.messages = data;
     });
+
+    $http.get('/api/u/id/'  + $routeParams.id + '/w').success(function(data) {
+      $scope.meters = data;
+    });
+
 
     // Save the new user information and send it to the server via a put method
     $scope.saveUser = function() {
@@ -287,6 +270,7 @@ app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParam
   function($scope, $http, $location, $routeParams) {
     $scope.messages = [];
     $scope.users = [];
+    $scope.meters = [];
     $scope.period = '';
     $scope.exportArray = [{ a: 'Cell Number', b: 'Farmer ID', c: 'Message Content',
       d: 'Contract Type', e: 'First Name', f: 'Last Name', g: 'Bank' }];
@@ -310,8 +294,8 @@ app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParam
       // Grab all users who have submitted and loop through each messages for
       // each user to pair up messages with the correct user then push it on
       // to the export array
-      $http.get('/api/p/id/' + $routeParams.id + '/u').success(function(users) {
-        $scope.users = users;
+      $http.get('/api/p/id/' + $routeParams.id + '/w').success(function(meters) {
+        $scope.meters = meters;
 
         for(var j = 0, lenj = tempexport.length; j < lenj; j++) {
           for(var k = 0, lenk = users.length; k < lenk; k++) {

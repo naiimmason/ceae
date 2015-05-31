@@ -6,7 +6,7 @@ var messageSchema = new Schema({
   body: String,
   date: { type: Date, default: Date.now },
   sid: String,
-  farmerid: Number
+  invitationid: Number
 });
 
 module.exports = mongoose.model("Message", messageSchema);

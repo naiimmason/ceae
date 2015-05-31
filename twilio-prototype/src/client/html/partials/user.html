@@ -22,8 +22,8 @@
 
   <div class="user-field-input">
     <form class="form-inline">
-      <label>ID Number: </label>
-      <input ng-disabled="!updating" class="form-control input-lg" type="number" ng-model="user.farmerid">
+      <label>Invitation Number: </label>
+      <input ng-disabled="!updating" class="form-control input-lg" type="number" ng-model="user.invitationid">
     </form>
   </div>
 
@@ -47,12 +47,6 @@
 
   <br>
 
-  <div class="user-field-input">
-    <form class="form-inline">
-      <label>Water Meter ID:</label>
-      <input ng-disabled="!updating" class="form-control input-lg" type="text" ng-model="user.watermeterNumber">
-  </div>
-
   <button ng-show="!updating" class="btn btn-primary btn-lg" ng-click="updating=true">Update User</button>
   <button ng-show="updating" class="btn btn-success btn-lg" ng-click="saveUser()">Save User</button>
 
@@ -64,16 +58,11 @@
   </div>
 
   <div class="col-md-6">
-    <h4>Periods Submitted:</h4>
+    <h4>Water Meters:</h4>
 
     <ul>
-      <li ng-repeat="submitted in user.submittedPeriods"><a href="/admin#/p/{{ submitted }}">{{ submitted }}</a></li>
+      <li ng-repeat="meter in meters"><a href="/admin#/w/{{ meter._id }}">{{ meter.serialnumber }}</a></li>
     </ul>
 
-    <h4>Missed Periods:</h4>
-
-    <ul>
-      <li ng-repeat="missed in user.missedPeriods"><a href="/admin#/p/{{ missed }}">{{ missed }}</a></li>
-    </ul>
   </div>
 </div>
