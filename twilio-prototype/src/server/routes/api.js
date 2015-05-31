@@ -351,7 +351,7 @@ router.post('/u', function(req, res, next) {
   if(c[req.body.invitationid]) {
     req.body.contractType = c[req.body.invitationid];
   } else {
-    req.body.contractType = 'D';
+    req.body.contractType = 'A';
   }
 
   console.log(req.body);
