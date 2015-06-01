@@ -4,6 +4,8 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
   invitationid: Number,
   number: String,
+  email: String,
+  payment: String,
   updated: { type: Date, default: Date.now },
   firstname: String,
   lastname: String,

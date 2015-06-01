@@ -456,40 +456,52 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
           console.log(meters);
 
           var userids = [];
+          var peepsubmitted = {};
           for(var i = 0, len = meters.length; i < len; i++) {
-            if(userids.indexOf(meters[i].user) === -1) {
+            console.log(userids.indexOf(meters[i].user));
+            if(userids.indexOf(meters[i].user) < 0) {
               userids.push(meters[i].user);
             }
           }
 
           for(i = 0, len = userids.length; i < len; i++) {
-            User.findOne({ '_id': userids[i] }, function(err, user) {
-              tosend = '';
-              if (err) next(err);
+            if(peepsubmitted[userids[i]]) {
 
-              if(user.contractType === 'A') {
-                tosend += m.A.closing.replace('%startdate%', theperiod.startDate.toDateString())
-                  .replace('%enddate%', theperiod.endDate.toDateString())
-                  .replace('%accountbalance%', user.bank);
-              }
-              else if(user.contractType === 'B') {
-                tosend += m.B.closing.replace('%startdate%', theperiod.startDate.toDateString())
-                  .replace('%enddate%', theperiod.endDate.toDateString())
-                  .replace('%accountbalance%', user.bank);
-              }
-              else if(user.contractType === 'C') {
-                tosend += m.C.closing.replace('%startdate%', theperiod.startDate.toDateString())
-                  .replace('%enddate%', theperiod.endDate.toDateString())
-                  .replace('%accountbalance%', user.bank);
-              }
-              else if(user.contractType === 'D') {
-                tosend += m.D.closing.replace('%startdate%', theperiod.startDate.toDateString)
-                  .replace('%enddate%', theperiod.endDate.toDateString())
-                  .replace('%accountbalance%', user.bank);
-              }
+            } else {
+              peepsubmitted[userids[i]] = 'done';
+              User.findOne({ '_id': userids[i] }, function(err, user) {
+                tosend = '';
+                if (err) next(err);
 
-              sendMessage(err, tosend, user.number);
-            });
+                if(user === null) {
+                  console.log('ERR: USER NOT FOUND ID OF "' + userids[i] + '"');
+                }
+                else if(user.contractType === 'A') {
+                  tosend += m.A.closing.replace('%startdate%', theperiod.startDate.toDateString())
+                    .replace('%enddate%', theperiod.endDate.toDateString())
+                    .replace('%accountbalance%', user.bank);
+                }
+                else if(user.contractType === 'B') {
+                  tosend += m.B.closing.replace('%startdate%', theperiod.startDate.toDateString())
+                    .replace('%enddate%', theperiod.endDate.toDateString())
+                    .replace('%accountbalance%', user.bank);
+                }
+                else if(user.contractType === 'C') {
+                  tosend += m.C.closing.replace('%startdate%', theperiod.startDate.toDateString())
+                    .replace('%enddate%', theperiod.endDate.toDateString())
+                    .replace('%accountbalance%', user.bank);
+                }
+                else if(user.contractType === 'D') {
+                  tosend += m.D.closing.replace('%startdate%', theperiod.startDate.toDateString)
+                    .replace('%enddate%', theperiod.endDate.toDateString())
+                    .replace('%accountbalance%', user.bank);
+                }
+
+                if(user != null) {
+                  sendMessage(err, tosend, user.number);
+                }
+              });
+            }
           }
         });
       });
@@ -507,11 +519,12 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
           if (err) next(err);
 
           var userids = [];
+          var peepsubmitted = {};
           var usermiss = {
 
           };
           for(var i = 0, len = meters.length; i < len; i++) {
-            if(userids.indexOf(meters[i].user) === -1) {
+            if(userids.indexOf(meters[i].user) < 0) {
               userids.push(meters[i].user);
             }
             if(usermiss[meters[i].user]) {
@@ -527,27 +540,34 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
           }
 
           for(i = 0, len = userids.length; i < len; i++) {
-            User.findOne({ '_id': userids[i] }, function(err, user) {
-              tosend = '';
-              if (err) next(err);
+            if(peepsubmitted[userids[i]]) {
 
-              tosend = 'Dear ' + user.salutation + ' ' + user.lastname +
-                ', the reporting window from ' + theperiod.startDate.toDateString() + ' to ' +
-                theperiod.endDate.toDateString() + ' has closed. Unfortunately we did not ' +
-                'receive a report for all of your meters from you and thus cannot reward you fully. We hope that you ' +
-                'will be able to submit a report next month. Please text \'HELP\' ' +
-                'if you wish to speak to us via phone, or call directly at XXX-XXX-XXXX ' +
-                'or email us at GAwaterreporting@h2opolicycenter.org';
+            } else {
+              peepsubmitted[userids[i]] = 'done';
+              User.findOne({ '_id': userids[i] }, function(err, user) {
+                tosend = '';
+                if (err) next(err);
 
-              if(user.contractType === 'C') {
-                user.bank -= (usermiss[users._id] * m.C.reportamt);
-              } else if(user.contractType === 'D') {
-                user.bank -= (usermiss[users._id] * m.C.reportamt);
-              }
+                if(user != null) {
+                  tosend = 'Dear ' + user.salutation + ' ' + user.lastname +
+                    ', the reporting window from ' + theperiod.startDate.toDateString() + ' to ' +
+                    theperiod.endDate.toDateString() + ' has closed. Unfortunately we did not ' +
+                    'receive a report for all of your meters from you and thus cannot reward you fully. We hope that you ' +
+                    'will be able to submit a report next month. Please text \'HELP\' ' +
+                    'if you wish to speak to us via phone, or call directly at XXX-XXX-XXXX ' +
+                    'or email us at GAwaterreporting@h2opolicycenter.org';
 
-              user.save();
-              sendMessage(err, tosend, user.number);
-            });
+                  if(user.contractType === 'C') {
+                    user.bank -= (usermiss[users._id] * m.C.reportamt);
+                  } else if(user.contractType === 'D') {
+                    user.bank -= (usermiss[users._id] * m.C.reportamt);
+                  }
+
+                  user.save();
+                  sendMessage(err, tosend, user.number);
+                }
+              });
+            }
           }
 
           theperiod.save();
@@ -581,6 +601,7 @@ router.put('/u', loggedIn, isAdmin, function(req, res, next) {
     user.salutation = req.body.salutation;
     user.bank = req.body.bank;
     user.contractType = req.body.contractType;
+    user.email = req.body.email;
     user.updated = Date.now();
     user.save();
     res.json(user);

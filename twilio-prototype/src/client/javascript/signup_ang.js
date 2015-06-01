@@ -25,7 +25,8 @@ app.controller('SignupController', ['$scope', '$http', '$window',
       'areacode': '',
       'firstthree': '',
       'lastfour': '',
-      'payment': 'VISA'
+      'payment': 'paypal',
+      'eamil': ''
     };
 
     $scope.checknum = {

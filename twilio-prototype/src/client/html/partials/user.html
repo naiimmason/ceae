@@ -31,6 +31,15 @@
 
   <div class="user-field-input">
     <form class="form-inline">
+      <label>Email: </label>
+      <input ng-disabled="!updating" class="form-control input-lg" type="text" ng-model="user.email">
+    </form>
+  </div>
+
+  <br>
+
+  <div class="user-field-input">
+    <form class="form-inline">
       <label>Contract Type:</label>
       <input ng-disabled="!updating" class="form-control input-lg" type="text" ng-model="user.contractType">
     </form>
