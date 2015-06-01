@@ -293,24 +293,24 @@ app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParam
 
       // Grab all users who have submitted and loop through each messages for
       // each user to pair up messages with the correct user then push it on
-      // to the export array
-      $http.get('/api/p/id/' + $routeParams.id + '/w').success(function(meters) {
-        $scope.meters = meters;
+      // // to the export array
+      // $http.get('/api/p/id/' + $routeParams.id + '/w').success(function(meters) {
+      //   $scope.meters = meters;
 
-        for(var j = 0, lenj = tempexport.length; j < lenj; j++) {
-          for(var k = 0, lenk = users.length; k < lenk; k++) {
-            if(tempexport[j].a === users[k].number) {
-              tempexport[j].d = users[k].contractType;
-              tempexport[j].e = users[k].firstname;
-              tempexport[j].f = users[k].lastname;
-              tempexport[j].g = users[k].bank;
-              break;
-            }
-          }
+      //   for(var j = 0, lenj = tempexport.length; j < lenj; j++) {
+      //     for(var k = 0, lenk = users.length; k < lenk; k++) {
+      //       if(tempexport[j].a === users[k].number) {
+      //         tempexport[j].d = users[k].contractType;
+      //         tempexport[j].e = users[k].firstname;
+      //         tempexport[j].f = users[k].lastname;
+      //         tempexport[j].g = users[k].bank;
+      //         break;
+      //       }
+      //     }
 
-          $scope.exportArray.push(tempexport[j]);
-        }
-      });
+      //     $scope.exportArray.push(tempexport[j]);
+      //   }
+      // });
     });
   }
 ]);
