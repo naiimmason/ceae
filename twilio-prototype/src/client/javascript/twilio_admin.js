@@ -4,16 +4,20 @@ var app = angular.module('twilio-admin', ['ngRoute', 'ngSanitize', 'ngCsv']);
 app.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider.when('/', {
-      templateUrl: '/html/partials/admin_home.html',
+      templateUrl: '../html/partials/admin_home.html',
       controller: 'AdminController'
     })
     .when('/u/:id', {
-      templateUrl: '/html/partials/user.html',
+      templateUrl: '../html/partials/user.html',
       controller: 'UserController'
     })
     .when('/p/:id', {
-      templateUrl: '/html/partials/report_period.html',
+      templateUrl: '../html/partials/report_period.html',
       controller: 'PeriodController'
+    })
+    .when('/w/:id', {
+      templateUrl: '../html/partials/meter.html',
+      controller: 'MeterController'
     })
     .otherwise({
       redirectTo: '/'
@@ -266,14 +270,17 @@ app.controller('AdminController', ['$scope', '$http', '$location',
 ]);
 
 // Show the current period information
-app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParams',
-  function($scope, $http, $location, $routeParams) {
+app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParams', '$interval',
+  function($scope, $http, $location, $routeParams, $interval) {
     $scope.messages = [];
     $scope.users = [];
     $scope.meters = [];
     $scope.period = '';
-    $scope.exportArray = [{ a: 'Cell Number', b: 'Farmer ID', c: 'Message Content',
-      d: 'Contract Type', e: 'First Name', f: 'Last Name', g: 'Bank' }];
+    $scope.seconds = 10;
+    $scope.allowExport = false;
+    $scope.exportArray = [{ a: 'Meter ID', b: 'user database id', c: 'First Name',
+      d: 'Last Name', e: 'Contract Type', f: 'Invite ID', g: 'Cell Number', h: 'Email',
+      i: 'Payment Method', j: 'Bank', k: 'Meter Value', l: 'Date Submitted'}];
 
     // Grab the period information
     $http.get('/api/p/id/' + $routeParams.id).success(function(data) {
@@ -283,34 +290,79 @@ app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParam
 
     // Grab all messages from that period
     $http.get('/api/p/id/' + $routeParams.id + '/m').success(function(data) {
-      // Loop  through each message and add its information to the temp export array
       var tempexport = [];
+      // Loop  through each message and add its information to the temp export array
       for(var i = 0, leni = data.length; i < leni; i++) {
-        tempexport.push({ a: data[i].sender, b: data[i].farmerid, c: data[i].body.replace(/,/g , '') });
+        //tempexport.push({ a: data[i].sender, b: data[i].farmerid, c: data[i].body.replace(/,/g , '') });
       }
 
       $scope.messages = data;
 
-      // Grab all users who have submitted and loop through each messages for
-      // each user to pair up messages with the correct user then push it on
-      // // to the export array
-      // $http.get('/api/p/id/' + $routeParams.id + '/w').success(function(meters) {
-      //   $scope.meters = meters;
+      $http.get('/api/p/id/' + $routeParams.id +  '/w').success(function(meters) {
+        $scope.meters = meters;
+        var tempusers = [];
+        for(var j = 0, lenj = meters.length; j < lenj; j++) {
+          //  console.log(meters[j]);
+          $scope.exportArray.push({ a: meters[j].serialnumber, l: meters[j].user });
+          if(tempusers.indexOf(meters[j].user) < 0) {
+            tempusers.push(meters[j].user);
+          }
+        }
 
-      //   for(var j = 0, lenj = tempexport.length; j < lenj; j++) {
-      //     for(var k = 0, lenk = users.length; k < lenk; k++) {
-      //       if(tempexport[j].a === users[k].number) {
-      //         tempexport[j].d = users[k].contractType;
-      //         tempexport[j].e = users[k].firstname;
-      //         tempexport[j].f = users[k].lastname;
-      //         tempexport[j].g = users[k].bank;
-      //         break;
-      //       }
-      //     }
+        for(j = 0, lenj = tempusers.length; j < lenj; j++) {
+          $http.get('/api/u/id/' + tempusers[j]).success(function(data) {
+            $scope.users.push(data);
+            for(var k = 0; k < $scope.exportArray.length; k++) {
+              if($scope.exportArray[k].l === data._id) {
+                $scope.exportArray[k].c = data.firstname;
+                $scope.exportArray[k].d = data.lastname;
+                $scope.exportArray[k].e = data.contractType;
+                $scope.exportArray[k].f = data.invitationid;
+                $scope.exportArray[k].g = data.number;
+                $scope.exportArray[k].h = data.email;
+                $scope.exportArray[k].i = data.payment;
+                $scope.exportArray[k].j = data.bank;
 
-      //     $scope.exportArray.push(tempexport[j]);
-      //   }
-      // });
+                for(var q = 0, lenq = $scope.messages.length; q < lenq; q++) {
+                  if($scope.messages[q].invitationid === data.invitationid && $scope.messages[q].body.split(',')[0] === $scope.exportArray[k].a) {
+                    console.log($scope.messages[q]);
+                    $scope.exportArray[k].b = $scope.messages[q].body.split(',')[1];
+                    $scope.exportArray[k].k = $scope.messages[q].date;
+                  }
+                }
+              }
+            }
+          });
+        }
+
+        var timer = $interval(function(){
+          console.log('hi');
+          $scope.seconds -= 1;
+          if($scope.seconds === 0) {
+
+            $scope.allowExport = true;
+            if (angular.isDefined(timer)) {
+              $interval.cancel(timer);
+              timer = undefined;
+            }
+          }
+        }, 1000);
+      });
+    });
+  }
+]);
+
+app.controller('MeterController', ['$scope', '$http', '$location', '$routeParams',
+  function($scope, $http, $location, $routeParams) {
+    $scope.meter = {};
+    $scope.user = {};
+
+    $http.get('/api/w/id/' + $routeParams.id).success(function(data) {
+      $scope.meter = data;
+
+      $http.get('/api/u/id/' + $scope.meter.user).success(function(data) {
+        $scope.user = data;
+      });
     });
   }
 ]);

@@ -11,12 +11,20 @@
 
   <h4>Meters Submitted</h4>
   <ul>
-<!--     <li ng-repeat="meter in meters"><a href="/admin#/w/{{ user._id }}">{{{{ user.salutation }} {{ user.lastname }}, {{ user.firstname }}}}</a></li>
- -->  </ul>
+    <li ng-repeat="meter in meters"><a href="/admin#/w/{{ meter._id }}">{{ meter.serialnumber }}</a></li>
+  <!--     <li ng-repeat="meter in meters"><a href="/admin#/w/{{ user._id }}">{{{{ user.salutation }} {{ user.lastname }}, {{ user.firstname }}}}</a></li>
+   -->
+  </ul>
+
+  <h4>Users Submitted</h4>
+  <ul>
+    <li ng-repeat="user in users"><a href="/admin#/u/{{ user._id }}">{{ user.salutation }} {{ user.lastname }}, {{ user.firstname }}</a></li>
+  </ul>
 
   <h4>Messages</h4>
   <ul>
     <li ng-repeat="message in messages">{{message.body}} - {{message.sender}}</li>
   </ul>
-  <button class="btn btn-primary" ng-csv="exportArray" filename="data.csv">Export to CSV</button>
+  <p ng-show="!allowExport">You must wait {{ seconds }} seconds while the CSV is being compiled...</p>
+  <button ng-disabled="!allowExport"  class="btn btn-primary" ng-csv="exportArray" filename="data.csv">Export to CSV</button>
 </div>

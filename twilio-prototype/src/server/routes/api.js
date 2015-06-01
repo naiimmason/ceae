@@ -75,7 +75,7 @@ router.get('/u/id/:id/w', loggedIn, isAdmin, function(req, res, next) {
   });
 });
 
-// ______________________________reporting period______________________________
+// ______________________________water meters______________________________
 // Get a specific meter
 router.get('/w/id/:id', loggedIn, isAdmin, function(req, res, next) {
   WaterMeter.findById(req.params.id, function(err, meter) {
@@ -115,7 +115,7 @@ router.get('/p/id/:id/m', loggedIn, isAdmin, function(req, res, next) {
   });
 });
 
-// return a reporting periods submitted users
+// return a reporting periods submitted meters
 router.get('/p/id/:id/w', loggedIn, isAdmin, function(req, res, next) {
   ReportPeriod.findById(req.params.id, function(err, period) {
     if (err) next(err);
@@ -126,6 +126,7 @@ router.get('/p/id/:id/w', loggedIn, isAdmin, function(req, res, next) {
   });
 });
 
+// Return a reporting periods submitted users
 router.get('/p/id/:id/u', loggedIn, isAdmin, function(req, res, next) {
   ReportPeriod.findById(req.params.id, function(err, period) {
     if(err) next(err);
@@ -266,10 +267,17 @@ router.post('/m/receive', function(req, res, next) {
                         // TODO: FIX
                         console.log('PERIOD ID ' + periodid);
                         for(var j = 0, lenj = meter.submittedPeriods.length; j < lenj; j++) {
-                          if(meter.submittedPeriods[j].equals(periodid)) {
+                          if(meter.submittedPeriods[j].equals(periodid) && !submitted) {
                             submitted = true;
                             sendMessage(err, messagestart + ' Both this value and your previous '  +
                               'value(s) were recorded. We will use the most recent one.', amessage.sender);
+
+                            // Update the period and user objects then save them
+                            ReportPeriod.findById(periodid, function(err, period) {
+                              if (err) next(err);
+                              period.messageids.push(amessage._id);
+                              period.save();
+                            });
                           }
                         }
 

@@ -49,6 +49,15 @@
 
   <div class="user-field-input">
     <form class="form-inline">
+      <label>Payment Method</label>
+      <input ng-disabled="!updating" class="form-control input-lg" type="text" ng-model="user.payment">
+    </form>
+  </div>
+
+  <br>
+
+  <div class="user-field-input">
+    <form class="form-inline">
       <label>Money in Bank: $</label>
       <input ng-disabled="!updating" class="form-control input-lg" type="number" ng-model="user.bank">
     </form>

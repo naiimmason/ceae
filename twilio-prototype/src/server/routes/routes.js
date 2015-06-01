@@ -12,7 +12,7 @@ router.get('/admin', loggedIn, isAdmin, function(req, res) {
 });
 
 // The registration page
-router.get('/signup', function(req ,res) {
+router.get('/signup/', function(req ,res) {
   res.sendFile(path.resolve('./src/client/html/signup.html'));
 });
 
