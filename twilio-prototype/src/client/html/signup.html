@@ -62,8 +62,10 @@
               <option value="Mr.">Mr.</option>
               <option value="Mrs.">Mrs.</option>
               <option value="Ms.">Ms.</option>
-              <option value="Sir">Sir</option>
-              <option value="Ma'am">Ma'am</option>
+              <option value="Miss">Miss</option>
+              <option value="Dr.">Dr.</option>
+              <option value="Rev.">Rev.</option>
+              <option value="Honorable">Honorable</option>
             </select>
           </div>
         </div>
@@ -104,7 +106,7 @@
             <select ng-disabled="submitted" class="form-control" ng-model="newuser.payment">
               <option value="paypal">PayPal</option>
               <option value="amazon">Amazon Gift Card</option>
-              <option value="walmart">Walmart</option>
+              <option value="walmart">Walmart Gift Card</option>
             </select>
           </div>
         </div>
@@ -163,14 +165,14 @@
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button ng-disabled="submitted" type="Submit" class="btn btn-success" ng-click="addCrop($index)">Add Another Crop</button>
+              <button ng-disabled="submitted" type="button" class="btn btn-success" ng-click="addCrop($index)">Add Another Crop</button>
             </div>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button ng-disabled="submitted" type="Submit" class="btn btn-success" ng-click="addMeter()">Add Another Meter</button>
+            <button ng-disabled="submitted" type="button" class="btn btn-success" ng-click="addMeter()">Add Another Meter</button>
           </div>
         </div>
 
@@ -178,7 +180,8 @@
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button ng-disabled="useraddition.$invalid || submitted" ng-click="addUser()" type="Submit" class="btn btn-primary" id="submitUser">Register</button>
+            <p ng-show="!submitted">Something has not been filled out properly! Please scan the registration form to make sure all boxes have turned green, indicating that they are filled in correctly.</p>
+            <button ng-disabled="useraddition.$invalid || submitted" ng-click="addUser()" type="button" class="btn btn-primary" id="submitUser">Register</button>
           </div>
         </div>
       </form>
