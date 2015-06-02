@@ -151,7 +151,7 @@ router.get('/u/me', loggedIn, isAdmin, function(req, res, next) {
 // POST
 // =============================================================================
 
-// _____________________________messags______________________________
+// _____________________________messages______________________________
 
 // Receive a post a request from
 router.post('/m/receive', function(req, res, next) {
@@ -187,16 +187,27 @@ router.post('/m/receive', function(req, res, next) {
         amessage.save();
 
         // Check to see which command they sent.
-        // HELP COMMAND
-        if(amessage.body.toUpperCase() === 'HELP') {
-          sendMessage(null, 'Please call XXX-XXX-XXXX with your question and we will be sure' +
-            ' to get back to you within 24 hours. You can also email GAwaterreporting@h2opolicycenter.org with' +
-            ' any questions.', amessage.sender);
+        // SUPPORT COMMAND
+        if(amessage.body.toUpperCase() === 'SUPPORT') {
+          sendMessage(null, 'Someone will call you within 4 hours between 8am and ' +
+            ' 8pm or you can call (229) 329-8389 and leave a voice mail. You can ' +
+            'also email GAwaterreporting@h2opolicycenter.org with any questions. ' +
+            'Text METERS to receive an automated response listing your registered ' +
+            'meters. Text BALANCE to view your current account balance.', amessage.sender);
         }
         // BALANCE COMMAND
         else if(amessage.body.toUpperCase() === 'BALANCE') {
-          sendMessage(null, 'Dear ' + user.salutation + ' ' + user.lastname + ', '  +
-            'your current account balance is $'  + user.bank, amessage.sender);
+          tosend = 'Dear ' + user.salutation + ' ' + user.lastname + ', '  +
+              'your current account balance is $'  + user.bank + '\n';
+          WaterMeter.find({ '_id': { $in: user.watermeters }}, function(err, meters) {
+            if (err) next(err);
+
+            for(var i = 0, len = meters.length; i < len; i++) {
+              tosend += 'Meter ' + meters[i].serialnumber + ': $' + meters[i].balance + '\n';
+            }
+
+            sendMessage(null, tosend, amessage.sender);
+          });
         }
 
         // METERS COMMAND
@@ -223,17 +234,17 @@ router.post('/m/receive', function(req, res, next) {
             rnumber = amessage.body.split(',')[1].replace(/[^0-9]/g, '');
           }
 
-          if(amessage.body.split(',').length != 2) {
+          if(amessage.body.split(',').length !== 2) {
             validmsg = false;
             sendMessage(null, m.ALL.nocomma, amessage.sender);
           }
 
-          else if(snumber.length != 7) {
+          else if(snumber.length !== 7) {
             validmsg = false;
             sendMessage(null, m.ALL.serialerror.replace('%theirtext%', '"'  + amessage.body + '"'), amessage.sender);
           }
 
-          else if(rnumber.length != 6) {
+          else if(rnumber.length !== 6) {
             validmsg = false;
             sendMessage(null, m.ALL.readingerror.replace('%theirtext%', '"'  + amessage.body + '"'), amessage.sender);
           }
@@ -291,17 +302,23 @@ router.post('/m/receive', function(req, res, next) {
                           // Depending on user contract type send different messages
                           if(user.contractType === 'A') {
                             user.bank += m.A.reportamt;
-                            tosend += m.A.thankyou.replace('%accountbalance%', user.bank);
+                            meter.balance += m.A.reportamt;
+                            tosend += m.A.thankyou.replace('%meterbalance%', meter.balance)
+                              .replace('%meternumber%', meter.serialnumber);
                           }
                           else if (user.contractType === 'B') {
                             user.bank += m.B.reportamt;
-                            tosend += m.B.thankyou.replace('%accountbalance%', user.bank);
+                            meter.balance += m.B.reportamt;
+                            tosend += m.B.thankyou.replace('%meterbalance%', meter.balance)
+                              .replace('%meternumber%', meter.serialnumber);
                           }
                           else if(user.contractType === 'C') {
-                            tosend += m.C.thankyou.replace('%accountbalance%', user.bank);
+                            tosend += m.C.thankyou.replace('%meterbalance%', meter.balance)
+                              .replace('%meternumber%', meter.serialnumber);
                           }
                           else if(user.contractType === 'D') {
-                            tosend += m.D.thankyou.replace('%accountbalance%', user.bank);
+                            tosend += m.D.thankyou.replace('%meterbalance%', meter.balance)
+                              .replace('%meternumber%', meter.serialnumber);
                           }
                           else {
                             tosend += 'Your value of \'' + rnumber + '\' has been stored.';
@@ -319,6 +336,10 @@ router.post('/m/receive', function(req, res, next) {
                           reporting = true;
                           user.save();
                           meter.submittedPeriods.push(periodid);
+                          meter.previousBalances.push({
+                            period: periodid,
+                            balance: meter.balance
+                          });
                           meter.save();
                         }
                       }
@@ -388,9 +409,11 @@ router.post('/w', function(req, res, next) {
       if(err) next(err);
       user.watermeters.push(meter._id);
       if(user.contractType === 'C' || user.contractType === 'D') {
-        user.bank += 350;
+        user.bank = req.body.numberofmeters * m.C.startamt;
+        meter.balance = m.C.startamt;
       }
       user.save();
+      meter.save();
     });
   });
 });
@@ -417,6 +440,11 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
     eveningBefore.setHours(17);
     console.log(eveningBefore.toString());
 
+    var morningDayOne = new Date(period.startDate.toISOString());
+    morningDayOne.setDate(period.startDate.getDate());
+    morningDayOne.setHours(9);
+    console.log(morningDayOne.toString());
+
     var eveningEnding = new Date(period.endDate.toISOString());
     eveningEnding.setDate(period.endDate.getDate() -1);
     console.log(eveningEnding.toString());
@@ -432,27 +460,48 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
 
           if(users[i].contractType === 'A') {
             tosend += m.A.opening.replace('%startdate%', period.startDate.toDateString())
-              .replace('%enddate%', period.endDate.toDateString())
-              .replace('%accountbalance%', users[i].bank);
+              .replace('%enddate%', period.endDate.toDateString());
           } else if(users[i].contractType === 'B'){
             tosend += m.B.opening.replace('%startdate%', period.startDate.toDateString())
-              .replace('%enddate%', period.endDate.toDateString())
-              .replace('%accountbalance%', users[i].bank);
+              .replace('%enddate%', period.endDate.toDateString());
           } else if(users[i].contractType === 'C') {
             tosend += m.C.opening.replace('%startdate%', period.startDate.toDateString())
-              .replace('%enddate%', period.endDate.toDateString())
-              .replace('%accountbalance%', users[i].bank);
+              .replace('%enddate%', period.endDate.toDateString());
           } else if(users[i].contractType === 'D') {
             tosend += m.D.opening.replace('%startdate%', period.startDate.toDateString())
-              .replace('%enddate%', period.endDate.toDateString())
-              .replace('%accountbalance%', users[i].bank);
+              .replace('%enddate%', period.endDate.toDateString());
           }
           sendMessage(err, tosend, users[i].number);
         }
       });
     });
 
-    //Message.find({ '_id': { $in: period.messageids }}, function(err, messages) {
+    var morningReminder = schedule.scheduleJob(morningDayOne, function() {
+      User.find(function(err, users) {
+        if (err) next(err);
+
+        for(var i = 0, len = users.length; i < len; i++) {
+          tosend = '';
+
+          if(users[i].contractType === 'A') {
+            tosend += m.A.morning.replace('%startdate%', period.startDate.toDateString())
+              .replace('%enddate%', period.endDate.toDateString());
+          } else if(users[i].contractType === 'B'){
+            tosend += m.B.morning.replace('%startdate%', period.startDate.toDateString())
+              .replace('%enddate%', period.endDate.toDateString());
+          } else if(users[i].contractType === 'C') {
+            tosend += m.C.morning.replace('%startdate%', period.startDate.toDateString())
+              .replace('%enddate%', period.endDate.toDateString());
+          } else if(users[i].contractType === 'D') {
+            tosend += m.D.morning.replace('%startdate%', period.startDate.toDateString())
+              .replace('%enddate%', period.endDate.toDateString());
+          }
+          sendMessage(err, tosend, users[i].number);
+        }
+      });
+    });
+
+    // Message.find({ '_id': { $in: period.messageids }}, function(err, messages) {
     // Create job to run with 24 hours left in reporting period
     // Change this to meters instead of users
     var endingReminder = schedule.scheduleJob(eveningEnding, function() {
@@ -486,26 +535,22 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
                 }
                 else if(user.contractType === 'A') {
                   tosend += m.A.closing.replace('%startdate%', theperiod.startDate.toDateString())
-                    .replace('%enddate%', theperiod.endDate.toDateString())
-                    .replace('%accountbalance%', user.bank);
+                    .replace('%enddate%', theperiod.endDate.toDateString());
                 }
                 else if(user.contractType === 'B') {
                   tosend += m.B.closing.replace('%startdate%', theperiod.startDate.toDateString())
-                    .replace('%enddate%', theperiod.endDate.toDateString())
-                    .replace('%accountbalance%', user.bank);
+                    .replace('%enddate%', theperiod.endDate.toDateString());
                 }
                 else if(user.contractType === 'C') {
                   tosend += m.C.closing.replace('%startdate%', theperiod.startDate.toDateString())
-                    .replace('%enddate%', theperiod.endDate.toDateString())
-                    .replace('%accountbalance%', user.bank);
+                    .replace('%enddate%', theperiod.endDate.toDateString());
                 }
                 else if(user.contractType === 'D') {
                   tosend += m.D.closing.replace('%startdate%', theperiod.startDate.toDateString())
-                    .replace('%enddate%', theperiod.endDate.toDateString())
-                    .replace('%accountbalance%', user.bank);
+                    .replace('%enddate%', theperiod.endDate.toDateString());
                 }
 
-                if(user != null) {
+                if(user !== null) {
                   sendMessage(err, tosend, user.number);
                 }
               });
@@ -541,8 +586,40 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
               usermiss[meters[i].user] = 1;
             }
 
-            meters[i].missedPeriods.push(theperiod._id);
-            meters[i].save();
+            (function(i) {
+              User.findOne({ '_id': meters[i].user }, function(err, user) {
+                if(user !== null) {
+                  if(user.contractType === 'C') {
+                    meters[i].balance -= m.C.reportamt;
+                    user.bank -= m.C.reportamt;
+                  } else if(user.contractType === 'D') {
+                    if(meters[i].missedPeriods.length === 1){
+                      meters[i].balance -= m.D.missedamt1;
+                      user.bank -= m.D.missedamt1;
+                    } else if(meters[i].missedPeriods.length === 2) {
+                      meters[i].balance -= m.D.missedamt2;
+                      user.bank -= m.D.missedamt2;
+                    } else if(meters[i].missedPeriods.length === 3) {
+                      meters[i].balance -= m.D.missedamt3;
+                      user.bank -= m.D.missedamt3;
+                    } else if(meters[i].missedPeriods.length === 4) {
+                      meters[i].balance -= m.D.missedamt4;
+                      user.bank -= m.D.missedamt4;
+                    } else {
+                      meters[i].balance = 0 ;
+                    }
+                  }
+
+                  meters[i].previousBalances.push({
+                    period: theperiod._id,
+                    balance: meters[i].balance
+                  });
+                  meters[i].missedPeriods.push(theperiod._id);
+                  meters[i].save();
+                user.save();
+                }
+              });
+            } (i));
             theperiod.missedMeters.push(meters[i]._id);
             theperiod.save();
           }
@@ -556,20 +633,14 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
                 tosend = '';
                 if (err) next(err);
 
-                if(user != null) {
+                if(user !== null) {
                   tosend = 'Dear ' + user.salutation + ' ' + user.lastname +
                     ', the reporting window from ' + theperiod.startDate.toDateString() + ' to ' +
                     theperiod.endDate.toDateString() + ' has closed. Unfortunately we did not ' +
                     'receive a report for all of your meters from you and thus cannot reward you fully. We hope that you ' +
-                    'will be able to submit a report next month. Please text \'HELP\' ' +
-                    'if you wish to speak to us via phone, or call directly at XXX-XXX-XXXX ' +
+                    'will be able to submit a report next month. Please text SUPPORT '+
+                    'if you wish to speak to us via phone, or call directly at (229) 329-8389 ' +
                     'or email us at GAwaterreporting@h2opolicycenter.org';
-
-                  if(user.contractType === 'C') {
-                    user.bank -= (usermiss[users._id] * m.C.reportamt);
-                  } else if(user.contractType === 'D') {
-                    user.bank -= (usermiss[users._id] * m.C.reportamt);
-                  }
 
                   user.save();
                   sendMessage(err, tosend, user.number);
@@ -600,6 +671,7 @@ var j = schedule.scheduleJob(date, function() {
 // =============================================================================
 // PUT
 // =============================================================================
+// Update a certain user object
 router.put('/u', loggedIn, isAdmin, function(req, res, next) {
   console.log(req.body);
   User.findById(req.body._id, function(err, user) {

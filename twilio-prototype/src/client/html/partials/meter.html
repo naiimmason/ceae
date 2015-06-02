@@ -7,6 +7,8 @@
   <a href="/admin#/"><button class="btn btn-success">Back</button></a>
 
   <h4>User: <a href="/admin#/u/{{ user._id }}">{{ user.salutation }} {{ user.lastname }}, {{ user.firstname }}</a></h4>
+
+  <h4>Balance: ${{ meter.balance }}</h4>
   <h4>Submitted Values</h4>
   <ul>
     <li ng-repeat="data in meter.submittedValues">Value: {{ data.value }}, Date: {{ data.date }}</li>

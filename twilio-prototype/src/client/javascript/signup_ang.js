@@ -95,6 +95,7 @@ app.controller('SignupController', ['$scope', '$http', '$window',
             ameter.crops += $scope.meters[i].crops[j].type + ': ' + ameter[j].acres + ', ';
           }
 
+          ameter.numberofmeters = $scope.meters.length;
           $http.post('/api/w', transformRequest(ameter), options).success(function(anothermeter) {
             console.log(anothermeter);
           });
