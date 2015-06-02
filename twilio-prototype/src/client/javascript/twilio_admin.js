@@ -278,7 +278,7 @@ app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParam
     $scope.period = '';
     $scope.seconds = 10;
     $scope.allowExport = false;
-    $scope.exportArray = [{ a: 'Meter ID', b: 'user database id', c: 'First Name',
+    $scope.exportArray = [{ a: 'Meter Serial Number', b: 'user database id', c: 'First Name',
       d: 'Last Name', e: 'Contract Type', f: 'Invite ID', g: 'Cell Number', h: 'Email',
       i: 'Payment Method', j: 'Bank', k: 'Meter Value', l: 'Date Submitted'}];
 
@@ -291,10 +291,6 @@ app.controller('PeriodController', ['$scope', '$http', '$location', '$routeParam
     // Grab all messages from that period
     $http.get('/api/p/id/' + $routeParams.id + '/m').success(function(data) {
       var tempexport = [];
-      // Loop  through each message and add its information to the temp export array
-      for(var i = 0, leni = data.length; i < leni; i++) {
-        //tempexport.push({ a: data[i].sender, b: data[i].farmerid, c: data[i].body.replace(/,/g , '') });
-      }
 
       $scope.messages = data;
 
