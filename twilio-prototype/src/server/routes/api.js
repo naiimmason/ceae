@@ -500,7 +500,7 @@ router.post('/p', loggedIn, isAdmin, function(req, res, next) {
                     .replace('%accountbalance%', user.bank);
                 }
                 else if(user.contractType === 'D') {
-                  tosend += m.D.closing.replace('%startdate%', theperiod.startDate.toDateString)
+                  tosend += m.D.closing.replace('%startdate%', theperiod.startDate.toDateString())
                     .replace('%enddate%', theperiod.endDate.toDateString())
                     .replace('%accountbalance%', user.bank);
                 }
