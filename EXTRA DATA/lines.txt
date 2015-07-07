@@ -1,0 +1,352 @@
+Monitor
+320, None, 3, Fried, 2, Nauti Pilgrim oysters from Plymouth Rock MA., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Long Island NY. These are wild-caught oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters. ,,,,, 1.43248238844, 1.1999991806, 1.16090468256, 1.83191974875, 3.25455433731, 1.54989840362 ,,,,, Yes, No, No, Yes, No, Yes
+
+900, C, 3, In a bag with ice, 1, moderate, low, unknown, high, low, unknown, moderate, high ,,,,, 2.41624455272, 2.19376552633, 1.70524986155, 1.67075404297, 1.23443563355, 1.53686429202, 1.37492952464, 1.97975298682 ,,,,, No, No, No, No, Yes, No, No, No
+
+490, None, 6, In a bag with ice, 5, Blue Point oysters from Long Island NY., Nauti Pilgrim oysters from Plymouth Rock MA., Little Bitches oysters from Chesapeake Bay in VA., Blue Point oysters. These are wild-caught oysters., Blue Point oysters. These are wild-caught oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 2.27302188921, 2.24227450903, 1.50136238182, 1.04724980081, 2.37422540069, 1.82263580513 ,,,,, No, No, No, No, No, Yes
+
+1264, C, 3, Fried, 7, moderate, unknown, unknown, high, low, low, high, moderate ,,,,, 1.50030571774, 2.09499548518, 1.58254304293, 2.20322987556, 2.13186784504, 0.269035466157, 1.01529365348, 0.632240775356 ,,,,, Yes, No, No, Yes, No, Yes, No, Yes
+
+1080, B, 3, Fried, 5, unknown, unknown, high, low, low, moderate, high, moderate ,,,,, 0.812978141068, 1.32587982036, 1.07569045651, 1.85274758987, 1.55276070124, 1.46315150147, 1.55877145627, 0.697841392171 ,,,,, No, No, No, Yes, Yes, Yes, No, Yes
+
+1396, C, 3, In a bag with ice, 7, moderate, high, moderate, unknown, high, low, low, unknown ,,,,, 1.86904540212, 1.41380413555, 1.37647956694, 0.486609574556, 1.47411625469, 1.17785722438, 1.6216901738, 1.29964060552 ,,,,, No, No, No, No, No, Yes, Yes, No
+
+1266, A, 3, Fried, 8, unknown, moderate, unknown, low, moderate, low, high, high ,,,,, 2.66616261607, 1.6824543492, 1.22024615969, 1.91786641565, 0.757903754204, 2.71662035612, 2.39215508056, 1.22208663673 ,,,,, No, No, No, No, Yes, No, No, No
+
+1298, None, 3, Raw on the half shell, 4, Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters., Blue Point oysters from Long Island NY., Little Bitches oysters. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 1.86770251562, 0.978168445792, 1.33662205358, 1.10571394829, 1.67760319175, 1.49355439624 ,,,,, No, Yes, Yes, No, No, Yes
+
+1181, None, 3, Fried, 4, Nauti Pilgrim oysters from Plymouth Rock MA., Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Blue Point oysters. These are wild-caught oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 1.25563020758, 0.89204386932, 1.08576470507, 1.9460013689, 2.05474824757, 1.46470052831 ,,,,, Yes, No, No, No, Yes, No
+
+1351, None, 3, Fried, 2, Oysters from Long Island NY. These are wild-caught oysters., Blue Point oysters from Long Island NY., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Long Island NY. These are wild-caught oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 1.24499024187, 1.76840251481, 1.89891612135, 0.92367969041, 0.11748841415, 1.15313186774 ,,,,, No, No, No, Yes, Yes, No
+
+1035, C, 3, Raw on the half shell, 5, moderate, moderate, unknown, low, high, high, low, unknown ,,,,, 0.797785256326, 0.860060562724, 0.906751665946, 1.98037965566, 2.00544827338, 1.73565751513, 2.6151780536, 2.39639398271 ,,,,, No, No, No, No, Yes, Yes, No, No
+
+1383, C, 3, Fried, 4, low, low, moderate, high, moderate, unknown, high, unknown ,,,,, 2.14120195657, 0.391028808842, 1.53025375736, 1.00254525823, 1.7092443581, 1.11169091622, 1.28184362856, 0.374170175285 ,,,,, No, No, Yes, No, No, No, No, No
+
+1316, A, 3, Fried, 3, moderate, unknown, low, low, high, high, moderate, unknown ,,,,, 1.36684382416, 0.661287002114, 1.31453811474, 2.79072128303, 1.72944682839, 2.25332953774, 1.54245718353, 1.8005196159 ,,,,, No, Yes, Yes, No, No, Yes, Yes, Yes
+
+1296, C, 3, Fried, 1, moderate, moderate, high, unknown, low, low, high, unknown ,,,,, 2.4427236263, 1.74355681021, 1.36161708916, 2.32059229437, 2.00477954253, 1.09456997851, 2.82768391382, 0.939566684727 ,,,,, No, Yes, Yes, No, No, Yes, No, No
+
+1164, B, 6, Fried, 7, moderate, moderate, low, unknown, high, high, low, unknown ,,,,, 1.22148577291, 2.13095213122, 1.85262362044, 1.88817340703, 1.32615153281, 1.66416119452, 1.76354554267, 0.869360358903 ,,,,, Yes, No, No, No, Yes, Yes, No, Yes
+
+1232, None, 12, Fried, 6, Nauti Pilgrim oysters from Plymouth Rock MA., Blue Point oysters from Long Island NY., Oysters from Plymouth Rock MA. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters. ,,,,, 2.54733275159, 1.34779188962, 2.11499414971, 0.418726092836, 0.945530702148, 1.87383081697 ,,,,, Yes, No, Yes, Yes, Yes, Yes
+
+8323, A, 3, Fried, 2, high, moderate, moderate, low, unknown, unknown, low, high ,,,,, 0.464474406926, 2.4927790219, 1.35251884894, 0.378561356606, 1.36823967138, 0.814132426835, 1.55566906702, 1.07903773372 ,,,,, No, No, No, Yes, No, No, No, No
+
+1134, B, 9, Fried, 2, unknown, high, moderate, high, moderate, low, unknown, low ,,,,, 2.21202785568, 0, 0.942047721983, 2.06677208795, 1.28836012514, 0.283402277369, 1.47421580285, 0.915207576352 ,,,,, No, Yes, Yes, No, No, Yes, No, Yes
+
+1149, C, 3, Fried, 6, moderate, low, unknown, low, unknown, moderate, high, high ,,,,, 2.73033814442, 2.51235480973, 1.70028946114, 1.64165028088, 1.94044139838, 0.667266297988, 0.957437292724, 1.68476897499 ,,,,, No, No, No, No, No, No, Yes, No
+
+1096, B, 6, Fried, 5, low, unknown, low, unknown, high, moderate, high, moderate ,,,,, 1.69940848371, 1.68408224288, 2.59520333123, 0.917541600943, 1.56232537285, 0.757242198097, 1.252787585, 0.897688717364 ,,,,, Yes, No, No, Yes, No, Yes, No, Yes
+
+1265, C, 3, Fried, 3, moderate, high, moderate, unknown, low, low, unknown, high ,,,,, 1.42393379724, 1.23092962406, 0, 0.914279631858, 1.42445791597, 1.48851305397, 2.20861487101, 1.68833720146 ,,,,, No, No, Yes, No, No, No, No, No
+
+1348, None, 6, Raw on the half shell, 5, Blue Point oysters from Long Island NY., Nauti Pilgrim oysters from Plymouth Rock MA., Nauti Pilgrim oysters from Plymouth Rock MA., Blue Point oysters. These are wild-caught oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Blue Point oysters from Long Island NY. ,,,,, 2.00306721589, 2.43324841281, 0.438592729462, 2.04714094432, 0.544559175928, 1.2708816142 ,,,,, No, No, No, Yes, No, No
+
+1299, None, 12, Raw on the half shell, 4, Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters., Little Bitches oysters. These are aquacultured oysters. ,,,,, 1.25496762741, 1.74992877195, 1.42445215891, 1.6663345002, 1.83354236677, 1.92192390709 ,,,,, Yes, No, Yes, Yes, No, No
+
+1300, C, 3, Fried, 8, high, high, unknown, unknown, low, low, moderate, moderate ,,,,, 1.67756701565, 0.92731736275, 1.74759603613, 1.50815114396, 1.39778867791, 0.933893171832, 1.50891729024, 1.56178532364 ,,,,, No, Yes, No, No, No, No, No, No
+
+1098, B, 3, Fried, 4, moderate, low, unknown, low, high, moderate, high, unknown ,,,,, 2.22744120923, 1.89741912952, 2.04741773084, 2.75045049164, 1.55677229869, 2.37175957101, 2.08914090831, 1.43769526881 ,,,,, No, No, No, No, Yes, No, No, Yes
+
+1380, A, 6, Raw on the half shell, 4, high, low, moderate, unknown, moderate, unknown, low, high ,,,,, 1.02634134861, 1.62448343517, 2.47603355295, 1.47275528977, 1.17026521481, 1.53412281474, 1.22190775634, 2.03381242678 ,,,,, Yes, No, No, No, No, No, No, No
+
+1399, None, 9, Raw on the half shell, 2, Oysters from Long Island NY. These are wild-caught oysters., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters. ,,,,, 1.90097328704, 1.15901150801, 1.25947001884, 1.6971780038, 2.37911576865, 2.5608764364 ,,,,, No, No, No, No, No, No
+
+750, None, 6, Fried, 1, Little Bitches oysters. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Blue Point oysters from Long Island NY., Oysters from Long Island NY. These are wild-caught oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 1.10857149025, 1.72168649468, 2.12760915202, 0.921936469037, 1.52907854574, 2.1329703055 ,,,,, Yes, No, No, Yes, Yes, No
+
+1133, None, 3, Fried, 3, Little Bitches oysters from Chesapeake Bay in VA., Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Nauti Pilgrim oysters from Plymouth Rock MA., Blue Point oysters. These are wild-caught oysters., Little Bitches oysters. These are aquacultured oysters. ,,,,, 0.559695905874, 2.59340539516, 1.76442405467, 1.89545523302, 1.63649272969, 1.86813591488 ,,,,, Yes, No, No, No, No, No
+
+875, C, 3, Fried, 2, low, high, moderate, high, unknown, unknown, moderate, low ,,,,, 2.3584234468, 1.44130902894, 1.8569278435, 3.19110806826, 2.5944757725, 1.82814929264, 1.97362948318, 1.99939607301 ,,,,, No, No, No, No, No, No, Yes, No
+
+1148, A, 3, Fried, 5, unknown, low, moderate, low, moderate, high, high, unknown ,,,,, 1.8157348236, 1.71597264985, 2.10773386758, 1.36530665922, 1.70837617566, 1.64037373784, 0.887083866623, 2.04810732578 ,,,,, No, No, No, Yes, Yes, Yes, Yes, No
+
+916, B, 3, Fried, 6, unknown, unknown, moderate, low, high, moderate, high, low ,,,,, 2.38687873973, 2.43592152371, 2.21928446086, 0.871959645106, 1.43809157592, 0.140695416465, 1.52248882491, 2.05540652911 ,,,,, No, No, No, Yes, No, Yes, No, Yes
+
+1234, A, 3, Fried, 1, unknown, moderate, high, moderate, low, unknown, low, high ,,,,, 1.54296957478, 0.614540209228, 2.33052962129, 0.878964252696, 1.1437262307, 2.03859192883, 0.201048923649, 1.05466687264 ,,,,, No, Yes, No, Yes, No, No, No, No
+
+756, C, 3, Fried, 8, moderate, unknown, high, moderate, high, low, low, unknown ,,,,, 2.2267278998, 1.04526345714, 2.00350612938, 0.893938427517, 1.66023636866, 0.883689205308, 1.2512722192, 1.58988426062 ,,,,, No, No, No, Yes, No, No, No, Yes
+
+1195, C, 3, Raw on the half shell, 1, unknown, low, high, unknown, moderate, moderate, low, high ,,,,, 0.972478074636, 1.78938359671, 0.888126392355, 3.31300048734, 0.458244090369, 2.01588600632, 1.9447907027, 1.32744853031 ,,,,, No, No, Yes, No, Yes, No, No, Yes
+
+848, None, 3, Fried, 3, Blue Point oysters from Long Island NY., Little Bitches oysters. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Oysters from Long Island NY. These are wild-caught oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA. ,,,,, 1.66176295623, 0.59756291252, 1.30995212293, 1.02594295821, 0.672508882662, 1.69195331793 ,,,,, Yes, Yes, No, No, Yes, No
+
+864, C, 3, Raw on the half shell, 5, low, high, moderate, low, unknown, high, moderate, unknown ,,,,, 1.73068868077, 2.44037797232, 1.53119367417, 2.01343186194, 1.23425716128, 1.7802904562, 1.17965596147, 1.3900796351 ,,,,, No, No, No, No, No, Yes, No, No
+
+816, C, 3, Fried, 6, moderate, low, unknown, high, unknown, moderate, low, high ,,,,, 1.48796849545, 1.73409250225, 1.22718582704, 2.20957331522, 1.50854023459, 1.17022108617, 1.39327741073, 2.29055877587 ,,,,, No, No, No, No, No, Yes, No, No
+
+1364, None, 3, Fried, 6, Little Bitches oysters. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Nauti Pilgrim oysters from Plymouth Rock MA. ,,,,, 1.79616752146, 1.87638764286, 1.4849370386, 1.99510173842, 0.851603610324, 0.626333093959 ,,,,, No, No, No, No, Yes, No
+
+1166, None, 3, Raw on the half shell, 2, Nauti Pilgrim oysters. These are aquacultured oysters., Blue Point oysters from Long Island NY., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Long Island NY. These are wild-caught oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 2.23631251538, 1.62307157268, 0.764152194967, 1.47756873572, 1.56490737714, 1.01777768877 ,,,,, No, No, Yes, No, No, No
+
+1332, B, 12, Fried, 6, high, unknown, unknown, low, high, moderate, low, moderate ,,,,, 1.87832848229, 1.13535621282, 1.21742795448, 2.17588622197, 1.77967659075, 2.43075235047, 1.96259696794, 0.959150299512 ,,,,, No, No, No, No, No, No, Yes, Yes
+
+1114, None, 3, Fried, 6, Little Bitches oysters from Chesapeake Bay in VA., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters., Blue Point oysters from Long Island NY. ,,,,, 0.258195914483, 1.38574948593, 1.15962820835, 1.7372705163, 1.04524938666, 1.34646103112 ,,,,, Yes, No, No, No, No, No
+
+1182, C, 9, Fried, 7, low, moderate, high, unknown, unknown, moderate, low, high ,,,,, 1.84391831958, 2.04960222094, 0.589237995338, 1.66326809589, 1.74381952426, 1.64811374216, 0.442545521888, 1.87345819807 ,,,,, No, No, No, Yes, No, No, No, No
+
+710, None, 3, Fried, 1, Oysters from Long Island NY. These are wild-caught oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Blue Point oysters. These are wild-caught oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters. ,,,,, 1.55310808201, 2.35411777186, 1.56210727132, 2.46587973279, 0.958493469921, 2.15280655741 ,,,,, No, No, No, No, Yes, No
+
+923, A, 3, In a bag with ice, 1, low, moderate, low, high, high, unknown, unknown, moderate ,,,,, 1.09028057804, 3.04797537621, 1.85651352511, 2.08945219452, 0.929067498941, 2.07249991838, 1.25608191847, 0.696349796529 ,,,,, No, No, No, Yes, Yes, No, No, Yes
+
+752, C, 6, Fried, 2, high, moderate, low, high, moderate, unknown, low, unknown ,,,,, 2.5849928419, 1.80541914683, 2.13138289593, 2.15308764693, 1.48763993177, 1.06216838867, 0.626676055362, 2.29725115815 ,,,,, No, No, No, No, No, No, No, No
+
+818, None, 3, Raw on the half shell, 5, Little Bitches oysters from Chesapeake Bay in VA., Blue Point oysters from Long Island NY., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Nauti Pilgrim oysters from Plymouth Rock MA., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 1.28698819782, 1.78124722457, 1.5490982765, 1.21183961148, 1.67864595078, 0.21541070144 ,,,,, No, No, No, Yes, No, No
+
+902, C, 3, Fried, 1, high, unknown, low, moderate, moderate, low, unknown, high ,,,,, 0.619992653894, 2.57664421209, 1.04760324916, 1.11166694822, 1.58563001536, 1.52688301976, 1.2609208651, 1.17394796498 ,,,,, Yes, No, No, No, No, No, No, Yes
+
+1235, B, 3, Fried, 3, moderate, moderate, low, high, unknown, low, high, unknown ,,,,, 1.64348340766, 1.45392873234, 1.66373540869, 0.788260743523, 1.33265474264, 1.3978139454, 1.96766331132, 0.527654467745 ,,,,, No, No, Yes, No, No, No, No, No
+
+714, A, 6, In a bag with ice, 6, high, moderate, unknown, low, unknown, high, low, moderate ,,,,, 1.93007929186, 1.37863700097, 1.11173776538, 1.57807322948, 2.06649237349, 0.927504598132, 1.57994362358, 0.437337687767 ,,,,, No, Yes, Yes, No, No, Yes, No, Yes
+
+730, B, 3, Fried, 5, low, moderate, unknown, high, low, unknown, moderate, high ,,,,, 0.839273526012, 1.77335420852, 1.16683113699, 1.69600570046, 0.631624906654, 1.75007563251, 1.55124435641, 1.44876894341 ,,,,, Yes, Yes, No, No, Yes, No, Yes, No
+
+725, C, 3, Fried, 5, high, high, moderate, low, moderate, low, unknown, unknown ,,,,, 1.23817634491, 1.64462337783, 1.44510392534, 1.91072199708, 2.47558617504, 1.08272754427, 0.938020132599, 2.39304233711 ,,,,, No, No, No, No, No, No, No, No
+
+1132, None, 6, Fried, 4, Oysters from Plymouth Rock MA. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Blue Point oysters from Long Island NY., Blue Point oysters. These are wild-caught oysters., Little Bitches oysters. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 1.02825495989, 2.00899480409, 1.69760646308, 1.3012208259, 1.30818877765, 1.78518238683 ,,,,, Yes, No, No, No, No, No
+
+726, C, 6, Fried, 2, unknown, high, low, moderate, low, moderate, unknown, high ,,,,, 2.05316473041, 1.82249769297, 1.31786478767, 1.71629323003, 1.61721506793, 0.0437426632588, 1.10954293569, 1.0609517608 ,,,,, No, No, No, No, No, Yes, No, No
+
+1147, None, 3, Fried, 5, Blue Point oysters from Long Island NY., Oysters from Plymouth Rock MA. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Little Bitches oysters. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters. ,,,,, 2.04623883624, 1.46675158685, 0.638314073206, 2.30455099078, 2.41101881524, 1.47163914075 ,,,,, No, No, Yes, No, No, Yes
+
+1026, A, 3, Fried, 2, unknown, moderate, unknown, high, moderate, low, low, high ,,,,, 1.81778694126, 0.72642648219, 1.54999800195, 1.64248805245, 1.67765879677, 0.782591794408, 0.732999876051, 1.67505448022 ,,,,, No, No, No, No, No, No, No, No
+
+1007, C, 3, Fried, 3, high, low, moderate, moderate, unknown, high, unknown, low ,,,,, 1.79937521273, 0.583616783901, 0.955145639859, 0.439326129041, 2.24873980105, 0.967285274858, 1.48521842514, 1.57841479021 ,,,,, No, No, No, No, No, No, No, No
+
+713, None, 9, Raw on the half shell, 6, Nauti Pilgrim oysters from Plymouth Rock MA., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Nauti Pilgrim oysters from Plymouth Rock MA., Oysters from Long Island NY. These are wild-caught oysters. ,,,,, 1.97861602638, 1.57170026131, 1.59472201303, 1.12672186134, 1.72643492468, 0.621747723696 ,,,,, No, No, No, Yes, No, Yes
+
+802, B, 9, Fried, 2, low, unknown, moderate, low, moderate, high, unknown, high ,,,,, 0.341896622865, 1.07584957057, 1.9408636871, 1.65149045145, 1.64184971199, 2.56645005908, 1.22509593429, 2.60343170473 ,,,,, Yes, Yes, No, No, Yes, No, Yes, No
+
+1223, C, 6, In a bag with ice, 7, high, low, moderate, low, unknown, unknown, moderate, high ,,,,, 1.66389922345, 1.59803610408, 1.87478085775, 1.34437580054, 0.783469745742, 1.03399148043, 2.01190614791, 0.626359973593 ,,,,, No, No, No, Yes, No, No, No, No
+
+939, None, 3, Fried, 3, Little Bitches oysters. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters., Blue Point oysters from Long Island NY., Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters from Plymouth Rock MA. ,,,,, 1.34563690623, 1.82879764837, 1.06785252847, 1.68676148958, 0.574586818377, 1.69497680731 ,,,,, Yes, No, Yes, No, Yes, No
+
+1280, A, 3, Fried, 5, high, low, unknown, low, moderate, moderate, unknown, high ,,,,, 1.69174585514, 1.62825849981, 2.05076881579, 1.44960354456, 1.35949164926, 0.685884722793, 2.12252764981, 1.0876600907 ,,,,, No, No, No, No, No, No, No, Yes
+
+784, B, 3, Fried, 3, unknown, moderate, low, high, high, low, moderate, unknown ,,,,, 1.96844705078, 0.635937811192, 1.12123121206, 1.68283542425, 2.62977374114, 1.85974784488, 0, 1.8629540714 ,,,,, No, No, No, No, No, No, Yes, No
+
+1201, None, 3, Fried, 6, Oysters from Long Island NY. These are wild-caught oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Blue Point oysters from Long Island NY., Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters. ,,,,, 1.49852250623, 1.66505517383, 1.7090791061, 1.03492034576, 1.63313781792, 1.09077159172 ,,,,, Yes, Yes, No, Yes, Yes, Yes
+
+996, A, 3, Fried, 2, moderate, high, unknown, low, high, low, moderate, unknown ,,,,, 1.18761221551, 1.176477048, 2.79908099735, 0.461478456865, 0.874872789797, 0.523843970901, 0.596560662854, 0.135005479766 ,,,,, No, No, No, No, No, No, No, Yes
+
+878, None, 3, Fried, 6, Blue Point oysters from Long Island NY., Nauti Pilgrim oysters. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters. ,,,,, 3.46215705133, 0.996252742241, 1.54873798032, 1.73859265915, 2.0580096489, 1.19128580782 ,,,,, No, Yes, Yes, No, No, Yes
+
+980, C, 3, Fried, 3, moderate, high, unknown, low, low, unknown, high, moderate ,,,,, 1.24564038205, 0, 0.784469024596, 2.27406638443, 1.51059884768, 2.63389673046, 1.44761181091, 1.77984276411 ,,,,, No, Yes, No, No, No, No, No, No
+
+997, B, 3, Fried, 4, low, unknown, moderate, unknown, high, low, moderate, high ,,,,, 1.46974091065, 1.45526132284, 1.5471806839, 2.35706751824, 2.40020426897, 1.8451043149, 1.24480227235, 1.24000485243 ,,,,, No, No, No, No, No, No, No, Yes
+
+891, C, 3, Raw on the half shell, 6, moderate, unknown, high, unknown, low, moderate, low, high ,,,,, 1.05771452083, 1.08089092603, 2.18774852643, 0.84432358506, 1.58997420013, 3.29373552156, 1.00809279967, 1.06038760495 ,,,,, No, No, No, No, No, No, No, No
+
+862, C, 3, Fried, 4, low, moderate, moderate, unknown, high, low, high, unknown ,,,,, 1.67100115211, 1.32899686058, 2.33285394226, 0.911827370555, 1.45059280798, 1.10910761554, 2.63191232055, 1.87123440533 ,,,,, No, Yes, No, No, No, No, No, No
+
+846, None, 3, Raw on the half shell, 3, Oysters from Long Island NY. These are wild-caught oysters., Little Bitches oysters. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Blue Point oysters from Long Island NY., Nauti Pilgrim oysters. These are aquacultured oysters., Blue Point oysters from Long Island NY. ,,,,, 1.03567310355, 1.68248220807, 1.79664829294, 1.42960995772, 1.14746881871, 1.30553931527 ,,,,, No, No, No, No, No, No
+
+1023, A, 6, Fried, 8, moderate, unknown, low, moderate, high, unknown, high, low ,,,,, 1.80207065191, 1.79981678933, 1.16056868845, 2.03760186586, 1.96867297867, 1.83882589471, 2.11719449054, 1.33127804685 ,,,,, No, No, Yes, No, No, No, No, Yes
+
+722, C, 6, Fried, 4, high, moderate, unknown, low, unknown, moderate, high, low ,,,,, 1.35824177643, 1.2289686597, 1.39657936845, 1.34848121543, 0.107876082284, 2.14272412812, 2.07194491764, 0.896856743181 ,,,,, No, No, No, Yes, No, No, No, Yes
+
+735, None, 3, Fried, 3, Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Oysters from Plymouth Rock MA. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA. ,,,,, 2.1002136842, 1.88404866519, 2.06870456488, 1.61559849605, 0.8915164672, 1.22834901028 ,,,,, No, No, No, No, Yes, No
+
+953, C, 3, Fried, 3, unknown, low, low, moderate, high, moderate, high, unknown ,,,,, 1.7957748554, 0.606896895312, 1.35185804316, 1.97983052916, 1.17873997808, 1.07474444807, 2.22840687067, 2.18173143433 ,,,,, No, No, No, No, No, Yes, No, No
+
+742, None, 3, Fried, 1, Blue Point oysters. These are wild-caught oysters., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Plymouth Rock MA. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Nauti Pilgrim oysters. These are aquacultured oysters. ,,,,, 1.91356757151, 1.42166716924, 1.12804611216, 1.55322218159, 1.53645736247, 0.957805407069 ,,,,, No, No, No, No, No, No
+
+880, C, 3, Raw on the half shell, 5, unknown, moderate, high, high, unknown, low, low, moderate ,,,,, 0.659591893645, 1.34241723794, 1.18574344217, 1.5117632315, 1.79674941357, 1.56265232932, 1.71994343107, 2.67902795064 ,,,,, Yes, Yes, Yes, Yes, No, No, No, Yes
+
+1019, B, 6, Fried, 4, unknown, high, high, moderate, low, moderate, unknown, low ,,,,, 1.59375698116, 1.87683583766, 1.46800834342, 0.860130861303, 1.60320579299, 1.84239965865, 1.34622443294, 1.07461830088 ,,,,, No, No, No, Yes, Yes, Yes, No, Yes
+
+1224, C, 6, Fried, 6, moderate, moderate, unknown, unknown, low, high, low, high ,,,,, 1.20771121719, 1.98215543045, 2.34692143891, 2.53779332617, 1.76489043725, 0.822703639753, 1.41122239647, 0.962163504539 ,,,,, Yes, No, No, No, Yes, Yes, Yes, Yes
+
+975, None, 6, Fried, 3, Nauti Pilgrim oysters from Plymouth Rock MA., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Long Island NY. These are wild-caught oysters., Blue Point oysters. These are wild-caught oysters. ,,,,, 1.6165208649, 1.65748529333, 1.8170554236, 1.1703273785, 1.26259584001, 0.923277221701 ,,,,, No, No, No, No, No, No
+
+774, None, 6, Raw on the half shell, 6, Little Bitches oysters. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Long Island NY. These are wild-caught oysters., Blue Point oysters. These are wild-caught oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Nauti Pilgrim oysters from Plymouth Rock MA. ,,,,, 1.15937312388, 0.726043925443, 2.36775098383, 2.17732696823, 0.509219923395, 1.78994566749 ,,,,, Yes, Yes, No, No, Yes, Yes
+
+720, C, 3, Raw on the half shell, 8, moderate, unknown, moderate, low, low, high, unknown, high ,,,,, 1.52449977967, 1.70705195953, 1.00250563919, 1.72472387544, 0.977744420403, 1.919903744, 1.43370725051, 2.05666357323 ,,,,, No, No, No, No, No, No, No, No
+
+1200, A, 6, Raw on the half shell, 1, moderate, moderate, high, high, low, unknown, low, unknown ,,,,, 1.17025668611, 1.37882880132, 1.0391878051, 1.36270545409, 0.729713780591, 1.14082407953, 1.0713897003, 2.12170784823 ,,,,, No, No, No, No, Yes, No, Yes, No
+
+984, B, 3, In a bag with ice, 7, unknown, low, unknown, moderate, high, moderate, high, low ,,,,, 1.34214154532, 0.786264727352, 2.1330767873, 0.905425280914, 0.943220618934, 2.85097348134, 1.4606711957, 1.59338745013 ,,,,, No, No, No, Yes, Yes, Yes, Yes, Yes
+
+799, B, 3, Raw on the half shell, 8, moderate, high, unknown, high, low, moderate, unknown, low ,,,,, 2.02379672483, 1.39191471404, 2.69122806737, 0.841777935431, 0.774857934933, 0.671159029559, 0.527248839449, 2.09582149993 ,,,,, No, No, No, No, No, No, Yes, No
+
+1248, None, 3, Fried, 1, Little Bitches oysters. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Plymouth Rock MA. These are aquacultured oysters., Blue Point oysters from Long Island NY. ,,,,, 1.41600562424, 1.75845723147, 2.07953385768, 1.11567844111, 2.20516000727, 1.22949712491 ,,,,, No, No, No, Yes, No, No
+
+729, A, 3, Fried, 5, high, moderate, moderate, unknown, unknown, high, low, low ,,,,, 2.28802208658, 0.480906840372, 1.45048947382, 2.16755027294, 1.62663063069, 1.41763603491, 2.65424736025, 0.836758656617 ,,,,, No, No, Yes, No, No, Yes, No, No
+
+783, None, 3, Fried, 2, Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Oysters from Plymouth Rock MA. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters. ,,,,, 0.978522985458, 1.01509405963, 0.854921319415, 1.16278689309, 0.621844373116, 0.694163005661 ,,,,, No, Yes, No, No, No, No
+
+1106, B, 3, Raw on the half shell, 2, unknown, high, moderate, high, low, low, moderate, unknown ,,,,, 2.57201346715, 1.78879978755, 1.56468205523, 1.09670746195, 1.65662061628, 1.23841220196, 0.844750661956, 1.51679235004 ,,,,, No, No, No, Yes, No, No, Yes, No
+
+943, None, 3, Fried, 3, Nauti Pilgrim oysters from Plymouth Rock MA., Little Bitches oysters. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Blue Point oysters from Long Island NY., Oysters from Long Island NY. These are wild-caught oysters., Blue Point oysters. These are wild-caught oysters. ,,,,, 0.663570012155, 1.66275924101, 1.4032583971, 2.23566782753, 1.68194921894, 1.32096880995 ,,,,, Yes, No, No, No, Yes, Yes
+
+734, C, 6, Fried, 3, moderate, low, high, high, low, unknown, unknown, moderate ,,,,, 0.954494266623, 1.04964598131, 1.03103909555, 1.39965280431, 1.73302918219, 1.86422344013, 1.21552452314, 1.86553309261 ,,,,, No, Yes, No, No, No, No, No, No
+
+905, None, 3, Fried, 1, Nauti Pilgrim oysters. These are aquacultured oysters., Blue Point oysters from Long Island NY., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Long Island NY. These are wild-caught oysters., Blue Point oysters. These are wild-caught oysters., Blue Point oysters from Long Island NY. ,,,,, 0.59656894121, 0.971700938721, 1.06160902014, 1.89541197882, 1.6392498252, 1.52560796603 ,,,,, No, No, No, No, No, No
+
+706, C, 6, Fried, 7, unknown, moderate, low, unknown, low, high, moderate, high ,,,,, 0.95760288615, 1.26027519391, 1.21403132209, 2.72879146133, 1.9673673828, 1.49968921213, 1.00917094446, 0.621781618184 ,,,,, Yes, Yes, Yes, No, No, Yes, Yes, Yes
+
+894, B, 6, Fried, 8, moderate, unknown, high, low, unknown, moderate, low, high ,,,,, 2.1294987219, 1.86699081003, 1.48591004443, 1.76229619715, 0.845588426958, 1.85013435168, 1.17609863124, 1.73722370825 ,,,,, No, No, No, Yes, Yes, Yes, No, Yes
+
+831, C, 6, Fried, 2, moderate, low, low, unknown, unknown, high, high, moderate ,,,,, 0.348990246204, 0.887152445772, 0.997292309892, 2.26982592445, 1.59480043063, 0.122728031935, 2.37796892012, 2.01996502778 ,,,,, Yes, No, No, No, No, Yes, No, No
+
+1150, C, 3, Fried, 2, high, unknown, unknown, moderate, moderate, high, low, low ,,,,, 2.36809331586, 1.08959265056, 1.08983085363, 1.87761857267, 2.07172423328, 0.977231661966, 2.21313864034, 1.33336451208 ,,,,, No, No, No, No, No, No, No, No
+
+746, None, 3, Raw on the half shell, 2, Little Bitches oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Nauti Pilgrim oysters. These are aquacultured oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 1.38324642046, 1.53162508244, 1.24076407332, 0.748191504522, 1.68515403246, 0.589987866455 ,,,,, Yes, Yes, Yes, Yes, No, Yes
+
+1122, A, 3, Fried, 8, high, low, low, unknown, high, moderate, unknown, moderate ,,,,, 2.078285591, 2.18716642085, 1.61422623373, 2.21894332122, 1.66173134028, 1.33621467802, 2.16247191254, 2.15060467792 ,,,,, No, No, No, No, No, Yes, No, No
+
+1204, C, 3, Raw on the half shell, 2, unknown, low, unknown, low, moderate, high, high, moderate ,,,,, 0, 0.742654626411, 0.835802449858, 2.73036766895, 2.18817140492, 1.3877649686, 0.998112512607, 0.991363345001 ,,,,, No, No, No, No, No, No, No, No
+
+970, None, 3, Fried, 3, Oysters from Plymouth Rock MA. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Blue Point oysters from Long Island NY., Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Nauti Pilgrim oysters from Plymouth Rock MA. ,,,,, 1.100302696, 2.30233763654, 1.47377765057, 0.285344111041, 1.9309960254, 1.05116256848 ,,,,, Yes, No, Yes, Yes, No, Yes
+
+1005, A, 3, Fried, 2, moderate, low, low, high, unknown, high, unknown, moderate ,,,,, 1.20486100649, 2.32835781222, 0.566455157294, 0.353065493566, 2.47524304041, 1.53621844894, 1.39130833724, 1.65605838417 ,,,,, No, No, No, Yes, No, No, No, No
+
+821, None, 6, Raw on the half shell, 5, Little Bitches oysters from Chesapeake Bay in VA., Blue Point oysters from Long Island NY., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Little Bitches oysters. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters. ,,,,, 1.48610562395, 1.92046521126, 0.522384117524, 1.40572442893, 1.18109009698, 1.80508813853 ,,,,, Yes, No, Yes, Yes, No, No
+
+758, C, 3, Fried, 6, unknown, moderate, low, moderate, high, low, high, unknown ,,,,, 1.75006082209, 0.780448293592, 0.988617340095, 1.73737919151, 2.74324755868, 1.54807039229, 1.03260308161, 2.14373986416 ,,,,, No, No, No, No, No, No, No, No
+
+1288, B, 9, In a bag with ice, 7, high, unknown, high, moderate, moderate, unknown, low, low ,,,,, 1.35587104456, 1.53415302501, 1.19466348812, 1.03320162356, 2.04325616818, 0.920272532032, 1.73780187575, 0.902904158691 ,,,,, No, No, No, Yes, No, Yes, No, Yes
+
+885, C, 3, Raw on the half shell, 3, moderate, low, unknown, moderate, low, high, high, unknown ,,,,, 1.94162276289, 1.88550420678, 2.35999059732, 1.99049438273, 2.12189841855, 0.962406384933, 1.72682693081, 2.38524552436 ,,,,, No, No, No, No, No, No, No, No
+
+1010, None, 6, Raw on the half shell, 1, Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters from Plymouth Rock MA. ,,,,, 0.52134240888, 1.493037032, 1.85926921022, 1.67061536142, 2.13435580733, 1.69992610419 ,,,,, Yes, No, Yes, No, No, No
+
+709, A, 3, Fried, 5, moderate, low, moderate, unknown, high, low, high, unknown ,,,,, 1.4117320958, 1.27392614095, 0.899599366525, 1.26219721782, 0.943355390839, 1.728214138, 1.60531037868, 1.24988853709 ,,,,, No, Yes, No, No, No, No, No, No
+
+702, None, 6, In a bag with ice, 5, Nauti Pilgrim oysters from Plymouth Rock MA., Little Bitches oysters. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters., Little Bitches oysters from Chesapeake Bay in VA., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 0.782976403001, 2.07054617402, 0.79838446486, 1.89322246235, 1.22253458935, 0.737308961712 ,,,,, Yes, Yes, Yes, Yes, Yes, Yes
+
+994, C, 6, Fried, 8, high, low, moderate, low, high, moderate, unknown, unknown ,,,,, 0.467541484231, 1.13396746697, 0.982297348101, 2.24011379985, 1.29761711424, 1.45792135186, 1.56245134525, 1.22423598297 ,,,,, Yes, No, No, No, No, No, No, No
+
+751, A, 6, In a bag with ice, 7, high, unknown, high, unknown, low, moderate, moderate, low ,,,,, 1.19976612783, 0.988344480071, 1.614867251, 2.27286721739, 0, 1.79052824493, 2.16148367662, 0.784898517294 ,,,,, No, No, No, No, Yes, No, No, Yes
+
+881, C, 3, Fried, 8, low, high, unknown, low, moderate, high, unknown, moderate ,,,,, 0.453427072242, 1.27716405865, 0.42229239785, 2.25944197966, 1.07497575818, 1.80784080518, 1.86516453281, 1.28239997873 ,,,,, No, No, No, No, No, No, No, No
+
+829, A, 3, Fried, 4, low, moderate, moderate, low, unknown, unknown, high, high ,,,,, 0.783592693609, 2.09655146983, 0.735496900909, 1.55021862166, 1.91082083125, 0.806943096121, 2.28489256887, 1.1540929303 ,,,,, Yes, No, Yes, Yes, No, No, No, No
+
+1009, B, 3, Fried, 1, moderate, high, high, moderate, unknown, unknown, low, low ,,,,, 1.80564434924, 1.74371729826, 1.60147642169, 1.47502135984, 2.72411467242, 0.948974429671, 1.32245037337, 0.615292016431 ,,,,, No, No, No, No, No, Yes, No, No
+
+701273934, C, 3, Raw on the half shell, 6, moderate, low, unknown, moderate, high, low, high, unknown ,,,,, 1.41335509727, 2.16556115547, 2.05513954322, 0.94906529102, 2.81732382441, 2.40851926697, 2.14559054605, 1.51623864882 ,,,,, No, No, No, Yes, No, No, No, No
+
+741, None, 3, Raw on the half shell, 4, Nauti Pilgrim oysters from Plymouth Rock MA., Blue Point oysters. These are wild-caught oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters. ,,,,, 2.48366678369, 1.65032175492, 0.752072152288, 2.12290060304, 0.956578149541, 1.13248250842 ,,,,, Yes, Yes, No, No, Yes, No
+
+937, None, 3, Raw on the half shell, 6, Little Bitches oysters from Chesapeake Bay in VA., Oysters from Long Island NY. These are wild-caught oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Blue Point oysters. These are wild-caught oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters. ,,,,, 1.68859530028, 0.953508636476, 1.8705789698, 1.9632625465, 1.22683357781, 1.60821966617 ,,,,, No, No, No, No, Yes, Yes
+
+705, C, 6, Fried, 1, moderate, moderate, unknown, high, high, low, low, unknown ,,,,, 0.593205074184, 1.68638406831, 2.2539925088, 1.70816359857, 1.12667195667, 2.21556190359, 1.21038633649, 1.29000747098 ,,,,, Yes, No, No, No, Yes, No, No, No
+
+1173, None, 6, Fried, 2, Blue Point oysters from Long Island NY., Nauti Pilgrim oysters. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters., Blue Point oysters from Long Island NY. ,,,,, 1.47461416403, 0.846303844697, 0.82189899266, 0.164095885948, 1.58984599184, 1.6093094877 ,,,,, No, Yes, No, No, No, No
+
+1131, C, 3, In a bag with ice, 5, unknown, moderate, low, moderate, unknown, high, low, high ,,,,, 1.24273812731, 0.657379880548, 1.49234442944, 1.92761580325, 2.25314240627, 0.494112876133, 1.63772349602, 1.72388648305 ,,,,, Yes, Yes, Yes, No, No, No, Yes, No
+
+945, A, 3, Fried, 2, unknown, low, low, high, high, moderate, unknown, moderate ,,,,, 1.27715739102, 1.75969621447, 2.89609527766, 1.96340159676, 0.863648020589, 1.20336247799, 0.949303875288, 1.49375992279 ,,,,, No, No, No, No, No, No, Yes, No
+
+1130, B, 3, Fried, 2, low, high, unknown, moderate, unknown, low, moderate, high ,,,,, 1.78642155669, 3.20446731974, 1.09568329044, 1.46134084564, 1.16902377027, 1.4803136559, 1.89929379015, 2.05143918084 ,,,,, No, No, No, Yes, No, No, Yes, No
+
+789, None, 3, Fried, 4, Nauti Pilgrim oysters from Plymouth Rock MA., Blue Point oysters. These are wild-caught oysters., Little Bitches oysters. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters. ,,,,, 1.95748693126, 1.34963683847, 1.15414458975, 1.80431533181, 1.57389670391, 1.14760380962 ,,,,, No, No, Yes, No, No, No
+
+978, C, 3, Fried, 2, moderate, high, unknown, unknown, low, low, moderate, high ,,,,, 0.166223980706, 0.637172156471, 1.80438167326, 1.24690426656, 1.41856097492, 0.853657461284, 1.45328413468, 1.19383502914 ,,,,, Yes, Yes, No, No, No, No, No, No
+
+1101, None, 3, In a bag with ice, 6, Little Bitches oysters. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters. ,,,,, 2.28205836698, 1.54435787782, 0.824215716218, 2.71024246212, 2.25415051677, 1.20819256492 ,,,,, No, Yes, Yes, No, No, Yes
+
+813, None, 3, Raw on the half shell, 5, Nauti Pilgrim oysters. These are aquacultured oysters., Blue Point oysters from Long Island NY., Oysters from Long Island NY. These are wild-caught oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Blue Point oysters. These are wild-caught oysters., Little Bitches oysters from Chesapeake Bay in VA. ,,,,, 1.97349940922, 0.879136604119, 1.99401377651, 1.28386362173, 0.688827460726, 2.04049952202 ,,,,, Yes, Yes, Yes, Yes, Yes, Yes
+
+850, B, 3, Raw on the half shell, 3, unknown, moderate, low, unknown, moderate, low, high, high ,,,,, 1.48525120195, 0.162341239552, 0.131640230114, 0.737981192897, 1.58196148003, 1.15607313864, 1.64292933867, 1.30527462637 ,,,,, No, Yes, No, No, Yes, No, Yes, Yes
+
+1013, None, 3, Fried, 2, Nauti Pilgrim oysters from Plymouth Rock MA., Little Bitches oysters. These are aquacultured oysters., Blue Point oysters from Long Island NY., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA. ,,,,, 1.21945845816, 1.86336550764, 1.55014294868, 1.18095304505, 2.20628271219, 2.02865796271 ,,,,, No, No, No, No, No, No
+
+777, C, 3, Fried, 8, moderate, high, high, low, unknown, moderate, unknown, low ,,,,, 0.917270330651, 1.16834380343, 2.19998695362, 1.48150350038, 2.18012620695, 1.21214031887, 0.527264196835, 2.16603066689 ,,,,, No, Yes, Yes, No, No, No, No, No
+
+830, A, 6, Fried, 6, moderate, moderate, unknown, high, low, unknown, high, low ,,,,, 1.80931906537, 1.78374021802, 2.36040262548, 0.831022539019, 0, 1.47137565244, 0.586533207992, 0.714581888683 ,,,,, No, No, No, No, Yes, No, No, No
+
+1217, A, 3, Fried, 5, low, unknown, high, unknown, low, moderate, high, moderate ,,,,, 1.67410072026, 2.16099734679, 2.04779932963, 0, 1.34481816313, 1.43190580932, 2.77151710518, 1.63046080476 ,,,,, No, No, No, Yes, No, No, No, No
+
+914, B, 6, In a bag with ice, 6, high, moderate, unknown, low, unknown, moderate, high, low ,,,,, 1.75824618239, 1.0005897928, 2.00705085439, 2.81728260448, 2.33646939529, 0.766836338637, 0.947730721034, 2.1450571173 ,,,,, No, Yes, No, No, No, Yes, Yes, No
+
+712, None, 3, Fried, 6, Nauti Pilgrim oysters from Plymouth Rock MA., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters. ,,,,, 1.87791249229, 2.28917928365, 0.881019522752, 1.57393135755, 1.80685974875, 1.92208300648 ,,,,, No, No, No, No, No, No
+
+1025, None, 3, Raw on the half shell, 4, Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Blue Point oysters from Long Island NY., Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters. ,,,,, 1.3987508091, 1.15495032241, 1.2688577153, 1.70325638885, 3.10088210168, 1.55004027026 ,,,,, No, No, No, Yes, No, No
+
+961, A, 3, Fried, 8, moderate, high, low, moderate, unknown, unknown, low, high ,,,,, 1.9610615961, 1.70644363222, 1.11408471769, 1.17954445328, 2.10892596503, 1.62370493667, 2.11900668157, 1.40608715125 ,,,,, No, No, No, No, No, No, No, No
+
+1206, C, 3, Fried, 6, low, unknown, moderate, moderate, high, high, low, unknown ,,,,, 1.84604600265, 2.45794466678, 1.15015340811, 2.04469725844, 1.68314087026, 1.04599687622, 2.61917566634, 2.4760962741 ,,,,, Yes, No, Yes, No, Yes, Yes, No, No
+
+998, C, 3, Fried, 4, moderate, moderate, unknown, low, high, high, low, unknown ,,,,, 1.27708165812, 1.02697197646, 0.58645263334, 1.13887816599, 2.43637729423, 1.85686386075, 2.14075742998, 1.75167576536 ,,,,, No, Yes, No, No, No, No, No, No
+
+966, C, 6, Fried, 5, high, unknown, low, high, moderate, low, moderate, unknown ,,,,, 1.85565411373, 1.78215795546, 1.93377866948, 1.44507796069, 2.08344698217, 1.19469130392, 0.526974754113, 1.84239040056 ,,,,, No, No, No, No, No, Yes, Yes, No
+
+793, B, 3, Raw on the half shell, 2, high, low, high, low, moderate, unknown, moderate, unknown ,,,,, 1.58424009098, 1.20554239929, 2.16696004121, 1.70669332582, 0.940738820898, 2.25422121575, 0.837967824572, 1.48089966247 ,,,,, No, No, No, No, No, No, Yes, No
+
+899, C, 3, Fried, 6, moderate, high, unknown, high, low, low, unknown, moderate ,,,,, 1.57537380641, 3.08758868075, 1.56337894936, 1.85693753323, 1.7763544257, 1.46961872358, 0.584799478544, 1.27447286351 ,,,,, No, No, No, No, No, No, No, No
+
+929, A, 6, Raw on the half shell, 3, high, high, low, moderate, unknown, unknown, low, moderate ,,,,, 1.66282036978, 0.741054045163, 1.686788943, 1.02612455311, 1.85944859809, 0, 0.754207879185, 1.0338425743 ,,,,, No, No, No, Yes, No, No, Yes, Yes
+
+1157, None, 3, Fried, 1, Oysters from Long Island NY. These are wild-caught oysters., Little Bitches oysters from Chesapeake Bay in VA., Little Bitches oysters. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Blue Point oysters from Long Island NY., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 1.63407863503, 1.02142214208, 2.30737747137, 1.92088200824, 2.20634052693, 1.54102941703 ,,,,, No, No, No, No, No, Yes
+
+703, None, 3, Fried, 4, Blue Point oysters. These are wild-caught oysters., Blue Point oysters from Long Island NY., Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters., Little Bitches oysters from Chesapeake Bay in VA. ,,,,, 1.51035440019, 1.15773741476, 1.09139413175, 1.45969380044, 2.01110827127, 2.01222198695 ,,,,, No, No, Yes, No, No, No
+
+1272, None, 3, In a bag with ice, 4, Oysters from Plymouth Rock MA. These are aquacultured oysters., Blue Point oysters from Long Island NY., Nauti Pilgrim oysters from Plymouth Rock MA., Nauti Pilgrim oysters from Plymouth Rock MA., Nauti Pilgrim oysters. These are aquacultured oysters., Nauti Pilgrim oysters. These are aquacultured oysters. ,,,,, 1.11378685555, 1.37471095718, 1.61992644924, 1.81012974626, 2.11525662427, 1.12303700343 ,,,,, Yes, No, No, No, No, No
+
+1208, B, 6, Raw on the half shell, 7, unknown, high, high, low, moderate, low, unknown, moderate ,,,,, 1.26497796887, 1.2549847522, 1.72581387284, 2.1174790401, 1.76622682736, 1.03539062116, 1.08958571835, 1.16044005298 ,,,,, No, Yes, Yes, No, No, No, No, No
+
+883, C, 3, Fried, 2, moderate, unknown, moderate, unknown, high, low, low, high ,,,,, 1.21667588843, 1.75986414223, 2.67851332175, 2.07343055079, 1.49719843141, 1.29301762519, 3.13064334157, 1.49336570867 ,,,,, Yes, No, No, No, No, No, No, No
+
+1102, C, 12, In a bag with ice, 7, moderate, unknown, unknown, low, high, low, high, moderate ,,,,, 1.58937100077, 1.27670832065, 1.85975912486, 1.61838032674, 1.63135608335, 1.27183567911, 2.27012920357, 0.638562498346 ,,,,, No, No, No, No, Yes, No, No, No
+
+867, C, 3, Fried, 5, unknown, high, high, low, low, moderate, unknown, moderate ,,,,, 1.9353076686, 1.22938145918, 1.68438463054, 2.97649462433, 1.42584299379, 1.30459802033, 2.01560451748, 1.13453150101 ,,,,, No, Yes, No, No, No, Yes, No, No
+
+819, A, 6, Fried, 8, low, high, low, high, unknown, unknown, moderate, moderate ,,,,, 1.8842674476, 1.25654710988, 1.31825805938, 2.0164306707, 0, 0.748370368358, 2.05633079766, 1.91007747407 ,,,,, Yes, No, Yes, No, No, No, Yes, No
+
+1207, None, 3, Raw on the half shell, 4, Oysters from Long Island NY. These are wild-caught oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters. ,,,,, 1.59166701373, 2.2549357889, 0.626249519057, 1.52101673403, 0.750034320075, 0.939435662254 ,,,,, No, Yes, No, No, No, Yes
+
+983, C, 3, Fried, 6, high, low, unknown, moderate, unknown, high, low, moderate ,,,,, 1.71562313378, 1.78156204669, 1.28001202284, 1.84402265615, 2.81472921189, 0.831150713889, 0.330883923197, 2.96851777352 ,,,,, No, No, No, No, No, No, Yes, No
+
+918, None, 3, Fried, 3, Oysters from Long Island NY. These are wild-caught oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Blue Point oysters from Long Island NY., Little Bitches oysters. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Little Bitches oysters. These are aquacultured oysters. ,,,,, 2.34157027139, 1.18239790017, 1.77249106587, 1.79436033849, 1.61090597965, 1.89112751556 ,,,,, No, No, No, No, No, No
+
+1172, None, 6, Fried, 4, Blue Point oysters. These are wild-caught oysters., Little Bitches oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters., Little Bitches oysters from Chesapeake Bay in VA. ,,,,, 1.84658893347, 1.39177890613, 1.211662077, 2.44340416325, 2.32279742826, 1.3974123157 ,,,,, No, No, No, No, No, No
+
+934, B, 6, Raw on the half shell, 8, unknown, unknown, moderate, low, high, moderate, low, high ,,,,, 1.20559251616, 1.94934807923, 1.4568836033, 2.60515733984, 1.83982746297, 1.68017752646, 1.16993357443, 1.71598056098 ,,,,, No, No, No, No, No, No, Yes, No
+
+1203, C, 12, In a bag with ice, 7, moderate, high, low, unknown, high, low, moderate, unknown ,,,,, 1.65735155969, 1.71582107023, 2.09028780539, 2.49633561693, 2.57149821617, 0.884107835233, 0.909776715689, 2.55109193474 ,,,,, No, No, No, No, No, No, No, No
+
+815, A, 3, Fried, 7, high, low, high, low, moderate, unknown, moderate, unknown ,,,,, 0.9547005066, 2.89714327883, 1.63016821434, 1.84554200907, 1.05826839917, 1.57140701626, 1.47794621681, 2.38605866072 ,,,,, Yes, No, No, No, No, No, No, No
+
+1020, None, 3, In a bag with ice, 1, Nauti Pilgrim oysters. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Little Bitches oysters from Chesapeake Bay in VA., Blue Point oysters from Long Island NY., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 2.07533402782, 1.31177123059, 2.09306319104, 1.39402276413, 2.06649908196, 1.07100070129 ,,,,, No, No, No, No, No, Yes
+
+863, C, 12, Raw on the half shell, 4, moderate, low, unknown, moderate, low, high, high, unknown ,,,,, 1.73525563394, 2.15403038345, 2.70481368407, 1.0849848933, 0.412629738766, 1.53346241369, 2.10062198861, 0.875019036684 ,,,,, No, No, No, Yes, No, No, No, No
+
+1004, C, 3, Fried, 6, unknown, moderate, unknown, high, high, moderate, low, low ,,,,, 1.01773353984, 1.80149542604, 2.22500191081, 0.997163918544, 2.41168407837, 1.63949553453, 2.85587962063, 1.98518114325 ,,,,, No, No, No, Yes, No, No, No, No
+
+1186, None, 3, Raw on the half shell, 6, Blue Point oysters. These are wild-caught oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Nauti Pilgrim oysters from Plymouth Rock MA., Blue Point oysters from Long Island NY., Little Bitches oysters. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA. ,,,,, 1.27390575554, 1.55820567913, 1.24047197824, 2.63215198974, 1.80259637001, 1.14023620355 ,,,,, Yes, Yes, Yes, Yes, No, No
+
+1154, B, 3, Raw on the half shell, 7, low, moderate, low, high, unknown, high, moderate, unknown ,,,,, 0.617602178493, 1.68092948141, 0.261533537846, 1.17543317052, 2.08737723785, 0.765746865978, 2.96889422716, 1.3723371952 ,,,,, Yes, Yes, Yes, Yes, No, Yes, No, No
+
+1170, C, 3, Fried, 7, high, low, unknown, moderate, low, high, unknown, moderate ,,,,, 0.870918424909, 2.27311376908, 2.51071974038, 1.45020136535, 2.35819376273, 1.30369102365, 1.9727189687, 1.08111663767 ,,,,, Yes, No, No, No, No, Yes, No, Yes
+
+1213, None, 3, Fried, 2, Oysters from Long Island NY. These are wild-caught oysters., Oysters from Long Island NY. These are wild-caught oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA., Nauti Pilgrim oysters. These are aquacultured oysters., Blue Point oysters from Long Island NY. ,,,,, 2.57544407859, 1.42927954151, 1.45828294522, 1.87233925365, 0, 1.37552888737 ,,,,, No, No, No, No, Yes, Yes
+
+1138, A, 6, Fried, 5, high, low, unknown, low, moderate, high, unknown, moderate ,,,,, 0.892105874589, 1.39142464131, 2.04162324858, 1.45938488124, 1.02865160149, 1.80761063813, 1.8509706348, 1.65973825788 ,,,,, Yes, No, No, Yes, Yes, Yes, No, Yes
+
+1187, C, 6, Fried, 4, high, low, high, unknown, moderate, unknown, low, moderate ,,,,, 1.20592448172, 1.84854890413, 1.99551571225, 2.07847401078, 1.42086939829, 1.6413073119, 2.66157101519, 1.42253304666 ,,,,, Yes, No, Yes, No, Yes, No, No, Yes
+
+814, B, 3, Fried, 1, high, unknown, moderate, moderate, low, high, unknown, low ,,,,, 1.96188084124, 3.21079128598, 1.9475063022, 0.514994124601, 1.79365232573, 1.68585560432, 1.57386053437, 1.99025212036 ,,,,, Yes, Yes, No, Yes, Yes, No, No, No
+
+1124, A, 3, Fried, 5, unknown, low, high, moderate, unknown, low, moderate, high ,,,,, 1.38672789464, 0.844708442516, 2.39641663507, 1.4564928251, 1.28031415353, 1.80171927578, 0.647436946906, 1.40807623343 ,,,,, No, No, No, No, No, No, No, No
+
+768, None, 3, Fried, 4, Nauti Pilgrim oysters from Plymouth Rock MA., Nauti Pilgrim oysters. These are aquacultured oysters., Little Bitches oysters. These are aquacultured oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters. ,,,,, 2.15869260546, 1.57032425881, 0.757405755109, 1.64214011344, 2.11907503361, 2.52189985957 ,,,,, No, No, No, No, No, No
+
+869, C, 3, Fried, 4, unknown, low, high, moderate, unknown, low, moderate, high ,,,,, 1.3548219592, 1.54652520171, 1.23266055555, 0.611631927508, 1.36353845297, 1.82136756164, 1.66901936077, 2.18253899713 ,,,,, No, No, No, No, No, No, No, No
+
+822, C, 3, Raw on the half shell, 7, low, unknown, moderate, high, low, high, unknown, moderate ,,,,, 1.97655358709, 1.39309162116, 1.62392486783, 1.29940176591, 1.33376963463, 1.75078059685, 1.84140610534, 1.48497564506 ,,,,, No, No, Yes, No, Yes, No, No, Yes
+
+853, None, 3, In a bag with ice, 5, Nauti Pilgrim oysters from Plymouth Rock MA., Little Bitches oysters. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Blue Point oysters from Long Island NY., Oysters from Long Island NY. These are wild-caught oysters., Little Bitches oysters from Chesapeake Bay in VA. ,,,,, 2.40878643286, 1.02285003903, 1.02660568784, 2.13721416207, 0.953690389567, 1.52593347921 ,,,,, No, No, Yes, No, No, No
+
+859, None, 3, In a bag with ice, 3, Oysters from Plymouth Rock MA. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Blue Point oysters from Long Island NY., Nauti Pilgrim oysters. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA. ,,,,, 1.99913015406, 0.606959687385, 1.32091482071, 2.12547478164, 1.05545428282, 1.99559234343 ,,,,, No, No, No, No, No, No
+
+907, A, 6, Raw on the half shell, 8, low, high, unknown, high, moderate, moderate, unknown, low ,,,,, 1.15525718026, 1.52458169866, 2.37074338769, 2.38731812692, 1.36460610661, 1.60826311031, 0.500207431929, 1.03077133321 ,,,,, No, No, No, No, No, Yes, No, No
+
+1156, B, 6, Fried, 3, moderate, high, moderate, low, unknown, unknown, low, high ,,,,, 2.65027855236, 2.21574372013, 1.71591859847, 1.04105034297, 1.56225984672, 2.05509997723, 0.616738065482, 1.88338209049 ,,,,, No, No, No, Yes, Yes, No, Yes, No
+
+807, B, 3, Raw on the half shell, 2, low, high, unknown, high, low, moderate, moderate, unknown ,,,,, 1.40961276064, 1.2233357237, 1.81512274911, 2.15226638931, 0.755304868391, 1.37313127986, 2.69030196337, 1.77653519966 ,,,,, Yes, No, No, No, Yes, Yes, No, No
+
+806, B, 6, In a bag with ice, 8, moderate, unknown, high, low, low, high, moderate, unknown ,,,,, 1.50404322478, 1.12482271336, 1.41254392652, 0.718973269313, 0.995826765246, 1.1918441528, 1.46465241429, 1.70873691094 ,,,,, Yes, Yes, Yes, No, No, Yes, Yes, No
+
+773, None, 3, Raw on the half shell, 2, Blue Point oysters from Long Island NY., Nauti Pilgrim oysters from Plymouth Rock MA., Little Bitches oysters. These are aquacultured oysters., Blue Point oysters. These are wild-caught oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., Little Bitches oysters from Chesapeake Bay in VA. ,,,,, 1.87196016424, 1.24726483561, 1.66116493518, 1.57077643243, 1.5805641176, 0.599390791 ,,,,, No, Yes, No, No, No, Yes

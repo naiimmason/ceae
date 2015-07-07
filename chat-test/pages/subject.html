@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+
+<script>
+  function scrollToTop() {
+    var objDiv = document.getElementById("chatbox");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
+
+  $(document).keypress(function(e) {
+    if(e.which == 13) {
+      scrollToTop();
+    }
+  });
+});
+</script>
+
+<div class="page-wrapper">
+  <section class="warning"></section>
+
+  <section class="instructions hidden">
+    <div class="box" id="chatbox" style="width: 100%;
+    height: 200px; border: 1px solid; margin-top: 10px;
+    margin-bottom: 10px; overflow-y: scroll; overflow-x: hidden;
+    border-radius: 5px; font-size: 20px; line-height:normal;"></div>
+    <hr>
+    <input class="chat-input" id="chatinput" type="text" autocomplete="off">
+    <button type="button" id="sendbutton" onclick="scrollToTop()">Send</button>
+  </section>
+
+  <section class="survey hidden"></section>
+
+  <section class="payout hidden"></section>
+
+  <section class="warning hidden"></section>
+</div>

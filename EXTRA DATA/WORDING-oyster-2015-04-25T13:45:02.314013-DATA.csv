@@ -1,0 +1,8 @@
+Date,2015-04-25T13:45:02.314013
+subject, treatment, number of oysters, cooked option, chosen option, option 1, option 2, option 3, option 4, option 5, option 6
+example, A, 12, fried, 6, unknown, low, medium, high, unknown, low
+,,,,,price1,2,3,4,5,6
+,,,,,yes,no,yes,no,yes,no
+Audrey_test, None, 6, Fried, 2, <em>Nauti Pilgrim</em> oysters. These are aquacultured oysters., Oysters from Chesapeake Bay in VA. These are aquacultured oysters., Oysters from Long Island NY. These are wild-caught oysters., Oysters from Plymouth Rock MA. These are aquacultured oysters., <em>Nauti Pilgrim</em> oysters from Plymouth Rock MA., <em>Blue Point</em> oysters. These are wild-caught oysters.
+,,,,, 1.48315107846, 1.92761018722, 0.822321641816, 1.32592446793, 2.66411535132, 0.15664221739
+,,,,, Yes, Yes, No, No, No, Yes
