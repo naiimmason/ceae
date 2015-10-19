@@ -1,0 +1,946 @@
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+
+<script>
+  // Store id / output pairs in an array
+  ids = [
+    ["number-oysters", "#num-oysters"],
+    ["oyster0", "#treatment-0-sel"],
+    ["oyster1", "#treatment-1-sel"],
+    ["oyster2", "#treatment-2-sel"],
+    ["oyster3", "#treatment-3-sel"],
+    ["oyster4", "#treatment-4-sel"],
+    ["oyster5", "#treatment-5-sel"],
+    ["oyster6", "#treatment-6-sel"],
+    ["oyster7", "#treatment-7-sel"]
+  ];
+
+  // Grab values from radio buttons
+  var grabValues = function(id) {
+    // If they are selecting the number of oysters to play for
+    if(id === 0) {
+      val = $("input[name=" + ids[id][0] + "]:checked").val();
+      $(ids[id][1]).html(val);
+      console.log(val);
+    }
+
+    // If they are playing for experiment 1
+    else if (id === 8) {
+      vals = [];
+      for(var i = 1; i < 9; i++) {
+        val = $("input[name=" + ids[i][0] + "]:checked").val();
+        vals.push(val);
+        $(ids[i][1]).html(val);
+      }
+      console.log(vals);
+    }
+
+    else if (id === 6) {
+      vals = [];
+      for(var i = 1; i < 7; i++) {
+        val = $("input[name=" + ids[i][0] + "]:checked").val();
+        vals.push(val);
+        $(ids[i][1]).html(val);
+      }
+      console.log(vals);
+    }
+
+    window.scrollTo(0, 0);
+  };
+</script>
+
+<script>
+  var grabCook = function() {
+    val = $("input[name=cooked-type]:checked").val();
+    $("#cooked-option").html(val);
+  };
+</script>
+
+<script>
+  values_to_html_tags = [
+    "gender",
+    "amtoysters",
+    "primshop",
+    "profession",
+    "political",
+    "income",
+    "education",
+    "beachtime",
+    "firsttime",
+    "shopper",
+    "delawarebay",
+    "delawareinlandbay",
+    "oysterprep",
+    "responders",
+    "BluesGolden",
+    "AmberSun",
+    "TillerBrown",
+    "InletIPA",
+    "OldCourt",
+    // "NightStalkStout",
+    // "DEOysterStout",
+    // "BBIPA",
+    // "RegalEagle",
+    // "KillerTiller",
+    // "CageFight",
+    // "DryHopper",
+    // "ChocRumCherr",
+    // "BabyLunchIPA",
+    // "PeteDept"
+  ];
+  console.log("outside");
+  var onFinal = function() {
+    console.log("hello");
+    values = [];
+    for(var i = 0; i < values_to_html_tags.length; i++) {
+      console.log("inside");
+      values.push($("input[name=" + values_to_html_tags[i] + "]:checked").val());
+      $("#" + values_to_html_tags[i]).html((values[i]));
+    }
+    console.log(values);
+  };
+
+  output_update_tags = [
+    "#percentSeafoodResValue",
+    "#homevresValue",
+    "#owncatchValue",
+    "#locoysterValue",
+    "#oysterSpecValue",
+    "#oysterShellValue",
+    "#oysterMeatValue",
+    "#oysterAppValue",
+    "#oysterSaltValue",
+    "#oysterSmellValue",
+    "#oysterShellColorValue",
+    "#oysterMeatColorValue",
+    "#oysterLocValue",
+    "#logo_likeValue"
+  ];
+
+  function outputUpdate(vol, i) {
+    if (vol < 0) {
+      vol *= -1;
+    }
+    if (i === 0) {
+      document.querySelector("#percentSeafoodResValue1").value = 100 - vol;
+      document.querySelector("#percentSeafoodResValue2").value = vol;
+    }
+    else if (i === 1) {
+      document.querySelector("#homevresValue1").value = 100 - vol;
+      document.querySelector("#homevresValue2").value = vol;
+    }
+    else {
+      document.querySelector(output_update_tags[i]).value = vol;
+    }
+  }
+</script>
+
+<div class="page-wrapper">
+  <section class="warning"></section>
+
+  <!-- Show the instructions for the experiment -->
+  <section class="instructions hidden">
+    <h3>Instructions:</h3>
+
+    <p><em>Please read these instructions carefully and do not communicate with any one while you are making your decisions.</em></p>
+
+    <ul>
+      <li><strong>We will give you $10 that you may keep or use to purchase oysters.</strong> You may think of this money as a bank account from which you can withdraw money.</li>
+      <li>Depending on the choices you make, you may receive a combination of cash and oysters. There is the possibility of you owing us money if the cost of your oysters is greater than $10.</li>
+      <li>Your decisions are just like the ones you make in a store, you either buy at the listed price or you don't.</li>
+    </ul>
+
+    <br>
+
+    <h3>Guidelines:</h3>
+
+    <ol>
+      <li>Decide how many oysters you want to buy (3, 6, 9 or 12)</li>
+      <li>Decide if you want to buy the oyster options at the listed price by selecting 'Yes' or 'No'</li>
+      <li>Fill out a short survey</li>
+      <li>Roll a digital die to determine which oyster option will be implemented (only one will be implemented)</li>
+    </ol>
+
+    <br>
+
+    <p><strong>Example 1:</strong> If you selected 'Yes' for an oyster option that cost $7 and this option is implemented, you will receive the oysters and $3 cash ($10 - $7 = $3).</p>
+
+    <p><strong>Example 2:</strong> If you selected 'No' for an oyster option and this option is implemented, you will receive $10 and will not receive any oysters.</p>
+
+    <p><strong>Example 3:</strong> If you selected 'Yes' for an oyster option that cost $15 and this option is implemented, you will receive the oysters and owe $5 ($10 - $15 = -$5).</p>
+    <div class="button">
+      <button type="button" id="continue">Continue</button>
+    </div>
+  </section>
+
+  <!-- Selection screen asking how many oysters they want -->
+  <section class="number-selection hidden">
+    <p>How many oysters would you like to buy?</p>
+    <form>
+      <input type="radio" name="number-oysters" value="3"> 3
+      <br>
+      <input type="radio" name="number-oysters" value="6"> 6
+      <br>
+      <input type="radio" name="number-oysters" value="9"> 9
+      <br>
+      <input type="radio" name="number-oysters" value="12"> 12
+    </form>
+    <div class="button">
+      <button type="button" id="continue" onclick="grabValues(0)">Continue</button>
+    </div>
+  </section>
+
+  <!-- Oyster selection screen, which ones are they going to buy -->
+  <section class="oyster-selection hidden">
+    <div class="selection-intro">
+      <p class="treatment-instructions"></p>
+      <h3><u><strong>Please make your decisions below</strong></u></h3>
+      <!-- <p class="hidden" id="noaa-instructions">The following information is based on the latest available report from the United States National Oceanic and Atmospheric Administration (NOAA) on nutrients in the nation's coastal waters. </p>
+      <p>You selected to make choices for <strong id="number-of-oysters"></strong> oysters. Please make your choices by selecting ‘YES' or ‘NO' for the following options. Remember these are the actual prices you will pay.</p> -->
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="oyster-list">
+      <div id="treatment-0"></div>
+      <br><hr><br>
+      <div id="treatment-1"></div>
+      <br><hr><br>
+      <div id="treatment-2"></div>
+      <br><hr><br>
+      <div id="treatment-3"></div>
+      <br><hr><br>
+      <div id="treatment-4"></div>
+      <br><hr><br>
+      <div id="treatment-5"></div>
+      <br><hr><br>
+      <div id="treatment-6"></div>
+      <br><hr><br>
+      <div id="treatment-7"></div>
+      <br><hr><br>
+    </div>
+    <div class="warning"></div>
+    <div class="button">
+      <button type="button" id="continue" onclick="grabValues(8)">Submit</button>
+    </div>
+  </section>
+
+  <section class="extra-question hidden">
+    <img class="temp_log" src="images/image1.jpg">
+
+    <ol>
+      <li>Do you find this logo appealing?
+        <div class="radio-item">
+          <input type="radio" name="appeal_logo" value="Yes">
+          <label>Yes</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="appeal_logo" value="No">
+          <label>No</label>
+        </div>
+      </li>
+
+      <li>Would you be willing to pay more for these oysters compared to other oysters?
+        <div class="radio-item">
+          <input type="radio" name="pay_more_logo" value="Yes">
+          <label>Yes</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="pay_more_logo" value="No">
+          <label>No</label>
+        </div>
+      </li>
+
+      <li>On a scale of 1-9 (1 being the lowest), how much do you like the following logo?
+        <strong><output for="logo_like" id="logo_likeValue">5</output></strong>
+        <div class="slider">
+          <span>Not at all (1)</span>
+          <input id="logo_like" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 13)">
+          <span>A shit ton (9)</span>
+        </div>
+      </li>
+    </ol>
+
+    <div class="button">
+      <button type="button" id="submit_logo" onclick="grabValues(22222)">Next</button>
+    </div>
+  </section>
+
+  <!-- Survey of questions -->
+  <section class="survey hidden">
+    <ol>
+      <li>Are you a first time oyster consumer?
+        <div class="radio-item">
+          <input type="radio" name="firsttime" value="Yes">
+          <label>Yes</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="firsttime" value="No">
+          <label>No</label>
+        </div>
+      </li>
+
+      <li>How often do you consume oysters?
+        <div class="radio-item">
+          <input type="radio" name="amtoysters" value="0">
+          <label>0 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="amtoysters" value="1-2">
+          <label>1-2 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="amtoysters" value="3-5">
+          <label>3-5 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="amtoysters" value="6-9">
+          <label>6-9 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="amtoysters" value=">9">
+          <label>>9 times per year</label>
+        </div>
+      </li>
+
+      <li>Are you the primary shopper in your household?
+        <div class="radio-item">
+          <input type="radio" name="primshop" value="yes">
+          <label>Yes</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="primshop" value="no">
+          <label>No</label>
+        </div>
+      </li>
+
+      <li>In a typical month, approximately how many times do you eat seafood?
+        <input type="text" id="ofteneatseafood">
+      </li>
+
+      <li>In a typical month, approximately how many times do you eat at restaurants?
+        <input type="text" id="ofteneatrestaurant">
+      </li>
+
+      <li>When you eat at a restaurant, what is the percentage of seafood versus other food?
+        <div class="slider">
+          <span>Other (<output for="percentSeafoodRes" id="percentSeafoodResValue1">50</output>%)</span>
+          <input id="percentSeafoodRes" type="range" value="50" min="0" max="100" step="1" data-show-value="true" oninput="outputUpdate(value, 0)">
+          <span>Seafood (<output output for="percentSeafoodRes" id="percentSeafoodResValue2">50</output>%)</span>
+        </div>
+      </li>
+
+      <li>How often do you eat seafood at home versus at a restaurant?
+        <div class="slider">
+          <span>Home (<output for="homevres" id="homevresValue1">50</output>%)</span>
+          <input id="homevres" type="range" value="50" min="-0" max="100" step="1" data-show-value="true" oninput="outputUpdate(value, 1)">
+          <span>Restaurant (<output for="homevres" id="homevresValue2">50</output>%)</span>
+        </div>
+      </li>
+
+      <li>Are you the primary seafood shopper in your household?
+        <div class="radio-item">
+          <input type="radio" name="shopper" value="Yes">
+          <label>Yes</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="shopper" value="No">
+          <label>No</label>
+        </div>
+      </li>
+
+      <li>How often do you catch your own seafood?
+        <strong><output for="owncatch" id="owncatchValue">5</output></strong>
+        <div class="slider">
+          <span>Never (1)</span>
+          <input id="owncatch" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 2)">
+          <span>Often (9)</span>
+        </div>
+      </li>
+
+      <li>How important is location in your oyster choice?
+        <strong><output for="locoyster" id="locoysterValue">5</output></strong>
+        <div class="slider">
+          <span>Not Important (1)</span>
+          <input id="locoyster" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 3)">
+          <span>Very Important (9)</span>
+        </div>
+      </li>
+
+      <li>For oysters from the Delaware Bay, I would...
+        <div class="radio-item">
+          <input type="radio" name="delawarebay" value="pay more than other locations">
+          <label>pay more than other locations.</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="delawarebay" value="pay less than other locations">
+          <label>pay less than other locations.</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="delawarebay" value="pay the same as other locations">
+          <label>pay the same as other locations.</label>
+        </div>
+      </li>
+
+      <li>For oysters from the Delaware Inland Bays, I would...
+        <div class="radio-item">
+          <input type="radio" name="delawareinlandbay" value="pay more than other locations">
+          <label>pay more than other locations.</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="delawareinlandbay" value="pay less than other locations">
+          <label>pay less than other locations.</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="delawareinlandbay" value="pay the same as other locations">
+          <label>pay the same as other locations.</label>
+        </div>
+      </li>
+
+      <li>How do you usually prefer the preparation of your oysters?
+        <div class="radio-item">
+          <input type="radio" name="oysterprep" value="Raw on the half shell">
+          <label>Raw on the half shell</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="oysterprep" value="Raw in a shooter">
+          <label>Raw in a shooter</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="oysterprep" value="Fried">
+          <label>Fried</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="oysterprep" value="Grilled">
+          <label>Grilled</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="oysterprep" value="Other">
+          <label>Other</label>
+          <input type="text" id="oysterprepother">
+        </div>
+      </li>
+
+      <li>How important are the following oyster characteristics to you?
+        <div class="slider">
+          <p>Oyster Species: <strong><output for="oysterSpec" id="oysterSpecValue">5</output></strong></p>
+          <span><strong>Not Important (1)</strong></span>
+          <input id="oysterSpec" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 4)">
+          <span><strong>Very Important (9)</strong></span>
+        </div>
+
+        <div class="slider">
+          <p>Size of the oyster shell: <strong><output for="oysterShell" id="oysterShellValue">5</output></strong></p>
+          <span><strong>Not Important (1)</strong></span>
+          <input id="oysterShell" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 5)">
+          <span><strong>Very Important (9)</strong></span>
+        </div>
+
+        <div class="slider">
+          <p>Size of the oyster meat: <strong><output for="oysterMeat" id="oysterMeatValue">5</output></strong></p>
+          <span><strong>Not Important (1)</strong></span>
+          <input id="oysterMeat" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 6)">
+          <span><strong>Very Important (9)</strong></span>
+        </div>
+
+        <div class="slider">
+          <p>Appearance of the oyster shell: <strong><output for="oysterApp" id="oysterAppValue">5</output></strong></p>
+          <span><strong>Not Important (1)</strong></span>
+          <input id="oysterApp" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 7)">
+          <span><strong>Very Important (9)</strong></span>
+        </div>
+
+        <div class="slider">
+          <p>Saltiness of the oyster: <strong><output for="oysterSalt" id="oysterSaltValue">5</output></strong></p>
+          <span><strong>Not Important (1)</strong></span>
+          <input id="oysterSalt" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 8)">
+          <span><strong>Very Important (9)</strong></span>
+        </div>
+
+        <div class="slider">
+          <p>Smell of the oyster: <strong><output for="oysterSmell" id="oysterSmellValue">5</output></strong></p>
+          <span><strong>Not Important (1)</strong></span>
+          <input id="oysterSmell" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 9)">
+          <span><strong>Very Important (9)</strong></span>
+        </div>
+
+        <div class="slider">
+          <p>Color of the oyster shell: <strong><output for="oysterShellColor" id="oysterShellColorValue">5</output></strong></p>
+          <span><strong>Not Important (1)</strong></span>
+          <input id="oysterShellColor" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 10)">
+          <span><strong>Very Important (9)</strong></span>
+        </div>
+
+        <div class="slider">
+          <p>Color of the oyster meat: <strong><output for="oysterMeatColor" id="oysterMeatColorValue">5</output></strong></p>
+          <span><strong>Not Important (1)</strong></span>
+          <input id="oysterMeatColor" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 11)">
+          <span><strong>Very Important (9)</strong></span>
+        </div>
+
+        <div class="slider">
+          <p>Location of harvest: <strong><output for="oysterLoc" id="oysterLocValue">5</output></strong></p>
+          <span><strong>Not Important (1)</strong></span>
+          <input id="oysterLoc" type="range" value="5" min="1" max="9" step="1" data-show-value="true" oninput="outputUpdate(value, 12)">
+          <span><strong>Very Important (9)</strong></span>
+        </div>
+      </li>
+
+      <li>On average, how often do you go to the beach each year?
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="0 times per year">
+          <label>0 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="1-2 times per year">
+          <label>1-2 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="3-5 times per year">
+          <label>3-5 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value="6-9 times per year">
+          <label>6-9 times per year</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="beachtime" value=">9 times per year">
+          <label>>9 times per year</label>
+        </div>
+      </li>
+
+      <li>What is your age?
+        <input type="text" id="age">
+      </li>
+      <li>Are you male or female?
+        <div class="radio-item">
+          <input type="radio" name="gender" id="male" value="male">
+          <label>Male</label>
+        </div>
+        <div class="radio-itme">
+          <input type="radio" name="gender" id="female" value="female">
+          <label>Female</label>
+        </div>
+      </li>
+
+      <li>What is your profession?
+        <div class="radio-item">
+          <input type="radio" name="profession" value="government">
+          <label>Government</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Academia">
+          <label>Academia</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Business">
+          <label>Business</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Agriculture">
+          <label>Agriculture</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="profession" value="Other">
+          <label>Other (please specify) </label>
+          <input type="text" name="otherprofession">
+        </div>
+      </li>
+
+      <li>Are you:
+        <div class="radio-item">
+          <input type="radio" name="political" value="liberal">
+          <label>Politically liberal</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="political" value="moderate">
+          <label>Politically moderate</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="political" value="conservative">
+          <label>Politically conservative</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="political" value="other">
+          <label>Other (please specify)</label>
+          <input type="text" name="otherpolitical">
+        </div>
+      </li>
+
+      <li>Which category best describes your <u>household</u> income (before taxes) in 2014?
+        <div class="radio-item">
+          <input type="radio" name="income" value="Less than $10000">
+          <label>Less than $10,000</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$10000-$14999">
+          <label>$10,000-$14,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$15000-$24999">
+          <label>$15,000-$24,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$25000-$34999">
+          <label>$25,000-$34,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$35000-$49999">
+          <label>$35,000-$49,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$50000-$74999">
+          <label>$50,000-$74,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$75000-$99999">
+          <label>$75,000-$99,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$100000-$149999">
+          <label>$100,000-$149,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$150000-$199999">
+          <label>$150,000-$199,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$200000-$249999">
+          <label>$200,000-$249,999</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="income" value="$250000 and above">
+          <label>$250,000 and above</label>
+        </div>
+      </li>
+
+      <li>What is the highest level of education that you have completed?
+        <div class="radio-item">
+          <input type="radio" name="education" value="Grade school">
+          <label>Grade school</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Some high school">
+          <label>Some high school</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="High school graduate">
+          <label>High school graduate</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Some college credit">
+          <label>Some college credit</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Associate degree">
+          <label>Associate degree</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Bachelor's degree">
+          <label>Bachelor's degree</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="education" value="Graduate degree/Professional">
+          <label>Graduate degree/Professional</label>
+        </div>
+      </li>
+
+<!--       <li>How many of the following beers have you consumed tonight?
+        <div class="row-buttons">
+          <strong>Light Beer: </strong><br>
+          <input type="radio" name="responders" value="0"><label>0</label>
+          <input type="radio" name="responders" value="1"><label>1</label>
+          <input type="radio" name="responders" value="2"><label>2</label>
+          <input type="radio" name="responders" value="3"><label>3</label>
+          <input type="radio" name="responders" value="4"><label>4</label>
+          <input type="radio" name="responders" value="5"><label>5</label>
+          <input type="radio" name="responders" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Regular Beer: </strong><br>
+          <input type="radio" name="BluesGolden" value="0"><label>0</label>
+          <input type="radio" name="BluesGolden" value="1"><label>1</label>
+          <input type="radio" name="BluesGolden" value="2"><label>2</label>
+          <input type="radio" name="BluesGolden" value="3"><label>3</label>
+          <input type="radio" name="BluesGolden" value="4"><label>4</label>
+          <input type="radio" name="BluesGolden" value="5"><label>5</label>
+          <input type="radio" name="BluesGolden" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Heavy Beer: </strong><br>
+          <input type="radio" name="AmberSun" value="0"><label>0</label>
+          <input type="radio" name="AmberSun" value="1"><label>1</label>
+          <input type="radio" name="AmberSun" value="2"><label>2</label>
+          <input type="radio" name="AmberSun" value="3"><label>3</label>
+          <input type="radio" name="AmberSun" value="4"><label>4</label>
+          <input type="radio" name="AmberSun" value="5"><label>5</label>
+          <input type="radio" name="AmberSun" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Wine: </strong><br>
+          <input type="radio" name="TillerBrown" value="0"><label>0</label>
+          <input type="radio" name="TillerBrown" value="1"><label>1</label>
+          <input type="radio" name="TillerBrown" value="2"><label>2</label>
+          <input type="radio" name="TillerBrown" value="3"><label>3</label>
+          <input type="radio" name="TillerBrown" value="4"><label>4</label>
+          <input type="radio" name="TillerBrown" value="5"><label>5</label>
+          <input type="radio" name="TillerBrown" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Shots of liquor: </strong><br>
+          <input type="radio" name="InletIPA" value="0"><label>0</label>
+          <input type="radio" name="InletIPA" value="1"><label>1</label>
+          <input type="radio" name="InletIPA" value="2"><label>2</label>
+          <input type="radio" name="InletIPA" value="3"><label>3</label>
+          <input type="radio" name="InletIPA" value="4"><label>4</label>
+          <input type="radio" name="InletIPA" value="5"><label>5</label>
+          <input type="radio" name="InletIPA" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Cocktails: </strong><br>
+          <input type="radio" name="OldCourt" value="0"><label>0</label>
+          <input type="radio" name="OldCourt" value="1"><label>1</label>
+          <input type="radio" name="OldCourt" value="2"><label>2</label>
+          <input type="radio" name="OldCourt" value="3"><label>3</label>
+          <input type="radio" name="OldCourt" value="4"><label>4</label>
+          <input type="radio" name="OldCourt" value="5"><label>5</label>
+          <input type="radio" name="OldCourt" value=">5"><label>>5</label>
+        </div> -->
+
+<!--         <div class="row-buttons">
+          <strong>Night Stalkers' Stout: </strong><br>
+          <input type="radio" name="NightStalkStout" value="0"><label>0</label>
+          <input type="radio" name="NightStalkStout" value="1"><label>1</label>
+          <input type="radio" name="NightStalkStout" value="2"><label>2</label>
+          <input type="radio" name="NightStalkStout" value="3"><label>3</label>
+          <input type="radio" name="NightStalkStout" value="4"><label>4</label>
+          <input type="radio" name="NightStalkStout" value="5"><label>5</label>
+          <input type="radio" name="NightStalkStout" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Delaware Oyster Stout: </strong><br>
+          <input type="radio" name="DEOysterStout" value="0"><label>0</label>
+          <input type="radio" name="DEOysterStout" value="1"><label>1</label>
+          <input type="radio" name="DEOysterStout" value="2"><label>2</label>
+          <input type="radio" name="DEOysterStout" value="3"><label>3</label>
+          <input type="radio" name="DEOysterStout" value="4"><label>4</label>
+          <input type="radio" name="DEOysterStout" value="5"><label>5</label>
+          <input type="radio" name="DEOysterStout" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Bridge Brown I.P.A.: </strong><br>
+          <input type="radio" name="BBIPA" value="0"><label>0</label>
+          <input type="radio" name="BBIPA" value="1"><label>1</label>
+          <input type="radio" name="BBIPA" value="2"><label>2</label>
+          <input type="radio" name="BBIPA" value="3"><label>3</label>
+          <input type="radio" name="BBIPA" value="4"><label>4</label>
+          <input type="radio" name="BBIPA" value="5"><label>5</label>
+          <input type="radio" name="BBIPA" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Regal Eagle: </strong><br>
+          <input type="radio" name="RegalEagle" value="0"><label>0</label>
+          <input type="radio" name="RegalEagle" value="1"><label>1</label>
+          <input type="radio" name="RegalEagle" value="2"><label>2</label>
+          <input type="radio" name="RegalEagle" value="3"><label>3</label>
+          <input type="radio" name="RegalEagle" value="4"><label>4</label>
+          <input type="radio" name="RegalEagle" value="5"><label>5</label>
+          <input type="radio" name="RegalEagle" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Killer Tiller: </strong><br>
+          <input type="radio" name="KillerTiller" value="0"><label>0</label>
+          <input type="radio" name="KillerTiller" value="1"><label>1</label>
+          <input type="radio" name="KillerTiller" value="2"><label>2</label>
+          <input type="radio" name="KillerTiller" value="3"><label>3</label>
+          <input type="radio" name="KillerTiller" value="4"><label>4</label>
+          <input type="radio" name="KillerTiller" value="5"><label>5</label>
+          <input type="radio" name="KillerTiller" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Cage Fight BOLD Pale: </strong><br>
+          <input type="radio" name="CageFight" value="0"><label>0</label>
+          <input type="radio" name="CageFight" value="1"><label>1</label>
+          <input type="radio" name="CageFight" value="2"><label>2</label>
+          <input type="radio" name="CageFight" value="3"><label>3</label>
+          <input type="radio" name="CageFight" value="4"><label>4</label>
+          <input type="radio" name="CageFight" value="5"><label>5</label>
+          <input type="radio" name="CageFight" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Dry Hopper!: </strong><br>
+          <input type="radio" name="DryHopper" value="0"><label>0</label>
+          <input type="radio" name="DryHopper" value="1"><label>1</label>
+          <input type="radio" name="DryHopper" value="2"><label>2</label>
+          <input type="radio" name="DryHopper" value="3"><label>3</label>
+          <input type="radio" name="DryHopper" value="4"><label>4</label>
+          <input type="radio" name="DryHopper" value="5"><label>5</label>
+          <input type="radio" name="DryHopper" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Chocolate Rum Covered Cherry: </strong><br>
+          <input type="radio" name="ChocRumCherr" value="0"><label>0</label>
+          <input type="radio" name="ChocRumCherr" value="1"><label>1</label>
+          <input type="radio" name="ChocRumCherr" value="2"><label>2</label>
+          <input type="radio" name="ChocRumCherr" value="3"><label>3</label>
+          <input type="radio" name="ChocRumCherr" value="4"><label>4</label>
+          <input type="radio" name="ChocRumCherr" value="5"><label>5</label>
+          <input type="radio" name="ChocRumCherr" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Baby's Lunch DOUBLE I.P.A.: </strong>
+          <br>
+          <input type="radio" name="BabyLunchIPA" value="0"><label>0</label>
+          <input type="radio" name="BabyLunchIPA" value="1"><label>1</label>
+          <input type="radio" name="BabyLunchIPA" value="2"><label>2</label>
+          <input type="radio" name="BabyLunchIPA" value="3"><label>3</label>
+          <input type="radio" name="BabyLunchIPA" value="4"><label>4</label>
+          <input type="radio" name="BabyLunchIPA" value="5"><label>5</label>
+          <input type="radio" name="BabyLunchIPA" value=">5"><label>>5</label>
+        </div>
+
+        <div class="row-buttons">
+          <strong>Peter's Deptford Retreat: </strong><br>
+          <input type="radio" name="PeteDept" value="0"><label>0</label>
+          <input type="radio" name="PeteDept" value="1"><label>1</label>
+          <input type="radio" name="PeteDept" value="2"><label>2</label>
+          <input type="radio" name="PeteDept" value="3"><label>3</label>
+          <input type="radio" name="PeteDept" value="4"><label>4</label>
+          <input type="radio" name="PeteDept" value="5"><label>5</label>
+          <input type="radio" name="PeteDept" value=">5"><label>>5</label>
+        </div> -->
+      </li>
+    </ol>
+    <div class="warning">
+    </div>
+    <div class="button">
+      <button onclick="onFinal()" type="button" id="submitSurvey">Finish and Submit</button>
+    </div>
+  </section>
+
+  <!-- Let them choose which way they want to consume their oysters -->
+  <section class="consumption-selection hidden">
+    <p>How would you like your oysters cooked?</p>
+    <div class="radio-item">
+      <input type="radio" name="cooked-type" value="Raw on the half shell">
+      <label>Raw on the half shell</label>
+    </div>
+    <div class="radio-item">
+      <input type="radio" name="cooked-type" value="Fried">
+      <label>Fried</label>
+    </div>
+    <div class="radio-item">
+      <input type="radio" name="cooked-type" value="In a bag with ice">
+      <label>In a bag with ice (to take home)</label>
+    </div>
+    <div class="button">
+      <button type="button" id="continue" onclick="grabCook()">Continue</button>
+    </div>
+  </section>
+
+  <!-- Option selection screen -->
+  <section class="dice-roll hidden">
+    <p>You will now roll a die to determine which treatment of oysters you will
+    be offered...</p>
+    <h2 id="dice-number" value="1">1</h2>
+    <button type="button" id="dice-button" value="start">Roll the Dice</button>
+  </section>
+
+
+  <!-- Final screen, shows final results -->
+  <section class="thank-you hidden">
+    <p>Thank you for participating! Please return this tablet.</p>
+    <p>Option <span id="option-choice"></span> was randomly selected, the option information is below:</p>
+    <div id="final-selection"></div>
+    <p id="yesno"></p>
+  </section>
+
+  <!-- Cleverly hide the subject's choices in hidden text areas -->
+  <textarea class="hidden" id="num-oysters">-1</textarea>
+  <textarea class="hidden" id="treatment-0-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-1-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-2-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-3-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-4-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-5-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-6-sel">-1</textarea>
+  <textarea class="hidden" id="treatment-7-sel">-1</textarea>
+  <textarea class="hidden" id="cooked-option">-1</textarea>
+  <textarea class="hidden" id="final-option"></textarea>
+
+  <!-- -->
+  <textarea class="hidden" id="gender"></textarea>
+  <textarea class="hidden" id="amtoysters"></textarea>
+  <textarea class="hidden" id="primshop"></textarea>
+  <textarea class="hidden" id="profession"></textarea>
+  <textarea class="hidden" id="political"></textarea>
+  <textarea class="hidden" id="income"></textarea>
+  <textarea class="hidden" id="education"></textarea>
+  <textarea class="hidden" id="beachtime"></textarea>
+  <textarea class="hidden" id="firsttime"></textarea>
+  <textarea class="hidden" id="shopper"></textarea>
+  <textarea class="hidden" id="delawarebay"></textarea>
+  <textarea class="hidden" id="delawareinlandbay"></textarea>
+  <textarea class="hidden" id="oysterprep"></textarea>
+
+  <textarea class="hidden" id="responders"></textarea>
+  <textarea class="hidden" id="BluesGolden"></textarea>
+  <textarea class="hidden" id="AmberSun"></textarea>
+  <textarea class="hidden" id="TillerBrown"></textarea>
+  <textarea class="hidden" id="InletIPA"></textarea>
+  <textarea class="hidden" id="OldCourt"></textarea>
+  <textarea class="hidden" id="NightStalkStout"></textarea>
+  <textarea class="hidden" id="DEOysterStout"></textarea>
+  <textarea class="hidden" id="BBIPA"></textarea>
+  <textarea class="hidden" id="RegalEagle"></textarea>
+  <textarea class="hidden" id="KillerTiller"></textarea>
+  <textarea class="hidden" id="CageFight"></textarea>
+  <textarea class="hidden" id="DryHopper"></textarea>
+  <textarea class="hidden" id="ChocRumCherr"></textarea>
+  <textarea class="hidden" id="BabyLunchIPA"></textarea>
+  <textarea class="hidden" id="PeteDept"></textarea>
+
+<!--
+
+    "BluesGolden",
+    "AmberSun",
+    "TillerBrown",
+    "InletIPA",
+    "OldCourt",
+    "NightStalkStout",
+    "DEOysterStout",
+    "BBIPA",
+    "RegalEagle",
+    "KillerTiller",
+    "CageFight",
+    "DryHopper",
+    "ChocRumCherr",
+    "BabyLunchIPA",
+    "PeteDept"
+
+    "gender",
+    "amtoysters",
+    "primshop",
+    "profession",
+    "political",
+    "income",
+    "education",
+    "beachtime",
+    "firsttime",
+    "shopper",
+    "delawarebay",
+    "delawareinlandbay",
+    "oysterprep" -->
+</div>

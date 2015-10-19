@@ -1,0 +1,114 @@
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+
+<script>
+
+  // Grab values from radio buttons
+  var grabValues = function() {
+    for(var i = 0; i < 6; i++) {
+      val = $("input[name=question" + i +"]:checked").val();
+      $("#question" + i + "-sel").html(val);
+      console.log(val);
+    }
+    window.scrollTo(0, 0);
+  };
+
+  yesno_tags =  ['q5', 'q6', 'q7', 'q17', 'q18', 'q19', 'q36'];
+  multiple_tags =  ['q34', 'q35', 'q41', 'q42', 'q43', 'q44', 'q45', 'q46', 'q47'];
+
+  var grabRadioValues = function() {
+    for(var i = 0; i < yesno_tags.length; i++) {
+      val = $("input[name=" + yesno_tags[i] + "]:checked").val();
+      $("#survey" + yesno_tags[i] + "-sel").html(val);
+    }
+
+    for(var i = 0; i < multiple_tags.length; i++) {
+      val = $("input[name=" + multiple_tags[i] + "]:checked").val();
+      $("#survey" + multiple_tags[i] + "-sel").html(val);
+    }
+  };
+  output_update_tags =  ['#surveyq0-sel', '#surveyq2-sel', '#surveyq3-sel', '#surveyq4-sel', '#surveyq8-sel', '#surveyq9-sel', '#surveyq10-sel', '#surveyq11-sel', '#surveyq12-sel', '#surveyq13-sel', '#surveyq14-sel', '#surveyq15-sel', '#surveyq16-sel', '#surveyq20-sel', '#surveyq21-sel', '#surveyq22-sel', '#surveyq23-sel', '#surveyq24-sel', '#surveyq25-sel', '#surveyq26-sel', '#surveyq27-sel', '#surveyq28-sel', '#surveyq29-sel', '#surveyq30-sel', '#surveyq31-sel', '#surveyq32-sel', '#surveyq33-sel'];
+
+  function outputUpdate(vol, i) {
+    if (vol < 0) {
+      vol *= -1;
+    }
+    else {
+      document.querySelector(output_update_tags[i]).value = vol;
+    }
+  }
+</script>
+
+
+<div class="page-wrapper">
+  <section class="warning"></section>
+
+  <section class="instructions hidden">
+    <h3><strong><u>Instructions:</u></strong></h3>
+
+    <p><em>Please read these instructions carefully and do not communicate with anyone else while you are making your decisions.</em></p>
+
+    <ul>
+      <li>Every decision you make involves a certain amount of money that you receive to perform a task.</li>
+      <li>You will make 'Yes' or 'No' decisions.</li>
+      <li>At the end of the study, which task will be implemented will be determined by a random draw.</li>
+      <li>We will also ask you to fill out a survey at the end.</li>
+    </ul>
+
+    <p><strong><em>Implementation of 'Yes' decisions</em></strong></p>
+    <ul>
+      <li>If you selected 'Yes' to the randomly determined task, you will receive the amount of money you agreed to and perform the task in a shielded area to ensure privacy. This money will be added to the $15 that you will receive for your participation in the study.  </li>
+    </ul>
+
+    <p><strong><em>Implementation of 'No' decisions</em></strong></p>
+    <ul>
+      <li>If you selected 'No' to the randomly determined task, you will not perform the task but also not receive the amount of money involved with the task. Thus, you will only receive the $15 that you will receive for your participation in the research.  </li>
+    </ul>
+
+<p><strong>Example 1:</strong> If you selected 'Yes' for <em>Task 1</em> for $10 and this task is randomly determined at the end of the study, you will perform <em>Task 1</em> and you will receive $10. Thus, your total earnings will be $25 ($10+$15).</p>
+
+    <p><strong>Example 2:</strong> If you selected 'No' for <em>Task 3</em> for $20 and this task is randomly determined at the end of the study, you will <strong>not</strong> perform <em>Task 3</em> and you will <strong>not</strong> receive the $20. Thus, your total earnings will be $15.</p>
+
+    <p><em>Please raise your hand if you have any questions and we will come to you to clarify.</em></p>
+    <button type="button" id="continue">Continue</button>
+  </section>
+
+  <section class="experiment hidden">
+    <div class="experimentqs">
+    </div>
+    <div class="warning"></div>
+    <button type="button" id="submit" onclick="grabValues()">Submit</button>
+  </section>
+
+  <section class="survey hidden">
+    <ol id="surveyqs">
+    </ol>
+
+    <div class="warning"></div>
+
+    <button type="button" id="submit" onclick="grabRadioValues()  ">Submit</button>
+  </section>
+
+  <section class="dice-roll hidden">
+    <p>You will now randomly determine which task will be chosen.</p>
+    <br>
+    <h1 id="dice-number" class="center">0</h1>
+    <button type="button" id="dice-button" value="start" class="center">Start Roll</button>
+  </section>
+
+  <section class="payout hidden">
+    <p>Task <span id="final_choice"></span> was chosen</p>
+    <p>This task is shown here for your review:</p>
+    <p id="selected-option"></p>
+    <p>You selected <strong><span id="subj_final_choice"></span></strong> to this option.</p>
+    <p>You will be payed $<span id="money"></span> ($15 + $<span id="gained"></span>) for participating.</p>
+    <br>
+    <p>Please return this tablet to the administrator</p>
+      </section>
+
+  <textarea class="hidden" id="question0-sel"></textarea>
+  <textarea class="hidden" id="question1-sel"></textarea>
+  <textarea class="hidden" id="question2-sel"></textarea>
+  <textarea class="hidden" id="question3-sel"></textarea>
+  <textarea class="hidden" id="question4-sel"></textarea>
+  <textarea class="hidden" id="question5-sel"></textarea>
+</div>

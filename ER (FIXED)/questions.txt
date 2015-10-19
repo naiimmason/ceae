@@ -1,0 +1,50 @@
+How thirsty are you right now?	range	1,9,1,5	Not Thirsty	Very Thirsty
+In the typical week, approximately how many glasses (12 oz.) of tap water do you consume?	input
+Tap Water:	range	1,9,1,5	Not Often	Very Often
+Filtered tap Water:	range	1,9,1,5	Not Often	Very Often
+Bottled Water:	range	1,9,1,5	Not Often	Very Often
+Are you concerned about the quality of your drinking water?	yesno
+Are you concerned about exposing yourself to water in your community through touch?	yesno
+Are you concerned about exposing yourself to water in your community through inhalations?	yesno
+Arsenic:	range	1,9,1,5	Not Concerned	Very Concerned
+Chromium:	range	1,9,1,5	Not concerned	Very Concerned
+Lead:	range	1,9,1,5	Not Concerned	Very Concerned
+Medication:	range	1,9,1,5	Not Concerned	Very Concerned
+Nutrients:	range	1,9,1,5	Not Concerned	Very Concerned
+Other (please specify)	range	1,9,1,5	Not Concerned	Very Concerned
+How risky do you consider drinking tap water?	range	1,9,1,5	Not Risky	Very Risky
+How risky do you consider filtered tap water?	range	1,9,1,5	Not Risky	Very Risky
+How risky do you consider bottled water?	range	1,9,1,5	Not Risky	Very Risky
+Before today, have you ever felt like drinking water may be a risk to your health?	yesno
+Before today, have you ever felt like exposing yourself to water through touch may be a risk to your health?	yesno
+Before today, have you ever felt like exposing yourself to water through inhalation may be a risk to your health?	yesno
+In general, how concerned are you about contaminants in your neighborhood?	range	1,9,1,5	Not Concerned	Very Concerned
+How concerned are you about sea level rise negatively affecting you?	range	1,9,1,5	Not Concerned	Very Concerned
+How concerned are you about sea level rise negatively affecting your community?	range	1,9,1,5	Not Concerned	Very Concerned
+How concerned are you about sea level rise negatively affecting the state of Delaware?	range	1,9,1,5	Not Concerned	Very Concerned
+How concerned are you about sea level rise negatively affecting the United States?	range	1,9,1,5	Not Concerned	Very Concerned
+How concerned are you about sea level negatively affecting places around the world?	range	1,9,1,5	Not Concerned	Very Concerned
+How concerned are you about flooding negatively affecting you?	range	1,9,1,5	Not Concerned	Very Concerned
+How concerned are you about flooding negatively affecting your community?	range	1,9,1,5	Not Concerned	Very Concerned
+How concerned are you about flooding negatively affecting the state of Delaware?	range	1,9,1,5	Not Concerned	Very Concerned
+How concerned are you about flooding negatively affecting the United States?	range	1,9,1,5	Not Concerned	Very Concerned
+How concerned are you about flooding negatively affecting places around the world?	range	1,9,1,5	Not Concerned	Very Concerned
+How much do you know about global warming?	range	1,9,1,5	Very Little	A Lot
+How much do you know about sea level rise?	range	1,9,1,5	Very Little	A Lot
+How much do you know about flooding?	range	1,9,1,5	Very Little	A Lot
+What is your country of origin?	multiple	U.S.,Other
+What is your gender?	multiple	Female,Male
+Do you have children?	yesno
+If yes, how many children live at home?	input
+What are their ages?	input
+What is your age?	input
+Including yourself, how many people live in your household?	input
+What is your relationship status?	multiple	Single,Married,Divorced,Widowed
+Employment status: Are you currently…	multiple	Employed for wages,Self-employed,Unemployed,Student,Retired,Other (please specify)
+Housing: Do you rent or own your place of living?	multiple	Rent,Own
+Housing: Do you live in a house or apartment?	multiple	House,Apartment
+What is your race?	multiple	White,Black or African American,American Indian and Alaska Native,Asian,Native Hawaiian and Other Pacific Islander,Some other race
+What is your highest level of education obtained?	multiple	Some High School, High School Degree, Some College, College Degree, Graduate Degree,Other (please list)
+What is your annual household income?	multiple	$0-$10000, $10001-$20000, $20001-$30000, $30001-$40000, $40001-$60000, $60001-$80000, $80001-$100000, $100001-$150000, $150001-$250000, More than $250000
+What is the zip code of your current primary residence?	input
+What zip code (or town) did you grow up in?	input

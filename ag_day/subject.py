@@ -405,7 +405,7 @@ def addExperimentHTML(me, subj_id, num_oysters, options, experiment_choice):
     # of oyster the subject is being offered
     first_line = ""
     if experiment_choice == "maik":
-      first_line = "<p>Oysters from a body of water with <strong><u><em>" + options[i]  + " levels</em> of nutrients</u></strong></p>"
+      first_line = "<p>" + options[i] + "</p>"
     elif experiment_choice == "yosef":
       first_line = "<p><strong>" + options[i] + "</strong></p>"
 

@@ -1,0 +1,484 @@
+<li>
+  How thirsty are you right now? <strong><output for="r0" id="surveyq0-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Thirsty (1)</span><input id="r0" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 0)"><span>Very Thirsty (9)</span>
+  </div>
+</li>
+<li>
+  In the typical week, approximately how many glasses (12 oz.) of tap water do you consume?
+  <input type="text" id="surveyq1-sel">
+</li>
+<li>
+  Tap Water: <strong><output for="r2" id="surveyq2-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Often (1)</span><input id="r2" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 1)"><span>Very Often (9)</span>
+  </div>
+</li>
+<li>
+  Filtered tap Water: <strong><output for="r3" id="surveyq3-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Often (1)</span><input id="r3" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 2)"><span>Very Often (9)</span>
+  </div>
+</li>
+<li>
+  Bottled Water: <strong><output for="r4" id="surveyq4-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Often (1)</span><input id="r4" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 3)"><span>Very Often (9)</span>
+  </div>
+</li>
+<li>
+  <p>Are you concerned about the quality of your drinking water?</p>
+  <div class="center">
+    <div class="radio-item half">
+      <input type="radio" name="q5" value="Yes">
+      <label>Yes</label>
+    </div>
+    <div class="radio-item half">
+      <input type="radio" name="q5" value="No">
+      <label>No</label>
+    </div>
+  </div>
+</li>
+<li>
+  <p>Are you concerned about exposing yourself to water in your community through touch?</p>
+  <div class="center">
+    <div class="radio-item half">
+      <input type="radio" name="q6" value="Yes">
+      <label>Yes</label>
+    </div>
+    <div class="radio-item half">
+      <input type="radio" name="q6" value="No">
+      <label>No</label>
+    </div>
+  </div>
+</li>
+<li>
+  <p>Are you concerned about exposing yourself to water in your community through inhalations?</p>
+  <div class="center">
+    <div class="radio-item half">
+      <input type="radio" name="q7" value="Yes">
+      <label>Yes</label>
+    </div>
+    <div class="radio-item half">
+      <input type="radio" name="q7" value="No">
+      <label>No</label>
+    </div>
+  </div>
+</li>
+<li>
+  Arsenic: <strong><output for="r8" id="surveyq8-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r8" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 4)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  Lead: <strong><output for="r9" id="surveyq9-sel">5</output></strong>
+  <div class="slider">
+    <span>Not concerned (1)</span><input id="r9" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 5)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  Lead: <strong><output for="r10" id="surveyq10-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r10" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 6)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  Medication: <strong><output for="r11" id="surveyq11-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r11" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 7)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  Nutrients: <strong><output for="r12" id="surveyq12-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r12" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 8)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  Other (please specify) <strong><output for="r13" id="surveyq13-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r13" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 9)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How risky do you consider drinking tap water? <strong><output for="r14" id="surveyq14-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Risky (1)</span><input id="r14" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 10)"><span>Very Risky (9)</span>
+  </div>
+</li>
+<li>
+  How risky do you consider filtered tap water? <strong><output for="r15" id="surveyq15-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Risky (1)</span><input id="r15" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 11)"><span>Very Risky (9)</span>
+  </div>
+</li>
+<li>
+  How risky do you consider bottled water? <strong><output for="r16" id="surveyq16-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Risky (1)</span><input id="r16" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 12)"><span>Very Risky (9)</span>
+  </div>
+</li>
+<li>
+  <p>Before today, have you ever felt like drinking water may be a risk to your health?</p>
+  <div class="center">
+    <div class="radio-item half">
+      <input type="radio" name="q17" value="Yes">
+      <label>Yes</label>
+    </div>
+    <div class="radio-item half">
+      <input type="radio" name="q17" value="No">
+      <label>No</label>
+    </div>
+  </div>
+</li>
+<li>
+  <p>Before today, have you ever felt like exposing yourself to water through touch may be a risk to your health?</p>
+  <div class="center">
+    <div class="radio-item half">
+      <input type="radio" name="q18" value="Yes">
+      <label>Yes</label>
+    </div>
+    <div class="radio-item half">
+      <input type="radio" name="q18" value="No">
+      <label>No</label>
+    </div>
+  </div>
+</li>
+<li>
+  <p>Before today, have you ever felt like exposing yourself to water through inhalation may be a risk to your health?</p>
+  <div class="center">
+    <div class="radio-item half">
+      <input type="radio" name="q19" value="Yes">
+      <label>Yes</label>
+    </div>
+    <div class="radio-item half">
+      <input type="radio" name="q19" value="No">
+      <label>No</label>
+    </div>
+  </div>
+</li>
+<li>
+  In general, how concerned are you about contaminants in your neighborhood? <strong><output for="r20" id="surveyq20-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r20" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 13)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How concerned are you about sea level rise negatively affecting you? <strong><output for="r21" id="surveyq21-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r21" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 14)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How concerned are you about sea level rise negatively affecting your community? <strong><output for="r22" id="surveyq22-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r22" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 15)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How concerned are you about sea level rise negatively affecting the state of Delaware? <strong><output for="r23" id="surveyq23-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r23" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 16)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How concerned are you about sea level rise negatively affecting the United States? <strong><output for="r24" id="surveyq24-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r24" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 17)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How concerned are you about sea level negatively affecting places around the world? <strong><output for="r25" id="surveyq25-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r25" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 18)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How concerned are you about flooding negatively affecting you? <strong><output for="r26" id="surveyq26-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r26" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 19)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How concerned are you about flooding negatively affecting your community? <strong><output for="r27" id="surveyq27-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r27" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 20)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How concerned are you about flooding negatively affecting the state of Delaware? <strong><output for="r28" id="surveyq28-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r28" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 21)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How concerned are you about flooding negatively affecting the United States? <strong><output for="r29" id="surveyq29-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r29" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 22)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How concerned are you about flooding negatively affecting places around the world? <strong><output for="r30" id="surveyq30-sel">5</output></strong>
+  <div class="slider">
+    <span>Not Concerned (1)</span><input id="r30" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 23)"><span>Very Concerned (9)</span>
+  </div>
+</li>
+<li>
+  How much do you know about global warming? <strong><output for="r31" id="surveyq31-sel">5</output></strong>
+  <div class="slider">
+    <span>Very Little (1)</span><input id="r31" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 24)"><span>A Lot (9)</span>
+  </div>
+</li>
+<li>
+  How much do you know about sea level rise? <strong><output for="r32" id="surveyq32-sel">5</output></strong>
+  <div class="slider">
+    <span>Very Little (1)</span><input id="r32" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 25)"><span>A Lot (9)</span>
+  </div>
+</li>
+<li>
+  How much do you know about flooding? <strong><output for="r33" id="surveyq33-sel">5</output></strong>
+  <div class="slider">
+    <span>Very Little (1)</span><input id="r33" type="range" value="5" min="1" max="9" step="1" oninput="outputUpdate(value, 26)"><span>A Lot (9)</span>
+  </div>
+</li>
+<li>
+  What is your country of origin?
+  <div class="radio-item">
+    <input type="radio" name="q34" value="U.S.">
+    <label>U.S.</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q34" value="Other">
+    <label>Other</label>
+  </div>
+</li>
+<li>
+  What is your gender?
+  <div class="radio-item">
+    <input type="radio" name="q35" value="Female">
+    <label>Female</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q35" value="Male">
+    <label>Male</label>
+  </div>
+</li>
+<li>
+  <p>Do you have children?</p>
+  <div class="center">
+    <div class="radio-item half">
+      <input type="radio" name="q36" value="Yes">
+      <label>Yes</label>
+    </div>
+    <div class="radio-item half">
+      <input type="radio" name="q36" value="No">
+      <label>No</label>
+    </div>
+  </div>
+</li>
+<li>
+  If yes, how many children live at home?
+  <input type="text" id="surveyq37-sel">
+</li>
+<li>
+  What are their ages?
+  <input type="text" id="surveyq38-sel">
+</li>
+<li>
+  What is your age?
+  <input type="text" id="surveyq39-sel">
+</li>
+<li>
+  Including yourself, how many people live in your household?
+  <input type="text" id="surveyq40-sel">
+</li>
+<li>
+  What is your relationship status?
+  <div class="radio-item">
+    <input type="radio" name="q41" value="Single">
+    <label>Single</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q41" value="Married">
+    <label>Married</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q41" value="Divorced">
+    <label>Divorced</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q41" value="Widowed">
+    <label>Widowed</label>
+  </div>
+</li>
+<li>
+  Employment status: Are you currently…
+  <div class="radio-item">
+    <input type="radio" name="q42" value="Employed for wages">
+    <label>Employed for wages</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q42" value="Self-employed">
+    <label>Self-employed</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q42" value="Unemployed">
+    <label>Unemployed</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q42" value="Student">
+    <label>Student</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q42" value="Retired">
+    <label>Retired</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q42" value="Other (please specify)">
+    <label>Other (please specify)</label>
+  </div>
+</li>
+<li>
+  Housing: Do you rent or own your place of living?
+  <div class="radio-item">
+    <input type="radio" name="q43" value="Rent">
+    <label>Rent</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q43" value="Own">
+    <label>Own</label>
+  </div>
+</li>
+<li>
+  Housing: Do you live in a house or apartment?
+  <div class="radio-item">
+    <input type="radio" name="q44" value="House">
+    <label>House</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q44" value="Apartment">
+    <label>Apartment</label>
+  </div>
+</li>
+<li>
+  What is your race?
+  <div class="radio-item">
+    <input type="radio" name="q45" value="White">
+    <label>White</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q45" value="Black or African American">
+    <label>Black or African American</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q45" value="American Indian and Alaska Native">
+    <label>American Indian and Alaska Native</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q45" value="Asian">
+    <label>Asian</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q45" value="Native Hawaiian and Other Pacific Islander">
+    <label>Native Hawaiian and Other Pacific Islander</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q45" value="Some other race">
+    <label>Some other race</label>
+  </div>
+</li>
+<li>
+  What is your highest level of education obtained?
+  <div class="radio-item">
+    <input type="radio" name="q46" value="Some High School">
+    <label>Some High School</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q46" value=" High School Degree">
+    <label> High School Degree</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q46" value=" Some College">
+    <label> Some College</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q46" value=" College Degree">
+    <label> College Degree</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q46" value=" Graduate Degree">
+    <label> Graduate Degree</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q46" value="Other (please list)">
+    <label>Other (please list)</label>
+  </div>
+</li>
+<li>
+  What is your annual household income?
+  <div class="radio-item">
+    <input type="radio" name="q47" value="$0-$10000">
+    <label>$0-$10000</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q47" value=" $10001-$20000">
+    <label> $10001-$20000</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q47" value=" $20001-$30000">
+    <label> $20001-$30000</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q47" value=" $30001-$40000">
+    <label> $30001-$40000</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q47" value=" $40001-$60000">
+    <label> $40001-$60000</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q47" value=" $60001-$80000">
+    <label> $60001-$80000</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q47" value=" $80001-$100000">
+    <label> $80001-$100000</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q47" value=" $100001-$150000">
+    <label> $100001-$150000</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q47" value=" $150001-$250000">
+    <label> $150001-$250000</label>
+  </div>
+  <div class="radio-item">
+    <input type="radio" name="q47" value=" More than $250000">
+    <label> More than $250000</label>
+  </div>
+</li>
+<li>
+  What is the zip code of your current primary residence?
+  <input type="text" id="surveyq48-sel">
+</li>
+<li>
+  What zip code (or town) did you grow up in?
+  <input type="text" id="surveyq49-sel">
+</li>
+<textarea class="hidden" id="surveyq5-sel"></textarea>
+<textarea class="hidden" id="surveyq6-sel"></textarea>
+<textarea class="hidden" id="surveyq7-sel"></textarea>
+<textarea class="hidden" id="surveyq17-sel"></textarea>
+<textarea class="hidden" id="surveyq18-sel"></textarea>
+<textarea class="hidden" id="surveyq19-sel"></textarea>
+<textarea class="hidden" id="surveyq36-sel"></textarea>
+<textarea class="hidden" id="surveyq34-sel"></textarea>
+<textarea class="hidden" id="surveyq35-sel"></textarea>
+<textarea class="hidden" id="surveyq41-sel"></textarea>
+<textarea class="hidden" id="surveyq42-sel"></textarea>
+<textarea class="hidden" id="surveyq43-sel"></textarea>
+<textarea class="hidden" id="surveyq44-sel"></textarea>
+<textarea class="hidden" id="surveyq45-sel"></textarea>
+<textarea class="hidden" id="surveyq46-sel"></textarea>
+<textarea class="hidden" id="surveyq47-sel"></textarea>
